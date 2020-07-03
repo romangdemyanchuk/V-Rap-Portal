@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    color: #000;
+}
+.container {
+    padding: 0 5%;
+}
+.main-page-wrapper {
+    margin: 40px auto;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+.main-page-header {
+    text-transform: uppercase;
+    font-size: 35px;
+    font-weight: 600;
+}
+.main-page-btns {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 70px;
+}
+.main-block-btn {
+    padding: 5px 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.main-block-btn:hover {
+    cursor: pointer;
+}

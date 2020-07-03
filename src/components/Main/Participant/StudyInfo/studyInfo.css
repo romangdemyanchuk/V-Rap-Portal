@@ -1,0 +1,66 @@
+.study-info-wrapper {
+    display: flex;
+    margin: 35px 0;
+}
+.study {
+    text-align: left;
+    width: 100%;
+    margin-left: 25px;
+    color: #000;
+}
+.study-require {
+    font-weight: 700;
+    margin-bottom: -5px;
+}
+.study-info {
+    width: 65%;
+    margin-bottom: 8px;
+    line-height: 17px;
+}
+.study-btns {
+    display: flex;
+}
+.study-info-img,
+.study-info-img img {
+    width: 150px;
+}
+.study-heading {
+    font-size: 23px;
+    font-weight: 600;
+}
+.study-length,
+.study-compensation,
+.study-descr {
+    font-size: 15px;
+}
+.study-block-header-btns {
+    display: flex;
+    border-bottom: 1px solid;
+}
+.study-profile-btn,
+.study-research-btn {
+    border: 1px solid;
+    padding: 6px;
+}
+.status-btn {
+    border-radius: 5px;
+    background-color: green;
+    color: #fff;
+    font-weight: 600;
+}
+.status-btn {
+    display: block;
+}
+.load-btns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: -47px;
+}
+.upload-btn {
+    margin-left: 10px;
+}
+.load-btns button {
+    border-radius: 5px;
+}
+
