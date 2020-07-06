@@ -4,59 +4,131 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import "./caseStudies.css";
+import HeaderBtns from '../../Participant/HeaderBtns'
 
 const CaseStudies = () => {
   return (
     <div className="container">
       <div className="main-page-wrapper">
-        <div className="study-block-header">
-          <div className="study-block-header-btns">
-            <Button className="study-profile-btn">Profile</Button>
-            <Button className="study-research-btn">Research Studies</Button>
-          </div>
-        </div>
-        <div className="study-info-wrapper case-wrapper">
-          <div className="study-info-img">
-            <img src={userImg} alt="userImg" />
-          </div>
-          <div className="study">
-            <div className="study-heading">Study 1</div>
-            <div className="study-status">Status: Active</div>
-            <div className="study-participants">Participants completed: 26</div>
-            <Button className="res-button">View Results</Button>
-          </div>
-          <Link to={"/upload-sim"} className="launch-btn">
-            <Button>Launch New Study</Button>
+        <div className="btns-wrapper">
+          <Link to={'/researcher-profile'}>
+            <Button className="profile-btn">Profile</Button>
+          </Link>
+          <Link to={'/study-info'}>
+            <Button className="research-btn">Research Studies</Button>
           </Link>
         </div>
-        <div className="study-info-wrapper case-wrapper">
+        {/*<div className="study-block-header">*/}
+        {/*  <HeaderBtns route={'/personal-stats'}/>*/}
+        {/*</div>*/}
+        <div className="research-header-wrapper">
+          <div className="personal-heading">Research Studies</div>
+          <Link to={'/personal-stats'}>
+            <Button type="primary" className="create-new-study">Create New Research Study</Button>
+          </Link>
+        </div>
+        <div className="study-info-wrapper">
           <div className="study-info-img">
             <img src={userImg} alt="userImg" />
           </div>
           <div className="study">
-            <div className="study-heading">Study 2</div>
-            <div className="study-status">Status: Closed</div>
-            <div className="study-participants">
-              Participants completed: 120
+            <div className="study-heading">
+              Research Study 1
             </div>
-            <div className="study-remaining">
-              Remaining Participants: Excepteur sint occeacat cupidatat non
-              proident
+            <div className="study-info">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift
+              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
             </div>
-            <Button className="res-button">View Results</Button>
+            <div className="study-require">
+              Required Headset
+            </div>
+            <div className="study-device">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift S
+            </div>
+          </div>
+          <div className="research-btns">
+            <Button className="status-btn">In progress</Button>
           </div>
         </div>
-        <div className="study-info-wrapper case-wrapper">
+        <div className="research-study-btns">
+          <Button className="status-btn">View Results</Button>
+          {/*<Link to={'/file-upload'}>*/}
+            <Button type="danger" className="upload-btn">Close</Button>
+          <Button type="danger" className="upload-btn">Delete</Button>
+          {/*</Link>*/}
+        </div>
+        <div className="study-info-wrapper">
           <div className="study-info-img">
             <img src={userImg} alt="userImg" />
           </div>
           <div className="study">
-            <div className="study-heading">Study 3</div>
-            <div className="study-status">Status: Complete</div>
-            <div className="study-participants">Participants completed: 26</div>
-            <div className="study-remaining">Remaining Budget: $76.00 CAD</div>
-            <Button className="res-button">View Results</Button>
+            <div className="study-heading"> Research Study 2</div>
+            <div className="study-info">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift
+              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+            </div>
+            <div className="study-require">Required Headset</div>
+            <div className="study-device">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift S
+            </div>
           </div>
+          <div className="research-btns">
+            <Button className="status-btn">Pending</Button>
+          </div>
+        </div>
+        <div className="research-study-btns">
+          <Button type="primary">Edit</Button>
+          <Link to={'/file-upload'}>
+            <Button type="danger" className="upload-btn">Delete</Button>
+          </Link>
+        </div>
+        <div className="study-info-wrapper">
+          <div className="study-info-img">
+            <img src={userImg} alt="userImg" />
+          </div>
+          <div className="study">
+            <div className="study-heading"> Research Study 3</div>
+            <div className="study-info">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift
+              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+            </div>
+            <div className="study-require">Required Headset</div>
+            <div className="study-device">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift S
+            </div>
+          </div>
+          <div className="research-btns">
+            <Button className="status-btn" type="danger">Closed</Button>
+          </div>
+        </div>
+        <div className="research-study-btns">
+          <Button type="danger">Delete</Button>
+        </div>
+        <div className="study-info-wrapper">
+          <div className="study-info-img">
+            <img src={userImg} alt="userImg" />
+          </div>
+          <div className="study">
+            <div className="study-heading"> Research Study 4</div>
+            <div className="study-info">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift
+              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+            </div>
+            <div className="study-require">Required Headset</div>
+            <div className="study-device">
+              Compatible Devices: ATC Vive, Oculus Rift / Rift S
+            </div>
+          </div>
+          <div className="research-btns">
+            <Button className="status-btn">Completed</Button>
+          </div>
+        </div>
+        <div className="research-study-btns">
+          <Button className="status-btn">View Results</Button>
+          {/*<Link to={'/file-upload'}>*/}
+          <Button type="danger" className="upload-btn">Close</Button>
+          <Button type="danger" className="upload-btn">Delete</Button>
+          {/*</Link>*/}
         </div>
       </div>
     </div>

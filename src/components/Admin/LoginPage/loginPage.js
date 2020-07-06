@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import "antd/dist/antd.css";
 import "./loginPage.css";
@@ -63,7 +64,7 @@ const LoginPage = () => {
           <Input.Password />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Link to={"/personal-info"}>
+          <Link to={"/case-studies"}>
             <Button type="primary" htmlType="submit">
               Register
             </Button>

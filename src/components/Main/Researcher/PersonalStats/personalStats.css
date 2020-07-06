@@ -2,7 +2,6 @@
 .personal-info-container {
     display: flex;
     align-items: center;
-    width: 100%;
 }
 /*.file-block {*/
 /*    width: 200px;*/
@@ -14,8 +13,47 @@
     margin-left: 25px;
 }
 .personal-fields-wrapper input {
-    width: 200px !important;
+    /*width: 200px !important;*/
 }
 .personal-fields-wrapper {
     margin-left: 40px;
+}
+.personal-stats-area {
+    resize: none;
+}
+.personal-blocks-wrapper {
+    display: flex;
+    margin-top: 40px;
+}
+.personal-right-block {
+    margin-left: 70px;
+}
+.personal-left-block,
+.personal-right-block {
+    width: 250px;
+}
+.input-number,
+.ant-dropdown-trigger{
+    width: 80% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.upload-vr-btn {
+    /*margin-top: 45px;*/
+}
+.research-footer-btns {
+    margin-top: 20px;
+}
+.create-research-btn {
+    margin-right: 15px;
+}
+.personal-right-block {
+    margin-top: 15px;
+}
+.ant-btn .ant-dropdown-trigger {
+    width: 100% !important;
+}
+.ant-progress-small {
+    text-align: left;
 }

@@ -37,7 +37,15 @@ const PersonalInfo = () => {
   return (
     <div className="container">
       <div className="main-page-wrapper">
-        <HeaderBtns/>
+        <div className="btns-wrapper">
+          <Link to={'/personal-info'}>
+            <Button className="profile-btn">Profile</Button>
+          </Link>
+          <Link to={'/study-info'}>
+            <Button className="research-btn">Research Studies</Button>
+          </Link>
+        </div>
+        {/*<HeaderBtns study_route={'/personal-info'}/>*/}
         <div className="personal-info-block">
           <div className="file-block">
             {/*<div className="personal-info-img">*/}

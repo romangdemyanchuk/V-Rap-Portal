@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import "./fileUpload.css";
 import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
-import { Upload, message, Button, Input, Modal } from "antd";
+import { Upload, message, Button, Input, Modal, Progress } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
 const FileUpload = () => {
@@ -46,14 +46,22 @@ const FileUpload = () => {
       <div className="main-page-wrapper">
         <div>
           <Modal
-            title="Basic Modal"
+            title="Upload results for Research Study 1"
             visible={modalIsOpen}
             onOk={handleOk}
             onCancel={handleCancel}
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <div className="modal-subtitle">
+              Upload the exported files from the simulation that are located on your
+              desktop to receive your gift card
+            </div>
+            <Link to={'/about-studies'}>
+              <div className="modal-upload-btn-wrapper">
+                <Button type="primary" className="upload-btn modal-upload-btn">Upload</Button>
+              </div>
+            </Link>
+            <Progress percent={75} />
+
           </Modal>
         </div>
 

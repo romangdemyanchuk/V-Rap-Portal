@@ -1,9 +1,8 @@
-.file-block,
-.personal-info-wrapper {
-    /*width: 50%;*/
+.file-block {
+    text-align: left;
 }
 .ant-input {
-    margin: 3px 0;
+    /*margin: 3px 0;*/
 }
 .personal-info-block,
 .changes-btns,
@@ -38,8 +37,26 @@ Input {
 }
 .ant-input,
 .ant-input-affix-wrapper{
-    width: 350px;
+    /*width: 350px;*/
 }
 .ant-form-item-control-input-content {
     flex: unset;
+    width: 250px;
 }
+.participant-heading {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.login-btns button {
+    border-top-left-radius:10px;
+    border-top-right-radius: 10px;
+}
+.ant-form-item {
+    margin: 10px 0 10px 30px;
+}
+.ant-checkbox-wrapper .ant-checkbox-wrapper-checked {
+    display: none;
+}
+
+

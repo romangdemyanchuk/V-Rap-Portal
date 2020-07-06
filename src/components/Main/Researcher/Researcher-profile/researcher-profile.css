@@ -1,0 +1,9 @@
+.changes-btns {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+.personal-fields-wrapper {
+    width: 100%;
+
+}
