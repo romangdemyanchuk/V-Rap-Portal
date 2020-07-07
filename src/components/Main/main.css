@@ -23,7 +23,7 @@ body {
 .main-page-btns {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 .main-block-btn {
     padding: 5px 8px;
@@ -32,4 +32,7 @@ body {
 }
 .main-block-btn:hover {
     cursor: pointer;
+}
+.admin-text {
+    text-align: left;
 }

@@ -1,24 +1,14 @@
 /* eslint-disable */
 import React, { useState } from 'react'
 import userImg from "../../../../images/user.svg";
-import HeaderBtns from '../../Participant/HeaderBtns'
 import { Link } from "react-router-dom";
-import { Input, Button, Progress, Dropdown, Menu, message, Slider, Switch, InputNumber } from 'antd'
+import { Input, Button, Progress, Dropdown, Menu, message, Slider, InputNumber } from 'antd'
 const { TextArea } = Input;
 import "./personalStats.css";
 import { DownOutlined } from '@ant-design/icons'
 
 const PersonalStats = () => {
   const [disabled, setDisabled] = useState(false);
-
-  const handleDisabledChange = disabled => {
-    setDisabled(true);
-  };
-  function handleButtonClick(e) {
-    message.info('Click on left button.');
-    console.log('click left button', e);
-  }
-
   function handleMenuClick(e) {
     message.info('Click on menu item.');
     console.log('click', e);
@@ -54,7 +44,7 @@ const PersonalStats = () => {
             <Button className="profile-btn">Profile</Button>
           </Link>
           <Link to={'/study-info'}>
-            <Button className="research-btn">Research Studies</Button>
+            <Button className="research-btn active">Research Studies</Button>
           </Link>
         </div>
         <div className="personal-wrapper">

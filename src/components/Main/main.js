@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./main.css";
+import { Button } from 'antd'
 
 const Main = () => {
   return (
@@ -12,14 +13,14 @@ const Main = () => {
             <div className="main-page-header">V-Rap</div>
             <div className="main-page-btns">
               <Link to={"/par-register-form"}>
-                <button type="button" className="main-block-btn btn btn-light">
+                <Button type="button" className="main-block-btn btn btn-light">
                   I`m Participant
-                </button>
+                </Button>
               </Link>
-              <Link to={"/par-login-form"}>
-                <button type="button" className="main-block-btn btn btn-light">
+              <Link to={"/res-login-form"}>
+                <Button type="button" className="main-block-btn btn btn-light">
                   I`m Researcher
-                </button>
+                </Button>
               </Link>
             </div>
           </div>

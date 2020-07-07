@@ -2,67 +2,27 @@
 /* eslint-disable */
 import React from "react";
 import "./listOfResearchers.css";
-import { Table } from "antd";
+import { Button, Table } from 'antd'
+import {useSelector } from 'react-redux'
 
 const ListOfResearchers = () => {
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "School/Institution Name",
-      dataIndex: "school_name",
-      key: "age",
-    },
-    {
-      title: "Area of Research",
-      dataIndex: "area",
-      key: "address",
-    },
-    {
-      title: "Actions",
-      key: "actions",
-      dataIndex: "actions",
-      render: (text) => <a>{text}</a>,
-    },
-  ];
-
-  const data = [
-    {
-      key: "1",
-      name: "Ada Lovelace",
-      school_name: "MIT",
-      area: "Area Name",
-      actions: "Edit/Delete",
-    },
-    {
-      key: "2",
-      name: "Grace Hopper",
-      school_name: "MIT",
-      area: "Area Name",
-      actions: "Edit/Delete",
-    },
-    {
-      key: "3",
-      name: "Margaret Hamilton",
-      school_name: "UofT",
-      area: "Area Name",
-      actions: "Edit/Delete",
-    },
-    {
-      key: "4",
-      name: "Joan Clarke",
-      school_name: "UofT",
-      area: "UofT",
-      actions: "Edit/Delete",
-    },
-  ];
+  const researchersList = useSelector((state) => {
+    return {
+      researchersList: state.researchersList
+    }
+  })
+  const researcherListColumns = useSelector((state) => {
+    return {
+      researcherListColumns: state.researcherListColumns
+    }
+  })
   return (
     <div className="container">
       <div className="main-page-wrapper">
-        <Table columns={columns} dataSource={data} />
+        <div className="researchers-profile-btn-wrapper">
+          <Button type="button" className="researchers-profile-btn">Create Researcher Profile</Button>
+        </div>
+        <Table columns={researcherListColumns.researcherListColumns} dataSource={researchersList.researchersList} />
       </div>
     </div>
   );

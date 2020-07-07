@@ -58,5 +58,8 @@ Input {
 .ant-checkbox-wrapper .ant-checkbox-wrapper-checked {
     display: none;
 }
-
+.form-wrapper {
+    width: 400px;
+    margin: 0 auto;
+}
 

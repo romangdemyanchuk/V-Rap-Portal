@@ -29,48 +29,55 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <Form
-        {...layout}
-        name="basic"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          label="Email Address"
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email address!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item {...tailLayout}>
-          <Link to={"/case-studies"}>
-            <Button type="primary" htmlType="submit">
-              Register
-            </Button>
-          </Link>
-        </Form.Item>
-      </Form>
+    <div className="container">
+      <div className="main-page-wrapper">
+        <h2 className="login-of-admin">
+          Login Page
+        </h2>
+        <div className="form-wrapper">
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Form.Item
+              label="Email Address"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your email address!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item {...tailLayout}>
+              <Link to={"/admin-portal"}>
+                <Button type="primary" htmlType="submit">
+                  Login
+                </Button>
+              </Link>
+            </Form.Item>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 };

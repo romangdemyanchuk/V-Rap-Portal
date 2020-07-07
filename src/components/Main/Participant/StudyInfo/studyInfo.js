@@ -1,26 +1,25 @@
 /* eslint-disable */
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import "./studyInfo.css";
-import HeaderBtns from '../HeaderBtns'
+import FileUpload from './FileUpload'
 
 const StudyInfo = () => {
+  const [modalOpen, setmodalOpen] = useState(false);
   return (
     <div className="container">
       <div className="main-page-wrapper">
+       <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
         <div className="btns-wrapper">
           <Link to={'/personal-info'}>
             <Button className="profile-btn">Profile</Button>
           </Link>
           <Link to={'/study-info'}>
-            <Button className="research-btn">Research Studies</Button>
+            <Button className="research-btn active">Research Studies</Button>
           </Link>
         </div>
-        {/*<div className="study-block-header">*/}
-        {/*  <HeaderBtns profile_route="/personal-info"/>*/}
-        {/*</div>*/}
         <div className="personal-heading">Research Studies</div>
         <div className="study-wrapper">
           <div className="study-info-wrapper">
@@ -48,9 +47,11 @@ const StudyInfo = () => {
           </div>
           <div className="load-btns">
             <Button type="primary">Download Research Study</Button>
-            <Link to={'/file-upload'}>
-              <Button type="primary" className="upload-btn">Upload Results</Button>
-            </Link>
+            {/*<Link to={'/file-upload'}>*/}
+              <Button type="primary" className="upload-btn"
+              onClick={() => setmodalOpen(true)}
+              >Upload Results</Button>
+            {/*</Link>*/}
           </div>
         </div>
         <div className="study-wrapper">
@@ -75,9 +76,11 @@ const StudyInfo = () => {
           </div>
           <div className="load-btns">
             <Button type="primary">Download Research Study</Button>
-            <Link to={'/file-upload'}>
-              <Button type="primary" className="upload-btn">Upload Results</Button>
-            </Link>
+            {/*<Link to={'/file-upload'}>*/}
+              <Button type="primary" className="upload-btn"
+                      onClick={() => setmodalOpen(true)}
+              >Upload Results</Button>
+            {/*</Link>*/}
           </div>
         </div>
         <div className="study-wrapper">
@@ -102,9 +105,11 @@ const StudyInfo = () => {
           </div>
           <div className="load-btns">
             <Button type="primary">Download Research Study</Button>
-            <Link to={'/file-upload'}>
-              <Button type="primary" className="upload-btn">Upload Results</Button>
-            </Link>
+            {/*<Link to={'/file-upload'}>*/}
+              <Button type="primary" className="upload-btn"
+                      onClick={() => setmodalOpen(true)}
+              >Upload Results</Button>
+            {/*</Link>*/}
           </div>
         </div>
 
