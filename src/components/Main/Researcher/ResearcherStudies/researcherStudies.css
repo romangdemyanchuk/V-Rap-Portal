@@ -1,0 +1,20 @@
+.res-button {
+    margin-top: 10px;
+}
+.study-remaining {
+    width: 300px;
+}
+.launch-btn {
+    margin-left: auto;
+}
+.research-header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.research-study-btns {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -35px;
+}
+
