@@ -1,0 +1,7 @@
+.case-studies-changes-wrapper {
+    display: flex;
+    align-items: flex-end;
+}
+.admin-modals-btns {
+    margin: 0 0 15px 25px;
+}

@@ -23,9 +23,6 @@
 .personal-info-img img {
     margin: 15px 0;
 }
-/*.profile-fields span {*/
-/*    margin-top: 15px;*/
-/*}*/
 .profile-fields .ant-btn {
     width: 100% !important;
     display: flex;
@@ -38,7 +35,6 @@
 #components-dropdown-demo-dropdown-button .ant-dropdown-button {
     margin: 0 8px 8px 0;
 }
-
 #components-dropdown-demo-dropdown-button .ant-btn-group-rtl.ant-dropdown-button {
     margin: 0 0 8px 8px;
 }
@@ -52,6 +48,7 @@ p {
 }
 .fields-wrapper {
     margin: 8px 0 15px 0;
+    text-align: left;
 }
 .before-dropdown {
     padding-bottom: 2px;

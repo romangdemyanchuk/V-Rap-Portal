@@ -42,7 +42,7 @@ const ParticipantRegisterForm = () => {
               // onClick={() => setActiveClass(true)}
               >Register</Button>
             </Link>
-            <Link to={'/par-login-form'}>
+            <Link to={'/participant-login'}>
               <Button className="research-btn ">Login</Button>
             </Link>
           </div>
@@ -78,7 +78,7 @@ const ParticipantRegisterForm = () => {
               <Input.Password />
             </Form.Item>
             <Form.Item {...tailLayout}>
-              <Link to={"/personal-info"}>
+              <Link to={"/participant-profile"}>
                 <Button type="primary" htmlType="submit">
                   Register
                 </Button>

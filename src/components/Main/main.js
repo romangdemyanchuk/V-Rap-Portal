@@ -12,12 +12,12 @@ const Main = () => {
           <div>
             <div className="main-page-header">V-Rap</div>
             <div className="main-page-btns">
-              <Link to={"/par-register-form"}>
+              <Link to={"/participant-register"}>
                 <Button type="button" className="main-block-btn btn btn-light">
                   I`m Participant
                 </Button>
               </Link>
-              <Link to={"/res-login-form"}>
+              <Link to={"/researcher-login"}>
                 <Button type="button" className="main-block-btn btn btn-light">
                   I`m Researcher
                 </Button>

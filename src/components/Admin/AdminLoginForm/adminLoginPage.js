@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import "antd/dist/antd.css";
-import "./loginPage.css";
+import "./adminLoginPage.css";
 import { Link } from "react-router-dom";
 import { Form, Input, Button } from "antd";
 
@@ -19,7 +19,7 @@ const tailLayout = {
     span: 16,
   },
 };
-const LoginPage = () => {
+const AdminLoginForm = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -81,4 +81,4 @@ const LoginPage = () => {
     </div>
   );
 };
-export default LoginPage;
+export default AdminLoginForm;

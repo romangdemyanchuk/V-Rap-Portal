@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./mainPage.css";
 import { Button } from 'antd'
 
@@ -23,7 +23,7 @@ const MainPage = () => {
                 Researchers
               </Button>
             </Link>
-            <Link to={'/all-studies'}>
+            <Link to={'/all-studies-list'}>
               <Button type="button" className="main-block-btn btn btn-light">
                 All Case Studies
               </Button>

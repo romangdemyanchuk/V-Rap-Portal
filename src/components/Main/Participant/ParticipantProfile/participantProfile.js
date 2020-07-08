@@ -3,9 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Input, Button, Menu, Dropdown, message, InputNumber } from "antd";
 import { DownOutlined } from '@ant-design/icons';
-import "./personalInfo.css";
+import "./participantProfile.css";
 
-const PersonalInfo = () => {
+const ParticipantProfile = () => {
   function handleMenuClick(e) {
     message.info('Click on menu item.');
     console.log('click', e);
@@ -30,10 +30,10 @@ const PersonalInfo = () => {
     <div className="container">
       <div className="main-page-wrapper">
         <div className="btns-wrapper">
-          <Link to={'/personal-info'}>
+          <Link to={'/participant-profile'}>
             <Button className="profile-btn active">Profile</Button>
           </Link>
-          <Link to={'/study-info'}>
+          <Link to={'/participant-studies'}>
             <Button className="research-btn">Research Studies</Button>
           </Link>
         </div>
@@ -88,4 +88,4 @@ const PersonalInfo = () => {
     </div>
   );
 };
-export default PersonalInfo;
+export default ParticipantProfile;

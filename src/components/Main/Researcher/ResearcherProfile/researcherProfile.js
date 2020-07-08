@@ -1,20 +1,20 @@
 /* eslint-disable */
 import React from "react";
-import {NavLink } from "react-router-dom";
+import {Link } from "react-router-dom";
 import { Input, Button} from "antd";
-import "./researcher-profile.css";
+import "./researcherProfile.css";
 
 const ResearcherProfile = () => {
   return (
     <div className="container">
       <div className="main-page-wrapper">
         <div className="btns-wrapper">
-          <NavLink to={'/researcher-profile'}>
+          <Link to={'/researcher-profile'}>
             <Button className="profile-btn active researcher-profile-btn">Profile</Button>
-          </NavLink>
-          <NavLink to={'/case-studies'}>
+          </Link>
+          <Link to={'/researcher-studies'}>
             <Button className="research-btn">Research Studies</Button>
-          </NavLink>
+          </Link>
         </div>
         <div className="personal-fields-wrapper">
           <div className="personal-heading">Profile Information</div>

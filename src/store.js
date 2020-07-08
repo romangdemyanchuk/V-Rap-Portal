@@ -1,8 +1,7 @@
 /* eslint-disable */
 import {createStore} from "redux";
-import reducer from "./reducers";
+import MainReducer from "./reducers";
 
-const store = createStore(reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(MainReducer);
 
 export default store
