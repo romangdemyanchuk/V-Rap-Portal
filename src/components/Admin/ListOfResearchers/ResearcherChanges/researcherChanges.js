@@ -5,7 +5,8 @@ import { message, Button, Modal, Progress, Input } from 'antd'
 import "./researcherChanges.css";
 import "antd/dist/antd.css";
 
-const ResearcherChanges = ({modalOpen, setmodalOpen}) => {
+const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
+  console.log('modalIsOpen', modalIsOpen)
   const uploadClick = () => {
     setmodalOpen(false);
   }
@@ -35,7 +36,7 @@ const ResearcherChanges = ({modalOpen, setmodalOpen}) => {
       <div>
         <Modal
           title="Admins Changes"
-          visible={modalOpen}
+          visible={modalIsOpen}
           onOk={closeModal}
           onCancel={closeModal}
         >

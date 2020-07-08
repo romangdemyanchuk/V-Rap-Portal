@@ -1,5 +1,10 @@
 /* eslint-disable */
 import React from 'react'
+import ResearcherChanges from '../components/Admin/ListOfResearchers/ResearcherChanges'
+const openTable = () => {
+  <ResearcherChanges modalIsOpen={true}/>
+  console.log('text');
+}
 
 const initialState = {
   caseStudies: [
@@ -114,7 +119,14 @@ const initialState = {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
-      render: (text) => <a>{text}</a>,
+      render: (text) => (
+        <div
+          onClick={openTable}
+        >
+          {text}
+        </div>
+      ),
+      // render: (text) => <a>{text}</a>,
     },
   ],
   caseStudiesColumns: [

@@ -25,9 +25,9 @@ const ListOfResearchers = () => {
         <div className="researchers-profile-btn-wrapper">
           <Button type="button" className="researchers-profile-btn">Create Researcher Profile</Button>
         </div>
-        <div onClick={() => setmodalOpen(true)}>
+        {/*<div onClick={() => setmodalOpen(true)}>*/}
           <Table columns={researcherListColumns.researcherListColumns} dataSource={researchersList.researchersList}/>
-        </div>
+        {/*</div>*/}
       </div>
     </div>
   );
