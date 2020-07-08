@@ -1,15 +1,13 @@
 /* eslint-disable */
 import React, {useState} from "react";
-import { message, Button, Modal, Progress, Input } from 'antd'
+import { message, Button, Modal, Input } from 'antd'
 import DeleteModal from './DeleteModal'
-import openTable from "../../../../reducers/index"
-import store from '../../../../store'
-// import AboutStudies from './AboutStudies'
 import "./researcherChanges.css";
 import "antd/dist/antd.css";
 import AboutStudies from '../../../Main/Participant/ParticipantStudies/FileUpload/AboutStudies'
 
-const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
+const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
+  
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const deleteClick = () => {
     setmodalOpen(false);
@@ -36,9 +34,7 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
       }
     },
   };
-  return (
-    <div>
-      <div>
+  return <>
         <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
         <Modal
           title="Admins Changes"
@@ -70,9 +66,7 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
               </Button>
             </div>
           </div>
-        </Modal>
-      </div>
-    </div>
-  );
+    </Modal>
+    </>
 };
 export default ResearcherChanges;

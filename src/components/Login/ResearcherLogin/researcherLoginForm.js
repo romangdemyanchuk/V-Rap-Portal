@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import "./participantRegisterForm.css";
+import "./researcherLoginForm.css";
 import { Form, Input, Button, Checkbox } from "antd";
 
 const layout = {
@@ -19,8 +19,7 @@ const tailLayout = {
     span: 16,
   },
 };
-const ParticipantRegisterForm = () => {
-  // const [active, setActiveClass] = useState(false);
+const ResearcherLogin = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -28,28 +27,25 @@ const ParticipantRegisterForm = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  // document.get('.one').addEventListener('click', _=> {classList.toggle('three');
+  // })
 
   return (
     <div className="container">
       <div className="main-page-wrapper">
+        <div className="participant-heading">
+          V-RAP: Researcher
+        </div>
+
+        <div className='login-text-title'>Login form</div>
+
         <div className="form-wrapper">
-          <div className="participant-heading">
-            V-RAP: Participant
-          </div>
-          <div className="login-btns">
-            <Link to={'/par-register-form'}>
-              <Button className="profile-btn active"
-              // onClick={() => setActiveClass(true)}
-              >Register</Button>
-            </Link>
-            <Link to={'/participant-login'}>
-              <Button className="research-btn ">Login</Button>
-            </Link>
-          </div>
-          <h2>Registration form</h2>
           <Form
             {...layout}
             name="basic"
+            initialValues={{
+              remember: true,
+            }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >
@@ -77,10 +73,13 @@ const ParticipantRegisterForm = () => {
             >
               <Input.Password />
             </Form.Item>
+            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
             <Form.Item {...tailLayout}>
-              <Link to={"/participant-profile"}>
+              <Link to={"/researcher-profile"}>
                 <Button type="primary" htmlType="submit">
-                  Register
+                  Login
                 </Button>
               </Link>
             </Form.Item>
@@ -90,4 +89,4 @@ const ParticipantRegisterForm = () => {
     </div>
   );
 };
-export default ParticipantRegisterForm;
+export default ResearcherLogin;

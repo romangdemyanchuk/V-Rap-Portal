@@ -4,20 +4,18 @@ import {Link} from "react-router-dom";
 import "./mainPage.css";
 import { Button } from 'antd'
 
-const MainPage = () => {
-  return (
-    <div>
-      <div className="container">
-        <div className="main-page-wrapper">
-          <div className="admin-text">
-            <div className="admin-heading">
-              Admin Panel
-            </div>
+const MainAdminPage = () => {
+  
+  return <div className="root-admin-page">
+            <div className="admin-text">
+              <div className="admin-heading">
+                Admin Panel
+              </div>
             <div className="user-name">
               User: First Name Last Name
             </div>
           </div>
-          <div className="admin-page-btns">
+            <div className="admin-page-btns">
             <Link to={'/researchers-list'}>
               <Button type="button" className="main-block-btn btn btn-light">
                 Researchers
@@ -40,8 +38,5 @@ const MainPage = () => {
             </Button>
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-export default MainPage;
+}
+export default MainAdminPage;

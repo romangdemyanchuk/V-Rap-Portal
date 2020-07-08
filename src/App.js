@@ -1,21 +1,22 @@
 /* eslint-disable */
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Main from "./components/Main";
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import Main from "./components/Main"
 // import AboutStudies from "./components/Main/Participant/StudyInfo/FileUpload/AboutStudies";
-import CaseStudies from "./components/Main/Researcher/ResearcherStudies";
-import FileUpload from "./components/Main/Participant/ParticipantStudies/FileUpload";
-import ParticipantProfile from "./components/Main/Participant/ParticipantProfile";
-import PersonalStats from "./components/Main/Researcher/ResearcherStudies/PersonalStats";
-import ParticipantStudies from "./components/Main/Participant/ParticipantStudies";
+import CaseStudies from "./components/Main/Researcher/ResearcherStudies"
+import FileUpload from "./components/Main/Participant/ParticipantStudies/FileUpload"
+import ParticipantProfile from "./components/Main/Participant/ParticipantProfile"
+import PersonalStats from "./components/Main/Researcher/ResearcherStudies/PersonalStats"
+import ParticipantStudies from "./components/Main/Participant/ParticipantStudies"
 import ResearcherProfile from './components/Main/Researcher/ResearcherProfile'
-import ParticipantRegisterForm from './components/ParticipantRegister/participantRegisterForm'
-import ParticipantLogin from './components/ParticipantLogin/participantLoginForm'
-import ResearcherLogin from './components/ResearcherLogin'
+import ParticipantRegisterForm from './components/Login/ParticipantRegister/participantRegisterForm'
+import ParticipantLogin from './components/Login/ParticipantLogin/participantLoginForm'
+import ResearcherLogin from './components/Login/ResearcherLogin'
 import LoginPage from './components/Admin/AdminLoginForm'
 import MainPage from './components/Admin/MainPage'
 import ListOfCaseStudies from "./components/Admin/ListOfCaseStudies"
 import ListOfResearchers from "./components/Admin/ListOfResearchers"
-import React from "react";
+import React from "react"
+
 const App = () => {
   return (
     <Router>
