@@ -24,13 +24,13 @@
     margin: 15px 0;
 }
 .profile-fields .ant-btn {
-    width: 100% !important;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .profile-fields .input-number {
-    width: 100% !important;
+    width: 100%;
 }
 #components-dropdown-demo-dropdown-button .ant-dropdown-button {
     margin: 0 8px 8px 0;
@@ -39,7 +39,7 @@
     margin: 0 0 8px 8px;
 }
 .ant-input:placeholder-shown {
-    text-align: left !important;
+    text-align: left;
 }
 p {
     text-align: left;
@@ -48,7 +48,6 @@ p {
 }
 .fields-wrapper {
     margin: 8px 0 15px 0;
-    width: 200px;
     text-align: left;
 }
 .before-dropdown {
@@ -59,6 +58,7 @@ p {
 }
 .changes-btns button {
     border-radius: 5px;
+    /*padding: 0 35px;*/
 }
 .save-btn {
     margin-right: 8px;

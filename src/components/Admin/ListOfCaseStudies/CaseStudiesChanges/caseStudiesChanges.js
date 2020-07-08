@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, {useState} from "react";
-import { message, Button, Modal, Progress, Input } from 'antd'
-// import AboutStudies from './AboutStudies'
+import { message, Button, Modal, Input } from 'antd'
 import "./caseStudiesChanges.css";
 import "antd/dist/antd.css";
 import DeleteModal from '../../ListOfResearchers/ResearcherChanges/DeleteModal'
@@ -12,7 +11,7 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
     setmodalOpen(false);
     setDeleteModalIsOpen(true)
   }
-  const  closeModal = e => {
+  const  closeModal = () => {
     setmodalOpen(false);
   }
   const props = {
@@ -22,7 +21,6 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
       authorization: "authorization-text",
     },
     onChange(info) {
-      console.log(1);
       if (info.file.status !== "uploading") {
         setmodalOpen(false);
       }
@@ -34,7 +32,6 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
     },
   };
   return (
-    <div>
       <div>
         <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
         <Modal
@@ -77,7 +74,6 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
           </div>
         </Modal>
       </div>
-    </div>
   );
 };
 export default CaseStudiesChanges;

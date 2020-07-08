@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./participantRegisterForm.css";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button} from "antd";
 
 const layout = {
   labelCol: {
@@ -20,11 +20,9 @@ const tailLayout = {
   },
 };
 const ParticipantRegisterForm = () => {
-  // const [active, setActiveClass] = useState(false);
   const onFinish = (values) => {
     console.log("Success:", values);
   };
-
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };

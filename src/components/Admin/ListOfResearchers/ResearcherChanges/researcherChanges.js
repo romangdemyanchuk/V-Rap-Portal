@@ -1,13 +1,9 @@
 /* eslint-disable */
 import React, {useState} from "react";
-import { message, Button, Modal, Progress, Input } from 'antd'
+import { message, Button, Modal, Input } from 'antd'
 import DeleteModal from './DeleteModal'
-import openTable from "../../../../reducers/index"
-import store from '../../../../store'
-// import AboutStudies from './AboutStudies'
 import "./researcherChanges.css";
 import "antd/dist/antd.css";
-import AboutStudies from '../../../Main/Participant/ParticipantStudies/FileUpload/AboutStudies'
 
 const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
@@ -15,7 +11,7 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
     setmodalOpen(false);
     setDeleteModalIsOpen(true)
   }
-  const  closeModal = e => {
+  const  closeModal = () => {
     setmodalOpen(false);
   }
   const props = {
@@ -38,40 +34,38 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
   };
   return (
     <div>
-      <div>
-        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
-        <Modal
-          title="Admins Changes"
-          visible={modalOpen}
-          onOk={closeModal}
-          onCancel={closeModal}
-        >
-          <div className="research-changes-wrapper">
-            <div>
-              <div className="fields-wrapper">
-                <p>Name</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>School/Institution Name</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>Area of Research</p>
-                <Input placeholder="Type here.." />
-              </div>
+      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
+      <Modal
+        title="Admins Changes"
+        visible={modalOpen}
+        onOk={closeModal}
+        onCancel={closeModal}
+      >
+        <div className="research-changes-wrapper">
+          <div>
+            <div className="fields-wrapper">
+              <p>Name</p>
+              <Input placeholder="Type here.." />
             </div>
-            <div className="changes-btns research-modal-btns">
-              <Button className="save-btn" type="primary">Save</Button>
-              <Button type="danger" className="cancel-btn"
-                onClick={deleteClick}
-              >
-                Delete
-              </Button>
+            <div className="fields-wrapper">
+              <p>School/Institution Name</p>
+              <Input placeholder="Type here.." />
+            </div>
+            <div className="fields-wrapper">
+              <p>Area of Research</p>
+              <Input placeholder="Type here.." />
             </div>
           </div>
-        </Modal>
-      </div>
+          <div className="changes-btns research-modal-btns">
+            <Button className="save-btn" type="primary">Save</Button>
+            <Button type="danger" className="cancel-btn"
+              onClick={deleteClick}
+            >
+              Delete
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

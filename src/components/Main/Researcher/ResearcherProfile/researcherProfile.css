@@ -1,9 +1,15 @@
-.changes-btns {
-    width: 250px;
-    display: flex;
-    justify-content: space-between;
-}
+
 .personal-fields-wrapper {
     width: 100%;
-
+}
+.personal-fields-wrapper .ant-input {
+    width: 250px;
+}
+.personal-fields-wrapper .changes-btns {
+    display: block;
+    text-align: left;
+}
+.researcher-profile-btn {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }

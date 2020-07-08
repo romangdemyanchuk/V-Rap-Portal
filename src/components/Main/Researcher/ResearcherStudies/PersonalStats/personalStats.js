@@ -32,13 +32,6 @@ const PersonalStats = () => {
   return (
     <div className="container">
       <div className="main-page-wrapper">
-        {/*<div className="study-block-header">*/}
-          {/*<div className="study-block-header-btns">*/}
-          {/*  <Button className="study-profile-btn">Profile</Button>*/}
-          {/*  <Button className="study-research-btn">My studies</Button>*/}
-          {/*</div>*/}
-          {/*<HeaderBtns/>*/}
-        {/*</div>*/}
         <div className="btns-wrapper">
           <Link to={'/researcher-profile'}>
             <Button className="profile-btn">Profile</Button>
@@ -52,9 +45,9 @@ const PersonalStats = () => {
             <div className="personal-heading">Create Research Studies</div>
             <div className="personal-info-img">
               <img src={userImg} alt="userImg" />
-            </div>
-            <div className="upload-btns">
-              <Button className="file-upload-btn" type="primary">Upload Image</Button>
+              <div className="upload-btns">
+                <Button className="file-upload-btn" type="primary">Upload Image</Button>
+              </div>
             </div>
             <div className="personal-blocks-wrapper">
               <div className="personal-left-block">
@@ -110,9 +103,7 @@ const PersonalStats = () => {
               <Link to={'/researcher-profile'}>
                 <Button>Close Page</Button>
               </Link>
-
             </div>
-
           </div>
         </div>
       </div>

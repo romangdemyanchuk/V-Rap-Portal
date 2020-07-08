@@ -39,12 +39,15 @@ const ParticipantLoginForm = () => {
         <div className="login-btns">
           <Link to={'/participant-register'}>
             <Button className="profile-btn"
-            // onClick={()=> ontoggle('active')}
-            >Register</Button>
+            >
+              Register
+            </Button>
           </Link>
           <Link to={'/participant-login'}>
             <Button className="research-btn active"
-            >Login</Button>
+            >
+              Login
+            </Button>
           </Link>
         </div>
         <h2>Login form</h2>
@@ -82,11 +85,9 @@ const ParticipantLoginForm = () => {
             >
               <Input.Password />
             </Form.Item>
-
             <Form.Item {...tailLayout} name="remember" valuePropName="checked">
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
-
             <Form.Item {...tailLayout}>
               <Link to={"/participant-profile"}>
                 <Button type="primary" htmlType="submit">
@@ -96,7 +97,6 @@ const ParticipantLoginForm = () => {
             </Form.Item>
           </Form>
         </div>
-
       </div>
     </div>
   );

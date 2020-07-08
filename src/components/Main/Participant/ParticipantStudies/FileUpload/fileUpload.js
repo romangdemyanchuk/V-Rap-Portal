@@ -11,7 +11,7 @@ const FileUpload = ({modalOpen, setmodalOpen}) => {
     setmodalOpen(false);
     setsuccessModalIsOpen(true)
   }
-  const  closeModal = e => {
+  const  closeModal = () => {
     setmodalOpen(false);
   }
   const props = {
@@ -35,24 +35,22 @@ const FileUpload = ({modalOpen, setmodalOpen}) => {
   return (
     <div>
       <AboutStudies successModalIsOpen={successModalIsOpen} setsuccessModalIsOpen={setsuccessModalIsOpen}/>
-      <div>
-        <Modal
-          title="Upload results for Research Study 1"
-          visible={modalOpen}
-          onOk={closeModal}
-          onCancel={closeModal}
-        >
-          <div className="modal-subtitle">
-            Upload the exported files from the simulation that are located on your
-            desktop to receive your gift card
-          </div>
-          <div className="modal-upload-btn-wrapper">
-            <Button type="primary" className="upload-btn modal-upload-btn"
-                    onClick={uploadClick}>Upload</Button>
-          </div>
-          <Progress percent={75} />
-        </Modal>
-      </div>
+      <Modal
+        title="Upload results for Research Study 1"
+        visible={modalOpen}
+        onOk={closeModal}
+        onCancel={closeModal}
+      >
+        <div className="modal-subtitle">
+          Upload the exported files from the simulation that are located on your
+          desktop to receive your gift card
+        </div>
+        <div className="modal-upload-btn-wrapper">
+          <Button type="primary" className="upload-btn modal-upload-btn"
+                  onClick={uploadClick}>Upload</Button>
+        </div>
+        <Progress percent={75} />
+      </Modal>
     </div>
   );
 };

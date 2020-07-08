@@ -9,14 +9,11 @@
 .upload-btns {
     display: flex;
 }
+.upload-btns {
+    justify-content: center;
+}
 .personal-info-wrapper {
     width: 250px;
-}
-Input {
-    max-width: 250px;
-}
-.changes-btns {
-    margin-top: 15px;
 }
 .personal-heading {
     font-size: 20px;
@@ -28,9 +25,8 @@ Input {
 .file-upload-btn,
 .choose-btn {
     border: 1px solid darkgray;
-    width: 200px;
     font-size: 14px;
-    padding: 5px 0;
+    /*padding: 5px 0;*/
 }
 .research-btn:hover {
     cursor: pointer;
@@ -63,7 +59,4 @@ h2 {
 
     color: #000;
 }
-.researcher-profile-btn {
-    border-top-left-radius: 10px !important;
-    border-top-right-radius: 10px !important;
-}
+

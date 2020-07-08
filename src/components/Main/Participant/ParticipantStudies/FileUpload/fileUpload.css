@@ -12,24 +12,15 @@
     display: flex;
     margin: 0 auto;
 }
-.choose-button {
-    width: 40% !important;
-    margin-top: 10px !important;
-}
 .ant-modal-content {
-    height: 60vh;
-    width: 37vw;
+    padding: 20px;
 }
-.ant-modal-close-x {
-    display: none !important;
-}
-.ant-modal-header {
-    border-bottom: none !important;
-    padding: 15px 0 0 0 !important;
+.ant-modal-content .ant-input {
+    width: 100%;
 }
 .ant-modal-title {
     text-align: center;
-    font-size: 18px !important;
+    font-size: 18px;
 }
 .modal-subtitle {
     text-align: center;
@@ -39,30 +30,26 @@
     text-align: center;
 }
 .modal-upload-btn {
-    margin: 20px 0 0 0;
+    margin: 20px 0 15px 0;
 }
 .ant-modal-footer {
     display: none;
 }
 .ant-progress-outer {
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 70% !important;
+    width: 70%;
 }
 .ant-progress-line {
     text-align: center;
-    margin-top: 15px !important;
 }
 .ant-progress-inner {
     height: 15px;
-    border-radius: 2px !important;
 }
 .ant-progress-bg {
     height: 100% !important;
 }
-.ant-progress-success-bg, .ant-progress-bg {
-    border-radius: 0 !important;
-}
 .ant-modal-body {
-    padding: 15px 20px 0 20px;
+    padding: 0;
+}
+.ant-modal {
+    width: 25vw;
 }
