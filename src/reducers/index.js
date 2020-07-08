@@ -1,11 +1,12 @@
 /* eslint-disable */
 import React from 'react'
 import ResearcherChanges from '../components/Admin/ListOfResearchers/ResearcherChanges'
+import Popconfirm from 'antd'
 const openTable = () => {
-  <ResearcherChanges modalIsOpen={true}/>
   console.log('text');
+  return true;
+  // <ResearcherChanges modalIsOpen={true}/>
 }
-
 const initialState = {
   caseStudies: [
     {
@@ -119,11 +120,18 @@ const initialState = {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
+      // render: (text, record) =>
+      //   (
+          // <ResearcherChanges modalIsOpen={true}/>
+          // <Popconfirm title="Sure to delete?">
+          //   <a>Delete</a>
+          // </Popconfirm>
+        // )
       render: (text) => (
         <div
-          onClick={openTable}
+          onClick={() => openTable}
         >
-          {text}
+          <a>{text}</a>
         </div>
       ),
       // render: (text) => <a>{text}</a>,
@@ -205,4 +213,7 @@ const MainReducer = (state = initialState, action) => {
     return state;
   }
 };
-export default MainReducer;
+export {
+   openTable
+}
+export default MainReducer

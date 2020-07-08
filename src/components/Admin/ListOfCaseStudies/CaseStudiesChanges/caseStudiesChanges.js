@@ -4,10 +4,13 @@ import { message, Button, Modal, Progress, Input } from 'antd'
 // import AboutStudies from './AboutStudies'
 import "./caseStudiesChanges.css";
 import "antd/dist/antd.css";
+import DeleteModal from '../../ListOfResearchers/ResearcherChanges/DeleteModal'
 
 const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
-  const uploadClick = () => {
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const deleteClick = () => {
     setmodalOpen(false);
+    setDeleteModalIsOpen(true)
   }
   const  closeModal = e => {
     setmodalOpen(false);
@@ -33,6 +36,7 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
   return (
     <div>
       <div>
+        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
         <Modal
           title="Admins Changes"
           visible={modalOpen}
@@ -64,7 +68,11 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
             </div>
             <div className="changes-btns admin-modals-btns">
               <Button className="save-btn" type="primary">Save</Button>
-              <Button type="danger" className="cancel-btn">Delete</Button>
+              <Button type="danger" className="cancel-btn"
+                      onClick={deleteClick}
+              >
+                Delete
+              </Button>
             </div>
           </div>
         </Modal>

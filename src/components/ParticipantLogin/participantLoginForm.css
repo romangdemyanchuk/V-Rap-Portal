@@ -28,7 +28,7 @@ Input {
 .file-upload-btn,
 .choose-btn {
     border: 1px solid darkgray;
-    width: 45%;
+    width: 200px;
     font-size: 14px;
     padding: 5px 0;
 }

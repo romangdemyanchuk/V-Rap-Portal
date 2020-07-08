@@ -1,0 +1,12 @@
+.delete-btns {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+.deleteModal .ant-modal-content {
+    height: 25vh;
+}
+.ant-modal-title {
+    width: 40vh !important;
+    margin: 0 auto;
+}

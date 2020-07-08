@@ -1,14 +1,19 @@
 /* eslint-disable */
 import React, {useState} from "react";
 import { message, Button, Modal, Progress, Input } from 'antd'
+import DeleteModal from './DeleteModal'
+import openTable from "../../../../reducers/index"
+import store from '../../../../store'
 // import AboutStudies from './AboutStudies'
 import "./researcherChanges.css";
 import "antd/dist/antd.css";
+import AboutStudies from '../../../Main/Participant/ParticipantStudies/FileUpload/AboutStudies'
 
 const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
-  console.log('modalIsOpen', modalIsOpen)
-  const uploadClick = () => {
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const deleteClick = () => {
     setmodalOpen(false);
+    setDeleteModalIsOpen(true)
   }
   const  closeModal = e => {
     setmodalOpen(false);
@@ -34,9 +39,10 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
   return (
     <div>
       <div>
+        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
         <Modal
           title="Admins Changes"
-          visible={modalIsOpen}
+          visible={modalOpen}
           onOk={closeModal}
           onCancel={closeModal}
         >
@@ -57,7 +63,11 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
             </div>
             <div className="changes-btns research-modal-btns">
               <Button className="save-btn" type="primary">Save</Button>
-              <Button type="danger" className="cancel-btn">Delete</Button>
+              <Button type="danger" className="cancel-btn"
+                onClick={deleteClick}
+              >
+                Delete
+              </Button>
             </div>
           </div>
         </Modal>

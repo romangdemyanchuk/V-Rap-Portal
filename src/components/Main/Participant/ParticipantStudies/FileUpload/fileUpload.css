@@ -17,7 +17,7 @@
     margin-top: 10px !important;
 }
 .ant-modal-content {
-    height: 60vh !important;
+    height: 60vh;
     width: 37vw;
 }
 .ant-modal-close-x {
