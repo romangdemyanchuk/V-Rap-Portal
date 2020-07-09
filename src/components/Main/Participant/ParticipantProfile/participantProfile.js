@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Input, Button, Menu, Dropdown, message, InputNumber } from "antd";
 import { DownOutlined } from '@ant-design/icons';
-import "./participantProfile.css";
+import "./participantProfile.scss";
 
 const ParticipantProfile = () => {
   function handleMenuClick(e) {

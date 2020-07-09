@@ -6,7 +6,7 @@ import "./researcherChanges.css";
 import "antd/dist/antd.css";
 
 const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
-  
+
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const deleteClick = () => {
     setmodalOpen(false);
@@ -33,7 +33,7 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
       }
     },
   };
-<<<<<<< HEAD
+// <<<<<<< HEAD
   return (
     <div>
       <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
@@ -68,7 +68,7 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
       </Modal>
     </div>
   );
-=======
+// =======
   return <>
         <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
         <Modal
@@ -103,6 +103,5 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
           </div>
     </Modal>
     </>
->>>>>>> ec59e5c63b2d9faaa4942f34d4528c91894b432d
 };
 export default ResearcherChanges;

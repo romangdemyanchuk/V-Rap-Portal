@@ -15,15 +15,18 @@ import LoginPage from './components/Admin/AdminLoginForm'
 import MainPage from './components/Admin/MainPage'
 import ListOfCaseStudies from "./components/Admin/ListOfCaseStudies"
 import ListOfResearchers from "./components/Admin/ListOfResearchers"
+import MainLogin from './components/Login/Login'
 import React from "react"
-
+import './styles/index.styl'
 const App = () => {
   return (
+    <div className="root-App">
     <Router>
       <Route path="/" component={Main} exact />
-      <Route path="/participant-register" component={ParticipantRegisterForm}/>
-      <Route path="/participant-login" component={ParticipantLogin}/>
-      <Route path="/researcher-login" component={ResearcherLogin}/>
+      {/*<Route path="/participant-register" component={ParticipantRegisterForm}/>*/}
+      {/*<Route path="/participant-login" component={ParticipantLogin}/>*/}
+      <Route path="/login" component={MainLogin}/>
+      {/*<Route path="/participant-login" component={ParticipantLogin}/>*/}
       {/*<Route path="/about-studies" component={AboutStudies} />*/}
       <Route path="/researcher-studies" component={CaseStudies} />
       <Route path="/participant-upload" component={FileUpload} />
@@ -36,6 +39,7 @@ const App = () => {
       <Route path="/researchers-list" component={ListOfResearchers} />
       <Route path="/all-studies-list" component={ListOfCaseStudies} />
     </Router>
-  );
+    </div>
+  )
 };
 export default App;

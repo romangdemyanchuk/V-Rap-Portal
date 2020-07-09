@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import {message, Button, Modal, Progress } from "antd";
 import AboutStudies from './AboutStudies'
-import "./fileUpload.css";
+import "./fileUpload.scss";
 import "antd/dist/antd.css";
 
 const FileUpload = ({modalOpen, setmodalOpen}) => {

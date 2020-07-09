@@ -1,45 +1,37 @@
 /* eslint-disable */
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
-import "./main.css";
+import "./main.scss";
 import { Button } from 'antd'
+import MainLogin from '../Login/Login'
 
 const Main = () => {
-<<<<<<< HEAD
+  const [registerForm, setRegisterForm] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
+  const typeOfForm = () => {
+    setRegisterForm(true);
+    setIsVisible(true)
+  }
   return (
     <div className="container">
       <div className="main-page-wrapper">
+        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
         <div className="main-page-header">V-Rap</div>
         <div className="main-page-btns">
-          <Link to={"/participant-register"}>
-            <Button type="button" className="main-block-btn btn btn-light">
+          {/*<Link to={"/participant-register"}>*/}
+            <Button type="button" className="main-block-btn btn btn-light"
+              onClick={typeOfForm}>
               I`m Participant
             </Button>
-          </Link>
+          {/*</Link>*/}
           <Link to={"/researcher-login"}>
             <Button type="button" className="main-block-btn btn btn-light">
               I`m Researcher
             </Button>
           </Link>
-=======
-
-  return <div className="container">
-          <div className="main-page-wrapper">
-            <div className="main-page-header">V-Rap</div>
-              <div className="main-page-btns">
-                <Link to={"/participant-register"}>
-                  <Button type="button" className="main-block-btn btn btn-light">
-                    I`m Participant
-                  </Button>
-                </Link>
-                <Link to={"/researcher-login"}>
-                  <Button type="button" className="main-block-btn btn btn-light">
-                    I`m Researcher
-                  </Button>
-                </Link>
-              </div>
-          </div>
->>>>>>> ec59e5c63b2d9faaa4942f34d4528c91894b432d
         </div>
+      </div>
+    </div>
+  );
 };
 export default Main;

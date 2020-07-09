@@ -1,0 +1,39 @@
+.participant-heading {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.login-btns {
+    button {
+        border: none;
+    }
+}
+h2 {
+    margin: 8px 0;
+}
+.research-btn {
+    &:hover {
+        cursor: pointer;
+    }
+}
+.save-btn,
+.cancel-btn,
+.file-upload-btn,
+.choose-btn {
+    border: 1px solid darkgray;
+    font-size: 14px;
+}
+.ant-form-item-control-input-content {
+    flex: unset;
+    width: 250px;
+}
+.ant-btn:active, .ant-btn.active {
+    //border-color: darkgray;
+    //background-color: darkgray;
+    //color: #000;
+    .researcher-profile-btn {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+}
+

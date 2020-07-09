@@ -1,99 +1,74 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import "./participantLoginForm.css";
+import "./participantLoginForm.scss";
 import { Form, Input, Button, Checkbox } from "antd";
-
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import MainLogin from '../Login'
 const ParticipantLoginForm = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  // document.get('.one').addEventListener('click', _=> {classList.toggle('three');
-  // })
-
+  const [registerForm, setRegisterForm] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
+  const typeOfForm = () => {
+    setRegisterForm(true);
+    setIsVisible(true)
+  }
   return (
     <div className="container">
       <div className="main-page-wrapper">
-        <div className="participant-heading">
-          V-RAP: Participant
-        </div>
-        <div className="login-btns">
-          <Link to={'/participant-register'}>
-            <Button className="profile-btn"
-            >
-              Register
-            </Button>
-          </Link>
-          <Link to={'/participant-login'}>
-            <Button className="research-btn active"
-            >
-              Login
-            </Button>
-          </Link>
-        </div>
-        <h2>Login form</h2>
+        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
         <div className="form-wrapper">
+          <div className="participant-heading">
+            V-RAP: Participant
+          </div>
+          <div className="login-btns">
+            <Button className="profile-btn "
+              onClick={typeOfForm}
+            >Register</Button>
+            {/*<Link to={'/participant-login'}>*/}
+            <Button className="research-btn active"
+                    // onClick={typeOfForm}
+            >Login</Button>
+            {/*</Link>*/}
+          </div>
           <Form
-            {...layout}
-            name="basic"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            name="normal_login"
+            className="login-form"
+            initialValues={{ remember: true }}
           >
             <Form.Item
-              label="Email Address"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your email address!",
-                },
-              ]}
+              name="username"
+              rules={[{ required: true, message: 'Please input your Username!' }]}
             >
-              <Input />
+              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
             </Form.Item>
             <Form.Item
-              label="Password"
               name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
+              rules={[{ required: true, message: 'Please input your Password!' }]}
             >
-              <Input.Password />
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
             </Form.Item>
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-              <Checkbox>Remember me</Checkbox>
+            <Form.Item>
+              <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <a className="login-form-forgot" href="">
+                Forgot password
+              </a>
             </Form.Item>
-            <Form.Item {...tailLayout}>
-              <Link to={"/participant-profile"}>
-                <Button type="primary" htmlType="submit">
-                  Login
-                </Button>
-              </Link>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                Log in
+              </Button>
+              Or <a href=""
+                    onClick={typeOfForm}
+            >register now!</a>
             </Form.Item>
           </Form>
         </div>

@@ -4,7 +4,7 @@ import userImg from "../../../../../images/user.svg";
 import { Link } from "react-router-dom";
 import { Input, Button, Progress, Dropdown, Menu, message, Slider, InputNumber } from 'antd'
 const { TextArea } = Input;
-import "./personalStats.css";
+import "./personalStats.scss";
 import { DownOutlined } from '@ant-design/icons'
 
 const PersonalStats = () => {
