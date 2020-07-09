@@ -41,27 +41,25 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
           onCancel={closeModal}
         >
           <div className="case-studies-changes-wrapper">
-            <div>
-              <div className="fields-wrapper">
-                <p>Title</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>Location</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>Age</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>Average Income</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>Status</p>
-                <Input placeholder="Type here.." />
-              </div>
+            <div className="fields-wrapper">
+              <p>Title</p>
+              <Input placeholder="Type here.." />
+            </div>
+            <div className="fields-wrapper">
+              <p>Location</p>
+              <Input placeholder="Type here.." />
+            </div>
+            <div className="fields-wrapper">
+              <p>Age</p>
+              <Input placeholder="Type here.." />
+            </div>
+            <div className="fields-wrapper">
+              <p>Average Income</p>
+              <Input placeholder="Type here.." />
+            </div>
+            <div className="fields-wrapper">
+              <p>Status</p>
+              <Input placeholder="Type here.." />
             </div>
             <div className="changes-btns admin-modals-btns">
               <Button className="save-btn" type="primary">Save</Button>

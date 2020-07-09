@@ -42,19 +42,17 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
         onCancel={closeModal}
       >
         <div className="research-changes-wrapper">
-          <div>
-            <div className="fields-wrapper">
-              <p>Name</p>
-              <Input placeholder="Type here.." />
-            </div>
-            <div className="fields-wrapper">
-              <p>School/Institution Name</p>
-              <Input placeholder="Type here.." />
-            </div>
-            <div className="fields-wrapper">
-              <p>Area of Research</p>
-              <Input placeholder="Type here.." />
-            </div>
+          <div className="fields-wrapper">
+            <p>Name</p>
+            <Input placeholder="Type here.." />
+          </div>
+          <div className="fields-wrapper">
+            <p>School/Institution Name</p>
+            <Input placeholder="Type here.." />
+          </div>
+          <div className="fields-wrapper">
+            <p>Area of Research</p>
+            <Input placeholder="Type here.." />
           </div>
           <div className="changes-btns research-modal-btns">
             <Button className="save-btn" type="primary">Save</Button>

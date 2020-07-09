@@ -51,12 +51,9 @@
 h2 {
     margin: 8px 0;
 }
-.active {
-    background-color: darkgray !important;
-}
 .ant-btn:active, .ant-btn.active {
-    border-color: transparent;
-
+    border-color: darkgray;
+    background-color: darkgray;
     color: #000;
 }
 
