@@ -1,84 +1,52 @@
 /* eslint-disable */
 import React from "react";
-import "antd/dist/antd.css";
 import "./adminLoginPage.css";
 import { Link } from "react-router-dom";
 import { Form, Input, Button } from "antd";
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 const AdminLoginForm = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
 
   return (
-    <div className="container">
+    <div className="root-Admin">
       <div className="main-page-wrapper">
-        <h2 className="login-of-admin">
-          Login Page
-        </h2>
-        <div className="form-wrapper">
-          <Form
-            {...layout}
-            name="basic"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-          >
-            <Form.Item
-              label="Email Address"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your email address!",
-                },
-              ]}
+          <div className="form-wrapper">
+            <div className="participant-heading">
+              V-RAP: Administration
+            </div>
+            <Form
+              name="normal_login"
+              className="login-form"
+              initialValues={{ remember: true }}
             >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-            <Form.Item {...tailLayout}>
-              <Link to={"/admin-portal"}>
-                <Button type="primary" htmlType="submit">
-                  Login
-                </Button>
-              </Link>
-            </Form.Item>
-          </Form>
-        </div>
+              <Form.Item
+                name="username"
+                rules={[{ required: true, message: 'Please input your Username!' }]}
+              >
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[{ required: true, message: 'Please input your Password!' }]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Password"
+                />
+              </Form.Item>
+              <Form.Item>
+                <Link to={'/admin-portal'}>
+                  <Button type="primary" htmlType="submit" className="login-form-button">
+                    Login
+                  </Button>
+                </Link>
+              </Form.Item>
+            </Form>
+          </div>
       </div>
     </div>
   );
 };
+
 export default AdminLoginForm;

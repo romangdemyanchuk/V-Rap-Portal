@@ -8,16 +8,15 @@ import ParticipantProfile from "./components/Main/Participant/ParticipantProfile
 import PersonalStats from "./components/Main/Researcher/ResearcherStudies/PersonalStats"
 import ParticipantStudies from "./components/Main/Participant/ParticipantStudies"
 import ResearcherProfile from './components/Main/Researcher/ResearcherProfile'
-import ParticipantRegisterForm from './components/Login/ParticipantRegister/participantRegisterForm'
-import ParticipantLogin from './components/Login/ParticipantLogin/participantLoginForm'
 import ResearcherLogin from './components/Login/ResearcherLogin'
 import LoginPage from './components/Admin/AdminLoginForm'
 import MainPage from './components/Admin/MainPage'
-import ListOfCaseStudies from "./components/Admin/ListOfCaseStudies"
-import ListOfResearchers from "./components/Admin/ListOfResearchers"
+import ListOfCaseStudies from "./components/Admin/MainPage/ListOfCaseStudies"
+import ListOfResearchers from "./components/Admin/MainPage/ListOfResearchers"
 import MainLogin from './components/Login/Login'
 import React from "react"
 import './styles/index.styl'
+
 const App = () => {
   return (
     <div className="root-App">
@@ -39,4 +38,5 @@ const App = () => {
     </div>
   )
 };
+
 export default App;

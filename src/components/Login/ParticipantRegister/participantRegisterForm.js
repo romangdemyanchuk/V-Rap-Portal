@@ -7,20 +7,7 @@ import "antd/dist/antd.css";
 import "./participantRegisterForm.css";
 import MainLogin from '../Login'
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+
 const ParticipantRegisterForm = () => {
   const [registerForm, setRegisterForm] = useState(false);
   const [isVisible, setIsVisible] = useState(false)
@@ -29,7 +16,7 @@ const ParticipantRegisterForm = () => {
     setIsVisible(true)
   }
   return (
-    <div className="container">
+    <div className="root-Participant-register">
       <div className="main-page-wrapper">
         {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
         {!isVisible && <div>

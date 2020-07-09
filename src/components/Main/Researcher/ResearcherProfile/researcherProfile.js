@@ -6,7 +6,7 @@ import "./researcherProfile.scss";
 
 const ResearcherProfile = () => {
   return (
-    <div className="container">
+    <div className="root-ResearcherProfile">
       <div className="main-page-wrapper">
         <div className="btns-wrapper">
           <Link to={'/researcher-profile'}>

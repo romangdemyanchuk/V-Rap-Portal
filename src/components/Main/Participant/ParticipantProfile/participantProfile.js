@@ -27,7 +27,7 @@ const ParticipantProfile = () => {
     </Menu>
   );
   return (
-    <div className="container">
+    <div className="root-PartProfile">
       <div className="main-page-wrapper">
         <div className="btns-wrapper">
           <Link to={'/participant-profile'}>

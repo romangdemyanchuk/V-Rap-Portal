@@ -8,9 +8,9 @@ import FileUpload from './FileUpload'
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
-  const [deleteModalOpen, setdeleteModalOpen] = useState(false);
+
   return (
-    <div className="container">
+    <div className="root-PartStudies">
       <div className="main-page-wrapper">
        <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
         <div className="btns-wrapper">
@@ -48,9 +48,7 @@ const ParticipantStudies = () => {
           </div>
           <div className="load-btns">
             <Button type="primary">Download Research Study</Button>
-              <Button type="primary" className="upload-btn"
-              onClick={() => setmodalOpen(true)}
-              >
+              <Button type="primary" className="upload-btn" onClick={() => setmodalOpen(true)}>
                 Upload Results
               </Button>
           </div>

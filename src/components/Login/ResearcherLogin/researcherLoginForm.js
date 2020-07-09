@@ -3,29 +3,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./researcherLoginForm.css";
-import { Form, Input, Button, Checkbox } from "antd";
-import MainLogin from '../Login'
+import { Form, Input, Button } from "antd";
+
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+
 const ResearcherLogin = () => {
   return (
-    <div className="container">
+    <div className="root-Researcher-login">
       <div className="main-page-wrapper">
-        <div>
           <div className="form-wrapper">
             <div className="participant-heading">
               V-RAP: Researcher
@@ -52,16 +38,14 @@ const ResearcherLogin = () => {
                 />
               </Form.Item>
               <Form.Item>
-                <Link to={'/participant-profile'}>
+                <Link to={'/researcher-profile'}>
                   <Button type="primary" htmlType="submit" className="login-form-button">
-                    Register
+                    Login
                   </Button>
                 </Link>
               </Form.Item>
             </Form>
           </div>
-        </div>
-
       </div>
     </div>
   );

@@ -13,26 +13,25 @@ const Main = () => {
     setIsVisible(true)
   }
   return (
-    <div className="container">
-      <div className="main-page-wrapper">
+    <div className="root-Main">
+      <div className="Main-land-view">
         {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
-        {!isVisible && <div>
-          <div className="main-page-header">V-Rap</div>
-          <div className="main-page-btns">
-            {/*<Link to={"/participant-register"}>*/}
-            <Button type="button" className="main-block-btn btn btn-light"
-                    onClick={typeOfForm}>
-              I`m Participant
-            </Button>
-            {/*</Link>*/}
-            <Link to={"/researcher-login"}>
-              <Button type="button" className="main-block-btn btn btn-light">
-                I`m Researcher
+        {!isVisible
+          &&
+          <div class>
+            <div className="main-page-header">V-Rap</div>
+            <div className="main-page-btns">
+              <Button type="button" className="main-block-btn btn btn-light"
+                      onClick={typeOfForm}>
+                I`m Participant
               </Button>
-            </Link>
-          </div>
+              <Link to={"/researcher-login"}>
+                <Button type="button" className="main-block-btn btn btn-light">
+                  I`m Researcher
+                </Button>
+              </Link>
+            </div>
         </div>}
-
       </div>
     </div>
   );

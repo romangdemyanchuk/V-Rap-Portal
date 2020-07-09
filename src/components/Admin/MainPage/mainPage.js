@@ -3,7 +3,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import "./mainPage.scss";
 import { Button } from 'antd'
+
 const MainPage = () => {
+  
   return <div className="root-admin-page">
             <div className="admin-text">
               <div className="admin-heading">

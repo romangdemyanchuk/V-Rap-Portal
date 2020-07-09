@@ -7,7 +7,7 @@ import "./researcherStudies.css";
 
 const ResearcherStudies = () => {
   return (
-    <div className="container">
+    <div className="ResearcherStudies">
       <div className="main-page-wrapper">
         <div className="btns-wrapper">
           <Link to={'/researcher-profile'}>

@@ -6,6 +6,8 @@ import "./participantLoginForm.scss";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import MainLogin from '../Login'
+
+
 const ParticipantLoginForm = () => {
   const [registerForm, setRegisterForm] = useState(false);
   const [isVisible, setIsVisible] = useState(false)
@@ -13,11 +15,13 @@ const ParticipantLoginForm = () => {
     setRegisterForm(true);
     setIsVisible(true)
   }
+
   return (
-    <div className="container">
+    <div className="root-Participant-login">
       <div className="main-page-wrapper">
         {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
-        {!isVisible && <div>
+        {!isVisible
+          &&
           <div className="form-wrapper">
             <div className="participant-heading">
               V-RAP: Participant
@@ -26,11 +30,8 @@ const ParticipantLoginForm = () => {
               <Button className="profile-btn "
                       onClick={typeOfForm}
               >Register</Button>
-              {/*<Link to={'/participant-login'}>*/}
               <Button className="research-btn active"
-                // onClick={typeOfForm}
               >Login</Button>
-              {/*</Link>*/}
             </div>
             <Form
               name="normal_login"
@@ -69,15 +70,12 @@ const ParticipantLoginForm = () => {
                     Login
                   </Button>
                 </Link>
-
                 Or <a href=""
                       onClick={typeOfForm}
               >register now!</a>
               </Form.Item>
             </Form>
-          </div>
-        </div>}
-
+          </div>}
       </div>
     </div>
   );
