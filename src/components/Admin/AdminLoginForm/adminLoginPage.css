@@ -1,4 +1,9 @@
 .ant-form-horizontal {
-    width: 30vw;
-    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+}
+.form-wrapper {
+    padding-top: 5%;
 }

@@ -17,61 +17,67 @@ const ParticipantLoginForm = () => {
     <div className="container">
       <div className="main-page-wrapper">
         {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
-        <div className="form-wrapper">
-          <div className="participant-heading">
-            V-RAP: Participant
-          </div>
-          <div className="login-btns">
-            <Button className="profile-btn "
-              onClick={typeOfForm}
-            >Register</Button>
-            {/*<Link to={'/participant-login'}>*/}
-            <Button className="research-btn active"
-                    // onClick={typeOfForm}
-            >Login</Button>
-            {/*</Link>*/}
-          </div>
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{ remember: true }}
-          >
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: 'Please input your Username!' }]}
+        {!isVisible && <div>
+          <div className="form-wrapper">
+            <div className="participant-heading">
+              V-RAP: Participant
+            </div>
+            <div className="login-btns">
+              <Button className="profile-btn "
+                      onClick={typeOfForm}
+              >Register</Button>
+              {/*<Link to={'/participant-login'}>*/}
+              <Button className="research-btn active"
+                // onClick={typeOfForm}
+              >Login</Button>
+              {/*</Link>*/}
+            </div>
+            <Form
+              name="normal_login"
+              className="login-form"
+              initialValues={{ remember: true }}
             >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: 'Please input your Password!' }]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
+              <Form.Item
+                name="username"
+                rules={[{ required: true, message: 'Please input your Username!' }]}
+              >
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[{ required: true, message: 'Please input your Password!' }]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Password"
+                />
+              </Form.Item>
+              <Form.Item>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+
+                <a className="login-form-forgot" href="">
+                  Forgot password
+                </a>
               </Form.Item>
 
-              <a className="login-form-forgot" href="">
-                Forgot password
-              </a>
-            </Form.Item>
+              <Form.Item>
+                <Link to={'/participant-profile'}>
+                  <Button type="primary" htmlType="submit" className="login-form-button">
+                    Login
+                  </Button>
+                </Link>
 
-            <Form.Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
-              </Button>
-              Or <a href=""
-                    onClick={typeOfForm}
-            >register now!</a>
-            </Form.Item>
-          </Form>
-        </div>
+                Or <a href=""
+                      onClick={typeOfForm}
+              >register now!</a>
+              </Form.Item>
+            </Form>
+          </div>
+        </div>}
+
       </div>
     </div>
   );

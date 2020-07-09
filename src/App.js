@@ -23,14 +23,11 @@ const App = () => {
     <div className="root-App">
     <Router>
       <Route path="/" component={Main} exact />
-      {/*<Route path="/participant-register" component={ParticipantRegisterForm}/>*/}
-      {/*<Route path="/participant-login" component={ParticipantLogin}/>*/}
       <Route path="/login" component={MainLogin}/>
-      {/*<Route path="/participant-login" component={ParticipantLogin}/>*/}
-      {/*<Route path="/about-studies" component={AboutStudies} />*/}
       <Route path="/researcher-studies" component={CaseStudies} />
       <Route path="/participant-upload" component={FileUpload} />
       <Route path="/participant-profile" component={ParticipantProfile} />
+      <Route path="/researcher-login" component={ResearcherLogin} />
       <Route path="/research-create-studies" component={PersonalStats} />
       <Route path="/researcher-profile" component={ResearcherProfile} />
       <Route path="/participant-studies" component={ParticipantStudies} />

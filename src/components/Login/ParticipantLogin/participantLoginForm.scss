@@ -4,8 +4,11 @@
     margin-bottom: 20px;
 }
 .login-btns {
+    display: flex;
+    justify-content: center;
     button {
         border: none;
+        margin: 0 8px;
     }
 }
 h2 {
@@ -24,16 +27,22 @@ h2 {
     font-size: 14px;
 }
 .ant-form-item-control-input-content {
+    flex-wrap: wrap;
     flex: unset;
     width: 250px;
 }
+.login-form .ant-btn-primary {
+    width: 100%;
+    margin-bottom: 3%;
+}
 .ant-btn:active, .ant-btn.active {
+    border-bottom: 2px solid aqua;
     //border-color: darkgray;
     //background-color: darkgray;
     //color: #000;
     .researcher-profile-btn {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        //border-top-left-radius: 10px;
+        //border-top-right-radius: 10px;
     }
 }
 
