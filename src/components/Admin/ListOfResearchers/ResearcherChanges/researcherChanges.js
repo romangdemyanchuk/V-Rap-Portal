@@ -5,7 +5,8 @@ import DeleteModal from './DeleteModal'
 import "./researcherChanges.css";
 import "antd/dist/antd.css";
 
-const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
+const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
+  
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const deleteClick = () => {
     setmodalOpen(false);
@@ -32,6 +33,7 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
       }
     },
   };
+<<<<<<< HEAD
   return (
     <div>
       <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
@@ -66,5 +68,41 @@ const ResearcherChanges = ({modalOpen, setmodalOpen, modalIsOpen}) => {
       </Modal>
     </div>
   );
+=======
+  return <>
+        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
+        <Modal
+          title="Admins Changes"
+          visible={modalOpen}
+          onOk={closeModal}
+          onCancel={closeModal}
+        >
+          <div className="research-changes-wrapper">
+            <div>
+              <div className="fields-wrapper">
+                <p>Name</p>
+                <Input placeholder="Type here.." />
+              </div>
+              <div className="fields-wrapper">
+                <p>School/Institution Name</p>
+                <Input placeholder="Type here.." />
+              </div>
+              <div className="fields-wrapper">
+                <p>Area of Research</p>
+                <Input placeholder="Type here.." />
+              </div>
+            </div>
+            <div className="changes-btns research-modal-btns">
+              <Button className="save-btn" type="primary">Save</Button>
+              <Button type="danger" className="cancel-btn"
+                onClick={deleteClick}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+    </Modal>
+    </>
+>>>>>>> ec59e5c63b2d9faaa4942f34d4528c91894b432d
 };
 export default ResearcherChanges;

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import "./mainPage.css";
 import { Button } from 'antd'
 
+<<<<<<< HEAD
 const MainPage = () => {
   return (
     <div className="container">
@@ -20,6 +21,36 @@ const MainPage = () => {
           <Link to={'/researchers-list'}>
             <Button type="button" className="main-block-btn btn btn-light">
               Researchers
+=======
+const MainAdminPage = () => {
+  
+  return <div className="root-admin-page">
+            <div className="admin-text">
+              <div className="admin-heading">
+                Admin Panel
+              </div>
+            <div className="user-name">
+              User: First Name Last Name
+            </div>
+          </div>
+            <div className="admin-page-btns">
+            <Link to={'/researchers-list'}>
+              <Button type="button" className="main-block-btn btn btn-light">
+                Researchers
+              </Button>
+            </Link>
+            <Link to={'/all-studies-list'}>
+              <Button type="button" className="main-block-btn btn btn-light">
+                All Case Studies
+              </Button>
+            </Link>
+            <Button
+              type="button"
+              className="main-block-btn pending btn btn-light"
+            >
+              Pending Case Studies
+              <div className="case-studies-count">3</div>
+>>>>>>> ec59e5c63b2d9faaa4942f34d4528c91894b432d
             </Button>
           </Link>
           <Link to={'/all-studies-list'}>
@@ -38,8 +69,5 @@ const MainPage = () => {
             List of Admin Users
           </Button>
         </div>
-      </div>
-    </div>
-  );
-};
-export default MainPage;
+}
+export default MainAdminPage;

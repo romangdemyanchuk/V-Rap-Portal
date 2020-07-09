@@ -1,9 +1,7 @@
 .file-block {
     text-align: left;
 }
-.ant-input {
-    /*margin: 3px 0;*/
-}
+
 .personal-info-block,
 .changes-btns,
 .upload-btns {
@@ -56,4 +54,11 @@ h2 {
     background-color: darkgray;
     color: #000;
 }
+<<<<<<< HEAD:src/components/ParticipantLogin/participantLoginForm.css
 
+=======
+.researcher-profile-btn {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+>>>>>>> ec59e5c63b2d9faaa4942f34d4528c91894b432d:src/components/Login/ParticipantLogin/participantLoginForm.css
