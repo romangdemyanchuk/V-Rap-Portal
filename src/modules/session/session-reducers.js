@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react'
-import ResearcherChanges from '../../components/Admin/MainPage/ListOfResearchers/ResearcherChanges/researcherChanges'
+import ResearcherChanges from '../../components/Admin/AdminPage/ListOfResearchers/ResearcherChanges/researcherChanges'
 const openTable = () => {
   console.log('text');
   return true;

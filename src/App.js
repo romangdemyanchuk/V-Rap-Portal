@@ -10,9 +10,9 @@ import ParticipantStudies from "./components/Main/Participant/ParticipantStudies
 import ResearcherProfile from './components/Main/Researcher/ResearcherProfile'
 import ResearcherLogin from './components/Login/ResearcherLogin'
 import LoginPage from './components/Admin/AdminLoginForm'
-import MainPage from './components/Admin/MainPage'
-import ListOfCaseStudies from "./components/Admin/MainPage/ListOfCaseStudies"
-import ListOfResearchers from "./components/Admin/MainPage/ListOfResearchers"
+import AdminPage from './components/Admin/AdminPage'
+import ListOfCaseStudies from "./components/Admin/AdminPage/ListOfCaseStudies"
+import ListOfResearchers from "./components/Admin/AdminPage/ListOfResearchers"
 import MainLogin from './components/Login/Login'
 import React from "react"
 import './styles/index.styl'
@@ -30,7 +30,7 @@ const App = () => {
       <Route path="/research-create-studies" component={PersonalStats} />
       <Route path="/researcher-profile" component={ResearcherProfile} />
       <Route path="/participant-studies" component={ParticipantStudies} />
-      <Route path="/admin-portal" component={MainPage} />
+      <Route path="/admin-portal" component={AdminPage} />
       <Route path="/admin" component={LoginPage} />
       <Route path="/researchers-list" component={ListOfResearchers} />
       <Route path="/all-studies-list" component={ListOfCaseStudies} />
