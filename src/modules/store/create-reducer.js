@@ -1,5 +1,5 @@
-import { sessionReducer } from "modules/session/session-reducers";
-import { combineReducers } from "redux";
+import { sessionReducer } from 'modules/session/session-reducers'
+import { combineReducers } from 'redux'
 
 const createReducer = asyncReducers =>
   combineReducers({
