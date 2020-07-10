@@ -17,16 +17,16 @@
         }
     }
 }
-.root-admin-page {
+.admin-page {
     padding: 5% 15%;
-    .admin-text {
+    .admin-page__text {
         padding-bottom: 5%;
         text-align: left;
-        .admin-heading {
+        .admin-page__text {
             font-size: 30px;
             font-weight: 500;
         }
-        .user-name {
+        .admin-page__user-name {
             font-size: 18px;
         }
     }

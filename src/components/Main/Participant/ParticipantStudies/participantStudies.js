@@ -8,7 +8,7 @@ import FileUpload from './FileUpload'
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
-
+  const [deleteModalOpen, setdeleteModalOpen] = useState(false);
   return (
     <div className="root-PartStudies">
       <div className="main-page-wrapper">

@@ -1,0 +1,1952 @@
+Index: src/components/Admin/MainPage/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import MainPage from './mainPage'\r\n\r\nexport default MainPage\r\n
+===================================================================
+--- src/components/Admin/MainPage/index.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/AdminPage/index.js	(date 1594327834207)
+@@ -1,3 +1,3 @@
+-import MainPage from './mainPage'
++import AdminPage from './adminPage'
+ 
+-export default MainPage
++export default AdminPage
+Index: src/components/Admin/MainPage/mainPage.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React from \"react\";\r\nimport {Link} from \"react-router-dom\";\r\nimport \"./mainPage.scss\";\r\nimport { Button } from 'antd'\r\nconst MainPage = () => {\r\n  return <div className=\"root-admin-page\">\r\n            <div className=\"admin-text\">\r\n              <div className=\"admin-heading\">\r\n                Admin Panel\r\n              </div>\r\n              <div className=\"user-name\">\r\n                User: First Name Last Name\r\n              </div>\r\n            </div>\r\n            <div className=\"admin-page-btns\">\r\n              <Link to={'/researchers-list'}>\r\n                <Button type=\"button\" className=\"main-block-btn btn btn-light\">\r\n                  Researchers\r\n                </Button>\r\n              </Link>\r\n              <Link to={'/all-studies-list'}>\r\n                <Button type=\"button\" className=\"main-block-btn btn btn-light\">\r\n                  All Case Studies\r\n                </Button>\r\n              </Link>\r\n              <Button\r\n                type=\"button\"\r\n                className=\"main-block-btn pending btn btn-light\"\r\n              >\r\n                Pending Case Studies\r\n                <div className=\"case-studies-count\">3</div>\r\n              </Button>\r\n              <Button type=\"button\" className=\"main-block-btn btn btn-light\">\r\n                List of Admin Users\r\n              </Button>\r\n            </div>\r\n      </div>\r\n}\r\nexport default MainPage\r\n
+===================================================================
+--- src/components/Admin/MainPage/mainPage.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/AdminPage/adminPage.js	(date 1594327834190)
+@@ -1,15 +1,15 @@
+ /* eslint-disable */
+ import React from "react";
+ import {Link} from "react-router-dom";
+-import "./mainPage.scss";
++import "./adminPage.scss";
+ import { Button } from 'antd'
+-const MainPage = () => {
+-  return <div className="root-admin-page">
+-            <div className="admin-text">
+-              <div className="admin-heading">
++const AdminPage = () => {
++  return <div className="admin-page">
++            <div className="admin-page__text">
++              <div className="admin-page__text-heading">
+                 Admin Panel
+               </div>
+-              <div className="user-name">
++              <div className="admin-page__user-name">
+                 User: First Name Last Name
+               </div>
+             </div>
+@@ -37,4 +37,4 @@
+             </div>
+       </div>
+ }
+-export default MainPage
++export default AdminPage
+Index: src/components/Admin/MainPage/mainPage.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.admin-page-btns {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    margin-top: 30px;\r\n    .case-studies-count {\r\n        position: absolute;\r\n        text-align: center;\r\n        align-items: center;\r\n        padding: 5px 12px;\r\n        background-color: #fff;\r\n        border-radius: 50%;\r\n        right: -14px;\r\n        top: -18px;\r\n        border: 1px solid;\r\n        .pending {\r\n            position: relative;\r\n        }\r\n    }\r\n}\r\n.root-admin-page {\r\n    padding: 5% 15%;\r\n    .admin-text {\r\n        padding-bottom: 5%;\r\n        text-align: left;\r\n        .admin-heading {\r\n            font-size: 30px;\r\n            font-weight: 500;\r\n        }\r\n        .user-name {\r\n            font-size: 18px;\r\n        }\r\n    }\r\n}\r\n\r\n
+===================================================================
+--- src/components/Admin/MainPage/mainPage.scss	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/AdminPage/adminPage.scss	(date 1594327834176)
+@@ -17,16 +17,16 @@
+         }
+     }
+ }
+-.root-admin-page {
++.admin-page {
+     padding: 5% 15%;
+-    .admin-text {
++    .admin-page__text {
+         padding-bottom: 5%;
+         text-align: left;
+-        .admin-heading {
++        .admin-page__text {
+             font-size: 30px;
+             font-weight: 500;
+         }
+-        .user-name {
++        .admin-page__user-name {
+             font-size: 18px;
+         }
+     }
+Index: src/components/Main/Participant/ParticipantProfile/participantProfile.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React from \"react\";\r\nimport { Link } from \"react-router-dom\";\r\nimport { Input, Button, Menu, Dropdown, message, InputNumber } from \"antd\";\r\nimport { DownOutlined } from '@ant-design/icons';\r\nimport \"./participantProfile.scss\";\r\n\r\nconst ParticipantProfile = () => {\r\n  function handleMenuClick(e) {\r\n    message.info('Click on menu item.');\r\n    console.log('click', e);\r\n  }\r\n  function onChange(value) {\r\n    console.log('changed', value);\r\n  }\r\n  const menu = (\r\n    <Menu onClick={handleMenuClick}>\r\n      <Menu.Item key=\"1\">\r\n        1st menu item\r\n      </Menu.Item>\r\n      <Menu.Item key=\"2\">\r\n        2nd menu item\r\n      </Menu.Item>\r\n      <Menu.Item key=\"3\">\r\n        3rd item\r\n      </Menu.Item>\r\n    </Menu>\r\n  );\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <div className=\"btns-wrapper\">\r\n          <Link to={'/participant-profile'}>\r\n            <Button className=\"profile-btn active\">Profile</Button>\r\n          </Link>\r\n          <Link to={'/participant-studies'}>\r\n            <Button className=\"research-btn\">Research Studies</Button>\r\n          </Link>\r\n        </div>\r\n        <div className=\"personal-info-block\">\r\n          <div className=\"personal-info-wrapper\">\r\n            <div className=\"personal-heading\">Profile Information</div>\r\n            <div className=\"profile-fields\">\r\n              <div className=\"fields-wrapper\">\r\n                <p>Name</p>\r\n                <Input placeholder=\"Name\" />\r\n              </div>\r\n              <div className=\"fields-wrapper\">\r\n                <p>Age</p>\r\n                <InputNumber min={1} max={100} defaultValue={25} onChange={onChange}\r\n                  className=\"input-number\"/>\r\n              </div>\r\n              <div className=\"fields-wrapper\">\r\n                <p className=\"before-dropdown\">Location</p>\r\n                <div id=\"components-dropdown-demo-dropdown-button\">\r\n                  <Dropdown overlay={menu}>\r\n                    <Button>\r\n                      --Countries-- <DownOutlined />\r\n                    </Button>\r\n                  </Dropdown>\r\n                </div>\r\n              </div>\r\n             <div className=\"fields-wrapper\">\r\n               <p>Average Income(USD)</p>\r\n               <Input placeholder=\"Average Income\" />\r\n             </div>\r\n              <div className=\"fields-wrapper\">\r\n                <p className=\"before-dropdown\">Main VR Headset</p>\r\n                <div id=\"components-dropdown-demo-dropdown-button\">\r\n                  <Dropdown overlay={menu}>\r\n                    <Button>\r\n                      --Headsets-- <DownOutlined />\r\n                    </Button>\r\n                  </Dropdown>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div className=\"changes-btns\">\r\n              <Button className=\"save-btn\"\r\n                type=\"primary\">\r\n                Save changes\r\n              </Button>\r\n              <Button className=\"cancel-btn\">Cancel</Button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default ParticipantProfile;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/Participant/ParticipantProfile/participantProfile.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/Participant/ParticipantProfile/participantProfile.js	(date 1594328241794)
+@@ -27,61 +27,59 @@
+     </Menu>
+   );
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        <div className="btns-wrapper">
+-          <Link to={'/participant-profile'}>
+-            <Button className="profile-btn active">Profile</Button>
+-          </Link>
+-          <Link to={'/participant-studies'}>
+-            <Button className="research-btn">Research Studies</Button>
+-          </Link>
+-        </div>
+-        <div className="personal-info-block">
+-          <div className="personal-info-wrapper">
+-            <div className="personal-heading">Profile Information</div>
+-            <div className="profile-fields">
+-              <div className="fields-wrapper">
+-                <p>Name</p>
+-                <Input placeholder="Name" />
+-              </div>
+-              <div className="fields-wrapper">
+-                <p>Age</p>
+-                <InputNumber min={1} max={100} defaultValue={25} onChange={onChange}
+-                  className="input-number"/>
+-              </div>
+-              <div className="fields-wrapper">
+-                <p className="before-dropdown">Location</p>
+-                <div id="components-dropdown-demo-dropdown-button">
+-                  <Dropdown overlay={menu}>
+-                    <Button>
+-                      --Countries-- <DownOutlined />
+-                    </Button>
+-                  </Dropdown>
+-                </div>
+-              </div>
+-             <div className="fields-wrapper">
+-               <p>Average Income(USD)</p>
+-               <Input placeholder="Average Income" />
+-             </div>
+-              <div className="fields-wrapper">
+-                <p className="before-dropdown">Main VR Headset</p>
+-                <div id="components-dropdown-demo-dropdown-button">
+-                  <Dropdown overlay={menu}>
+-                    <Button>
+-                      --Headsets-- <DownOutlined />
+-                    </Button>
+-                  </Dropdown>
+-                </div>
+-              </div>
+-            </div>
+-            <div className="changes-btns">
+-              <Button className="save-btn"
+-                type="primary">
+-                Save changes
+-              </Button>
+-              <Button className="cancel-btn">Cancel</Button>
+-            </div>
++    <div className="main-page-wrapper">
++      <div className="btns-wrapper">
++        <Link to={'/participant-profile'}>
++          <Button className="profile-btn active">Profile</Button>
++        </Link>
++        <Link to={'/participant-studies'}>
++          <Button className="research-btn">Research Studies</Button>
++        </Link>
++      </div>
++      <div className="personal-info-block">
++        <div className="personal-info-wrapper">
++          <div className="personal-heading">Profile Information</div>
++          <div className="profile-fields">
++            <div className="participant-profile__fields-wrapper">
++              <p>Name</p>
++              <Input placeholder="Name" />
++            </div>
++            <div className="participant-profile__fields-wrapper">
++              <p>Age</p>
++              <InputNumber min={1} max={100} defaultValue={25} onChange={onChange}
++                className="input-number"/>
++            </div>
++            <div className="participant-profile__fields-wrapper">
++              <p className="before-dropdown">Location</p>
++              <div id="components-dropdown-demo-dropdown-button">
++                <Dropdown overlay={menu}>
++                  <Button>
++                    --Countries-- <DownOutlined />
++                  </Button>
++                </Dropdown>
++              </div>
++            </div>
++           <div className="participant-profile__fields-wrapper">
++             <p>Average Income(USD)</p>
++             <Input placeholder="Average Income" />
++           </div>
++            <div className="participant-profile__fields-wrapper">
++              <p className="before-dropdown">Main VR Headset</p>
++              <div id="components-dropdown-demo-dropdown-button">
++                <Dropdown overlay={menu}>
++                  <Button>
++                    --Headsets-- <DownOutlined />
++                  </Button>
++                </Dropdown>
++              </div>
++            </div>
++          </div>
++          <div className="participant-profile__changes-btns">
++            <Button className="participant-profile__save-btn"
++              type="primary">
++              Save changes
++            </Button>
++            <Button className="participant-profile__cancel-btn">Cancel</Button>
+           </div>
+         </div>
+       </div>
+Index: src/components/Admin/ListOfResearchers/ResearcherChanges/DeleteModal/deleteModal.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React from \"react\";\r\nimport \"./deleteModal.css\";\r\nimport \"antd/dist/antd.css\";\r\nimport { Link } from \"react-router-dom\";\r\nimport {message, Button, Modal, Progress } from \"antd\";\r\n\r\nconst DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen }) => {\r\n  const  closeModal = e => {\r\n    setDeleteModalIsOpen(false);\r\n  }\r\n  const props = {\r\n    name: \"file\",\r\n    action: \"https://www.mocky.io/v2/5cc8019d300000980a055e76\",\r\n    headers: {\r\n      authorization: \"authorization-text\",\r\n    },\r\n    onChange(info) {\r\n      if (info.file.status !== \"uploading\") {\r\n      }\r\n      if (info.file.status === \"done\") {\r\n        message.success(`${info.file.name} file uploaded successfully`);\r\n      } else if (info.file.status === \"error\") {\r\n        message.error(`${info.file.name} file upload failed.`);\r\n      }\r\n    },\r\n  };\r\n  return (\r\n    <div className=\"delete-block\">\r\n      <Modal\r\n        title=\"Are you sure you want to delete this profile?\"\r\n        visible={deleteModalIsOpen}\r\n        onOk={closeModal}\r\n        onCancel={closeModal}\r\n        className=\"deleteModal\"\r\n      >\r\n       <div className=\"delete-btns\">\r\n         <Link to={'/all-studies-list'}>\r\n          <Button>Cancel</Button>\r\n         </Link>\r\n         <Button type=\"primary\">Ok</Button>\r\n       </div>\r\n      </Modal>\r\n    </div>\r\n  );\r\n};\r\nexport default DeleteModal;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfResearchers/ResearcherChanges/DeleteModal/deleteModal.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfResearchers/ResearcherChanges/DeleteModal/deleteModal.js	(date 1594323010683)
+@@ -26,7 +26,7 @@
+     },
+   };
+   return (
+-    <div className="delete-block">
++    <div className="delete-modal-block">
+       <Modal
+         title="Are you sure you want to delete this profile?"
+         visible={deleteModalIsOpen}
+@@ -34,7 +34,7 @@
+         onCancel={closeModal}
+         className="deleteModal"
+       >
+-       <div className="delete-btns">
++       <div className="delete-modal__btns">
+          <Link to={'/all-studies-list'}>
+           <Button>Cancel</Button>
+          </Link>
+Index: src/components/Admin/ListOfResearchers/listOfResearchers.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n/* eslint-disable */\r\nimport React, { useState } from 'react'\r\nimport \"./listOfResearchers.css\";\r\nimport { Button, Table } from 'antd'\r\nimport {useSelector } from 'react-redux'\r\nimport ResearcherChanges from './ResearcherChanges'\r\n\r\nconst ListOfResearchers = () => {\r\n  const [modalOpen, setmodalOpen] = useState(false);\r\n\r\n  const researchersList = useSelector(state => state.researchersList)\r\n  const researcherListColumns = useSelector(state => state.researcherListColumns)\r\n\r\n  console.log(researchersList, 'researchersList')\r\n\r\n  return <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <ResearcherChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>\r\n        <div className=\"researchers-profile-btn-wrapper\">\r\n          <Button type=\"button\" className=\"researchers-profile-btn\">Create Researcher Profile</Button>\r\n        </div>\r\n        <div onClick={() => setmodalOpen(true)}>\r\n          <Table columns={researcherListColumns} dataSource={researchersList}/>\r\n        </div>\r\n      </div>\r\n    </div>\r\n}\r\n\r\nexport default ListOfResearchers;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfResearchers/listOfResearchers.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfResearchers/listOfResearchers.js	(date 1594323010641)
+@@ -1,28 +1,26 @@
+-
+ /* eslint-disable */
+ import React, { useState } from 'react'
+ import "./listOfResearchers.css";
+ import { Button, Table } from 'antd'
+ import {useSelector } from 'react-redux'
+ import ResearcherChanges from './ResearcherChanges'
++import ResearcherCreate from './ResearcherCreate'
+ 
+ const ListOfResearchers = () => {
+-  const [modalOpen, setmodalOpen] = useState(false);
+-
++  const [EditDeleteModalOpen, setEditDeleteModalOpen] = useState(false);
++  const [CreateResearcherModalOpen, setCreateResearcherModalOpen] = useState(false);
+   const researchersList = useSelector(state => state.researchersList)
+   const researcherListColumns = useSelector(state => state.researcherListColumns)
+ 
+-  console.log(researchersList, 'researchersList')
+-
+-  return <div className="container">
+-      <div className="main-page-wrapper">
+-        <ResearcherChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
+-        <div className="researchers-profile-btn-wrapper">
+-          <Button type="button" className="researchers-profile-btn">Create Researcher Profile</Button>
+-        </div>
+-        <div onClick={() => setmodalOpen(true)}>
+-          <Table columns={researcherListColumns} dataSource={researchersList}/>
+-        </div>
++  return <div className="researchers-list-block">
++      <ResearcherChanges modalOpen={EditDeleteModalOpen} setmodalOpen={setEditDeleteModalOpen}/>
++      <ResearcherCreate modalOpen={CreateResearcherModalOpen} setmodalOpen={setCreateResearcherModalOpen}/>
++      <div className="researchers-list__btn-wrapper">
++        <Button type="button" className="researchers-list__btn"
++          onClick={() => setCreateResearcherModalOpen(true)}>Create Researcher Profile</Button>
++      </div>
++      <div onClick={() => setEditDeleteModalOpen(true)}>
++        <Table columns={researcherListColumns} dataSource={researchersList}/>
+       </div>
+     </div>
+ }
+Index: src/components/Admin/ListOfResearchers/ResearcherChanges/researcherChanges.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React, {useState} from \"react\";\r\nimport { message, Button, Modal, Input } from 'antd'\r\nimport DeleteModal from './DeleteModal'\r\nimport \"./researcherChanges.css\";\r\nimport \"antd/dist/antd.css\";\r\n\r\nconst ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {\r\n\r\n  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);\r\n  const deleteClick = () => {\r\n    setmodalOpen(false);\r\n    setDeleteModalIsOpen(true)\r\n  }\r\n  const  closeModal = () => {\r\n    setmodalOpen(false);\r\n  }\r\n  const props = {\r\n    name: \"file\",\r\n    action: \"https://www.mocky.io/v2/5cc8019d300000980a055e76\",\r\n    headers: {\r\n      authorization: \"authorization-text\",\r\n    },\r\n    onChange(info) {\r\n      console.log(1);\r\n      if (info.file.status !== \"uploading\") {\r\n        setmodalOpen(false);\r\n      }\r\n      if (info.file.status === \"done\") {\r\n        message.success(`${info.file.name} file uploaded successfully`);\r\n      } else if (info.file.status === \"error\") {\r\n        message.error(`${info.file.name} file upload failed.`);\r\n      }\r\n    },\r\n  };\r\n// <<<<<<< HEAD\r\n  return (\r\n    <div>\r\n      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>\r\n      <Modal\r\n        title=\"Admins Changes\"\r\n        visible={modalOpen}\r\n        onOk={closeModal}\r\n        onCancel={closeModal}\r\n      >\r\n        <div className=\"research-changes-wrapper\">\r\n          <div className=\"fields-wrapper\">\r\n            <p>Name</p>\r\n            <Input placeholder=\"Type here..\" />\r\n          </div>\r\n          <div className=\"fields-wrapper\">\r\n            <p>School/Institution Name</p>\r\n            <Input placeholder=\"Type here..\" />\r\n          </div>\r\n          <div className=\"fields-wrapper\">\r\n            <p>Area of Research</p>\r\n            <Input placeholder=\"Type here..\" />\r\n          </div>\r\n          <div className=\"changes-btns research-modal-btns\">\r\n            <Button className=\"save-btn\" type=\"primary\">Save</Button>\r\n            <Button type=\"danger\" className=\"cancel-btn\"\r\n              onClick={deleteClick}\r\n            >\r\n              Delete\r\n            </Button>\r\n          </div>\r\n        </div>\r\n      </Modal>\r\n    </div>\r\n  );\r\n// =======\r\n  return <>\r\n        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>\r\n        <Modal\r\n          title=\"Admins Changes\"\r\n          visible={modalOpen}\r\n          onOk={closeModal}\r\n          onCancel={closeModal}\r\n        >\r\n          <div className=\"research-changes-wrapper\">\r\n            <div>\r\n              <div className=\"fields-wrapper\">\r\n                <p>Name</p>\r\n                <Input placeholder=\"Type here..\" />\r\n              </div>\r\n              <div className=\"fields-wrapper\">\r\n                <p>School/Institution Name</p>\r\n                <Input placeholder=\"Type here..\" />\r\n              </div>\r\n              <div className=\"fields-wrapper\">\r\n                <p>Area of Research</p>\r\n                <Input placeholder=\"Type here..\" />\r\n              </div>\r\n            </div>\r\n            <div className=\"changes-btns research-modal-btns\">\r\n              <Button className=\"save-btn\" type=\"primary\">Save</Button>\r\n              <Button type=\"danger\" className=\"cancel-btn\"\r\n                onClick={deleteClick}\r\n              >\r\n                Delete\r\n              </Button>\r\n            </div>\r\n          </div>\r\n    </Modal>\r\n    </>\r\n};\r\nexport default ResearcherChanges;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfResearchers/ResearcherChanges/researcherChanges.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfResearchers/ResearcherChanges/researcherChanges.js	(date 1594323010674)
+@@ -12,7 +12,7 @@
+     setmodalOpen(false);
+     setDeleteModalIsOpen(true)
+   }
+-  const  closeModal = () => {
++  const closeModal = () => {
+     setmodalOpen(false);
+   }
+   const props = {
+@@ -21,7 +21,7 @@
+     headers: {
+       authorization: "authorization-text",
+     },
+-    onChange(info) {
++    onChange (info) {
+       console.log(1);
+       if (info.file.status !== "uploading") {
+         setmodalOpen(false);
+@@ -33,7 +33,6 @@
+       }
+     },
+   };
+-// <<<<<<< HEAD
+   return (
+     <div>
+       <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
+@@ -43,23 +42,23 @@
+         onOk={closeModal}
+         onCancel={closeModal}
+       >
+-        <div className="research-changes-wrapper">
+-          <div className="fields-wrapper">
++        <div className="research-changes">
++          <div className="research-changes__fields-wrapper">
+             <p>Name</p>
+-            <Input placeholder="Type here.." />
++            <Input placeholder="Type here.."/>
+           </div>
+-          <div className="fields-wrapper">
++          <div className="research-changes__fields-wrapper">
+             <p>School/Institution Name</p>
+-            <Input placeholder="Type here.." />
++            <Input placeholder="Type here.."/>
+           </div>
+-          <div className="fields-wrapper">
++          <div className="research-changes__fields-wrapper">
+             <p>Area of Research</p>
+-            <Input placeholder="Type here.." />
++            <Input placeholder="Type here.."/>
+           </div>
+-          <div className="changes-btns research-modal-btns">
++          <div className="research-changes__changes-btns research-modal-btns">
+             <Button className="save-btn" type="primary">Save</Button>
+             <Button type="danger" className="cancel-btn"
+-              onClick={deleteClick}
++                    onClick={deleteClick}
+             >
+               Delete
+             </Button>
+@@ -68,40 +67,5 @@
+       </Modal>
+     </div>
+   );
+-// =======
+-  return <>
+-        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
+-        <Modal
+-          title="Admins Changes"
+-          visible={modalOpen}
+-          onOk={closeModal}
+-          onCancel={closeModal}
+-        >
+-          <div className="research-changes-wrapper">
+-            <div>
+-              <div className="fields-wrapper">
+-                <p>Name</p>
+-                <Input placeholder="Type here.." />
+-              </div>
+-              <div className="fields-wrapper">
+-                <p>School/Institution Name</p>
+-                <Input placeholder="Type here.." />
+-              </div>
+-              <div className="fields-wrapper">
+-                <p>Area of Research</p>
+-                <Input placeholder="Type here.." />
+-              </div>
+-            </div>
+-            <div className="changes-btns research-modal-btns">
+-              <Button className="save-btn" type="primary">Save</Button>
+-              <Button type="danger" className="cancel-btn"
+-                onClick={deleteClick}
+-              >
+-                Delete
+-              </Button>
+-            </div>
+-          </div>
+-    </Modal>
+-    </>
+ };
+ export default ResearcherChanges;
+Index: src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport { BrowserRouter as Router, Route } from \"react-router-dom\"\r\nimport Main from \"./components/Main\"\r\n// import AboutStudies from \"./components/Main/Participant/StudyInfo/FileUpload/AboutStudies\";\r\nimport CaseStudies from \"./components/Main/Researcher/ResearcherStudies\"\r\nimport FileUpload from \"./components/Main/Participant/ParticipantStudies/FileUpload\"\r\nimport ParticipantProfile from \"./components/Main/Participant/ParticipantProfile\"\r\nimport PersonalStats from \"./components/Main/Researcher/ResearcherStudies/PersonalStats\"\r\nimport ParticipantStudies from \"./components/Main/Participant/ParticipantStudies\"\r\nimport ResearcherProfile from './components/Main/Researcher/ResearcherProfile'\r\nimport ParticipantRegisterForm from './components/Login/ParticipantRegister/participantRegisterForm'\r\nimport ParticipantLogin from './components/Login/ParticipantLogin/participantLoginForm'\r\nimport ResearcherLogin from './components/Login/ResearcherLogin'\r\nimport LoginPage from './components/Admin/AdminLoginForm'\r\nimport MainPage from './components/Admin/MainPage'\r\nimport ListOfCaseStudies from \"./components/Admin/ListOfCaseStudies\"\r\nimport ListOfResearchers from \"./components/Admin/ListOfResearchers\"\r\nimport MainLogin from './components/Login/Login'\r\nimport React from \"react\"\r\nimport './styles/index.styl'\r\nconst App = () => {\r\n  return (\r\n    <div className=\"root-App\">\r\n    <Router>\r\n      <Route path=\"/\" component={Main} exact />\r\n      <Route path=\"/login\" component={MainLogin}/>\r\n      <Route path=\"/researcher-studies\" component={CaseStudies} />\r\n      <Route path=\"/participant-upload\" component={FileUpload} />\r\n      <Route path=\"/participant-profile\" component={ParticipantProfile} />\r\n      <Route path=\"/researcher-login\" component={ResearcherLogin} />\r\n      <Route path=\"/research-create-studies\" component={PersonalStats} />\r\n      <Route path=\"/researcher-profile\" component={ResearcherProfile} />\r\n      <Route path=\"/participant-studies\" component={ParticipantStudies} />\r\n      <Route path=\"/admin-portal\" component={MainPage} />\r\n      <Route path=\"/admin\" component={LoginPage} />\r\n      <Route path=\"/researchers-list\" component={ListOfResearchers} />\r\n      <Route path=\"/all-studies-list\" component={ListOfCaseStudies} />\r\n    </Router>\r\n    </div>\r\n  )\r\n};\r\nexport default App;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/App.js	(date 1594327854932)
+@@ -12,7 +12,7 @@
+ import ParticipantLogin from './components/Login/ParticipantLogin/participantLoginForm'
+ import ResearcherLogin from './components/Login/ResearcherLogin'
+ import LoginPage from './components/Admin/AdminLoginForm'
+-import MainPage from './components/Admin/MainPage'
++import AdminPage from './components/Admin/AdminPage'
+ import ListOfCaseStudies from "./components/Admin/ListOfCaseStudies"
+ import ListOfResearchers from "./components/Admin/ListOfResearchers"
+ import MainLogin from './components/Login/Login'
+@@ -31,7 +31,7 @@
+       <Route path="/research-create-studies" component={PersonalStats} />
+       <Route path="/researcher-profile" component={ResearcherProfile} />
+       <Route path="/participant-studies" component={ParticipantStudies} />
+-      <Route path="/admin-portal" component={MainPage} />
++      <Route path="/admin-portal" component={AdminPage} />
+       <Route path="/admin" component={LoginPage} />
+       <Route path="/researchers-list" component={ListOfResearchers} />
+       <Route path="/all-studies-list" component={ListOfCaseStudies} />
+Index: src/components/Admin/ListOfCaseStudies/listOfCaseStudies.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React, { useState } from 'react'\r\nimport \"./listOfCaseStudies.css\";\r\nimport { Table } from \"antd\";\r\nimport { useDispatch, useSelector} from \"react-redux\";\r\nimport AdminsChanges from './CaseStudiesChanges'\r\n\r\nconst ListOfCaseStudies = () => {\r\n  const [modalOpen, setmodalOpen] = useState(false);\r\n  const caseStudies = useSelector((state) => {\r\n    return {\r\n      caseStudies: state.caseStudies\r\n    }\r\n  })\r\n  const caseStudiesColumns = useSelector((state) => {\r\n    return {\r\n      caseStudiesColumns: state.caseStudiesColumns\r\n    }\r\n  })\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <AdminsChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>\r\n        <div className=\"case-studies-heading\">Case Studies - All</div>\r\n        <div className=\"case-studies-wrapper\">\r\n          <div onClick={() => setmodalOpen(true)}>\r\n            <Table columns={caseStudiesColumns.caseStudiesColumns} dataSource={caseStudies.caseStudies}/>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default ListOfCaseStudies;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfCaseStudies/listOfCaseStudies.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfCaseStudies/listOfCaseStudies.js	(date 1594322412574)
+@@ -18,14 +18,12 @@
+     }
+   })
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        <AdminsChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
+-        <div className="case-studies-heading">Case Studies - All</div>
+-        <div className="case-studies-wrapper">
+-          <div onClick={() => setmodalOpen(true)}>
+-            <Table columns={caseStudiesColumns.caseStudiesColumns} dataSource={caseStudies.caseStudies}/>
+-          </div>
++    <div className="case-studies">
++      <AdminsChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
++      <div className="case-studies__heading">Case Studies - All</div>
++      <div className="case-studies__wrapper">
++        <div onClick={() => setmodalOpen(true)}>
++          <Table columns={caseStudiesColumns.caseStudiesColumns} dataSource={caseStudies.caseStudies}/>
+         </div>
+       </div>
+     </div>
+Index: src/components/Main/Participant/ParticipantStudies/participantStudies.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React, {useState} from \"react\";\r\nimport { Button } from \"antd\";\r\nimport { Link } from \"react-router-dom\";\r\nimport userImg from \"../../../../images/user.svg\";\r\nimport \"./participantStudies.scss\";\r\nimport FileUpload from './FileUpload'\r\n\r\nconst ParticipantStudies = () => {\r\n  const [modalOpen, setmodalOpen] = useState(false);\r\n  const [deleteModalOpen, setdeleteModalOpen] = useState(false);\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n       <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>\r\n        <div className=\"btns-wrapper\">\r\n          <Link to={'/participant-profile'}>\r\n            <Button className=\"profile-btn\">Profile</Button>\r\n          </Link>\r\n          <Link to={'/participant-studies'}>\r\n            <Button className=\"research-btn active\">Research Studies</Button>\r\n          </Link>\r\n        </div>\r\n        <div className=\"personal-heading\">Research Studies</div>\r\n        <div className=\"study-wrapper\">\r\n          <div className=\"study-info-wrapper\">\r\n            <div className=\"study-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n            </div>\r\n            <div className=\"study\">\r\n              <div className=\"study-heading\">\r\n                Research Study 1\r\n              </div>\r\n              <div className=\"study-info\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift\r\n                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n              <div className=\"study-require\">\r\n                Required Headset\r\n              </div>\r\n              <div className=\"study-device\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n            </div>\r\n            <div className=\"research-btns\">\r\n              <Button className=\"status-btn\">Closed</Button>\r\n            </div>\r\n          </div>\r\n          <div className=\"load-btns\">\r\n            <Button type=\"primary\">Download Research Study</Button>\r\n              <Button type=\"primary\" className=\"upload-btn\"\r\n              onClick={() => setmodalOpen(true)}\r\n              >\r\n                Upload Results\r\n              </Button>\r\n          </div>\r\n        </div>\r\n        <div className=\"study-wrapper\">\r\n          <div className=\"study-info-wrapper\">\r\n            <div className=\"study-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n            </div>\r\n            <div className=\"study\">\r\n              <div className=\"study-heading\"> Research Study 1</div>\r\n              <div className=\"study-info\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift\r\n                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n              <div className=\"study-require\">Required Headset</div>\r\n              <div className=\"study-device\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n            </div>\r\n            <div className=\"research-btns\">\r\n              <Button className=\"status-btn\">Participant based is full</Button>\r\n            </div>\r\n          </div>\r\n          <div className=\"load-btns\">\r\n            <Button type=\"primary\">Download Research Study</Button>\r\n              <Button type=\"primary\" className=\"upload-btn\"\r\n                      onClick={() => setmodalOpen(true)}\r\n              >\r\n                Upload Results\r\n              </Button>\r\n          </div>\r\n        </div>\r\n        <div className=\"study-wrapper\">\r\n          <div className=\"study-info-wrapper\">\r\n            <div className=\"study-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n            </div>\r\n            <div className=\"study\">\r\n              <div className=\"study-heading\"> Research Study 1</div>\r\n              <div className=\"study-info\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift\r\n                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n              <div className=\"study-require\">Required Headset</div>\r\n              <div className=\"study-device\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n            </div>\r\n            <div className=\"research-btns\">\r\n              <Button className=\"status-btn\">In progress</Button>\r\n            </div>\r\n          </div>\r\n          <div className=\"load-btns\">\r\n            <Button type=\"primary\">Download Research Study</Button>\r\n              <Button type=\"primary\" className=\"upload-btn\"\r\n                      onClick={() => setmodalOpen(true)}\r\n              >\r\n                Upload Results\r\n              </Button>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default ParticipantStudies;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/Participant/ParticipantStudies/participantStudies.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/Participant/ParticipantStudies/participantStudies.js	(date 1594321403212)
+@@ -10,110 +10,107 @@
+   const [modalOpen, setmodalOpen] = useState(false);
+   const [deleteModalOpen, setdeleteModalOpen] = useState(false);
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-       <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
+-        <div className="btns-wrapper">
+-          <Link to={'/participant-profile'}>
+-            <Button className="profile-btn">Profile</Button>
+-          </Link>
+-          <Link to={'/participant-studies'}>
+-            <Button className="research-btn active">Research Studies</Button>
+-          </Link>
+-        </div>
+-        <div className="personal-heading">Research Studies</div>
+-        <div className="study-wrapper">
+-          <div className="study-info-wrapper">
+-            <div className="study-info-img">
+-              <img src={userImg} alt="userImg" />
+-            </div>
+-            <div className="study">
+-              <div className="study-heading">
+-                Research Study 1
+-              </div>
+-              <div className="study-info">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift
+-                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+-              </div>
+-              <div className="study-require">
+-                Required Headset
+-              </div>
+-              <div className="study-device">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift S
+-              </div>
+-            </div>
+-            <div className="research-btns">
+-              <Button className="status-btn">Closed</Button>
+-            </div>
+-          </div>
+-          <div className="load-btns">
+-            <Button type="primary">Download Research Study</Button>
+-              <Button type="primary" className="upload-btn"
+-              onClick={() => setmodalOpen(true)}
+-              >
+-                Upload Results
+-              </Button>
+-          </div>
+-        </div>
+-        <div className="study-wrapper">
+-          <div className="study-info-wrapper">
+-            <div className="study-info-img">
+-              <img src={userImg} alt="userImg" />
+-            </div>
+-            <div className="study">
+-              <div className="study-heading"> Research Study 1</div>
+-              <div className="study-info">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift
+-                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+-              </div>
+-              <div className="study-require">Required Headset</div>
+-              <div className="study-device">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift S
+-              </div>
+-            </div>
+-            <div className="research-btns">
+-              <Button className="status-btn">Participant based is full</Button>
+-            </div>
+-          </div>
+-          <div className="load-btns">
+-            <Button type="primary">Download Research Study</Button>
+-              <Button type="primary" className="upload-btn"
+-                      onClick={() => setmodalOpen(true)}
+-              >
+-                Upload Results
+-              </Button>
+-          </div>
+-        </div>
+-        <div className="study-wrapper">
+-          <div className="study-info-wrapper">
+-            <div className="study-info-img">
+-              <img src={userImg} alt="userImg" />
+-            </div>
+-            <div className="study">
+-              <div className="study-heading"> Research Study 1</div>
+-              <div className="study-info">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift
+-                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+-              </div>
+-              <div className="study-require">Required Headset</div>
+-              <div className="study-device">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift S
+-              </div>
+-            </div>
+-            <div className="research-btns">
+-              <Button className="status-btn">In progress</Button>
+-            </div>
+-          </div>
+-          <div className="load-btns">
+-            <Button type="primary">Download Research Study</Button>
+-              <Button type="primary" className="upload-btn"
+-                      onClick={() => setmodalOpen(true)}
+-              >
+-                Upload Results
+-              </Button>
+-          </div>
++    <div className="main-page-wrapper">
++     <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
++      <div className="btns-wrapper">
++        <Link to={'/participant-profile'}>
++          <Button className="profile-btn">Profile</Button>
++        </Link>
++        <Link to={'/participant-studies'}>
++          <Button className="research-btn active">Research Studies</Button>
++        </Link>
++      </div>
++      <div className="personal-heading">Research Studies</div>
++      <div className="study-wrapper">
++        <div className="study-info-wrapper">
++          <div className="study-info-img">
++            <img src={userImg} alt="userImg" />
++          </div>
++          <div className="study">
++            <div className="study-heading">
++              Research Study 1
++            </div>
++            <div className="study-info">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift
++              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
++            </div>
++            <div className="study-require">
++              Required Headset
++            </div>
++            <div className="study-device">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift S
++            </div>
++          </div>
++          <div className="research-btns">
++            <Button className="status-btn">Closed</Button>
++          </div>
++        </div>
++        <div className="load-btns">
++          <Button type="primary">Download Research Study</Button>
++            <Button type="primary" className="upload-btn"
++            onClick={() => setmodalOpen(true)}
++            >
++              Upload Results
++            </Button>
++        </div>
++      </div>
++      <div className="study-wrapper">
++        <div className="study-info-wrapper">
++          <div className="study-info-img">
++            <img src={userImg} alt="userImg" />
++          </div>
++          <div className="study">
++            <div className="study-heading"> Research Study 1</div>
++            <div className="study-info">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift
++              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
++            </div>
++            <div className="study-require">Required Headset</div>
++            <div className="study-device">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift S
++            </div>
++          </div>
++          <div className="research-btns">
++            <Button className="status-btn">Participant based is full</Button>
++          </div>
++        </div>
++        <div className="load-btns">
++          <Button type="primary">Download Research Study</Button>
++            <Button type="primary" className="upload-btn"
++                    onClick={() => setmodalOpen(true)}
++            >
++              Upload Results
++            </Button>
++        </div>
++      </div>
++      <div className="study-wrapper">
++        <div className="study-info-wrapper">
++          <div className="study-info-img">
++            <img src={userImg} alt="userImg" />
++          </div>
++          <div className="study">
++            <div className="study-heading"> Research Study 1</div>
++            <div className="study-info">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift
++              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
++            </div>
++            <div className="study-require">Required Headset</div>
++            <div className="study-device">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift S
++            </div>
++          </div>
++          <div className="research-btns">
++            <Button className="status-btn">In progress</Button>
++          </div>
++        </div>
++        <div className="load-btns">
++          <Button type="primary">Download Research Study</Button>
++            <Button type="primary" className="upload-btn"
++                    onClick={() => setmodalOpen(true)}
++            >
++              Upload Results
++            </Button>
+         </div>
+-
+       </div>
+     </div>
+   );
+Index: src/components/Main/Researcher/ResearcherStudies/PersonalStats/personalStats.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React, { useState } from 'react'\r\nimport userImg from \"../../../../../images/user.svg\";\r\nimport { Link } from \"react-router-dom\";\r\nimport { Input, Button, Progress, Dropdown, Menu, message, Slider, InputNumber } from 'antd'\r\nconst { TextArea } = Input;\r\nimport \"./personalStats.scss\";\r\nimport { DownOutlined } from '@ant-design/icons'\r\n\r\nconst PersonalStats = () => {\r\n  const [disabled, setDisabled] = useState(false);\r\n  function handleMenuClick(e) {\r\n    message.info('Click on menu item.');\r\n    console.log('click', e);\r\n  }\r\n  function onChange(value) {\r\n    console.log('changed', value);\r\n  }\r\n  const menu = (\r\n    <Menu onClick={handleMenuClick}>\r\n      <Menu.Item key=\"1\">\r\n        1st menu item\r\n      </Menu.Item>\r\n      <Menu.Item key=\"2\">\r\n        2nd menu item\r\n      </Menu.Item>\r\n      <Menu.Item key=\"3\">\r\n        3rd item\r\n      </Menu.Item>\r\n    </Menu>\r\n  );\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <div className=\"btns-wrapper\">\r\n          <Link to={'/researcher-profile'}>\r\n            <Button className=\"profile-btn\">Profile</Button>\r\n          </Link>\r\n          <Link to={'/participant-studies'}>\r\n            <Button className=\"research-btn active\">Research Studies</Button>\r\n          </Link>\r\n        </div>\r\n        <div className=\"personal-wrapper\">\r\n          <div className=\"file-block\">\r\n            <div className=\"personal-heading\">Create Research Studies</div>\r\n            <div className=\"personal-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n              <div className=\"upload-btns\">\r\n                <Button className=\"file-upload-btn\" type=\"primary\">Upload Image</Button>\r\n              </div>\r\n            </div>\r\n            <div className=\"personal-blocks-wrapper\">\r\n              <div className=\"personal-left-block\">\r\n                <Button className=\"upload-vr-btn\">Upload VR File</Button>\r\n                <Progress percent={30} size=\"small\" />\r\n                <div className=\"fields-wrapper\">\r\n                  <p>Title</p>\r\n                  <Input placeholder=\"Title\" />\r\n                </div>\r\n                <div className=\"fields-wrapper\">\r\n                  <p>Description</p>\r\n                  <TextArea placeholder=\"Type here\" rows={3} className=\"personal-stats-area\" />\r\n                </div>\r\n                <div className=\"fields-wrapper\">\r\n                  <p className=\"before-dropdown\">Location</p>\r\n                  <div id=\"components-dropdown-demo-dropdown-button\">\r\n                    <Dropdown overlay={menu}>\r\n                      <Button>\r\n                        --Countries-- <DownOutlined />\r\n                      </Button>\r\n                    </Dropdown>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div className=\"personal-right-block\">\r\n                <div className=\"fields-wrapper\">\r\n                  <p>Age(range)</p>\r\n                  <Slider range defaultValue={[10, 85]} disabled={disabled} />\r\n                </div>\r\n                <div className=\"fields-wrapper\">\r\n                  <p>Average Income(range)</p>\r\n                  <Slider range defaultValue={[10, 85]} disabled={disabled} />\r\n                </div>\r\n                <div className=\"fields-wrapper\">\r\n                  <p>Required number of participant</p>\r\n                  <InputNumber min={1} max={300} defaultValue={100} onChange={onChange}\r\n                               className=\"input-number\"/>\r\n                </div>\r\n                <div className=\"fields-wrapper\">\r\n                  <p className=\"before-dropdown\">Supported Headsets</p>\r\n                  <div id=\"components-dropdown-demo-dropdown-button\">\r\n                    <Dropdown overlay={menu}>\r\n                      <Button>\r\n                        --Headsets-- <DownOutlined />\r\n                      </Button>\r\n                    </Dropdown>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div className=\"research-footer-btns\">\r\n              <Button type=\"primary\" className=\"create-research-btn\">Create Research Study</Button>\r\n              <Link to={'/researcher-profile'}>\r\n                <Button>Close Page</Button>\r\n              </Link>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default PersonalStats;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/Researcher/ResearcherStudies/PersonalStats/personalStats.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/Researcher/ResearcherStudies/PersonalStats/personalStats.js	(date 1594321403328)
+@@ -30,80 +30,78 @@
+     </Menu>
+   );
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        <div className="btns-wrapper">
+-          <Link to={'/researcher-profile'}>
+-            <Button className="profile-btn">Profile</Button>
+-          </Link>
+-          <Link to={'/participant-studies'}>
+-            <Button className="research-btn active">Research Studies</Button>
+-          </Link>
+-        </div>
+-        <div className="personal-wrapper">
+-          <div className="file-block">
+-            <div className="personal-heading">Create Research Studies</div>
+-            <div className="personal-info-img">
+-              <img src={userImg} alt="userImg" />
+-              <div className="upload-btns">
+-                <Button className="file-upload-btn" type="primary">Upload Image</Button>
+-              </div>
+-            </div>
+-            <div className="personal-blocks-wrapper">
+-              <div className="personal-left-block">
+-                <Button className="upload-vr-btn">Upload VR File</Button>
+-                <Progress percent={30} size="small" />
+-                <div className="fields-wrapper">
+-                  <p>Title</p>
+-                  <Input placeholder="Title" />
+-                </div>
+-                <div className="fields-wrapper">
+-                  <p>Description</p>
+-                  <TextArea placeholder="Type here" rows={3} className="personal-stats-area" />
+-                </div>
+-                <div className="fields-wrapper">
+-                  <p className="before-dropdown">Location</p>
+-                  <div id="components-dropdown-demo-dropdown-button">
+-                    <Dropdown overlay={menu}>
+-                      <Button>
+-                        --Countries-- <DownOutlined />
+-                      </Button>
+-                    </Dropdown>
+-                  </div>
+-                </div>
+-              </div>
+-              <div className="personal-right-block">
+-                <div className="fields-wrapper">
+-                  <p>Age(range)</p>
+-                  <Slider range defaultValue={[10, 85]} disabled={disabled} />
+-                </div>
+-                <div className="fields-wrapper">
+-                  <p>Average Income(range)</p>
+-                  <Slider range defaultValue={[10, 85]} disabled={disabled} />
+-                </div>
+-                <div className="fields-wrapper">
+-                  <p>Required number of participant</p>
+-                  <InputNumber min={1} max={300} defaultValue={100} onChange={onChange}
+-                               className="input-number"/>
+-                </div>
+-                <div className="fields-wrapper">
+-                  <p className="before-dropdown">Supported Headsets</p>
+-                  <div id="components-dropdown-demo-dropdown-button">
+-                    <Dropdown overlay={menu}>
+-                      <Button>
+-                        --Headsets-- <DownOutlined />
+-                      </Button>
+-                    </Dropdown>
+-                  </div>
+-                </div>
+-              </div>
+-            </div>
+-            <div className="research-footer-btns">
+-              <Button type="primary" className="create-research-btn">Create Research Study</Button>
+-              <Link to={'/researcher-profile'}>
+-                <Button>Close Page</Button>
+-              </Link>
+-            </div>
++    <div className="main-page-wrapper">
++      <div className="btns-wrapper">
++        <Link to={'/researcher-profile'}>
++          <Button className="profile-btn">Profile</Button>
++        </Link>
++        <Link to={'/participant-studies'}>
++          <Button className="research-btn active">Research Studies</Button>
++        </Link>
++      </div>
++      <div className="personal-wrapper">
++        <div className="file-block">
++          <div className="personal-heading">Create Research Studies</div>
++          <div className="personal-info-img">
++            <img src={userImg} alt="userImg" />
++            <div className="upload-btns">
++              <Button className="file-upload-btn" type="primary">Upload Image</Button>
++            </div>
++          </div>
++          <div className="personal-blocks-wrapper">
++            <div className="personal-left-block">
++              <Button className="upload-vr-btn">Upload VR File</Button>
++              <Progress percent={30} size="small" />
++              <div className="fields-wrapper">
++                <p>Title</p>
++                <Input placeholder="Title" />
++              </div>
++              <div className="fields-wrapper">
++                <p>Description</p>
++                <TextArea placeholder="Type here" rows={3} className="personal-stats-area" />
++              </div>
++              <div className="fields-wrapper">
++                <p className="before-dropdown">Location</p>
++                <div id="components-dropdown-demo-dropdown-button">
++                  <Dropdown overlay={menu}>
++                    <Button>
++                      --Countries-- <DownOutlined />
++                    </Button>
++                  </Dropdown>
++                </div>
++              </div>
++            </div>
++            <div className="personal-right-block">
++              <div className="fields-wrapper">
++                <p>Age(range)</p>
++                <Slider range defaultValue={[10, 85]} disabled={disabled} />
++              </div>
++              <div className="fields-wrapper">
++                <p>Average Income(range)</p>
++                <Slider range defaultValue={[10, 85]} disabled={disabled} />
++              </div>
++              <div className="fields-wrapper">
++                <p>Required number of participant</p>
++                <InputNumber min={1} max={300} defaultValue={100} onChange={onChange}
++                             className="input-number"/>
++              </div>
++              <div className="fields-wrapper">
++                <p className="before-dropdown">Supported Headsets</p>
++                <div id="components-dropdown-demo-dropdown-button">
++                  <Dropdown overlay={menu}>
++                    <Button>
++                      --Headsets-- <DownOutlined />
++                    </Button>
++                  </Dropdown>
++                </div>
++              </div>
++            </div>
++          </div>
++          <div className="research-footer-btns">
++            <Button type="primary" className="create-research-btn">Create Research Study</Button>
++            <Link to={'/researcher-profile'}>
++              <Button>Close Page</Button>
++            </Link>
+           </div>
+         </div>
+       </div>
+Index: src/components/Login/ParticipantRegister/participantRegisterForm.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React, { useState } from 'react'\r\nimport { Link } from \"react-router-dom\";\r\nimport { Form, Input, Button, Checkbox } from 'antd';\r\nimport { UserOutlined, LockOutlined } from '@ant-design/icons';\r\nimport \"antd/dist/antd.css\";\r\nimport \"./participantRegisterForm.css\";\r\nimport MainLogin from '../Login'\r\n\r\nconst layout = {\r\n  labelCol: {\r\n    span: 8,\r\n  },\r\n  wrapperCol: {\r\n    span: 16,\r\n  },\r\n};\r\nconst tailLayout = {\r\n  wrapperCol: {\r\n    offset: 8,\r\n    span: 16,\r\n  },\r\n};\r\nconst ParticipantRegisterForm = () => {\r\n  const [registerForm, setRegisterForm] = useState(false);\r\n  const [isVisible, setIsVisible] = useState(false)\r\n  const typeOfForm = () => {\r\n    setRegisterForm(false);\r\n    setIsVisible(true)\r\n  }\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}\r\n        {!isVisible && <div>\r\n          <div className=\"form-wrapper\">\r\n            <div className=\"participant-heading\">\r\n              V-RAP: Participant\r\n            </div>\r\n            <div className=\"login-btns\">\r\n              <Button className=\"profile-btn active\"\r\n                // onClick={typeOfForm(true)}\r\n              >Register</Button>\r\n              {/*<Link to={'/participant-login'}>*/}\r\n              <Button className=\"research-btn\"\r\n                      onClick={typeOfForm}\r\n              >Login</Button>\r\n              {/*</Link>*/}\r\n            </div>\r\n            <Form\r\n              name=\"normal_login\"\r\n              className=\"login-form\"\r\n              initialValues={{ remember: true }}\r\n            >\r\n              <Form.Item\r\n                name=\"username\"\r\n                rules={[{ required: true, message: 'Please input your Username!' }]}\r\n              >\r\n                <Input prefix={<UserOutlined className=\"site-form-item-icon\" />} placeholder=\"E-mail\" />\r\n              </Form.Item>\r\n              <Form.Item\r\n                name=\"password\"\r\n                rules={[{ required: true, message: 'Please input your Password!' }]}\r\n              >\r\n                <Input\r\n                  prefix={<LockOutlined className=\"site-form-item-icon\" />}\r\n                  type=\"password\"\r\n                  placeholder=\"Password\"\r\n                />\r\n              </Form.Item>\r\n              <Form.Item>\r\n                <Link to={'/participant-profile'}>\r\n                  <Button type=\"primary\" htmlType=\"submit\" className=\"login-form-button\">\r\n                    Register\r\n                  </Button>\r\n                </Link>\r\n              </Form.Item>\r\n            </Form>\r\n          </div>\r\n        </div>}\r\n\r\n    </div>\r\n  </div>\r\n\r\n  );\r\n};\r\nexport default ParticipantRegisterForm;\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Login/ParticipantRegister/participantRegisterForm.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Login/ParticipantRegister/participantRegisterForm.js	(date 1594321403284)
+@@ -29,59 +29,55 @@
+     setIsVisible(true)
+   }
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
+-        {!isVisible && <div>
+-          <div className="form-wrapper">
+-            <div className="participant-heading">
+-              V-RAP: Participant
+-            </div>
+-            <div className="login-btns">
+-              <Button className="profile-btn active"
+-                // onClick={typeOfForm(true)}
+-              >Register</Button>
+-              {/*<Link to={'/participant-login'}>*/}
+-              <Button className="research-btn"
+-                      onClick={typeOfForm}
+-              >Login</Button>
+-              {/*</Link>*/}
+-            </div>
+-            <Form
+-              name="normal_login"
+-              className="login-form"
+-              initialValues={{ remember: true }}
+-            >
+-              <Form.Item
+-                name="username"
+-                rules={[{ required: true, message: 'Please input your Username!' }]}
+-              >
+-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
+-              </Form.Item>
+-              <Form.Item
+-                name="password"
+-                rules={[{ required: true, message: 'Please input your Password!' }]}
+-              >
+-                <Input
+-                  prefix={<LockOutlined className="site-form-item-icon" />}
+-                  type="password"
+-                  placeholder="Password"
+-                />
+-              </Form.Item>
+-              <Form.Item>
+-                <Link to={'/participant-profile'}>
+-                  <Button type="primary" htmlType="submit" className="login-form-button">
+-                    Register
+-                  </Button>
+-                </Link>
+-              </Form.Item>
+-            </Form>
+-          </div>
+-        </div>}
+-
+-    </div>
++    <div className="main-page-wrapper">
++      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
++      {!isVisible && <div>
++        <div className="form-wrapper">
++          <div className="participant-heading">
++            V-RAP: Participant
++          </div>
++          <div className="login-btns">
++            <Button className="profile-btn active"
++              // onClick={typeOfForm(true)}
++            >Register</Button>
++            {/*<Link to={'/participant-login'}>*/}
++            <Button className="research-btn"
++                    onClick={typeOfForm}
++            >Login</Button>
++            {/*</Link>*/}
++          </div>
++          <Form
++            name="normal_login"
++            className="login-form"
++            initialValues={{ remember: true }}
++          >
++            <Form.Item
++              name="username"
++              rules={[{ required: true, message: 'Please input your Username!' }]}
++            >
++              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
++            </Form.Item>
++            <Form.Item
++              name="password"
++              rules={[{ required: true, message: 'Please input your Password!' }]}
++            >
++              <Input
++                prefix={<LockOutlined className="site-form-item-icon" />}
++                type="password"
++                placeholder="Password"
++              />
++            </Form.Item>
++            <Form.Item>
++              <Link to={'/participant-profile'}>
++                <Button type="primary" htmlType="submit" className="login-form-button">
++                  Register
++                </Button>
++              </Link>
++            </Form.Item>
++          </Form>
++        </div>
++      </div>}
+   </div>
+-
+   );
+ };
+ export default ParticipantRegisterForm;
+Index: src/components/Main/Researcher/ResearcherStudies/researcherStudies.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React from \"react\";\r\nimport { Button } from \"antd\";\r\nimport { Link } from \"react-router-dom\";\r\nimport userImg from \"../../../../images/user.svg\";\r\nimport \"./researcherStudies.css\";\r\n\r\nconst ResearcherStudies = () => {\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <div className=\"btns-wrapper\">\r\n          <Link to={'/researcher-profile'}>\r\n            <Button className=\"profile-btn\">Profile</Button>\r\n          </Link>\r\n          <Link to={'/participant-studies'}>\r\n            <Button className=\"research-btn active\">Research Studies</Button>\r\n          </Link>\r\n        </div>\r\n        <div className=\"research-header-wrapper\">\r\n          <div className=\"personal-heading\">Research Studies</div>\r\n          <Link to={'/research-create-studies'}>\r\n            <Button type=\"primary\" className=\"create-new-study\">Create New Research Study</Button>\r\n          </Link>\r\n        </div>\r\n        <div className=\"study-wrapper\">\r\n          <div className=\"study-info-wrapper\">\r\n            <div className=\"study-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n            </div>\r\n            <div className=\"study\">\r\n              <div className=\"study-heading\">\r\n                Research Study 1\r\n              </div>\r\n              <div className=\"study-info\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift\r\n                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n              <div className=\"study-require\">\r\n                Required Headset\r\n              </div>\r\n              <div className=\"study-device\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n            </div>\r\n            <div className=\"research-btns\">\r\n              <Button className=\"status-btn\">In progress</Button>\r\n            </div>\r\n          </div>\r\n          <div className=\"research-study-btns\">\r\n            <Button className=\"status-btn\">View Results</Button>\r\n            <Button type=\"danger\" className=\"upload-btn\">Close</Button>\r\n            <Button type=\"danger\" className=\"upload-btn\">Delete</Button>\r\n          </div>\r\n        </div>\r\n        <div className=\"study-wrapper\">\r\n          <div className=\"study-info-wrapper\">\r\n            <div className=\"study-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n            </div>\r\n            <div className=\"study\">\r\n              <div className=\"study-heading\"> Research Study 2</div>\r\n              <div className=\"study-info\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift\r\n                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n              <div className=\"study-require\">Required Headset</div>\r\n              <div className=\"study-device\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n            </div>\r\n            <div className=\"research-btns\">\r\n              <Button className=\"status-btn\">Pending</Button>\r\n            </div>\r\n          </div>\r\n          <div className=\"research-study-btns\">\r\n            <Button type=\"primary\">Edit</Button>\r\n            <Link to={'/participant-upload'}>\r\n              <Button type=\"danger\" className=\"upload-btn\">Delete</Button>\r\n            </Link>\r\n          </div>\r\n        </div>\r\n        <div className=\"study-wrapper\">\r\n          <div className=\"study-info-wrapper\">\r\n            <div className=\"study-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n            </div>\r\n            <div className=\"study\">\r\n              <div className=\"study-heading\"> Research Study 3</div>\r\n              <div className=\"study-info\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift\r\n                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n              <div className=\"study-require\">Required Headset</div>\r\n              <div className=\"study-device\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n            </div>\r\n            <div className=\"research-btns\">\r\n              <Button className=\"status-btn\" type=\"danger\">Closed</Button>\r\n            </div>\r\n          </div>\r\n          <div className=\"research-study-btns\">\r\n            <Button type=\"danger\">Delete</Button>\r\n          </div>\r\n        </div>\r\n        <div className=\"study-wrapper\">\r\n          <div className=\"study-info-wrapper\">\r\n            <div className=\"study-info-img\">\r\n              <img src={userImg} alt=\"userImg\" />\r\n            </div>\r\n            <div className=\"study\">\r\n              <div className=\"study-heading\"> Research Study 4</div>\r\n              <div className=\"study-info\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift\r\n                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n              <div className=\"study-require\">Required Headset</div>\r\n              <div className=\"study-device\">\r\n                Compatible Devices: ATC Vive, Oculus Rift / Rift S\r\n              </div>\r\n            </div>\r\n            <div className=\"research-btns\">\r\n              <Button className=\"status-btn\">Completed</Button>\r\n            </div>\r\n          </div>\r\n          <div className=\"research-study-btns\">\r\n            <Button className=\"status-btn\">View Results</Button>\r\n            <Button type=\"danger\" className=\"upload-btn\">Close</Button>\r\n            <Button type=\"danger\" className=\"upload-btn\">Delete</Button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default ResearcherStudies;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/Researcher/ResearcherStudies/researcherStudies.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/Researcher/ResearcherStudies/researcherStudies.js	(date 1594321403349)
+@@ -7,128 +7,124 @@
+ 
+ const ResearcherStudies = () => {
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        <div className="btns-wrapper">
+-          <Link to={'/researcher-profile'}>
+-            <Button className="profile-btn">Profile</Button>
+-          </Link>
+-          <Link to={'/participant-studies'}>
+-            <Button className="research-btn active">Research Studies</Button>
+-          </Link>
+-        </div>
+-        <div className="research-header-wrapper">
+-          <div className="personal-heading">Research Studies</div>
+-          <Link to={'/research-create-studies'}>
+-            <Button type="primary" className="create-new-study">Create New Research Study</Button>
+-          </Link>
+-        </div>
+-        <div className="study-wrapper">
+-          <div className="study-info-wrapper">
+-            <div className="study-info-img">
+-              <img src={userImg} alt="userImg" />
+-            </div>
+-            <div className="study">
+-              <div className="study-heading">
+-                Research Study 1
+-              </div>
+-              <div className="study-info">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift
+-                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+-              </div>
+-              <div className="study-require">
+-                Required Headset
+-              </div>
+-              <div className="study-device">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift S
+-              </div>
+-            </div>
+-            <div className="research-btns">
+-              <Button className="status-btn">In progress</Button>
+-            </div>
+-          </div>
+-          <div className="research-study-btns">
+-            <Button className="status-btn">View Results</Button>
+-            <Button type="danger" className="upload-btn">Close</Button>
+-            <Button type="danger" className="upload-btn">Delete</Button>
+-          </div>
+-        </div>
+-        <div className="study-wrapper">
+-          <div className="study-info-wrapper">
+-            <div className="study-info-img">
+-              <img src={userImg} alt="userImg" />
+-            </div>
+-            <div className="study">
+-              <div className="study-heading"> Research Study 2</div>
+-              <div className="study-info">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift
+-                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+-              </div>
+-              <div className="study-require">Required Headset</div>
+-              <div className="study-device">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift S
+-              </div>
+-            </div>
+-            <div className="research-btns">
+-              <Button className="status-btn">Pending</Button>
+-            </div>
+-          </div>
+-          <div className="research-study-btns">
+-            <Button type="primary">Edit</Button>
+-            <Link to={'/participant-upload'}>
+-              <Button type="danger" className="upload-btn">Delete</Button>
+-            </Link>
+-          </div>
+-        </div>
+-        <div className="study-wrapper">
+-          <div className="study-info-wrapper">
+-            <div className="study-info-img">
+-              <img src={userImg} alt="userImg" />
+-            </div>
+-            <div className="study">
+-              <div className="study-heading"> Research Study 3</div>
+-              <div className="study-info">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift
+-                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+-              </div>
+-              <div className="study-require">Required Headset</div>
+-              <div className="study-device">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift S
+-              </div>
+-            </div>
+-            <div className="research-btns">
+-              <Button className="status-btn" type="danger">Closed</Button>
+-            </div>
+-          </div>
+-          <div className="research-study-btns">
+-            <Button type="danger">Delete</Button>
+-          </div>
+-        </div>
+-        <div className="study-wrapper">
+-          <div className="study-info-wrapper">
+-            <div className="study-info-img">
+-              <img src={userImg} alt="userImg" />
+-            </div>
+-            <div className="study">
+-              <div className="study-heading"> Research Study 4</div>
+-              <div className="study-info">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift
+-                ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
+-              </div>
+-              <div className="study-require">Required Headset</div>
+-              <div className="study-device">
+-                Compatible Devices: ATC Vive, Oculus Rift / Rift S
+-              </div>
+-            </div>
+-            <div className="research-btns">
+-              <Button className="status-btn">Completed</Button>
+-            </div>
+-          </div>
+-          <div className="research-study-btns">
+-            <Button className="status-btn">View Results</Button>
+-            <Button type="danger" className="upload-btn">Close</Button>
+-            <Button type="danger" className="upload-btn">Delete</Button>
+-          </div>
++    <div className="main-page-wrapper">
++      <div className="btns-wrapper">
++        <Link to={'/researcher-profile'}>
++          <Button className="profile-btn">Profile</Button>
++        </Link>
++        <Link to={'/participant-studies'}>
++          <Button className="research-btn active">Research Studies</Button>
++        </Link>
++      </div>
++      <div className="research-header-wrapper">
++        <div className="personal-heading">Research Studies</div>
++        <Link to={'/research-create-studies'}>
++          <Button type="primary" className="create-new-study">Create New Research Study</Button>
++        </Link>
++      </div>
++      <div className="study-wrapper">
++        <div className="study-info-wrapper">
++          <div className="study-info-img">
++            <img src={userImg} alt="userImg" />
++          </div>
++          <div className="study">
++            <div className="study-heading">
++              Research Study 1
++            </div>
++            <div className="study-info">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift
++              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
++            </div>
++            <div className="study-require">
++              Required Headset
++            </div>
++            <div className="study-device">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift S
++            </div>
++          </div>
++          <div className="research-btns">
++            <Button className="status-btn">In progress</Button>
++          </div>
++        </div>
++        <div className="research-study-btns">
++          <Button className="status-btn">View Results</Button>
++          <Button type="danger" className="upload-btn">Close</Button>
++          <Button type="danger" className="upload-btn">Delete</Button>
++        </div>
++      </div>
++      <div className="study-wrapper">
++        <div className="study-info-wrapper">
++          <div className="study-info-img">
++            <img src={userImg} alt="userImg" />
++          </div>
++          <div className="study">
++            <div className="study-heading"> Research Study 2</div>
++            <div className="study-info">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift
++              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
++            </div>
++            <div className="study-require">Required Headset</div>
++            <div className="study-device">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift S
++            </div>
++          </div>
++          <div className="research-btns">
++            <Button className="status-btn">Pending</Button>
++          </div>
++        </div>
++        <div className="research-study-btns">
++          <Button type="primary">Edit</Button>
++          <Button type="danger" className="upload-btn">Delete</Button>
++        </div>
++      </div>
++      <div className="study-wrapper">
++        <div className="study-info-wrapper">
++          <div className="study-info-img">
++            <img src={userImg} alt="userImg" />
++          </div>
++          <div className="study">
++            <div className="study-heading"> Research Study 3</div>
++            <div className="study-info">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift
++              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
++            </div>
++            <div className="study-require">Required Headset</div>
++            <div className="study-device">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift S
++            </div>
++          </div>
++          <div className="research-btns">
++            <Button className="status-btn" type="danger">Closed</Button>
++          </div>
++        </div>
++        <div className="research-study-btns">
++          <Button type="danger">Delete</Button>
++        </div>
++      </div>
++      <div className="study-wrapper">
++        <div className="study-info-wrapper">
++          <div className="study-info-img">
++            <img src={userImg} alt="userImg" />
++          </div>
++          <div className="study">
++            <div className="study-heading"> Research Study 4</div>
++            <div className="study-info">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift
++              ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S
++            </div>
++            <div className="study-require">Required Headset</div>
++            <div className="study-device">
++              Compatible Devices: ATC Vive, Oculus Rift / Rift S
++            </div>
++          </div>
++          <div className="research-btns">
++            <Button className="status-btn">Completed</Button>
++          </div>
++        </div>
++        <div className="research-study-btns">
++          <Button className="status-btn">View Results</Button>
++          <Button type="danger" className="upload-btn">Close</Button>
++          <Button type="danger" className="upload-btn">Delete</Button>
+         </div>
+       </div>
+     </div>
+Index: src/components/Main/Participant/ParticipantProfile/participantProfile.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.btns-wrapper {\r\n    display: flex;\r\n    border-bottom: 1px solid;\r\n    button {\r\n        border-top-left-radius: 10px;\r\n        border-top-right-radius: 10px;\r\n        border-bottom: none;\r\n    }\r\n    .profile-btn,\r\n    .research-btn {\r\n        border: 1px solid darkgray;\r\n        width: 130px;\r\n        font-size: 12px;\r\n    }\r\n}\r\n//.file-block {\r\n//    text-align: left;\r\n//}\r\n.personal-info-block,\r\n.changes-btns,\r\n.upload-btns {\r\n    display: flex;\r\n    .personal-info-wrapper {\r\n        width: 250px;\r\n        .personal-heading {\r\n            font-size: 20px;\r\n            font-weight: 600;\r\n            text-align: left;\r\n            margin: 15px 0;\r\n            .profile-fields {\r\n                .ant-btn {\r\n                    border: none;\r\n                    width: 100%;\r\n                    display: flex;\r\n                    justify-content: space-between;\r\n                    align-items: center;\r\n                }\r\n\r\n                .input-number {\r\n                    width: 100%;\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n.fields-wrapper {\r\n    margin: 8px 0 15px 0;\r\n    text-align: left;\r\n    p {\r\n        text-align: left;\r\n        font-size: 13px;\r\n        margin: 0;\r\n    }\r\n    #components-dropdown-demo-dropdown-button {\r\n        .ant-dropdown-button {\r\n            margin: 0 8px 8px 0;\r\n        }\r\n        .ant-btn-group-rtl.ant-dropdown-button {\r\n            margin: 0 0 8px 8px;\r\n        }\r\n    }\r\n    .before-dropdown {\r\n        padding-bottom: 2px;\r\n    }\r\n}\r\n\r\n//.upload-btns {\r\n//    justify-content: center;\r\n//}\r\n\r\n\r\n.personal-info-img {\r\n    width: 200px;\r\n    img {\r\n        width: 200px;\r\n        margin: 15px 0;\r\n    }\r\n}\r\n.ant-input:placeholder-shown {\r\n    text-align: left;\r\n}\r\n.changes-btns {\r\n    margin-top: 20px;\r\n    button {\r\n        border-radius: 5px;\r\n    }\r\n    .save-btn {\r\n        margin-right: 8px;\r\n        font-weight: 600;\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/Participant/ParticipantProfile/participantProfile.scss	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/Participant/ParticipantProfile/participantProfile.scss	(date 1594328183182)
+@@ -17,7 +17,9 @@
+ //    text-align: left;
+ //}
+ .personal-info-block,
+-.changes-btns,
++.case-studies__changes-btns,
++.research-create__changes-btns,
++.participant-profile__changes-btns,
+ .upload-btns {
+     display: flex;
+     .personal-info-wrapper {
+@@ -43,7 +45,10 @@
+         }
+     }
+ }
+-.fields-wrapper {
++.case-studies__fields-wrapper,
++.research-changes__fields-wrapper,
++.research-create__fields-wrapper,
++.participant-profile__fields-wrapper{
+     margin: 8px 0 15px 0;
+     text-align: left;
+     p {
+@@ -79,12 +84,14 @@
+ .ant-input:placeholder-shown {
+     text-align: left;
+ }
+-.changes-btns {
++.case-studies__changes-btns,
++.research-create__changes-btns{
+     margin-top: 20px;
+     button {
+         border-radius: 5px;
+     }
+-    .save-btn {
++    .case-studies__save-btn,
++    .research-create__save-btn{
+         margin-right: 8px;
+         font-weight: 600;
+     }
+Index: src/components/Login/ParticipantLogin/participantLoginForm.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.participant-heading {\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n    margin-bottom: 20px;\r\n}\r\n.login-btns {\r\n    display: flex;\r\n    justify-content: center;\r\n    button {\r\n        border: none;\r\n        margin: 0 8px;\r\n    }\r\n}\r\nh2 {\r\n    margin: 8px 0;\r\n}\r\n.research-btn {\r\n    &:hover {\r\n        cursor: pointer;\r\n    }\r\n}\r\n.save-btn,\r\n.cancel-btn,\r\n.file-upload-btn,\r\n.choose-btn {\r\n    border: 1px solid darkgray;\r\n    font-size: 14px;\r\n}\r\n.ant-form-item-control-input-content {\r\n    flex-wrap: wrap;\r\n    flex: unset;\r\n    width: 250px;\r\n}\r\n.login-form .ant-btn-primary {\r\n    width: 100%;\r\n    margin-bottom: 3%;\r\n}\r\n.ant-btn:active, .ant-btn.active {\r\n    border-bottom: 2px solid aqua;\r\n    //border-color: darkgray;\r\n    //background-color: darkgray;\r\n    //color: #000;\r\n    .researcher-profile-btn {\r\n        //border-top-left-radius: 10px;\r\n        //border-top-right-radius: 10px;\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Login/ParticipantLogin/participantLoginForm.scss	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Login/ParticipantLogin/participantLoginForm.scss	(date 1594328326809)
+@@ -19,8 +19,12 @@
+         cursor: pointer;
+     }
+ }
+-.save-btn,
+-.cancel-btn,
++.case-studies__save-btn,
++.case-studies__cancel-btn,
++.research-create__save-btn,
++.research-create__cancel-btn,
++.participant-profile__save-btn,
++.participant-profile__cancel-btn,
+ .file-upload-btn,
+ .choose-btn {
+     border: 1px solid darkgray;
+@@ -31,6 +35,9 @@
+     flex: unset;
+     width: 250px;
+ }
++.participant-profile__cancel-btn {
++    margin-left: 10px;
++}
+ .login-form .ant-btn-primary {
+     width: 100%;
+     margin-bottom: 3%;
+Index: src/components/Main/main.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React,{useState} from \"react\";\r\nimport { Link } from \"react-router-dom\";\r\nimport \"./main.scss\";\r\nimport { Button } from 'antd'\r\nimport MainLogin from '../Login/Login'\r\n\r\nconst Main = () => {\r\n  const [registerForm, setRegisterForm] = useState(false);\r\n  const [isVisible, setIsVisible] = useState(false)\r\n  const typeOfForm = () => {\r\n    setRegisterForm(true);\r\n    setIsVisible(true)\r\n  }\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}\r\n        {!isVisible && <div>\r\n          <div className=\"main-page-header\">V-Rap</div>\r\n          <div className=\"main-page-btns\">\r\n            {/*<Link to={\"/participant-register\"}>*/}\r\n            <Button type=\"button\" className=\"main-block-btn btn btn-light\"\r\n                    onClick={typeOfForm}>\r\n              I`m Participant\r\n            </Button>\r\n            {/*</Link>*/}\r\n            <Link to={\"/researcher-login\"}>\r\n              <Button type=\"button\" className=\"main-block-btn btn btn-light\">\r\n                I`m Researcher\r\n              </Button>\r\n            </Link>\r\n          </div>\r\n        </div>}\r\n\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default Main;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/main.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/main.js	(date 1594321403245)
+@@ -13,27 +13,24 @@
+     setIsVisible(true)
+   }
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
+-        {!isVisible && <div>
+-          <div className="main-page-header">V-Rap</div>
+-          <div className="main-page-btns">
+-            {/*<Link to={"/participant-register"}>*/}
+-            <Button type="button" className="main-block-btn btn btn-light"
+-                    onClick={typeOfForm}>
+-              I`m Participant
+-            </Button>
+-            {/*</Link>*/}
+-            <Link to={"/researcher-login"}>
+-              <Button type="button" className="main-block-btn btn btn-light">
+-                I`m Researcher
+-              </Button>
+-            </Link>
+-          </div>
+-        </div>}
+-
+-      </div>
++    <div className="main-page-wrapper">
++      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
++      {!isVisible && <div>
++        <div className="main-page-header">V-Rap</div>
++        <div className="main-page-btns">
++          {/*<Link to={"/participant-register"}>*/}
++          <Button type="button" className="main-block-btn btn btn-light"
++                  onClick={typeOfForm}>
++            I`m Participant
++          </Button>
++          {/*</Link>*/}
++          <Link to={"/researcher-login"}>
++            <Button type="button" className="main-block-btn btn btn-light">
++              I`m Researcher
++            </Button>
++          </Link>
++        </div>
++      </div>}
+     </div>
+   );
+ };
+Index: src/components/Login/ParticipantLogin/participantLoginForm.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React, { useState } from 'react'\r\nimport { Link } from \"react-router-dom\";\r\nimport \"antd/dist/antd.css\";\r\nimport \"./participantLoginForm.scss\";\r\nimport { Form, Input, Button, Checkbox } from \"antd\";\r\nimport { UserOutlined, LockOutlined } from '@ant-design/icons';\r\nimport MainLogin from '../Login'\r\nconst ParticipantLoginForm = () => {\r\n  const [registerForm, setRegisterForm] = useState(false);\r\n  const [isVisible, setIsVisible] = useState(false)\r\n  const typeOfForm = () => {\r\n    setRegisterForm(true);\r\n    setIsVisible(true)\r\n  }\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}\r\n        {!isVisible && <div>\r\n          <div className=\"form-wrapper\">\r\n            <div className=\"participant-heading\">\r\n              V-RAP: Participant\r\n            </div>\r\n            <div className=\"login-btns\">\r\n              <Button className=\"profile-btn \"\r\n                      onClick={typeOfForm}\r\n              >Register</Button>\r\n              {/*<Link to={'/participant-login'}>*/}\r\n              <Button className=\"research-btn active\"\r\n                // onClick={typeOfForm}\r\n              >Login</Button>\r\n              {/*</Link>*/}\r\n            </div>\r\n            <Form\r\n              name=\"normal_login\"\r\n              className=\"login-form\"\r\n              initialValues={{ remember: true }}\r\n            >\r\n              <Form.Item\r\n                name=\"username\"\r\n                rules={[{ required: true, message: 'Please input your Username!' }]}\r\n              >\r\n                <Input prefix={<UserOutlined className=\"site-form-item-icon\" />} placeholder=\"E-mail\" />\r\n              </Form.Item>\r\n              <Form.Item\r\n                name=\"password\"\r\n                rules={[{ required: true, message: 'Please input your Password!' }]}\r\n              >\r\n                <Input\r\n                  prefix={<LockOutlined className=\"site-form-item-icon\" />}\r\n                  type=\"password\"\r\n                  placeholder=\"Password\"\r\n                />\r\n              </Form.Item>\r\n              <Form.Item>\r\n                <Form.Item name=\"remember\" valuePropName=\"checked\" noStyle>\r\n                  <Checkbox>Remember me</Checkbox>\r\n                </Form.Item>\r\n\r\n                <a className=\"login-form-forgot\" href=\"\">\r\n                  Forgot password\r\n                </a>\r\n              </Form.Item>\r\n\r\n              <Form.Item>\r\n                <Link to={'/participant-profile'}>\r\n                  <Button type=\"primary\" htmlType=\"submit\" className=\"login-form-button\">\r\n                    Login\r\n                  </Button>\r\n                </Link>\r\n\r\n                Or <a href=\"\"\r\n                      onClick={typeOfForm}\r\n              >register now!</a>\r\n              </Form.Item>\r\n            </Form>\r\n          </div>\r\n        </div>}\r\n\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default ParticipantLoginForm;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Login/ParticipantLogin/participantLoginForm.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Login/ParticipantLogin/participantLoginForm.js	(date 1594321403361)
+@@ -14,71 +14,67 @@
+     setIsVisible(true)
+   }
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
+-        {!isVisible && <div>
+-          <div className="form-wrapper">
+-            <div className="participant-heading">
+-              V-RAP: Participant
+-            </div>
+-            <div className="login-btns">
+-              <Button className="profile-btn "
+-                      onClick={typeOfForm}
+-              >Register</Button>
+-              {/*<Link to={'/participant-login'}>*/}
+-              <Button className="research-btn active"
+-                // onClick={typeOfForm}
+-              >Login</Button>
+-              {/*</Link>*/}
+-            </div>
+-            <Form
+-              name="normal_login"
+-              className="login-form"
+-              initialValues={{ remember: true }}
+-            >
+-              <Form.Item
+-                name="username"
+-                rules={[{ required: true, message: 'Please input your Username!' }]}
+-              >
+-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
+-              </Form.Item>
+-              <Form.Item
+-                name="password"
+-                rules={[{ required: true, message: 'Please input your Password!' }]}
+-              >
+-                <Input
+-                  prefix={<LockOutlined className="site-form-item-icon" />}
+-                  type="password"
+-                  placeholder="Password"
+-                />
+-              </Form.Item>
+-              <Form.Item>
+-                <Form.Item name="remember" valuePropName="checked" noStyle>
+-                  <Checkbox>Remember me</Checkbox>
+-                </Form.Item>
++    <div className="main-page-wrapper">
++      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
++      {!isVisible && <div>
++        <div className="form-wrapper">
++          <div className="participant-heading">
++            V-RAP: Participant
++          </div>
++          <div className="login-btns">
++            <Button className="profile-btn "
++                    onClick={typeOfForm}
++            >Register</Button>
++            {/*<Link to={'/participant-login'}>*/}
++            <Button className="research-btn active"
++              // onClick={typeOfForm}
++            >Login</Button>
++            {/*</Link>*/}
++          </div>
++          <Form
++            name="normal_login"
++            className="login-form"
++            initialValues={{ remember: true }}
++          >
++            <Form.Item
++              name="username"
++              rules={[{ required: true, message: 'Please input your Username!' }]}
++            >
++              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
++            </Form.Item>
++            <Form.Item
++              name="password"
++              rules={[{ required: true, message: 'Please input your Password!' }]}
++            >
++              <Input
++                prefix={<LockOutlined className="site-form-item-icon" />}
++                type="password"
++                placeholder="Password"
++              />
++            </Form.Item>
++            <Form.Item>
++              <Form.Item name="remember" valuePropName="checked" noStyle>
++                <Checkbox>Remember me</Checkbox>
++              </Form.Item>
+ 
+-                <a className="login-form-forgot" href="">
+-                  Forgot password
+-                </a>
+-              </Form.Item>
+-
+-              <Form.Item>
+-                <Link to={'/participant-profile'}>
+-                  <Button type="primary" htmlType="submit" className="login-form-button">
+-                    Login
+-                  </Button>
+-                </Link>
++              <a className="login-form-forgot" href="">
++                Forgot password
++              </a>
++            </Form.Item>
++            <Form.Item>
++              <Link to={'/participant-profile'}>
++                <Button type="primary" htmlType="submit" className="login-form-button">
++                  Login
++                </Button>
++              </Link>
+ 
+-                Or <a href=""
+-                      onClick={typeOfForm}
+-              >register now!</a>
+-              </Form.Item>
+-            </Form>
+-          </div>
+-        </div>}
+-
+-      </div>
++              Or <a href=""
++                    onClick={typeOfForm}
++            >register now!</a>
++            </Form.Item>
++          </Form>
++        </div>
++      </div>}
+     </div>
+   );
+ };
+Index: src/components/Main/main.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>* {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\nbody {\r\n    font-family: Arial, sans-serif;\r\n    color: #000;\r\n    .container {\r\n        .main-page-wrapper {\r\n            height: 100%;\r\n            text-align: center;\r\n            border-radius: 5px;\r\n            padding: 3%;\r\n        }\r\n    }\r\n}\r\n.main-page-header {\r\n    padding: 5%;\r\n    text-transform: uppercase;\r\n    font-size: 35px;\r\n    font-weight: 600;\r\n}\r\n.main-page-btns {\r\n    display: flex;\r\n    justify-content: space-evenly;\r\n    margin-top: 30px;\r\n    .main-block-btn {\r\n        padding: 5px 8px;\r\n        font-size: 14px;\r\n        font-weight: 600;\r\n        &:hover {\r\n            cursor: pointer;\r\n        }\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/main.scss	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/main.scss	(date 1594321468007)
+@@ -5,13 +5,11 @@
+ body {
+     font-family: Arial, sans-serif;
+     color: #000;
+-    .container {
+-        .main-page-wrapper {
+-            height: 100%;
+-            text-align: center;
+-            border-radius: 5px;
+-            padding: 3%;
+-        }
++    .main-page-wrapper {
++        height: 100%;
++        text-align: center;
++        border-radius: 5px;
++        //padding: 3%;
+     }
+ }
+ .main-page-header {
+Index: src/components/Login/ResearcherLogin/researcherLoginForm.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React from \"react\";\r\nimport { Link } from \"react-router-dom\";\r\nimport \"antd/dist/antd.css\";\r\nimport \"./researcherLoginForm.css\";\r\nimport { Form, Input, Button, Checkbox } from \"antd\";\r\nimport MainLogin from '../Login'\r\nimport { LockOutlined, UserOutlined } from '@ant-design/icons'\r\n\r\nconst layout = {\r\n  labelCol: {\r\n    span: 8,\r\n  },\r\n  wrapperCol: {\r\n    span: 16,\r\n  },\r\n};\r\nconst tailLayout = {\r\n  wrapperCol: {\r\n    offset: 8,\r\n    span: 16,\r\n  },\r\n};\r\nconst ResearcherLogin = () => {\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <div>\r\n          <div className=\"form-wrapper\">\r\n            <div className=\"participant-heading\">\r\n              V-RAP: Researcher\r\n            </div>\r\n            <Form\r\n              name=\"normal_login\"\r\n              className=\"login-form\"\r\n              initialValues={{ remember: true }}\r\n            >\r\n              <Form.Item\r\n                name=\"username\"\r\n                rules={[{ required: true, message: 'Please input your Username!' }]}\r\n              >\r\n                <Input prefix={<UserOutlined className=\"site-form-item-icon\" />} placeholder=\"E-mail\" />\r\n              </Form.Item>\r\n              <Form.Item\r\n                name=\"password\"\r\n                rules={[{ required: true, message: 'Please input your Password!' }]}\r\n              >\r\n                <Input\r\n                  prefix={<LockOutlined className=\"site-form-item-icon\" />}\r\n                  type=\"password\"\r\n                  placeholder=\"Password\"\r\n                />\r\n              </Form.Item>\r\n              <Form.Item>\r\n                <Link to={'/participant-profile'}>\r\n                  <Button type=\"primary\" htmlType=\"submit\" className=\"login-form-button\">\r\n                    Register\r\n                  </Button>\r\n                </Link>\r\n              </Form.Item>\r\n            </Form>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default ResearcherLogin;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Login/ResearcherLogin/researcherLoginForm.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Login/ResearcherLogin/researcherLoginForm.js	(date 1594321403306)
+@@ -23,45 +23,42 @@
+ };
+ const ResearcherLogin = () => {
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        <div>
+-          <div className="form-wrapper">
+-            <div className="participant-heading">
+-              V-RAP: Researcher
+-            </div>
+-            <Form
+-              name="normal_login"
+-              className="login-form"
+-              initialValues={{ remember: true }}
+-            >
+-              <Form.Item
+-                name="username"
+-                rules={[{ required: true, message: 'Please input your Username!' }]}
+-              >
+-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
+-              </Form.Item>
+-              <Form.Item
+-                name="password"
+-                rules={[{ required: true, message: 'Please input your Password!' }]}
+-              >
+-                <Input
+-                  prefix={<LockOutlined className="site-form-item-icon" />}
+-                  type="password"
+-                  placeholder="Password"
+-                />
+-              </Form.Item>
+-              <Form.Item>
+-                <Link to={'/participant-profile'}>
+-                  <Button type="primary" htmlType="submit" className="login-form-button">
+-                    Register
+-                  </Button>
+-                </Link>
+-              </Form.Item>
+-            </Form>
+-          </div>
++    <div className="main-page-wrapper">
++      <div>
++        <div className="form-wrapper">
++          <div className="participant-heading">
++            V-RAP: Researcher
++          </div>
++          <Form
++            name="normal_login"
++            className="login-form"
++            initialValues={{ remember: true }}
++          >
++            <Form.Item
++              name="username"
++              rules={[{ required: true, message: 'Please input your Username!' }]}
++            >
++              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
++            </Form.Item>
++            <Form.Item
++              name="password"
++              rules={[{ required: true, message: 'Please input your Password!' }]}
++            >
++              <Input
++                prefix={<LockOutlined className="site-form-item-icon" />}
++                type="password"
++                placeholder="Password"
++              />
++            </Form.Item>
++            <Form.Item>
++              <Link to={'/researcher-profile'}>
++                <Button type="primary" htmlType="submit" className="login-form-button">
++                  Login
++                </Button>
++              </Link>
++            </Form.Item>
++          </Form>
+         </div>
+-
+       </div>
+     </div>
+   );
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"name\": \"test\",\r\n  \"version\": \"0.1.0\",\r\n  \"private\": true,\r\n  \"dependencies\": {\r\n    \"@ant-design/icons\": \"^4.2.1\",\r\n    \"@babel/core\": \"7.9.0\",\r\n    \"@svgr/webpack\": \"4.3.3\",\r\n    \"@testing-library/jest-dom\": \"^4.2.4\",\r\n    \"@testing-library/react\": \"^9.3.2\",\r\n    \"@testing-library/user-event\": \"^7.1.2\",\r\n    \"@typescript-eslint/eslint-plugin\": \"^2.10.0\",\r\n    \"@typescript-eslint/parser\": \"^2.10.0\",\r\n    \"antd\": \"^4.1.1\",\r\n    \"autoprefixer\": \"^9.7.6\",\r\n    \"babel-eslint\": \"10.1.0\",\r\n    \"babel-jest\": \"^24.9.0\",\r\n    \"babel-loader\": \"8.1.0\",\r\n    \"babel-plugin-import\": \"^1.13.0\",\r\n    \"babel-plugin-named-asset-import\": \"^0.3.6\",\r\n    \"babel-preset-react-app\": \"^9.1.2\",\r\n    \"camelcase\": \"^5.3.1\",\r\n    \"case-sensitive-paths-webpack-plugin\": \"2.3.0\",\r\n    \"docx2html\": \"^1.1.0\",\r\n    \"dotenv\": \"8.2.0\",\r\n    \"dotenv-expand\": \"5.1.0\",\r\n    \"eslint-config-airbnb\": \"^18.1.0\",\r\n    \"eslint-config-prettier\": \"^6.10.1\",\r\n    \"eslint-config-react-app\": \"^5.2.1\",\r\n    \"eslint-config-standard\": \"^14.1.1\",\r\n    \"eslint-config-standard-react\": \"^9.2.0\",\r\n    \"eslint-import-resolver-webpack\": \"^0.12.1\",\r\n    \"eslint-loader\": \"3.0.3\",\r\n    \"eslint-plugin-flowtype\": \"4.6.0\",\r\n    \"eslint-plugin-import\": \"^2.20.2\",\r\n    \"eslint-plugin-jsx-a11y\": \"^6.2.3\",\r\n    \"eslint-plugin-node\": \"^11.1.0\",\r\n    \"eslint-plugin-prettier\": \"^3.1.2\",\r\n    \"eslint-plugin-promise\": \"^4.2.1\",\r\n    \"eslint-plugin-react-hooks\": \"^1.6.1\",\r\n    \"eslint-plugin-standard\": \"^4.0.1\",\r\n    \"file-loader\": \"4.3.0\",\r\n    \"fs-extra\": \"^8.1.0\",\r\n    \"history\": \"^4.10.1\",\r\n    \"html-webpack-plugin\": \"4.0.0-beta.11\",\r\n    \"identity-obj-proxy\": \"3.0.0\",\r\n    \"jest\": \"24.9.0\",\r\n    \"jest-environment-jsdom-fourteen\": \"1.0.1\",\r\n    \"jest-resolve\": \"24.9.0\",\r\n    \"jest-watch-typeahead\": \"0.4.2\",\r\n    \"mammoth\": \"^1.4.9\",\r\n    \"mini-css-extract-plugin\": \"0.9.0\",\r\n    \"optimize-css-assets-webpack-plugin\": \"5.0.3\",\r\n    \"pnp-webpack-plugin\": \"1.6.4\",\r\n    \"postcss-flexbugs-fixes\": \"4.1.0\",\r\n    \"postcss-loader\": \"3.0.0\",\r\n    \"postcss-normalize\": \"8.0.1\",\r\n    \"postcss-preset-env\": \"6.7.0\",\r\n    \"postcss-safe-parser\": \"4.0.1\",\r\n    \"react\": \"^16.13.1\",\r\n    \"react-app-polyfill\": \"^1.0.6\",\r\n    \"react-cookie\": \"^4.0.3\",\r\n    \"react-dev-utils\": \"^10.2.1\",\r\n    \"react-dom\": \"^16.13.1\",\r\n    \"react-redux\": \"^7.2.0\",\r\n    \"react-router\": \"^5.1.2\",\r\n    \"react-router-dom\": \"^5.1.2\",\r\n    \"redux\": \"^4.0.5\",\r\n    \"redux-form\": \"^8.3.5\",\r\n    \"redux-persist\": \"^6.0.0\",\r\n    \"redux-thunk\": \"^2.3.0\",\r\n    \"resolve\": \"1.15.0\",\r\n    \"resolve-url-loader\": \"3.1.1\",\r\n    \"semver\": \"6.3.0\",\r\n    \"standard\": \"^14.3.3\",\r\n    \"style-loader\": \"0.23.1\",\r\n    \"terser-webpack-plugin\": \"2.3.5\",\r\n    \"ts-pnp\": \"1.1.6\",\r\n    \"url-loader\": \"2.3.0\",\r\n    \"webpack\": \"4.42.0\",\r\n    \"webpack-dev-server\": \"3.10.3\",\r\n    \"webpack-manifest-plugin\": \"2.2.0\",\r\n    \"workbox-webpack-plugin\": \"4.3.1\"\r\n  },\r\n  \"scripts\": {\r\n    \"start\": \"node scripts/start.js\",\r\n    \"build\": \"node scripts/build.js\",\r\n    \"test\": \"node scripts/test.js\",\r\n    \"predeploy\": \"npm run build\",\r\n    \"deploy\": \"gh-pages -d build\",\r\n    \"prettier\": \"prettier  ./.prettierrc --write  \\\"./src/**/*.js\\\"\"\r\n  },\r\n  \"eslintConfig\": {\r\n    \"extends\": \"react-app\"\r\n  },\r\n  \"browserslist\": {\r\n    \"production\": [\r\n      \">0.2%\",\r\n      \"not dead\",\r\n      \"not op_mini all\"\r\n    ],\r\n    \"development\": [\r\n      \"last 1 chrome version\",\r\n      \"last 1 firefox version\",\r\n      \"last 1 safari version\"\r\n    ]\r\n  },\r\n  \"jest\": {\r\n    \"roots\": [\r\n      \"<rootDir>/src\"\r\n    ],\r\n    \"collectCoverageFrom\": [\r\n      \"src/**/*.{js,jsx,ts,tsx}\",\r\n      \"!src/**/*.d.ts\"\r\n    ],\r\n    \"setupFiles\": [\r\n      \"react-app-polyfill/jsdom\"\r\n    ],\r\n    \"setupFilesAfterEnv\": [\r\n      \"<rootDir>/src/setupTests.js\"\r\n    ],\r\n    \"testMatch\": [\r\n      \"<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}\",\r\n      \"<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}\"\r\n    ],\r\n    \"testEnvironment\": \"jest-environment-jsdom-fourteen\",\r\n    \"transform\": {\r\n      \"^.+\\\\.(js|jsx|ts|tsx)$\": \"<rootDir>/node_modules/babel-jest\",\r\n      \"^.+\\\\.css$\": \"<rootDir>/config/jest/cssTransform.js\",\r\n      \"^(?!.*\\\\.(js|jsx|ts|tsx|css|json)$)\": \"<rootDir>/config/jest/fileTransform.js\"\r\n    },\r\n    \"transformIgnorePatterns\": [\r\n      \"[/\\\\\\\\]node_modules[/\\\\\\\\].+\\\\.(js|jsx|ts|tsx)$\",\r\n      \"^.+\\\\.module\\\\.(css|sass|scss)$\"\r\n    ],\r\n    \"modulePaths\": [],\r\n    \"moduleNameMapper\": {\r\n      \"^react-native$\": \"react-native-web\",\r\n      \"^.+\\\\.module\\\\.(css|sass|scss)$\": \"identity-obj-proxy\"\r\n    },\r\n    \"moduleFileExtensions\": [\r\n      \"web.js\",\r\n      \"js\",\r\n      \"web.ts\",\r\n      \"ts\",\r\n      \"web.tsx\",\r\n      \"tsx\",\r\n      \"json\",\r\n      \"web.jsx\",\r\n      \"jsx\",\r\n      \"node\"\r\n    ],\r\n    \"watchPlugins\": [\r\n      \"jest-watch-typeahead/filename\",\r\n      \"jest-watch-typeahead/testname\"\r\n    ]\r\n  },\r\n  \"babel\": {\r\n    \"presets\": [\r\n      \"react-app\"\r\n    ]\r\n  },\r\n  \"devDependencies\": {\r\n    \"css-loader\": \"^3.4.2\",\r\n    \"eslint\": \"^6.8.0\",\r\n    \"eslint-plugin-react\": \"^7.19.0\",\r\n    \"gh-pages\": \"^2.2.0\",\r\n    \"node-sass\": \"^4.14.1\",\r\n    \"prettier\": \"2.0.5\",\r\n    \"sass-loader\": \"^8.0.2\",\r\n    \"stylus\": \"^0.54.7\",\r\n    \"stylus-loader\": \"^3.0.2\"\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ package.json	(date 1594306718815)
+@@ -77,6 +77,7 @@
+     "terser-webpack-plugin": "2.3.5",
+     "ts-pnp": "1.1.6",
+     "url-loader": "2.3.0",
++    "validate.js": "^0.13.1",
+     "webpack": "4.42.0",
+     "webpack-dev-server": "3.10.3",
+     "webpack-manifest-plugin": "2.2.0",
+Index: src/components/Admin/ListOfResearchers/ResearcherChanges/DeleteModal/deleteModal.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.delete-btns {\r\n    display: flex;\r\n    justify-content: space-evenly;\r\n    margin-top: 15px;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfResearchers/ResearcherChanges/DeleteModal/deleteModal.css	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfResearchers/ResearcherChanges/DeleteModal/deleteModal.css	(date 1594323010788)
+@@ -1,4 +1,4 @@
+-.delete-btns {
++.delete-modal__btns {
+     display: flex;
+     justify-content: space-evenly;
+     margin-top: 15px;
+Index: src/styles/index.styl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.root-App\r\n  padding 2%\r\n  height: 100vh;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/styles/index.styl	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/styles/index.styl	(date 1594328372992)
+@@ -1,3 +1,3 @@
+ .root-App
+-  padding 2%
++  padding 5%
+   height: 100vh;
+Index: src/components/Main/Researcher/ResearcherProfile/researcherProfile.scss
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.personal-fields-wrapper {\r\n    width: 100%;\r\n    .ant-input {\r\n        width: 250px;\r\n    }\r\n    .changes-btns {\r\n        display: block;\r\n        text-align: left;\r\n    }\r\n}\r\n.researcher-profile-btn {\r\n    border-top-left-radius: 10px;\r\n    border-top-right-radius: 10px;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/Researcher/ResearcherProfile/researcherProfile.scss	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/Researcher/ResearcherProfile/researcherProfile.scss	(date 1594323010622)
+@@ -3,7 +3,8 @@
+     .ant-input {
+         width: 250px;
+     }
+-    .changes-btns {
++    .research-changes__changes-btns,
++    .research-create__changes-btns{
+         display: block;
+         text-align: left;
+     }
+Index: src/components/Admin/ListOfCaseStudies/listOfCaseStudies.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfCaseStudies/listOfCaseStudies.css	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfCaseStudies/listOfCaseStudies.css	(date 1594322412540)
+@@ -1,1 +1,5 @@
+-
++.case-studies__heading {
++    font-size: 25px;
++    font-weight: 600;
++    margin-bottom: 15px;
++}
+Index: src/components/Admin/ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React, {useState} from \"react\";\r\nimport { message, Button, Modal, Input } from 'antd'\r\nimport \"./caseStudiesChanges.css\";\r\nimport \"antd/dist/antd.css\";\r\nimport DeleteModal from '../../ListOfResearchers/ResearcherChanges/DeleteModal'\r\n\r\nconst CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {\r\n  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);\r\n  const deleteClick = () => {\r\n    setmodalOpen(false);\r\n    setDeleteModalIsOpen(true)\r\n  }\r\n  const  closeModal = () => {\r\n    setmodalOpen(false);\r\n  }\r\n  const props = {\r\n    name: \"file\",\r\n    action: \"https://www.mocky.io/v2/5cc8019d300000980a055e76\",\r\n    headers: {\r\n      authorization: \"authorization-text\",\r\n    },\r\n    onChange(info) {\r\n      if (info.file.status !== \"uploading\") {\r\n        setmodalOpen(false);\r\n      }\r\n      if (info.file.status === \"done\") {\r\n        message.success(`${info.file.name} file uploaded successfully`);\r\n      } else if (info.file.status === \"error\") {\r\n        message.error(`${info.file.name} file upload failed.`);\r\n      }\r\n    },\r\n  };\r\n  return (\r\n      <div>\r\n        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>\r\n        <Modal\r\n          title=\"Admins Changes\"\r\n          visible={modalOpen}\r\n          onOk={closeModal}\r\n          onCancel={closeModal}\r\n        >\r\n          <div className=\"case-studies-changes-wrapper\">\r\n            <div className=\"fields-wrapper\">\r\n              <p>Title</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n            <div className=\"fields-wrapper\">\r\n              <p>Location</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n            <div className=\"fields-wrapper\">\r\n              <p>Age</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n            <div className=\"fields-wrapper\">\r\n              <p>Average Income</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n            <div className=\"fields-wrapper\">\r\n              <p>Status</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n            <div className=\"changes-btns admin-modals-btns\">\r\n              <Button className=\"save-btn\" type=\"primary\">Save</Button>\r\n              <Button type=\"danger\" className=\"cancel-btn\"\r\n                      onClick={deleteClick}\r\n              >\r\n                Delete\r\n              </Button>\r\n            </div>\r\n          </div>\r\n        </Modal>\r\n      </div>\r\n  );\r\n};\r\nexport default CaseStudiesChanges;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges.js	(date 1594322412607)
+@@ -32,7 +32,7 @@
+     },
+   };
+   return (
+-      <div>
++      <div className="case-studies-changes-block">
+         <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
+         <Modal
+           title="Admins Changes"
+@@ -40,30 +40,30 @@
+           onOk={closeModal}
+           onCancel={closeModal}
+         >
+-          <div className="case-studies-changes-wrapper">
+-            <div className="fields-wrapper">
++          <div className="case-studies-changes">
++            <div className="case-studies__fields-wrapper">
+               <p>Title</p>
+               <Input placeholder="Type here.." />
+             </div>
+-            <div className="fields-wrapper">
++            <div className="case-studies__fields-wrapper">
+               <p>Location</p>
+               <Input placeholder="Type here.." />
+             </div>
+-            <div className="fields-wrapper">
++            <div className="case-studies__fields-wrapper">
+               <p>Age</p>
+               <Input placeholder="Type here.." />
+             </div>
+-            <div className="fields-wrapper">
++            <div className="case-studies__fields-wrapper">
+               <p>Average Income</p>
+               <Input placeholder="Type here.." />
+             </div>
+-            <div className="fields-wrapper">
++            <div className="case-studies__fields-wrapper">
+               <p>Status</p>
+               <Input placeholder="Type here.." />
+             </div>
+-            <div className="changes-btns admin-modals-btns">
+-              <Button className="save-btn" type="primary">Save</Button>
+-              <Button type="danger" className="cancel-btn"
++            <div className="case-studies__changes-btns admin-modals-btns">
++              <Button className="case-studies__save-btn" type="primary">Save</Button>
++              <Button type="danger" className="case-studies__cancel-btn"
+                       onClick={deleteClick}
+               >
+                 Delete
+Index: src/components/Admin/ListOfResearchers/listOfResearchers.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.ant-table-thead > tr > th {\r\n    background-color: #e6e6e6;\r\n    text-align: center;\r\n    font-weight: 700;\r\n}\r\n.ant-table-cell {\r\n    border-right: 2px solid #eaeaea;\r\n    text-align: center;\r\n}\r\n.ant-table-cell:first-child {\r\n    border-left: 2px solid #eaeaea;\r\n}\r\n.ant-table-tbody > tr > td {\r\n    border-bottom: 2px solid #eaeaea;\r\n}\r\n.ant-table-thead > tr > th,\r\n.ant-table-tbody > tr > td,\r\n.ant-table tfoot > tr > th,\r\n.ant-table tfoot > tr > td {\r\n    padding: 23px 16px;\r\n}\r\n.ant-table-tbody {\r\n    font-weight: 600;\r\n}\r\n.researchers-profile-btn {\r\n    margin-bottom: 25px;\r\n}\r\n.researchers-profile-btn-wrapper {\r\n    text-align: left;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/ListOfResearchers/listOfResearchers.css	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/ListOfResearchers/listOfResearchers.css	(date 1594323010774)
+@@ -22,9 +22,9 @@
+ .ant-table-tbody {
+     font-weight: 600;
+ }
+-.researchers-profile-btn {
++.researchers-list__btn {
+     margin-bottom: 25px;
+ }
+-.researchers-profile-btn-wrapper {
++.researchers-list__btn-wrapper {
+     text-align: left;
+ }
+Index: src/components/Main/Researcher/ResearcherProfile/researcherProfile.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React from \"react\";\r\nimport {Link } from \"react-router-dom\";\r\nimport { Input, Button} from \"antd\";\r\nimport \"./researcherProfile.scss\";\r\n\r\nconst ResearcherProfile = () => {\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <div className=\"btns-wrapper\">\r\n          <Link to={'/researcher-profile'}>\r\n            <Button className=\"profile-btn active researcher-profile-btn\">Profile</Button>\r\n          </Link>\r\n          <Link to={'/researcher-studies'}>\r\n            <Button className=\"research-btn\">Research Studies</Button>\r\n          </Link>\r\n        </div>\r\n        <div className=\"personal-fields-wrapper\">\r\n          <div className=\"personal-heading\">Profile Information</div>\r\n            <div className=\"fields-wrapper\">\r\n              <p>Name</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n            <div className=\"fields-wrapper\">\r\n              <p>School/Institution Name</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n            <div className=\"fields-wrapper\">\r\n              <p>Area of Research</p>\r\n              <Input placeholder=\"Type here..\" />\r\n            </div>\r\n          <div className=\"changes-btns\">\r\n            <Button className=\"save-btn\" type=\"primary\">Save changes</Button>\r\n            <Button className=\"cancel-btn\">Cancel</Button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default ResearcherProfile\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Main/Researcher/ResearcherProfile/researcherProfile.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Main/Researcher/ResearcherProfile/researcherProfile.js	(date 1594321403317)
+@@ -6,34 +6,32 @@
+ 
+ const ResearcherProfile = () => {
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        <div className="btns-wrapper">
+-          <Link to={'/researcher-profile'}>
+-            <Button className="profile-btn active researcher-profile-btn">Profile</Button>
+-          </Link>
+-          <Link to={'/researcher-studies'}>
+-            <Button className="research-btn">Research Studies</Button>
+-          </Link>
+-        </div>
+-        <div className="personal-fields-wrapper">
+-          <div className="personal-heading">Profile Information</div>
+-            <div className="fields-wrapper">
+-              <p>Name</p>
+-              <Input placeholder="Type here.." />
+-            </div>
+-            <div className="fields-wrapper">
+-              <p>School/Institution Name</p>
+-              <Input placeholder="Type here.." />
+-            </div>
+-            <div className="fields-wrapper">
+-              <p>Area of Research</p>
+-              <Input placeholder="Type here.." />
+-            </div>
+-          <div className="changes-btns">
+-            <Button className="save-btn" type="primary">Save changes</Button>
+-            <Button className="cancel-btn">Cancel</Button>
+-          </div>
++    <div className="main-page-wrapper">
++      <div className="btns-wrapper">
++        <Link to={'/researcher-profile'}>
++          <Button className="profile-btn active researcher-profile-btn">Profile</Button>
++        </Link>
++        <Link to={'/researcher-studies'}>
++          <Button className="research-btn">Research Studies</Button>
++        </Link>
++      </div>
++      <div className="personal-fields-wrapper">
++        <div className="personal-heading">Profile Information</div>
++          <div className="fields-wrapper">
++            <p>Name</p>
++            <Input placeholder="Type here.." />
++          </div>
++          <div className="fields-wrapper">
++            <p>School/Institution Name</p>
++            <Input placeholder="Type here.." />
++          </div>
++          <div className="fields-wrapper">
++            <p>Area of Research</p>
++            <Input placeholder="Type here.." />
++          </div>
++        <div className="changes-btns">
++          <Button className="save-btn" type="primary">Save changes</Button>
++          <Button className="cancel-btn">Cancel</Button>
+         </div>
+       </div>
+     </div>
+Index: src/components/Admin/AdminLoginForm/adminLoginPage.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* eslint-disable */\r\nimport React from \"react\";\r\nimport \"antd/dist/antd.css\";\r\nimport \"./adminLoginPage.css\";\r\nimport { Link } from \"react-router-dom\";\r\nimport { Form, Input, Button } from \"antd\";\r\n\r\nconst layout = {\r\n  labelCol: {\r\n    span: 8,\r\n  },\r\n  wrapperCol: {\r\n    span: 16,\r\n  },\r\n};\r\nconst tailLayout = {\r\n  wrapperCol: {\r\n    offset: 8,\r\n    span: 16,\r\n  },\r\n};\r\nconst AdminLoginForm = () => {\r\n  const onFinish = (values) => {\r\n    console.log(\"Success:\", values);\r\n  };\r\n\r\n  const onFinishFailed = (errorInfo) => {\r\n    console.log(\"Failed:\", errorInfo);\r\n  };\r\n\r\n  return (\r\n    <div className=\"container\">\r\n      <div className=\"main-page-wrapper\">\r\n        <h2 className=\"login-of-admin\">\r\n          Login Page\r\n        </h2>\r\n        <div className=\"form-wrapper\">\r\n          <Form\r\n            {...layout}\r\n            name=\"basic\"\r\n            initialValues={{\r\n              remember: true,\r\n            }}\r\n            onFinish={onFinish}\r\n            onFinishFailed={onFinishFailed}\r\n          >\r\n            <Form.Item\r\n              label=\"Email Address\"\r\n              name=\"email\"\r\n              rules={[\r\n                {\r\n                  required: true,\r\n                  message: \"Please input your email address!\",\r\n                },\r\n              ]}\r\n            >\r\n              <Input />\r\n            </Form.Item>\r\n            <Form.Item\r\n              label=\"Password\"\r\n              name=\"password\"\r\n              rules={[\r\n                {\r\n                  required: true,\r\n                  message: \"Please input your password!\",\r\n                },\r\n              ]}\r\n            >\r\n              <Input.Password />\r\n            </Form.Item>\r\n            <Form.Item {...tailLayout}>\r\n              <Link to={\"/admin-portal\"}>\r\n                <Button type=\"primary\" htmlType=\"submit\">\r\n                  Login\r\n                </Button>\r\n              </Link>\r\n            </Form.Item>\r\n          </Form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n};\r\nexport default AdminLoginForm;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Admin/AdminLoginForm/adminLoginPage.js	(revision 4d31232818124895e2de3a79ed94e8d7bc1b193b)
++++ src/components/Admin/AdminLoginForm/adminLoginPage.js	(date 1594321933404)
+@@ -1,9 +1,11 @@
+ /* eslint-disable */
+-import React from "react";
++import React, { useState } from 'react'
+ import "antd/dist/antd.css";
+ import "./adminLoginPage.css";
+ import { Link } from "react-router-dom";
+ import { Form, Input, Button } from "antd";
++import { LockOutlined, UserOutlined } from '@ant-design/icons'
++import validate from "validate.js";
+ 
+ const layout = {
+   labelCol: {
+@@ -11,66 +13,60 @@
+   },
+   wrapperCol: {
+     span: 16,
+-  },
+-};
+-const tailLayout = {
+-  wrapperCol: {
+-    offset: 8,
+-    span: 16,
+   },
+ };
+ const AdminLoginForm = () => {
+-  const onFinish = (values) => {
+-    console.log("Success:", values);
++  const [errorsInfo, setErrorsInfo] = useState(0);
++  const validate = event => {
++    const { constraints } = this.props;
++    const { value } = event.target;
++    if (!constraints) return null;
++    setErrorsInfo
++    this.setState({ errorsInfo: validate.single(value, constraints) });
+   };
+-
+-  const onFinishFailed = (errorInfo) => {
+-    console.log("Failed:", errorInfo);
+-  };
+-
++  const { input, label, constraints, type, ...field } = this.props;
++  const { errors } = this.state;
+   return (
+-    <div className="container">
+-      <div className="main-page-wrapper">
+-        <h2 className="login-of-admin">
+-          Login Page
+-        </h2>
++    <div className="main-page-wrapper">
++      <div>
+         <div className="form-wrapper">
++          <div className="participant-heading">
++            V-RAP: Admin
++          </div>
+           <Form
+-            {...layout}
+-            name="basic"
+-            initialValues={{
+-              remember: true,
+-            }}
+-            onFinish={onFinish}
+-            onFinishFailed={onFinishFailed}
++            name="normal_login"
++            className="login-form"
++            initialValues={{ remember: true }}
+           >
+             <Form.Item
+-              label="Email Address"
+-              name="email"
+-              rules={[
+-                {
+-                  required: true,
+-                  message: "Please input your email address!",
+-                },
+-              ]}
++              required={constraints && constraints.presence}
++              help={renderErrors()}
++              validateStatus={errors ? "error" : null}
++              name="username"
++              rules={[{ required: true, message: 'Please input your Username!' }]}
+             >
+-              <Input />
++              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
+             </Form.Item>
+             <Form.Item
+-              label="Password"
+               name="password"
+-              rules={[
+-                {
+-                  required: true,
+-                  message: "Please input your password!",
+-                },
+-              ]}
++              rules={[{ required: true, message: 'Please input your Password!' }]}
+             >
+-              <Input.Password />
++              <Input
++                prefix={<LockOutlined className="site-form-item-icon" />}
++                type="password"
++                placeholder="Password"
++              />
+             </Form.Item>
+-            <Form.Item {...tailLayout}>
+-              <Link to={"/admin-portal"}>
+-                <Button type="primary" htmlType="submit">
++            <Form.Item>
++              {input({
++                type,
++                ...field,
++                ...validationProps
++              })}
++            </Form.Item>
++            <Form.Item>
++              <Link to={'/admin-portal'}>
++                <Button type="primary" htmlType="submit" className="login-form-button">
+                   Login
+                 </Button>
+               </Link>

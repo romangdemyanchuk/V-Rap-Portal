@@ -41,16 +41,16 @@ const ParticipantProfile = () => {
           <div className="personal-info-wrapper">
             <div className="personal-heading">Profile Information</div>
             <div className="profile-fields">
-              <div className="fields-wrapper">
+              <div className="participant-profile__fields-wrapper">
                 <p>Name</p>
                 <Input placeholder="Name" />
               </div>
-              <div className="fields-wrapper">
+              <div className="participant-profile__fields-wrapper">
                 <p>Age</p>
                 <InputNumber min={1} max={100} defaultValue={25} onChange={onChange}
                   className="input-number"/>
               </div>
-              <div className="fields-wrapper">
+              <div className="participant-profile__fields-wrapper">
                 <p className="before-dropdown">Location</p>
                 <div id="components-dropdown-demo-dropdown-button">
                   <Dropdown overlay={menu}>
@@ -60,11 +60,11 @@ const ParticipantProfile = () => {
                   </Dropdown>
                 </div>
               </div>
-             <div className="fields-wrapper">
+             <div className="participant-profile__fields-wrapper">
                <p>Average Income(USD)</p>
                <Input placeholder="Average Income" />
              </div>
-              <div className="fields-wrapper">
+              <div className="participant-profile__fields-wrapper">
                 <p className="before-dropdown">Main VR Headset</p>
                 <div id="components-dropdown-demo-dropdown-button">
                   <Dropdown overlay={menu}>
@@ -75,12 +75,12 @@ const ParticipantProfile = () => {
                 </div>
               </div>
             </div>
-            <div className="changes-btns">
-              <Button className="save-btn"
+            <div className="participant-profile__changes-btns">
+              <Button className="participant-profile__save-btn"
                 type="primary">
                 Save changes
               </Button>
-              <Button className="cancel-btn">Cancel</Button>
+              <Button className="participant-profile__cancel-btn">Cancel</Button>
             </div>
           </div>
         </div>

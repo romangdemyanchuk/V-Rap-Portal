@@ -1,17 +1,15 @@
 /* eslint-disable */
 import React from "react";
 import {Link} from "react-router-dom";
-import "./mainPage.scss";
+import "./adminPage.scss";
 import { Button } from 'antd'
-
-const MainPage = () => {
-  
-  return <div className="root-admin-page">
-            <div className="admin-text">
-              <div className="admin-heading">
+const AdminPage = () => {
+  return <div className="admin-page">
+            <div className="admin-page__text">
+              <div className="admin-page__text-heading">
                 Admin Panel
               </div>
-              <div className="user-name">
+              <div className="admin-page__user-name">
                 User: First Name Last Name
               </div>
             </div>
@@ -39,4 +37,4 @@ const MainPage = () => {
             </div>
       </div>
 }
-export default MainPage
+export default AdminPage

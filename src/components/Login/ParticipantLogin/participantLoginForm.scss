@@ -19,17 +19,29 @@ h2 {
         cursor: pointer;
     }
 }
-.save-btn,
-.cancel-btn,
+.case-studies__save-btn,
+.case-studies__cancel-btn,
+.research-create__save-btn,
+.research-create__cancel-btn,
+.participant-profile__save-btn,
+.participant-profile__cancel-btn,
+.ResearcherProfile__save-btn,
+.ResearcherProfile__cancel-btn,
 .file-upload-btn,
 .choose-btn {
     border: 1px solid darkgray;
     font-size: 14px;
 }
+.ResearcherProfile__cancel-btn {
+    margin-left: 10px;
+}
 .ant-form-item-control-input-content {
     flex-wrap: wrap;
     flex: unset;
     width: 250px;
+}
+.participant-profile__cancel-btn {
+    margin-left: 10px;
 }
 .login-form .ant-btn-primary {
     width: 100%;

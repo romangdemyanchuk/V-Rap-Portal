@@ -5,9 +5,11 @@ import "./listOfResearchers.css";
 import { Button, Table } from 'antd'
 import {useSelector } from 'react-redux'
 import ResearcherChanges from './ResearcherChanges'
+import ResearcherCreate from './ResearcherCreate'
 
 const ListOfResearchers = () => {
-  const [modalOpen, setmodalOpen] = useState(false);
+  const [modalOfChangesOpen, setmodalOfChangesOpen] = useState(false);
+  const [modalOfCreateOpen, setmodalOfCreateOpen] = useState(false);
 
   const researchersList = useSelector(state => state.researchersList)
   const researcherListColumns = useSelector(state => state.researcherListColumns)
@@ -16,11 +18,14 @@ const ListOfResearchers = () => {
 
   return <div className="container">
       <div className="main-page-wrapper">
-        <ResearcherChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
+        <ResearcherChanges modalOpen={modalOfChangesOpen} setmodalOpen={setmodalOfChangesOpen}/>
+        <ResearcherCreate modalOpen={modalOfCreateOpen} setmodalOpen={setmodalOfCreateOpen}/>
         <div className="researchers-profile-btn-wrapper">
-          <Button type="button" className="researchers-profile-btn">Create Researcher Profile</Button>
+          <Button type="button" className="researchers-profile-btn"
+                  onClick={() => setmodalOfCreateOpen(true)}
+          >Create Researcher Profile</Button>
         </div>
-        <div onClick={() => setmodalOpen(true)}>
+        <div onClick={() => setmodalOfChangesOpen(true)}>
           <Table columns={researcherListColumns} dataSource={researchersList}/>
         </div>
       </div>
