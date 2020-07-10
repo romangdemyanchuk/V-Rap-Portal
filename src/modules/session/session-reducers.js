@@ -1,11 +1,6 @@
 /* eslint-disable */
 import React from 'react'
-import ResearcherChanges from '../../components/Admin/MainPage/ListOfResearchers/ResearcherChanges/researcherChanges'
-const openTable = () => {
-  console.log('text');
-  return true;
-  // <ResearcherChanges modalIsOpen={true}/>
-}
+
 const initialState = {
   caseStudies: [
     {
@@ -119,22 +114,12 @@ const initialState = {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
-      // render: (text, record) =>
-      //   (
-          // <ResearcherChanges modalIsOpen={true}/>
-          // <Popconfirm title="Sure to delete?">
-          //   <a>Delete</a>
-          // </Popconfirm>
-        // )
+      
       render: (text) => (
-        <div
-          onClick={() => openTable}
-        >
           <a>{text}</a>
-        </div>
-      ),
-      // render: (text) => <a>{text}</a>,
-    },
+        
+      )
+    }
   ],
   caseStudiesColumns: [
     {
@@ -212,7 +197,5 @@ const MainReducer = (state = initialState, action) => {
     return state;
   }
 };
-export {
-   openTable
-}
+
 export default MainReducer

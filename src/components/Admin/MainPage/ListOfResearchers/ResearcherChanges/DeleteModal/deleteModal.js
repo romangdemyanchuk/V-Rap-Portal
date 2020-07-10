@@ -35,9 +35,7 @@ const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen }) => {
         className="deleteModal"
       >
        <div className="delete-btns">
-         <Link to={'/all-studies-list'}>
           <Button>Cancel</Button>
-         </Link>
          <Button type="primary">Ok</Button>
        </div>
       </Modal>
