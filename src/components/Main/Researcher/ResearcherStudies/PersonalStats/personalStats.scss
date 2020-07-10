@@ -1,4 +1,4 @@
-.personal-wrapper,
+.personal-stats__wrapper,
 .personal-info-container {
     display: flex;
     align-items: center;
@@ -11,15 +11,15 @@
 .personal-stats-area {
     resize: none;
 }
-.personal-blocks-wrapper {
+.personal-stats__blocks-wrapper {
     display: flex;
     margin-top: 40px;
-    .personal-left-block,
-    .personal-right-block {
+    .personal-stats__left-block,
+    .personal-stats__right-block {
         width: 250px;
         text-align: left;
     }
-    .personal-right-block {
+    .personal-stats__right-block {
         margin-top: 15px;
         margin-left: 70px;
     }
@@ -31,10 +31,10 @@
     justify-content: space-between;
     width: 100%;
 }
-.research-footer-btns {
+.personal-stats__footer-btns {
     margin: 20px 0;
     text-align: left;
-    .create-research-btn {
+    .personal-stats__create-research-btn {
         margin-right: 15px;
     }
 }

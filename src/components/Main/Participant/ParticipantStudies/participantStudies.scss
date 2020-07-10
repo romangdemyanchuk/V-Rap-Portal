@@ -1,36 +1,45 @@
-.study-wrapper {
+.participant-studies__wrapper,
+.researcher-studies__study-wrapper
+ {
     border: 1px solid;
     padding: 15px 10px;
     border-radius: 15px;
     margin-bottom: 8px;
-    .study-info-wrapper {
+    .participant-studies__info-wrapper,
+    .researcher-studies__info-wrapper{
         display: flex;
-        .study-info-img {
+        .participant-studies__img,
+        .researcher-studies__study-info-img{
             width: 150px;
             img {
                 width: 150px;
             }
         }
-        .study {
+        .participant-studies__study,
+        .study{
             text-align: left;
             width: 100%;
             margin-left: 25px;
             color: #000;
-            .study-require {
-                font-weight: 700;
-                margin-bottom: -5px;
-            }
-            .study-info {
-                width: 65%;
-                margin-bottom: 8px;
-                line-height: 17px;
-            }
-            .study-heading {
-                font-size: 23px;
-                font-weight: 600;
-            }
+
         }
     }
+}
+.participant-studies__require,
+.researcher-studies__require{
+    font-weight: 700;
+    margin-bottom: -5px;
+}
+.participant-studies__info,
+.researcher-studies__info{
+    width: 65%;
+    margin-bottom: 8px;
+    line-height: 17px;
+}
+.participant-studies__heading,
+.researcher-studies__heading{
+    font-size: 23px;
+    font-weight: 600;
 }
 .study-btns {
     display: flex;
@@ -45,7 +54,9 @@
     border-bottom: 1px solid;
 }
 .study-profile-btn,
-.study-research-btn {
+.study-research-btn,
+.participant-register__research-btn,
+.researcher-studies__btn{
     border: 1px solid;
     padding: 6px;
 }
@@ -56,21 +67,15 @@
     font-weight: 600;
     display: block;
 }
-.load-btns {
+.participant-studies__load-btns {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     button {
         border-radius: 5px;
     }
-    .upload-btn {
+    .participant-studies__upload-btn {
         margin-left: 10px;
     }
-}
-.personal-heading {
-    font-size: 20px;
-    font-weight: 600;
-    text-align: left;
-    margin: 15px 0;
 }
 

@@ -13,14 +13,10 @@ const ListOfResearchers = () => {
 
   const researchersList = useSelector(state => state.researchersList)
   const researcherListColumns = useSelector(state => state.researcherListColumns)
-
-  console.log(researchersList, 'researchersList')
-
-  return <div className="container">
-      <div className="main-page-wrapper">
+  return <div className="researchers-list">
         <ResearcherChanges modalOpen={modalOfChangesOpen} setmodalOpen={setmodalOfChangesOpen}/>
         <ResearcherCreate modalOpen={modalOfCreateOpen} setmodalOpen={setmodalOfCreateOpen}/>
-        <div className="researchers-profile-btn-wrapper">
+        <div className="researchers-list__btn-wrapper">
           <Button type="button" className="researchers-profile-btn"
                   onClick={() => setmodalOfCreateOpen(true)}
           >Create Researcher Profile</Button>
@@ -29,7 +25,7 @@ const ListOfResearchers = () => {
           <Table columns={researcherListColumns} dataSource={researchersList}/>
         </div>
       </div>
-    </div>
+
 }
 
 export default ListOfResearchers;

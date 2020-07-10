@@ -22,8 +22,10 @@
 .ant-table-tbody {
     font-weight: 600;
 }
-.researchers-profile-btn {
-    margin-bottom: 25px;
+.researchers-profile-btn,
+.participant-login__-btn,
+.researcher-studies__profile-btn{
+    /*margin-bottom: 25px;*/
 }
 .researchers-profile-btn-wrapper {
     text-align: left;

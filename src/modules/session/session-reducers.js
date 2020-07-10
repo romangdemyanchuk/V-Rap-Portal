@@ -184,6 +184,12 @@ const initialState = {
       dataIndex: "actions",
       render: (text) => <a>{text}</a>,
     },
+  ],
+  adminsLoginInfo:[
+    {
+      email:'',
+      password:''
+    }
   ]
 }
 const MainReducer = (state = initialState, action) => {
@@ -207,6 +213,11 @@ const MainReducer = (state = initialState, action) => {
     return {
       ...state,
       caseStudiesColumns: action.payload
+    };
+  case 'LIST_OF_ADMINS_LOGINS_INFO':
+    return {
+      ...state,
+      adminsLoginInfo: action.payload
     };
   default:
     return state;

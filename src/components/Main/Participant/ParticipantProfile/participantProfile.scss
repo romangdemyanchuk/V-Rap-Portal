@@ -1,4 +1,8 @@
-.btns-wrapper {
+.participant-profile__btns-wrapper,
+.participant-studies__btns-wrapper,
+.researcher-profile__btns-wrapper,
+.researcher-studies__btns-wrapper,
+.personal-stats__tns-wrapper{
     display: flex;
     border-bottom: 1px solid;
     button {
@@ -6,8 +10,8 @@
         border-top-right-radius: 10px;
         border-bottom: none;
     }
-    .profile-btn,
-    .research-btn {
+    .participant-profile__btn,
+    .participant__btn {
         border: 1px solid darkgray;
         width: 130px;
         font-size: 12px;
@@ -16,42 +20,52 @@
 //.file-block {
 //    text-align: left;
 //}
-.personal-info-block,
+.participant-profile__personal-info-block,
 .case-studies__changes-btns,
 .research-create__changes-btns,
 .participant-profile__changes-btns,
-.upload-btns {
+.researcher-profile__changes-btns,
+.personal-stats__upload-btns {
     display: flex;
-    .personal-info-wrapper {
+    .participant-profile__wrapper {
         width: 250px;
-        .personal-heading {
-            font-size: 20px;
-            font-weight: 600;
-            text-align: left;
-            margin: 15px 0;
-            .profile-fields {
-                .ant-btn {
-                    border: none;
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
+        .participant-profile__fields {
+            .ant-btn {
+                border: none;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
 
-                .input-number {
-                    width: 100%;
-                }
+            .input-number {
+                width: 100%;
             }
         }
+
     }
+}
+.participant-profile__personal-heading,
+.participant-studies__personal-heading,
+.researcher-profile__personal-heading,
+.researcher-studies__personal-heading,
+.personal-stats__personal-heading {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    margin: 15px 0;
+}
+.researcher-login__heading {
+    text-align: center;
 }
 .case-studies__fields-wrapper,
 .research-changes__fields-wrapper,
 .research-create__fields-wrapper,
 .participant-profile__fields-wrapper,
 .create-research__fields-wrapper,
+.personal-stats__fields-wrapper,
 .changes-modal__fields-wrapper,
-.ResearcherProfile__fields-wrapper{
+.researcher-profile__fields-wrapper{
     margin: 8px 0 15px 0;
     text-align: left;
     p {
@@ -60,6 +74,7 @@
         margin: 0;
     }
     #components-dropdown-demo-dropdown-button {
+        border: 1px solid #d9d9d9;
         .ant-dropdown-button {
             margin: 0 8px 8px 0;
         }
@@ -77,7 +92,8 @@
 //}
 
 
-.personal-info-img {
+.personal-stats__info-img,
+.researcher-studies__study-info-img{
     width: 200px;
     img {
         width: 200px;

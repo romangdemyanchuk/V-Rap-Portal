@@ -33,7 +33,7 @@ const FileUpload = ({modalOpen, setmodalOpen}) => {
     },
   };
   return (
-    <div>
+    <div className="root-FileUpload">
       <AboutStudies successModalIsOpen={successModalIsOpen} setsuccessModalIsOpen={setsuccessModalIsOpen}/>
       <Modal
         title="Upload results for Research Study 1"
@@ -41,11 +41,11 @@ const FileUpload = ({modalOpen, setmodalOpen}) => {
         onOk={closeModal}
         onCancel={closeModal}
       >
-        <div className="modal-subtitle">
+        <div className="file-upload__modal-subtitle">
           Upload the exported files from the simulation that are located on your
           desktop to receive your gift card
         </div>
-        <div className="modal-upload-btn-wrapper">
+        <div className="file-upload__btn-wrapper">
           <Button type="primary" className="upload-btn modal-upload-btn"
                   onClick={uploadClick}>Upload</Button>
         </div>

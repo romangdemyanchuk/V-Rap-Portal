@@ -1,6 +1,10 @@
 .ant-form-item-explain {
     text-align: left;
 }
+.ant-form-item-explain > div {
+    width: 300px;
+    margin: 8px 0;
+}
 
 .login-text-title {
     font-size: 25px;
@@ -8,7 +12,3 @@
     padding-bottom: 20px;
 }
 
-.participant-heading{
-    display: flex;
-    justify-content: center;
-}

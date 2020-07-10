@@ -33,7 +33,6 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
       }
     },
   };
-// <<<<<<< HEAD
   return (
     <div>
       <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
@@ -43,7 +42,7 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
         onOk={closeModal}
         onCancel={closeModal}
       >
-        <div className="research-changes-wrapper">
+        <div className="research-changes">
           <div className="changes-modal__fields-wrapper">
             <p>Name</p>
             <Input placeholder="Type here.." />
@@ -68,40 +67,5 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
       </Modal>
     </div>
   );
-// =======
-  return <>
-        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
-        <Modal
-          title="Admins Changes"
-          visible={modalOpen}
-          onOk={closeModal}
-          onCancel={closeModal}
-        >
-          <div className="research-changes-wrapper">
-            <div>
-              <div className="fields-wrapper">
-                <p>Name</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>School/Institution Name</p>
-                <Input placeholder="Type here.." />
-              </div>
-              <div className="fields-wrapper">
-                <p>Area of Research</p>
-                <Input placeholder="Type here.." />
-              </div>
-            </div>
-            <div className="changes-btns research-modal-btns">
-              <Button className="save-btn" type="primary">Save</Button>
-              <Button type="danger" className="cancel-btn"
-                onClick={deleteClick}
-              >
-                Delete
-              </Button>
-            </div>
-          </div>
-    </Modal>
-    </>
 };
 export default ResearcherChanges;

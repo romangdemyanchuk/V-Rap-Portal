@@ -17,15 +17,14 @@ const ListOfCaseStudies = () => {
       caseStudiesColumns: state.caseStudiesColumns
     }
   })
+
   return (
-    <div className="container">
-      <div className="main-page-wrapper">
-        <AdminsChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
-        <div className="case-studies-heading">Case Studies - All</div>
-        <div className="case-studies-wrapper">
-          <div onClick={() => setmodalOpen(true)}>
-            <Table columns={caseStudiesColumns.caseStudiesColumns} dataSource={caseStudies.caseStudies}/>
-          </div>
+    <div className="case-studies">
+      <AdminsChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
+      <div className="case-studies__heading">Case Studies - All</div>
+      <div className="case-studies__wrapper">
+        <div onClick={() => setmodalOpen(true)}>
+          <Table columns={caseStudiesColumns.caseStudiesColumns} dataSource={caseStudies.caseStudies}/>
         </div>
       </div>
     </div>

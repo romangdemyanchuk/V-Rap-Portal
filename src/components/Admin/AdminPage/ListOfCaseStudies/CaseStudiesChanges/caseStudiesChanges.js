@@ -40,30 +40,30 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
           onOk={closeModal}
           onCancel={closeModal}
         >
-          <div className="case-studies-changes-wrapper">
-            <div className="fields-wrapper">
+          <div className="case-studies-changes">
+            <div className="case-studies__fields-wrapper">
               <p>Title</p>
               <Input placeholder="Type here.." />
             </div>
-            <div className="fields-wrapper">
+            <div className="case-studies__fields-wrapper">
               <p>Location</p>
               <Input placeholder="Type here.." />
             </div>
-            <div className="fields-wrapper">
+            <div className="case-studies__fields-wrapper">
               <p>Age</p>
               <Input placeholder="Type here.." />
             </div>
-            <div className="fields-wrapper">
+            <div className="case-studies__fields-wrapper">
               <p>Average Income</p>
               <Input placeholder="Type here.." />
             </div>
-            <div className="fields-wrapper">
+            <div className="case-studies__fields-wrapper">
               <p>Status</p>
               <Input placeholder="Type here.." />
             </div>
-            <div className="changes-btns admin-modals-btns">
+            <div className="case-studies__changes-btns admin-modals-btns">
               <Button className="save-btn" type="primary">Save</Button>
-              <Button type="danger" className="cancel-btn"
+              <Button type="danger" className="case-studies__cancel-btn"
                       onClick={deleteClick}
               >
                 Delete

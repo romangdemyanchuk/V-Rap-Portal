@@ -1,9 +1,15 @@
-.participant-heading {
+.root-Admin__heading,
+.participant-heading,
+.researcher-login__heading,
+.participant-login__heading{
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }
-.login-btns {
+.participant-login__btns,
+.participant-register__login-btns{
     display: flex;
     justify-content: center;
     button {
@@ -14,7 +20,7 @@
 h2 {
     margin: 8px 0;
 }
-.research-btn {
+.participant__btn {
     &:hover {
         cursor: pointer;
     }
@@ -25,20 +31,23 @@ h2 {
 .research-create__cancel-btn,
 .participant-profile__save-btn,
 .participant-profile__cancel-btn,
-.ResearcherProfile__save-btn,
-.ResearcherProfile__cancel-btn,
+.researcher-profile__save-btn,
+.researcher-profile__cancel-btn,
 .file-upload-btn,
 .choose-btn {
     border: 1px solid darkgray;
     font-size: 14px;
 }
-.ResearcherProfile__cancel-btn {
+.researcher-profile__cancel-btn {
     margin-left: 10px;
 }
 .ant-form-item-control-input-content {
     flex-wrap: wrap;
     flex: unset;
     width: 250px;
+}
+.ant-form-item-control-input {
+    margin: 0 auto;
 }
 .participant-profile__cancel-btn {
     margin-left: 10px;

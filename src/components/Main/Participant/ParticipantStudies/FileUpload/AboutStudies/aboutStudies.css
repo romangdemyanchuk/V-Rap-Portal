@@ -1,3 +1,7 @@
 .ant-modal-body {
-    /*text-align: center;*/
+    text-align: center;
+}
+.info-about-upload {
+    font-size: 16px;
+    margin: 10px 0;
 }

@@ -7,7 +7,7 @@
 .launch-btn {
     margin-left: auto;
 }
-.research-header-wrapper {
+.researcher-profile__header-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -15,7 +15,7 @@
 .research-study-btns {
     display: flex;
     justify-content: flex-end;
-    margin-top: -35px;
+    margin-top: -50px;
 }
 .ant-btn-danger {
     margin: 0 5px;
