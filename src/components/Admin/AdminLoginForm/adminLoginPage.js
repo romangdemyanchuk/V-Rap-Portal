@@ -1,8 +1,6 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./adminLoginPage.css";
-import { Link } from "react-router-dom";
-import { Field } from 'rc-field-form';
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from 'react-redux'
@@ -10,45 +8,46 @@ import { AdminLogin } from '../../../modules/session/session-actions'
 
 const AdminLoginForm = () => {
   const dispatch = useDispatch()
-  useSelector( state => { state.adminLogin
-    dispatch((AdminLogin(adminLogin)))
-  })
+
+  const testData = useSelector(state => state.adminLoginData)
+
+  useEffect(() => {
+
+    console.log(testData, "testData")
+  }, [testData])
+
 
   const [loginText, setloginText] = useState("");
   const [passwordText, setpasswordText] = useState("");
   const [isEmailFieldValid, setIsEmailFieldValid] = useState(true);
   const [isPasswordFieldValid, setIsPasswordFieldValid] = useState(true);
+
   const emailIsValid = (e) => {
     if (e && e.target) setloginText(e.target.value);
     return setIsEmailFieldValid(
-      /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
-        e.target.value
-      )
-    );
-  };
+      /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
+    )
+  }
+
   const passwordIsValid = (e) => {
     if (e && e.target) setpasswordText(e.target.value);
     return setIsPasswordFieldValid(
-      /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/.test(
-      e.target.value
-      )
-    );
-  };
+      /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/
+    )
+  }
+
   const LoginFieldsIsValid = () => {
     emailIsValid(loginText);
     passwordIsValid(passwordText);
   };
-  const caseStudiesColumns = useSelector((state) => {
-    return {
-      caseStudiesColumns: state.caseStudiesColumns
-    }
-  })
+  const caseStudiesColumns = useSelector(state => state.caseStudiesColumns)
   return (
     <div className="root-Admin">
       <div className="root-Admin__wrapper">
         <div className="root-Admin__heading">V-RAP: Administration</div>
         <Form
           onFinish={values => {
+            dispatch(AdminLogin(values))
             console.log('Finish:', values);
           }}
           name="normal_login"
@@ -58,7 +57,7 @@ const AdminLoginForm = () => {
           <div className="root-Admin__item-wrapper">
             <Form.Item
               name="username"
-              // rules={[{ required: true, message: "Please input valid E-mail" }]}
+            // rules={[{ required: true, message: "Please input valid E-mail" }]}
 
             >
               <Input
@@ -74,13 +73,13 @@ const AdminLoginForm = () => {
           <div className="root-Admin__item-wrapper">
             <Form.Item
               name="password"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message:
-              //       "Your password must have >6 symbols, special character,lowercase letter and uppercase letter ",
-              //   },
-              // ]}
+            // rules={[
+            //   {
+            //     required: true,
+            //     message:
+            //       "Your password must have >6 symbols, special character,lowercase letter and uppercase letter ",
+            //   },
+            // ]}
             >
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -91,19 +90,19 @@ const AdminLoginForm = () => {
                 value={passwordText}
               />
             </Form.Item>
-            {!isPasswordFieldValid && <div className="invalid-password">Invalid Password<br/>
-            Your password must have > 6 symbols, special character,lowercase letter and uppercase letter</div>}
+            {!isPasswordFieldValid && <div className="invalid-password">
+              Enter at least 6 symbols. Message will be rewritten</div>}
           </div>
 
           <Form.Item>
             {/*<Link to={"/admin-portal"}>*/}
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-                onClick={LoginFieldsIsValid}
-              >
-                Login
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              onClick={LoginFieldsIsValid}
+            >
+              Login
               </Button>
             {/*</Link>*/}
           </Form.Item>

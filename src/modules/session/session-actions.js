@@ -1,3 +1,4 @@
+import { ADMIN_LOGIN } from './session-constants'
 
 export const listOfCaseStudies = data => ({ type: 'LIST_OF_CASE_STUDIES', payload: data })
 
@@ -9,4 +10,4 @@ export const researcherListColumns = data => ({ type: 'LIST_OF_RESEARCHERS_COLUM
 
 export const listOfAdminsLoginInfo = data => ({ type: 'LIST_OF_ADMINS_LOGINS_INFO', payload: data })
 
-export const AdminLoginAC = data => ({ type: 'ADMIN_LOGIN', payload: data })
+export const AdminLogin = data => ({ type: ADMIN_LOGIN, payload: data })

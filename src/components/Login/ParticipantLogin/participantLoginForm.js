@@ -35,7 +35,7 @@ const ParticipantLoginForm = () => {
   const LoginFieldsIsValid = () => {
     console.log('isEmailFieldValid', isEmailFieldValid)
     console.log('isPasswordFieldValid', isPasswordFieldValid)
-    if(isEmailFieldValid && isPasswordFieldValid) {
+    if (isEmailFieldValid && isPasswordFieldValid) {
       // <Link to={'/participant-profile'}/>
     }
   };
@@ -46,7 +46,7 @@ const ParticipantLoginForm = () => {
 
   return (
     <div className="root-Participant-login">
-      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
+      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm} />}
       {!isVisible
         &&
         <div className="participant-login__form-wrapper">
@@ -55,7 +55,7 @@ const ParticipantLoginForm = () => {
           </div>
           <div className="participant-login__btns">
             <Button className="participant-login__-btn"
-                    onClick={typeOfForm}
+              onClick={typeOfForm}
             >Register</Button>
             <Button className="participant__btn active"
             >Login</Button>
@@ -71,7 +71,7 @@ const ParticipantLoginForm = () => {
                 rules={[{ required: true, message: 'Please input your Username!' }]}
               >
                 <Input
-                  prefix={<UserOutlined className="site-form-item-icon"/>}
+                  prefix={<UserOutlined className="site-form-item-icon" />}
                   onChange={() => setIsEmailFieldValid(true)}
                   onBlur={emailIsValid}
                   value={loginText}
@@ -93,7 +93,7 @@ const ParticipantLoginForm = () => {
                   value={passwordText}
                 />
               </Form.Item>
-              {!isPasswordFieldValid && <div className="invalid-password">Invalid Password<br/>
+              {!isPasswordFieldValid && <div className="invalid-password">Invalid Password<br />
                 Your password must have > 6 symbols, special character,lowercase letter and uppercase letter</div>}
             </div>
             <Form.Item>
@@ -109,13 +109,13 @@ const ParticipantLoginForm = () => {
             <Form.Item>
               <Link to={'/participant-profile'}>
                 <Button type="primary" htmlType="submit" className="login-form-button"
-                        onClick={LoginFieldsIsValid}>
+                  onClick={LoginFieldsIsValid}>
                   Login
                 </Button>
               </Link>
               Or <a href=""
-                    onClick={typeOfForm}
-            >register now!</a>
+                onClick={typeOfForm}
+              >register now!</a>
             </Form.Item>
           </Form>
         </div>}

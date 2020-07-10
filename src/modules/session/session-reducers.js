@@ -1,5 +1,7 @@
 /* eslint-disable */
+import { ADMIN_LOGIN } from './session-constants'
 import React from 'react'
+
 const initialState = {
   caseStudies: [
     {
@@ -113,10 +115,10 @@ const initialState = {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
-      
+
       render: (text) => (
-          <a>{text}</a>
-        
+        <a>{text}</a>
+
       )
     }
   ],
@@ -169,42 +171,50 @@ const initialState = {
       render: (text) => <a>{text}</a>,
     },
   ],
-  adminsLoginInfo:[
+  adminsLoginInfo: [
     {
-      email:'',
-      password:''
+      email: '',
+      password: ''
     }
-  ]
+  ],
+  adminLoginData: []
 }
+
 const MainReducer = (state = initialState, action) => {
+
   switch (action.type) {
-  case 'LIST_OF_RESEARCHERS':
-    return {
-      ...state,
-      researchersList: action.payload
-    };
-  case 'LIST_OF_CASE_STUDIES':
-    return {
-      ...state,
-      caseStudies: action.payload
-    };
-  case 'LIST_OF_RESEARCHERS_COLUMNS':
-    return {
-      ...state,
-      researcherListColumns: action.payload
-    };
-  case 'LIST_OF_CASE_STUDIES_COLUMNS':
-    return {
-      ...state,
-      caseStudiesColumns: action.payload
-    };
-  case 'LIST_OF_ADMINS_LOGINS_INFO':
-    return {
-      ...state,
-      adminsLoginInfo: action.payload
-    };
-  default:
-    return state;
+    case 'LIST_OF_RESEARCHERS':
+      return {
+        ...state,
+        researchersList: action.payload
+      };
+    case 'LIST_OF_CASE_STUDIES':
+      return {
+        ...state,
+        caseStudies: action.payload
+      };
+    case 'LIST_OF_RESEARCHERS_COLUMNS':
+      return {
+        ...state,
+        researcherListColumns: action.payload
+      };
+    case 'LIST_OF_CASE_STUDIES_COLUMNS':
+      return {
+        ...state,
+        caseStudiesColumns: action.payload
+      };
+    case 'LIST_OF_ADMINS_LOGINS_INFO':
+      return {
+        ...state,
+        adminsLoginInfo: action.payload
+      };
+    case ADMIN_LOGIN:
+      return {
+        ...state,
+        adminLoginData: action.payload
+      }
+    default:
+      return state;
   }
 };
 
