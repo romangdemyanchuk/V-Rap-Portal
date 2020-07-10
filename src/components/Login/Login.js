@@ -9,7 +9,10 @@ const MainLogin = (props) => {
   const { registerForm } = props
   
     return <>
-      { registerForm
+      {registerForm
+        
+
+        
         ?
         <ParticipantRegisterForm />
         :

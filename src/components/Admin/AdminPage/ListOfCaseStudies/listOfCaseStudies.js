@@ -14,7 +14,7 @@ const ListOfCaseStudies = () => {
 
   return <div className="main-page-wrapper">
     <AdminsChanges modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
-    <div className="case-studies-heading">Case Studies - All</div>
+    <div className="case-studies-heading" style={{marginBottom: '20px', fontWeight: 'bold', fontSize: '20px'}}>Case Studies - All</div>
     <div className="case-studies-wrapper">
       <div onClick={() => setmodalOpen(true)}>
         <Table columns={caseStudiesColumns} dataSource={caseStudies}/>

@@ -5,6 +5,7 @@ import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from 'react-redux'
 import { AdminLogin } from '../../../modules/session/session-actions'
+import { Link } from "react-router-dom";
 
 const AdminLoginForm = () => {
   const dispatch = useDispatch()
@@ -73,13 +74,6 @@ const AdminLoginForm = () => {
           <div className="root-Admin__item-wrapper">
             <Form.Item
               name="password"
-            // rules={[
-            //   {
-            //     required: true,
-            //     message:
-            //       "Your password must have >6 symbols, special character,lowercase letter and uppercase letter ",
-            //   },
-            // ]}
             >
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -95,7 +89,7 @@ const AdminLoginForm = () => {
           </div>
 
           <Form.Item>
-            {/*<Link to={"/admin-portal"}>*/}
+            <Link to={"/admin-portal"}>
             <Button
               type="primary"
               htmlType="submit"
@@ -104,7 +98,7 @@ const AdminLoginForm = () => {
             >
               Login
               </Button>
-            {/*</Link>*/}
+            </Link>
           </Form.Item>
         </Form>
       </div>

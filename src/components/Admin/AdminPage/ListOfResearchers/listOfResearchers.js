@@ -17,7 +17,7 @@ const ListOfResearchers = () => {
         <ResearcherChanges modalOpen={modalOfChangesOpen} setmodalOpen={setmodalOfChangesOpen}/>
         <ResearcherCreate modalOpen={modalOfCreateOpen} setmodalOpen={setmodalOfCreateOpen}/>
         <div className="researchers-list__btn-wrapper">
-          <Button type="button" className="researchers-profile-btn"
+      <Button style={{marginBottom: '20px'}} type="button" className="researchers-profile-btn"
                   onClick={() => setmodalOfCreateOpen(true)}
           >Create Researcher Profile</Button>
         </div>

@@ -18,13 +18,15 @@ const Main = () => {
         {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
         {!isVisible
           &&
-          <div class>
+          <div>
             <div className="main-page-header">V-Rap</div>
-            <div className="main-page-btns">
+          <div className="main-page-btns">
+          <Link to={"/login-participant"}>
               <Button type="button" className="main-block-btn btn btn-light"
                       onClick={typeOfForm}>
                 I`m Participant
               </Button>
+              </Link>
               <Link to={"/researcher-login"}>
                 <Button type="button" className="main-block-btn btn btn-light">
                   I`m Researcher
