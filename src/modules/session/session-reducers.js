@@ -11,21 +11,23 @@ const initialState = {
   researcherListColumns,
   caseStudiesColumns,
   adminLoginData: [],
-  adminRegisterData: ''
+  adminRegisterData: '',
+  isAuth: localStorage.getItem('isAuth')
 }
 
 const MainReducer = (state = initialState, action) => {
-  debugger
   switch (action.type) {
     case LOGIN:
       return {
         ...state,
-        adminLoginData: action.payload
+        adminLoginData: action.payload,
+        isAuth: true
       }
     case REGISTER:
       return {
         ...state,
-        adminRegisterData: action.payload
+        adminRegisterData: action.payload,
+        isAuth: true,
       }
     default:
       return state;
@@ -41,23 +43,27 @@ export const RegisterAC = data => ({ type: REGISTER, payload: data })
 export const ApiRegisterRequest = data => dispatch => {
   RegisterApi(data)
     .then(response => {
-      dispatch(RegisterAC(response),
-        console.log(response, 'response'))
+      if (response) {
+        // localStorage.setItem('userLoginToken', response.token)
+        dispatch(RegisterAC(response))
+        // console.log(response, 'response')
+        // localStorage.setItem('isAuth', true)
+      }
     }
     )
 }
 
 export const ApiLoginRequest = data => dispatch => {
-  debugger
   LoginApi(data)
     .then(response => {
       if (response.statusText == "OK") {
         dispatch(LoginAC(response))
         localStorage.setItem('userLoginToken', response.data.token)
         console.log(response, 'response')
+        localStorage.setItem('isAuth', true)
       }
     }
-    )
+  )
 }
 
 // case 'LIST_OF_RESEARCHERS':

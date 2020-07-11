@@ -5,9 +5,12 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./modules/store/create-store";
 import "antd/dist/antd.css";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <Provider store={store}>
+  <BrowserRouter>
+    <Provider store={store}>
     <App />
-  </Provider>
+    </Provider>
+  </BrowserRouter>
   , document.getElementById("root"));

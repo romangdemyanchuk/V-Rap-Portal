@@ -6,6 +6,7 @@ import { Input, Button, Progress, Dropdown, Menu, message, Slider, InputNumber }
 const { TextArea } = Input;
 import "./personalStats.scss";
 import { DownOutlined } from '@ant-design/icons'
+import WithAuthRedirect from '../../../../../hoc/hoc';
 
 const PersonalStats = () => {
   const [disabled, setDisabled] = useState(false);
@@ -108,4 +109,7 @@ const PersonalStats = () => {
     </div>
   );
 };
-export default PersonalStats;
+
+const AuthRedirectComponent = WithAuthRedirect(PersonalStats)
+
+export default AuthRedirectComponent;

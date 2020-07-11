@@ -11,8 +11,6 @@ const MainLogin = (props) => {
     return <>
       {registerForm
         
-
-        
         ?
         <ParticipantRegisterForm />
         :

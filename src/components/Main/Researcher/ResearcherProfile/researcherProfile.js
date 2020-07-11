@@ -3,6 +3,7 @@ import React from "react";
 import {Link } from "react-router-dom";
 import { Input, Button} from "antd";
 import "./researcherProfile.scss";
+import WithAuthRedirect from "../../../../hoc/hoc";
 
 const ResearcherProfile = () => {
   return (
@@ -37,4 +38,7 @@ const ResearcherProfile = () => {
     </div>
   );
 };
-export default ResearcherProfile
+
+const AuthRedirectComponent = WithAuthRedirect(ResearcherProfile)
+
+export default AuthRedirectComponent

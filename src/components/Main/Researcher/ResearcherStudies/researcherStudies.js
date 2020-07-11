@@ -4,6 +4,7 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import "./researcherStudies.css";
+import WithAuthRedirect from "../../../../hoc/hoc";
 
 const ResearcherStudies = () => {
   return (
@@ -145,4 +146,7 @@ const ResearcherStudies = () => {
     </div>
   );
 };
-export default ResearcherStudies;
+
+const AuthRedirectComponent = WithAuthRedirect(ResearcherStudies)
+
+export default AuthRedirectComponent;

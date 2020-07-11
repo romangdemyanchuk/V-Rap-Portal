@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Input, Button, Menu, Dropdown, message, InputNumber } from "antd";
 import { DownOutlined } from '@ant-design/icons';
 import "./participantProfile.scss";
+import WithAuthRedirect from "../../../../hoc/hoc";
 
 const ParticipantProfile = () => {
   function handleMenuClick(e) {
@@ -26,6 +27,7 @@ const ParticipantProfile = () => {
       </Menu.Item>
     </Menu>
   );
+
   return (
     <div className="root-PartProfile">
       <div className="participant-profile__btns-wrapper">
@@ -86,4 +88,8 @@ const ParticipantProfile = () => {
     </div>
   );
 };
-export default ParticipantProfile;
+
+const AuthRedirectComponent = WithAuthRedirect(ParticipantProfile)
+
+
+export default AuthRedirectComponent;

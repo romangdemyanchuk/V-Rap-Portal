@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import "antd/dist/antd.css";
 import "./participantRegisterForm.css";
 import MainLogin from '../Login'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ApiRegisterRequest } from '../../../modules/session/session-reducers';
 
 const layout = {
@@ -51,6 +51,7 @@ const ParticipantRegisterForm = () => {
   //     )
   //   );
   // };
+
 
   let dispatch = useDispatch()
 
