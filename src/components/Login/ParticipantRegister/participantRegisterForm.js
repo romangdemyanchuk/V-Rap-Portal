@@ -6,6 +6,8 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import "antd/dist/antd.css";
 import "./participantRegisterForm.css";
 import MainLogin from '../Login'
+import { useDispatch } from 'react-redux';
+import { ApiRegisterRequest } from '../../../modules/session/session-reducers';
 
 const layout = {
   labelCol: {
@@ -41,20 +43,20 @@ const ParticipantRegisterForm = () => {
       )
     );
   };
-  const passwordIsValid = (e) => {
-    if (e && e.target) setpasswordText(e.target.value);
-    return setIsPasswordFieldValid(
-      /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/.test(
-        e.target.value
-      )
-    );
-  };
-  const LoginFieldsIsValid = () => {
-    // if(emailIsValid && passwordIsValid) {}
-  };
+  // const passwordIsValid = (e) => {
+  //   if (e && e.target) setpasswordText(e.target.value);
+  //   return setIsPasswordFieldValid(
+  //     /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/.test(
+  //       e.target.value
+  //     )
+  //   );
+  // };
+
+  let dispatch = useDispatch()
+
   return (
     <div className="root-Participant-register">
-      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm}/>}
+      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm} />}
       {!isVisible && <div>
         <div className="participant-register__form-wrapper">
           <div className="participant-heading">
@@ -64,56 +66,55 @@ const ParticipantRegisterForm = () => {
             <Button className="participant__btn active"
             >Register</Button>
             <Button className="participant-register__research-btn"
-                    onClick={typeOfForm}
+              onClick={typeOfForm}
             >Login</Button>
           </div>
           <Form
-            name="normal_login"
+            onFinish={values => { ApiRegisterRequest(values)(dispatch) }}
+            name="login"
             className="login-form"
             initialValues={{ remember: true }}
           >
             <div>
               <Form.Item
-                name="username"
-                // rules={[{ required: true, message: 'Please input your Username!' }]}
+                name="login"
+              // rules={[{ required: true, message: 'Please input your Username!' }]}
               >
                 <Input
-                  prefix={<UserOutlined className="site-form-item-icon"/>}
-                  onChange={() => setIsEmailFieldValid(true)}
+                  prefix={<UserOutlined className="site-form-item-icon" />}
                   onBlur={emailIsValid}
                   value={loginText}
-                 placeholder="E-mail" />
+                  placeholder="E-mail" />
               </Form.Item>
               {!isEmailFieldValid && <div className="invalid-email">Invalid E-mail</div>}
             </div>
             <div>
               <Form.Item
                 name="password"
-                // rules={[{ required: true, message: 'Please input your Password!' }]}
+              // rules={[{ required: true, message: 'Please input your Password!' }]}
               >
                 <Input
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
-                  onChange={() => setIsPasswordFieldValid(true)}
-                  onBlur={passwordIsValid}
+                  // onBlur={passwordIsValid}
                   value={passwordText}
                 />
               </Form.Item>
-              {!isPasswordFieldValid && <div className="invalid-password">Invalid Password<br/>
-                Your password must have > 6 symbols, special character,lowercase letter and uppercase letter</div>}
+              {!isPasswordFieldValid && <div className="invalid-password">
+                Password should contain at least 6 symbols</div>}
             </div>
             <Form.Item>
-              <Link to={'/participant-profile'}>
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                  Register
+              {/* <Link to={'/participant-profile'}> */}
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                Register
                 </Button>
-              </Link>
+              {/* </Link> */}
             </Form.Item>
           </Form>
         </div>
       </div>}
-  </div>
+    </div>
 
   );
 };

@@ -46,10 +46,10 @@ const ResearcherLogin = () => {
           <div className="researcher-login__item-wrapper">
             <Form.Item
               name="username"
-              // rules={[{ required: true, message: 'Please input your Username!' }]}
+            // rules={[{ required: true, message: 'Please input your Username!' }]}
             >
               <Input
-                prefix={<UserOutlined className="site-form-item-icon"/>}
+                prefix={<UserOutlined className="site-form-item-icon" />}
                 onChange={() => setIsEmailFieldValid(true)}
                 onBlur={emailIsValid}
                 value={loginText}
@@ -61,7 +61,7 @@ const ResearcherLogin = () => {
           <div className="researcher-login__item-wrapper">
             <Form.Item
               name="password"
-              // rules={[{ required: true, message: 'Please input your Password!' }]}
+            // rules={[{ required: true, message: 'Please input your Password!' }]}
             >
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -72,13 +72,13 @@ const ResearcherLogin = () => {
                 value={passwordText}
               />
             </Form.Item>
-            {!isPasswordFieldValid && <div className="invalid-password">Invalid Password<br/>
-              Your password must have > 6 symbols, special character,lowercase letter and uppercase letter</div>}
+            {!isPasswordFieldValid && <div className="invalid-password">
+              Password should contain at least 6 symbols</div>}
           </div>
           <Form.Item>
             <Link to={'/researcher-profile'}>
               <Button type="primary" htmlType="submit" className="login-form-button"
-                      onClick={LoginFieldsIsValid}>
+                onClick={LoginFieldsIsValid}>
                 Login
               </Button>
             </Link>

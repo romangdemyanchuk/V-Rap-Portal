@@ -6,6 +6,8 @@ import "./participantLoginForm.scss";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import MainLogin from '../Login'
+import { useDispatch } from 'react-redux';
+import { ApiLoginRequest } from '../../../modules/session/session-reducers';
 
 
 const ParticipantLoginForm = () => {
@@ -22,27 +24,22 @@ const ParticipantLoginForm = () => {
       /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
         e.target.value
       )
-    );
-  };
-  const passwordIsValid = (e) => {
-    if (e && e.target) setpasswordText(e.target.value);
-    return setIsPasswordFieldValid(
-      /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/.test(
-        e.target.value
-      )
-    );
-  };
-  const LoginFieldsIsValid = () => {
-    console.log('isEmailFieldValid', isEmailFieldValid)
-    console.log('isPasswordFieldValid', isPasswordFieldValid)
-    if (isEmailFieldValid && isPasswordFieldValid) {
-      // <Link to={'/participant-profile'}/>
-    }
-  };
+    )
+  }
+  // const passwordIsValid = (e) => {
+  //   if (e && e.target) setpasswordText(e.target.value);
+  //   return setIsPasswordFieldValid(
+  //     /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/.test(
+  //       e.target.value
+  //     )
+  //   )
+  // }
   const typeOfForm = () => {
     setRegisterForm(true);
     setIsVisible(true)
   }
+
+  let dispatch = useDispatch()
 
   return (
     <div className="root-Participant-login">
@@ -61,18 +58,17 @@ const ParticipantLoginForm = () => {
             >Login</Button>
           </div>
           <Form
-            name="normal_login"
+            name="login"
             className="login-form"
-            initialValues={{ remember: true }}
+            onFinish={values => { ApiLoginRequest(values)(dispatch) }}
           >
             <div>
               <Form.Item
-                name="username"
+                name="login"
                 rules={[{ required: true, message: 'Please input your Username!' }]}
               >
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
-                  onChange={() => setIsEmailFieldValid(true)}
                   onBlur={emailIsValid}
                   value={loginText}
                   placeholder="E-mail" />
@@ -88,31 +84,27 @@ const ParticipantLoginForm = () => {
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
-                  onChange={() => setIsPasswordFieldValid(true)}
-                  onBlur={passwordIsValid}
+                  // onBlur={passwordIsValid}
                   value={passwordText}
                 />
               </Form.Item>
-              {!isPasswordFieldValid && <div className="invalid-password">Invalid Password<br />
-                Your password must have > 6 symbols, special character,lowercase letter and uppercase letter</div>}
+              {!isPasswordFieldValid && <div className="invalid-password">
+                Password should contain at least 6 symbols</div>}
             </div>
             <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Form.Item name="remember" noStyle>
                 <Checkbox>Remember me</Checkbox>
               </Form.Item>
-
-              <a className="login-form-forgot" href="">
+              <a className="login-form-forgot">
                 Forgot password
               </a>
             </Form.Item>
-
             <Form.Item>
-              <Link to={'/participant-profile'}>
-                <Button type="primary" htmlType="submit" className="login-form-button"
-                  onClick={LoginFieldsIsValid}>
-                  Login
+              {/* <Link to={'/participant-profile'}> */}
+              <Button type="primary" htmlType="submit" className="login-form-button">
+                Login
                 </Button>
-              </Link>
+              {/* </Link> */}
               Or <a href=""
                 onClick={typeOfForm}
               >register now!</a>

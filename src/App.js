@@ -8,7 +8,7 @@ import PersonalStats from "./components/Main/Researcher/ResearcherStudies/Person
 import ParticipantStudies from "./components/Main/Participant/ParticipantStudies"
 import ResearcherProfile from './components/Main/Researcher/ResearcherProfile'
 import ResearcherLogin from './components/Login/ResearcherLogin'
-import LoginPage from './components/Admin/AdminLoginForm'
+import LoginPage from './components/Admin/AdminLogin'
 import AdminPage from './components/Admin/AdminPage'
 import ListOfCaseStudies from "./components/Admin/AdminPage/ListOfCaseStudies"
 import ListOfResearchers from "./components/Admin/AdminPage/ListOfResearchers"
@@ -20,7 +20,7 @@ const App = () => {
     <div className="root-App">
       <Router>
         <Route path="/" component={Main} exact />
-        <Route path="/login-participant" component={MainLogin}/>
+        <Route path="/login-participant" component={MainLogin} />
         <Route path="/researcher-studies" component={CaseStudies} />
         <Route path="/participant-profile" component={ParticipantProfile} />
         <Route path="/researcher-login" component={ResearcherLogin} />

@@ -1,22 +1,15 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./adminLoginPage.css";
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from 'react-redux'
-import { AdminLogin } from '../../../modules/session/session-actions'
-import { Link } from "react-router-dom";
+import { ApiLoginRequest } from "../../../modules/session/session-reducers";
 
 const AdminLoginForm = () => {
-  const dispatch = useDispatch()
 
   const testData = useSelector(state => state.adminLoginData)
-
-  useEffect(() => {
-
-    console.log(testData, "testData")
-  }, [testData])
-
+  console.log(testData, 'state')
 
   const [loginText, setloginText] = useState("");
   const [passwordText, setpasswordText] = useState("");
@@ -37,34 +30,28 @@ const AdminLoginForm = () => {
     )
   }
 
-  const LoginFieldsIsValid = () => {
-    emailIsValid(loginText);
-    passwordIsValid(passwordText);
-  };
-  const caseStudiesColumns = useSelector(state => state.caseStudiesColumns)
+  // const LoginFieldsIsValid = () => {
+  //   emailIsValid(loginText);
+  //   passwordIsValid(passwordText);
+  // }
+
+  // const caseStudiesColumns = useSelector(state => state.caseStudiesColumns)
+  let dispatch = useDispatch()
+
   return (
     <div className="root-Admin">
       <div className="root-Admin__wrapper">
         <div className="root-Admin__heading">V-RAP: Administration</div>
-        <Form
-          onFinish={values => {
-            dispatch(AdminLogin(values))
-            console.log('Finish:', values);
-          }}
+        <Form onFinish={values => { ApiLoginRequest(values)(dispatch) }}
           name="normal_login"
           className="login-form"
-          initialValues={{ remember: true }}
         >
           <div className="root-Admin__item-wrapper">
-            <Form.Item
-              name="username"
-            // rules={[{ required: true, message: "Please input valid E-mail" }]}
-
-            >
+            <Form.Item name="login" >
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
+                type='email'
                 placeholder="E-mail"
-                onChange={() => setIsEmailFieldValid(true)}
                 onBlur={emailIsValid}
                 value={loginText}
               />
@@ -79,7 +66,6 @@ const AdminLoginForm = () => {
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
-                onChange={() => setIsPasswordFieldValid(true)}
                 onBlur={passwordIsValid}
                 value={passwordText}
               />
@@ -89,20 +75,20 @@ const AdminLoginForm = () => {
           </div>
 
           <Form.Item>
-            <Link to={"/admin-portal"}>
+            {/* <Link to={"/admin-portal"}> */}
             <Button
               type="primary"
               htmlType="submit"
               className="login-form-button"
-              onClick={LoginFieldsIsValid}
             >
               Login
-              </Button>
-            </Link>
+            </Button>
+            {/* </Link> */}
           </Form.Item>
         </Form>
       </div>
     </div>
   );
 };
+
 export default AdminLoginForm;

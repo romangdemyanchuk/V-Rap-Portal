@@ -1,22 +1,8 @@
-import { applyMiddleware, compose, createStore } from "redux";
-import thunk from "redux-thunk";
+/*eslint-disable*/
+import { applyMiddleware, createStore } from "redux"
+import thunk from "redux-thunk"
+import MainReducer from "../session/session-reducers"
 
-import persistStore from "./persist-store";
-import persistReducer from "./persist-reducer";
+const store = createStore(MainReducer, applyMiddleware(thunk))
 
-export default (initialState = {}) => {
-  const middlewares = [thunk];
-  const enhancers = [];
-
-  const store = createStore(
-    persistReducer(),
-    initialState,
-    compose(applyMiddleware(...middlewares), ...enhancers)
-  );
-
-  store.asyncReducers = {};
-
-  const persistor = persistStore(store);
-
-  return { store, persistor };
-};
+export default store
