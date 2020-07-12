@@ -1,11 +1,9 @@
 /* eslint-disable */
-import React, { useState } from 'react'
+import React from 'react'
 import { Redirect } from "react-router-dom";
-import "antd/dist/antd.css";
 import "./participantLoginForm.scss";
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import MainLogin from '../Login'
+import { Form, Input, Button, Checkbox, notification } from "antd";
+import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiLoginRequest } from '../../../modules/session/session-reducers';
 
@@ -13,7 +11,20 @@ const ParticipantLoginForm = ({ setState }) => {
 
   let dispatch = useDispatch()
   const isAuthCheck = useSelector(state => state.isAuth)
-  if (isAuthCheck) return <Redirect to={'/participant-profile'} />
+
+  const infoAction = () => {
+    const openNotification = () => {
+      notification.open({
+        message: 'Notification Title',
+        description: 'Mission complete Participant :)',
+        icon: <SmileOutlined style={{ color: '#108ee9' }} />
+      })
+    }
+    openNotification()
+    return <Redirect to={'/participant-profile'} />
+  }
+
+  if (isAuthCheck)  return infoAction()
 
 
   return <>

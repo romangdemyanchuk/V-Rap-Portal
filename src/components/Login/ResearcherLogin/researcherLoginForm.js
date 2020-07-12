@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React from 'react'
 import "./researcherLoginForm.css"
-import { Form, Input, Button } from "antd"
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Form, Input, Button, notification } from "antd";
+import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { ApiLoginRequest } from '../../../modules/session/session-reducers'
 import { Redirect } from 'react-router'
@@ -11,7 +11,23 @@ const ResearcherLogin = () => {
 
   const dispatch = useDispatch()
   const isAuthCheck = useSelector(state => state.isAuth)
-  if (isAuthCheck) return <Redirect to={'/researcher-profile'} />
+
+  const infoAction = () => {
+    const openNotification = () => {
+      notification.open({
+        message: 'Notification Title',
+        description: 'Mission complete Researcher :)',
+        icon: <SmileOutlined style={{ color: '#108ee9' }} />
+      })
+    }
+    openNotification()
+    return <Redirect to={'/researcher-profile'} />
+  }
+
+  if (isAuthCheck)  return infoAction()
+
+  
+  
 
   return <>
     <div className="researcher-login__heading">
