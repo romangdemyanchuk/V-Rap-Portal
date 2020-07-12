@@ -18,22 +18,6 @@ const ParticipantLoginForm = () => {
   const [isEmailFieldValid, setIsEmailFieldValid] = useState(true);
   const [isPasswordFieldValid, setIsPasswordFieldValid] = useState(true);
 
-  const emailIsValid = (e) => {
-    if (e && e.target) setloginText(e.target.value);
-    return setIsEmailFieldValid(
-      /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
-        e.target.value
-      )
-    )
-  }
-  // const passwordIsValid = (e) => {
-  //   if (e && e.target) setpasswordText(e.target.value);
-  //   return setIsPasswordFieldValid(
-  //     /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/.test(
-  //       e.target.value
-  //     )
-  //   )
-  // }
   const typeOfForm = () => {
     setRegisterForm(true);
     setIsVisible(true)
@@ -72,11 +56,8 @@ const ParticipantLoginForm = () => {
               >
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
-                  onBlur={emailIsValid}
-                  value={loginText}
                   placeholder="E-mail" />
               </Form.Item>
-              {!isEmailFieldValid && <div className="invalid-email">Invalid E-mail</div>}
             </div>
             <div>
               <Form.Item
@@ -87,12 +68,8 @@ const ParticipantLoginForm = () => {
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
-                  // onBlur={passwordIsValid}
-                  value={passwordText}
                 />
               </Form.Item>
-              {!isPasswordFieldValid && <div className="invalid-password">
-                Password should contain at least 6 symbols</div>}
             </div>
             <Form.Item>
               <Form.Item name="remember" noStyle>
@@ -103,11 +80,9 @@ const ParticipantLoginForm = () => {
               </a>
             </Form.Item>
             <Form.Item>
-              {/* <Link to={'/participant-profile'}> */}
               <Button type="primary" htmlType="submit" className="login-form-button">
                 Login
                 </Button>
-              {/* </Link> */}
               Or <a href="/"
                 onClick={typeOfForm}
               >register now!</a>

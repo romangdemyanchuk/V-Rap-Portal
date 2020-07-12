@@ -26,32 +26,11 @@ const tailLayout = {
 const ParticipantRegisterForm = () => {
   const [registerForm, setRegisterForm] = useState(false);
   const [isVisible, setIsVisible] = useState(false)
-  const [loginText, setloginText] = useState("");
-  const [passwordText, setpasswordText] = useState("");
-  const [isEmailFieldValid, setIsEmailFieldValid] = useState(true);
-  const [isPasswordFieldValid, setIsPasswordFieldValid] = useState(true);
+
   const typeOfForm = () => {
     setRegisterForm(false);
     setIsVisible(true)
   }
-
-  const emailIsValid = (e) => {
-    if (e && e.target) setloginText(e.target.value);
-    return setIsEmailFieldValid(
-      /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
-        e.target.value
-      )
-    );
-  };
-  // const passwordIsValid = (e) => {
-  //   if (e && e.target) setpasswordText(e.target.value);
-  //   return setIsPasswordFieldValid(
-  //     /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{6,}$/.test(
-  //       e.target.value
-  //     )
-  //   );
-  // };
-
 
   let dispatch = useDispatch()
 
@@ -74,43 +53,34 @@ const ParticipantRegisterForm = () => {
             onFinish={values => { ApiRegisterRequest(values)(dispatch) }}
             name="login"
             className="login-form"
-            initialValues={{ remember: true }}
           >
-            <div>
-              <Form.Item
-                name="login"
-              // rules={[{ required: true, message: 'Please input your Username!' }]}
-              >
-                <Input
-                  prefix={<UserOutlined className="site-form-item-icon" />}
-                  onBlur={emailIsValid}
-                  value={loginText}
-                  placeholder="E-mail" />
-              </Form.Item>
-              {!isEmailFieldValid && <div className="invalid-email">Invalid E-mail</div>}
-            </div>
-            <div>
-              <Form.Item
-                name="password"
-              // rules={[{ required: true, message: 'Please input your Password!' }]}
-              >
-                <Input
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  type="password"
-                  placeholder="Password"
-                  // onBlur={passwordIsValid}
-                  value={passwordText}
-                />
-              </Form.Item>
-              {!isPasswordFieldValid && <div className="invalid-password">
-                Password should contain at least 6 symbols</div>}
-            </div>
+            <Form.Item
+              validateTrigger={'onBlur'}
+              name="login"
+              rules={[{ type: 'email', message: 'Please enter valid email: name@post.com' },
+              { required: true, message: 'Field is required!' },
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="E-mail" />
+            </Form.Item>
+            <Form.Item
+              validateTrigger={'onBlur'}
+              name="password"
+              rules={[{ min: 6, message: 'Password should contain at least 6 symbols' },
+              { required: true, message: 'Field is required!' }]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
             <Form.Item>
-              {/* <Link to={'/participant-profile'}> */}
               <Button type="primary" htmlType="submit" className="login-form-button">
                 Register
                 </Button>
-              {/* </Link> */}
             </Form.Item>
           </Form>
         </div>

@@ -1,10 +1,9 @@
 .ant-form-item-explain {
     text-align: left;
 }
-.ant-form-item-explain > div {
-    width: 300px;
+/* .ant-form-item-explain > div {
     margin: 8px 0;
-}
+} */
 
 .login-text-title {
     font-size: 25px;

@@ -12,17 +12,9 @@
     margin: 0 0 5px 0;
     color: red;
 }
-.root-Admin__item-wrapper {
-    /*display: flex;*/
-}
-.ant-form-item-has-success {
-    /*margin: 0 0 5px 0;*/
-}
+
 .invalid-password {
     width: 250px;
     margin: 5px auto;
     text-align: left;
-}
-.ant-form-item {
-    margin: 0 0 10px 0;
 }

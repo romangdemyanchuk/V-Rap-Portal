@@ -13,7 +13,7 @@ const ResearcherStudies = () => {
         <Link to={'/researcher-profile'}>
           <Button className="researcher-studies__profile-btn">Profile</Button>
         </Link>
-        <Link to={'/participant-studies'}>
+        <Link to={'/researcher-studies'}>
           <Button className="researcher-studies__btn active">Research Studies</Button>
         </Link>
       </div>
