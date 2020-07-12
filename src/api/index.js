@@ -5,10 +5,10 @@ const instance = axios.create({
     baseURL: 'https://v-rap.herokuapp.com/'
 })
 
-export const RegisterApi = (emailData) => {
-    return instance.post(`api/auth/register`, emailData)
+export const RegisterApi = (regData) => {
+    return instance.post(`api/auth/register`, regData)
 }
 
-export const LoginApi = (data) => {
-    return instance.post(`api/auth/login`, data)
+export const LoginApi = (loginData) => {
+    return instance.post(`api/auth/login`, loginData)
 }
