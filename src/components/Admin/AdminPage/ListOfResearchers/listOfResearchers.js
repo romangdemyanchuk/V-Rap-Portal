@@ -17,15 +17,17 @@ const ListOfResearchers = () => {
         <ResearcherChanges modalOpen={modalOfChangesOpen} setmodalOpen={setmodalOfChangesOpen}/>
         <ResearcherCreate modalOpen={modalOfCreateOpen} setmodalOpen={setmodalOfCreateOpen}/>
         <div className="researchers-list__btn-wrapper">
-      <Button style={{marginBottom: '20px'}} type="button" className="researchers-profile-btn"
-                  onClick={() => setmodalOfCreateOpen(true)}
-          >Create Researcher Profile</Button>
+      <Button style={{ marginBottom: '20px' }}
+        type="button"
+        className="researchers-profile-btn"
+        onClick={() => setmodalOfCreateOpen(true)}>
+        Create Researcher Profile
+      </Button>
         </div>
         <div onClick={() => setmodalOfChangesOpen(true)}>
           <Table columns={researcherListColumns} dataSource={researchersList}/>
         </div>
       </div>
-
 }
 
 export default ListOfResearchers;

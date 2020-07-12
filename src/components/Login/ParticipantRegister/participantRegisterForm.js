@@ -1,53 +1,28 @@
 /* eslint-disable */
 import React, { useState } from 'react'
-import { Link, Redirect } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import "antd/dist/antd.css";
 import "./participantRegisterForm.css";
 import MainLogin from '../Login'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ApiRegisterRequest } from '../../../modules/session/session-reducers';
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
-const ParticipantRegisterForm = () => {
-  const [registerForm, setRegisterForm] = useState(false);
-  const [isVisible, setIsVisible] = useState(false)
-
-  const typeOfForm = () => {
-    setRegisterForm(false);
-    setIsVisible(true)
-  }
+const ParticipantRegisterForm = ({ setState }) => {
 
   let dispatch = useDispatch()
 
-  return (
-    <div className="root-Participant-register">
-      {isVisible && <MainLogin registerForm={registerForm} setRegisterForm={setRegisterForm} />}
-      {!isVisible && <div>
+  return <>
         <div className="participant-register__form-wrapper">
           <div className="participant-heading">
             V-RAP: Participant
           </div>
           <div className="participant-register__login-btns">
-            <Button className="participant__btn active"
-            >Register</Button>
-            <Button className="participant-register__research-btn"
-              onClick={typeOfForm}
-            >Login</Button>
+          <Button className="participant-register__research-btn" onClick={() => setState(false)}>
+          Login
+          </Button>
+          <Button className="participant__btn active">
+            Register
+          </Button>
           </div>
           <Form
             onFinish={values => { ApiRegisterRequest(values)(dispatch) }}
@@ -78,18 +53,13 @@ const ParticipantRegisterForm = () => {
               />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
+              <Button type="primary" htmlType="submit" >
                 Register
                 </Button>
             </Form.Item>
           </Form>
         </div>
-      </div>}
-    </div>
+  </>
+}
 
-  );
-};
 export default ParticipantRegisterForm;
-
-
-

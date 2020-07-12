@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import { message, Button, Modal, Input } from 'antd'
 import DeleteModal from './DeleteModal'
-import "./researcherChanges.css";
+import "./ResearchersEdit.css";
 import "antd/dist/antd.css";
 
 const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
@@ -12,7 +12,7 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
     setmodalOpen(false);
     setDeleteModalIsOpen(true)
   }
-  const  closeModal = () => {
+  const closeModal = () => {
     setmodalOpen(false);
   }
   const props = {

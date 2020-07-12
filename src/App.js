@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react"
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
+import { Route } from "react-router-dom"
 import Main from "./components/Main"
 import CaseStudies from "./components/Main/Researcher/ResearcherStudies"
 import ParticipantProfile from "./components/Main/Participant/ParticipantProfile"
@@ -14,16 +14,12 @@ import ListOfCaseStudies from "./components/Admin/AdminPage/ListOfCaseStudies"
 import ListOfResearchers from "./components/Admin/AdminPage/ListOfResearchers"
 import MainLogin from './components/Login/Login'
 import './styles/index.styl'
-import { useSelector } from "react-redux"
+
 
 const App = () => {
 
-  // const isAuthCheck = useSelector(state => state.isAuth)
-  // if (!isAuthCheck) return <Redirect to={'/login-participant'} />
-
   return (
     <div className="root-App">
-
       <Route path="/" component={Main} exact />
       <Route path="/login-participant" component={MainLogin} />
       <Route path="/researcher-studies" component={CaseStudies} />
@@ -36,9 +32,8 @@ const App = () => {
       <Route path="/admin" component={LoginPage} />
       <Route path="/researchers-list" component={ListOfResearchers} />
       <Route path="/all-studies-list" component={ListOfCaseStudies} />
-
     </div>
   )
-};
+}
 
 export default App;

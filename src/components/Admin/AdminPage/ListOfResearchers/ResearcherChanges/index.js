@@ -1,3 +1,3 @@
-import ResearcherChanges from './researcherChanges'
+import ResearcherChanges from './ResearchersEdit'
 
 export default ResearcherChanges

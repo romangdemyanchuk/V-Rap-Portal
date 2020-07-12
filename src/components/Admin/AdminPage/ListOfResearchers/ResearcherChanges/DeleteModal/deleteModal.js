@@ -1,30 +1,30 @@
 /* eslint-disable */
 import React from "react";
 import "./deleteModal.css";
-import "antd/dist/antd.css";
-import { Link } from "react-router-dom";
-import {message, Button, Modal, Progress } from "antd";
+import {Button, Modal} from "antd";
 
 const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen }) => {
-  const  closeModal = e => {
+  const  closeModal = () => {
     setDeleteModalIsOpen(false);
   }
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+
+  // const props = {
+  //   name: "file",
+  //   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  //   headers: {
+  //     authorization: "authorization-text",
+  //   },
+  //   onChange(info) {
+  //     if (info.file.status !== "uploading") {
+  //     }
+  //     if (info.file.status === "done") {
+  //       message.success(`${info.file.name} file uploaded successfully`);
+  //     } else if (info.file.status === "error") {
+  //       message.error(`${info.file.name} file upload failed.`);
+  //     }
+  //   },
+  // };
+
   return (
     <div className="delete-block">
       <Modal
@@ -34,12 +34,12 @@ const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen }) => {
         onCancel={closeModal}
         className="deleteModal"
       >
-       <div className="delete-btns">
-          <Button>Cancel</Button>
-         <Button type="primary">Ok</Button>
-       </div>
+      <div className="delete-btns">
+        <Button onClick={closeModal}>Cancel</Button>
+        <Button type="primary" onClick={closeModal}>Ok</Button>
+      </div>
       </Modal>
     </div>
-  );
-};
+  )
+}
 export default DeleteModal;

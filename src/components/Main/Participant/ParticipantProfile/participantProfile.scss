@@ -17,9 +17,7 @@
         font-size: 12px;
     }
 }
-//.file-block {
-//    text-align: left;
-//}
+
 .participant-profile__personal-info-block,
 .case-studies__changes-btns,
 .research-create__changes-btns,
@@ -87,11 +85,6 @@
     }
 }
 
-//.upload-btns {
-//    justify-content: center;
-//}
-
-
 .personal-stats__info-img,
 .researcher-studies__study-info-img{
     width: 200px;
@@ -107,6 +100,8 @@
 .research-create__changes-btns,
 .changes-modal__changes-btns{
     margin-top: 20px;
+    display: flex;
+                justify-content: space-between;
     button {
         border-radius: 5px;
     }

@@ -4,9 +4,10 @@
 .participant-login__heading{
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 20px;
     display: flex;
     justify-content: center;
+    margin-top: 50px;
+    padding: 20px
 }
 .participant-login__btns,
 .participant-register__login-btns{
@@ -42,9 +43,15 @@ h2 {
     margin-left: 10px;
 }
 .ant-form-item-control-input-content {
+    display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     flex: unset;
     width: 250px;
+    .orRegister-proposal{
+        display: flex;
+    justify-content: space-between;
+    }
 }
 .ant-form-item-control-input {
     margin: 0 auto;

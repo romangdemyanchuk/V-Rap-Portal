@@ -1,21 +1,21 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState } from 'react';
 import ParticipantLoginForm from './ParticipantLogin'
 import ParticipantRegisterForm from './ParticipantRegister'
 
 
-const MainLogin = (props) => {
+const MainLogin = ({ registerForm }) => {
   
-  const { registerForm } = props
-  
-    return <>
-      {registerForm
-        
-        ?
-        <ParticipantRegisterForm />
-        :
-        <ParticipantLoginForm />}
-       </>
+  let [state, setState] = useState(false)
+
+
+  return <>
+    {state
+      ?
+      <ParticipantRegisterForm setState={setState} />
+      :
+      <ParticipantLoginForm setState={setState}/>}
+  </>
 }
 
 export default MainLogin
