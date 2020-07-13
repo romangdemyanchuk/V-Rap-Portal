@@ -97,7 +97,7 @@ export const allData =  ({
 
 })
 
-export const caseStudiesColumns = (modalsOpen) => ({    caseStudiesColumns: [
+export const caseStudiesColumns = (modalsOpen) => ({caseStudiesColumns: [
       {
           title: "Title",
           dataIndex: "title",
@@ -111,47 +111,47 @@ export const caseStudiesColumns = (modalsOpen) => ({    caseStudiesColumns: [
             <a onClick={() => modalsOpen(true)}>{text}</a>
           )
       },
-  {
-      title: "Created at",
-      dataIndex: "created",
-      key: "created",
-  },
-  {
-      title: "Location",
-      key: "location",
-      dataIndex: "location",
-  },
-  {
-      title: "Age",
-      key: "age",
-      dataIndex: "age",
-  },
-  {
-      title: "Average Income",
-      key: "average",
-      dataIndex: "average",
-  },
-  {
-      title: "Status",
-      key: "status",
-      dataIndex: "status",
-  },
-  {
-      title: "Participated",
-      key: "participated",
-      dataIndex: "participated",
-  },
-  {
-      title: "Actions",
-      key: "actions",
-      dataIndex: "actions",
-      render: (text) => (
-        <a onClick={() => modalsOpen(true)}>{text}</a>
-      )
-},
+      {
+          title: "Created at",
+          dataIndex: "created",
+          key: "created",
+      },
+      {
+          title: "Location",
+          key: "location",
+          dataIndex: "location",
+      },
+      {
+          title: "Age",
+          key: "age",
+          dataIndex: "age",
+      },
+      {
+          title: "Average Income",
+          key: "average",
+          dataIndex: "average",
+      },
+      {
+          title: "Status",
+          key: "status",
+          dataIndex: "status",
+      },
+      {
+          title: "Participated",
+          key: "participated",
+          dataIndex: "participated",
+      },
+      {
+          title: "Actions",
+          key: "actions",
+          dataIndex: "actions",
+          render: (text) => (
+            <a onClick={() => modalsOpen(true)}>{text}</a>
+          )
+     },
 ],})
 
-export const  researcherListColumns = (modalsOpen) => ({    researcherListColumns: [
+export const  researcherListColumns = (modalsOpen) => ({researcherListColumns:[
         {
             title: "Name",
             dataIndex: "name",

@@ -17,11 +17,10 @@ import './styles/index.styl'
 
 
 const App = () => {
-
   return (
     <div className="root-App">
       <Route path="/" component={Main} exact />
-      <Route path="/login-participant" component={MainLogin} />
+      <Route path="/participant-login" component={MainLogin} />
       <Route path="/researcher-studies" component={CaseStudies} />
       <Route path="/participant-profile" component={ParticipantProfile} />
       <Route path="/researcher-login" component={ResearcherLogin} />

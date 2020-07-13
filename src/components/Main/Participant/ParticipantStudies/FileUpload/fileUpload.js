@@ -11,7 +11,7 @@ const FileUpload = ({modalOpen, setmodalOpen}) => {
     setmodalOpen(false);
     setsuccessModalIsOpen(true)
   }
-  const  closeModal = () => {
+  const closeModal = () => {
     setmodalOpen(false);
   }
   const props = {

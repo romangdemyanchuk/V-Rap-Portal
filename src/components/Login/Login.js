@@ -4,10 +4,9 @@ import ParticipantLoginForm from './ParticipantLogin'
 import ParticipantRegisterForm from './ParticipantRegister'
 
 
-const MainLogin = ({ registerForm }) => {
-  
-  let [state, setState] = useState(false)
+const MainLogin = () => {
 
+  let [state, setState] = useState(false)
 
   return <>
     {state

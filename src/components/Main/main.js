@@ -23,7 +23,7 @@ const Main = () => {
           <div>
             <div className="main-page-header">V-Rap</div>
             <div className="main-page-btns">
-              <Link to={"/login-participant"}>
+              <Link to={"/participant-login"}>
                 <Button type="button" className="main-block-btn btn btn-light"
                   onClick={typeOfForm}>
                   I`m Participant

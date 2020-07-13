@@ -2,10 +2,8 @@
 import { LOGIN, REGISTER, LOADING} from './session-constants'
 import { allData } from './data'
 import { RegisterApi, LoginApi } from '../../api'
-import ParticipantLoginForm from '../../components/Login/ParticipantLogin/participantLoginForm'
 import {infoAction} from '../../utils/notification'
-import { loadingInfo } from '../../components/Main/Participant/ParticipantProfile/participantProfile'
-import React, { useState } from 'react'
+import React from 'react'
 
 let { caseStudies, researchersList, caseStudiesColumns } = allData
 
@@ -36,7 +34,6 @@ const MainReducer = (state = initialState, action) => {
         isAuth: true,
       }
     case LOADING:
-
       return {
         ...state,
         isLoading: action.payload
@@ -67,18 +64,20 @@ export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
       if (response.statusText == 'OK') {
-        dispatch(LoadingAC(true))
         dispatch(LoginAC(response))
         localStorage.setItem('userLoginToken', response.data.token)
         localStorage.setItem('isAuth', true)
-        dispatch(LoadingAC(false))
       }
     }
   )
     .catch(e => {
-      if (e.response.data) {
+      if (e.response && e.response.data) {
         infoAction(e.response.data.message, '/participant-profile');
       }
+      infoAction('ERROR', '/participant-profile')
+  }).finally(() => {
+    dispatch(LoadingAC(false))
   })
+
 
 }

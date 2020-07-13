@@ -34,7 +34,7 @@ const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen }) => {
         onCancel={closeModal}
         className="deleteModal"
       >
-      <div className="delete-btns">
+      <div className="delete__btns">
         <Button onClick={closeModal}>Cancel</Button>
         <Button type="primary" onClick={closeModal}>Ok</Button>
       </div>

@@ -7,11 +7,8 @@ import AdminsChanges from './CaseStudiesChanges'
 import { caseStudiesColumns as list } from  '../../../../modules/session/data'
 
 const ListOfCaseStudies = () => {
-
   const [modalOpen, setmodalOpen] = useState(false);
   const { caseStudiesColumns } = list(setmodalOpen)
-
-  // const caseStudiesColumns = useSelector(state => state.caseStudiesColumns)
   const caseStudies = useSelector(state => state.caseStudies)
 
   return <div className="main-page-wrapper">
@@ -19,11 +16,12 @@ const ListOfCaseStudies = () => {
     <div className="case-studies-heading"
          style={{marginBottom: '20px',
            fontWeight: 'bold',
-           fontSize: '20px'}}>Case Studies - All</div>
+           fontSize: '20px'}}
+    >
+      Case Studies - All
+    </div>
     <div className="case-studies-wrapper">
-      {/*<div onClick={() => setmodalOpen(true)}>*/}
-        <Table columns={caseStudiesColumns} dataSource={caseStudies}/>
-      {/*</div>*/}
+      <Table columns={caseStudiesColumns} dataSource={caseStudies}/>
     </div>
   </div>
 }

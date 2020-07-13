@@ -1,16 +1,14 @@
 /* eslint-disable */
 import React, {useState} from "react";
 import { Button } from "antd";
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import "./participantStudies.scss";
 import FileUpload from './FileUpload'
-import { useSelector } from "react-redux";
 import WithAuthRedirect from "../../../../hoc/hoc";
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
-  // const [deleteModalOpen, setdeleteModalOpen] = useState(false);
 
   return (
     <div className="root-PartStudies">

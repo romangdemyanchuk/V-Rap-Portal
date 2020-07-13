@@ -1,23 +1,14 @@
 /* eslint-disable */
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
-import { Input, Button, Menu, Dropdown, message, InputNumber } from "antd";
+import { Link } from "react-router-dom";
+import { Input, Button, Menu, Dropdown, InputNumber } from "antd";
 import { DownOutlined } from '@ant-design/icons';
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
-import { RegisterApi } from '../../../../api'
-import { RegisterAC } from '../../../../modules/session/session-reducers'
-import { useSelector } from 'react-redux'
+
 const ParticipantProfile = () => {
-  function handleMenuClick(e) {
-    message.info('Click on menu item.');
-    console.log('click', e);
-  }
-  function onChange(value) {
-    console.log('changed', value);
-  }
   const menu = (
-    <Menu onClick={handleMenuClick}>
+    <Menu>
       <Menu.Item key="1">
         1st menu item
       </Menu.Item>
@@ -50,7 +41,7 @@ const ParticipantProfile = () => {
             </div>
             <div className="participant-profile__fields-wrapper">
               <p>Age</p>
-              <InputNumber min={1} max={100} defaultValue={25} onChange={onChange}
+              <InputNumber min={1} max={100} defaultValue={25}
                 className="input-number"/>
             </div>
             <div className="participant-profile__fields-wrapper">

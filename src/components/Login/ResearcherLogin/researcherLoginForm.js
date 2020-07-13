@@ -1,29 +1,33 @@
 /* eslint-disable */
 import React from 'react'
 import "./researcherLoginForm.css"
-import { Form, Input, Button, notification } from "antd";
-import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
+import { Form, Input, Button} from "antd";
+import { UserOutlined, LockOutlined} from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
-import { ApiLoginRequest } from '../../../modules/session/session-reducers'
+import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
+import Loader from '../../Loader/loader'
 import {infoAction} from '../../../utils/notification'
-import { Redirect } from 'react-router'
 
 const ResearcherLogin = () => {
 
   const dispatch = useDispatch()
   const isAuthCheck = useSelector(state => state.isAuth)
+  const isLoading = useSelector(state => state.isLoading)
 
-  if (isAuthCheck)  return infoAction('Mission complete Researcher :)', '/researcher-profile')
+  if (isAuthCheck)
+    return infoAction('Mission complete Researcher :)', '/researcher-profile')
 
-
-
+  const handleSubmit = (values) => {
+    ApiLoginRequest(values)(dispatch);
+    dispatch(LoadingAC(true))
+  }
 
   return <>
     <div className="researcher-login__heading">
       V-RAP: Researcher
       </div>
     <Form
-      onFinish={values => { ApiLoginRequest(values)(dispatch) }}
+      onFinish={values => { handleSubmit(values) }}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
@@ -53,7 +57,7 @@ const ResearcherLogin = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" >
-          Login
+          {isLoading ? <Loader/> : 'Login'}
         </Button>
       </Form.Item>
     </Form>

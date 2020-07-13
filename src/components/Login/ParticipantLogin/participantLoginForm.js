@@ -1,28 +1,29 @@
 /* eslint-disable */
-import React, {useState} from 'react'
-import { Redirect } from "react-router-dom";
+import React from 'react'
+import { Link } from "react-router-dom";
 import Loader from '../../Loader/loader'
 import "./participantLoginForm.scss";
-import { Form, Input, Button, Checkbox, notification } from "antd";
-import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Checkbox} from "antd";
+import { UserOutlined, LockOutlined} from '@ant-design/icons';
 import {infoAction} from '../../../utils/notification'
 import { useDispatch, useSelector } from 'react-redux';
-import { ApiLoginRequest } from '../../../modules/session/session-reducers';
+import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
 
 const ParticipantLoginForm = ({ setState }) => {
 
   let dispatch = useDispatch()
 
   const isAuthCheck = useSelector(state => state.isAuth)
+  const isLoading = useSelector(state => state.isLoading)
 
   if (isAuthCheck) {
-    setisLoading(false);
     return infoAction('Mission complete Participant :)', '/participant-profile')
   }
 
-  const isLoading = useSelector(state => state.isLoading)
-  console.log(isLoading)
-
+  const handleSubmit = (values) => {
+    ApiLoginRequest(values)(dispatch);
+    dispatch(LoadingAC(true))
+  }
 
   return <>
       <div className="participant-login__heading">
@@ -39,7 +40,7 @@ const ParticipantLoginForm = ({ setState }) => {
       <Form
         name="login"
         className="login-form"
-        onFinish={values => { ApiLoginRequest(values)(dispatch) }}
+        onFinish={values => { handleSubmit(values) }}
       >
       <Form.Item
         validateTrigger={'onBlur'}
@@ -72,12 +73,13 @@ const ParticipantLoginForm = ({ setState }) => {
           </a>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" >
+          <Button type="primary" htmlType="submit">
             {isLoading ? <Loader/> : 'Login'}
           </Button>
           <span className='orRegister-proposal'>
           Or
-          <a href="/">&ensp;register now!</a>
+          <Link to={'/participant-login'}
+                onClick={() => setState(true)}>&ensp;register now!</Link>
           </span>
         </Form.Item>
       </Form>

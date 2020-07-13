@@ -7,6 +7,7 @@ import DeleteModal from '../../ListOfResearchers/ResearcherChanges/DeleteModal'
 
 const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+
   const deleteClick = () => {
     setmodalOpen(false);
     setDeleteModalIsOpen(true)

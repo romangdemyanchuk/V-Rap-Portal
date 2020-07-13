@@ -1,20 +1,28 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React from "react";
 import "./adminLoginPage.css";
+import Loader from '../../Loader/loader'
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from 'react-redux'
-import { ApiLoginRequest } from "../../../modules/session/session-reducers";
+import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
 
 const AdminLoginForm = () => {
 
   let dispatch = useDispatch()
 
+  const isLoading = useSelector(state => state.isLoading)
+
+  const handleSubmit = (values) => {
+    ApiLoginRequest(values)(dispatch);
+    dispatch(LoadingAC(true))
+  }
+
   return <div className="root-Admin__wrapper">
       <div className="root-Admin__heading">
         V-RAP: Administration
       </div>
-        <Form onFinish={values => { ApiLoginRequest(values)(dispatch) }}
+        <Form onFinish={values => { handleSubmit(values) }}
           name="normal_login"
           className="login-form"
         >
@@ -46,7 +54,7 @@ const AdminLoginForm = () => {
             type="primary"
             htmlType="submit"
           >
-            Login
+            {isLoading ? <Loader/> : 'Login'}
           </Button>
         </Form.Item>
         </Form>

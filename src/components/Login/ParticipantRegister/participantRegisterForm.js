@@ -1,15 +1,21 @@
 /* eslint-disable */
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import Loader from '../../Loader/loader'
 import "./participantRegisterForm.css";
-import MainLogin from '../Login'
-import { useDispatch } from 'react-redux';
-import { ApiRegisterRequest } from '../../../modules/session/session-reducers';
+import { useDispatch, useSelector } from 'react-redux'
+import { ApiRegisterRequest, LoadingAC } from '../../../modules/session/session-reducers'
 
 const ParticipantRegisterForm = ({ setState }) => {
 
   let dispatch = useDispatch()
+  const isLoading = useSelector(state => state.isLoading)
+
+  const handleSubmit = (values) => {
+    ApiRegisterRequest(values)(dispatch);
+    dispatch(LoadingAC(true))
+  }
 
   return <>
         <div className="participant-register__form-wrapper">
@@ -25,7 +31,7 @@ const ParticipantRegisterForm = ({ setState }) => {
           </Button>
           </div>
           <Form
-            onFinish={values => { ApiRegisterRequest(values)(dispatch) }}
+            onFinish={values => { handleSubmit(values) }}
             name="login"
             className="login-form"
           >
@@ -54,7 +60,7 @@ const ParticipantRegisterForm = ({ setState }) => {
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" >
-                Register
+                {isLoading ? <Loader/> : 'Register'}
                 </Button>
             </Form.Item>
           </Form>
