@@ -5,7 +5,7 @@ import DeleteModal from './DeleteModal'
 import "./ResearchersEdit.css";
 import "antd/dist/antd.css";
 
-const ResearcherChanges = ({ modalOpen, setmodalOpen, modalIsOpen }) => {
+const ResearcherChanges = ({ modalOpen, setmodalOpen }) => {
 
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const deleteClick = () => {

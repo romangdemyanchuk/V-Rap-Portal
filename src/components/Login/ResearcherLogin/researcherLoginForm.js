@@ -5,6 +5,7 @@ import { Form, Input, Button, notification } from "antd";
 import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { ApiLoginRequest } from '../../../modules/session/session-reducers'
+import {infoAction} from '../../utils/notification'
 import { Redirect } from 'react-router'
 
 const ResearcherLogin = () => {
@@ -12,22 +13,10 @@ const ResearcherLogin = () => {
   const dispatch = useDispatch()
   const isAuthCheck = useSelector(state => state.isAuth)
 
-  const infoAction = () => {
-    const openNotification = () => {
-      notification.open({
-        message: 'Notification Title',
-        description: 'Mission complete Researcher :)',
-        icon: <SmileOutlined style={{ color: '#108ee9' }} />
-      })
-    }
-    openNotification()
-    return <Redirect to={'/researcher-profile'} />
-  }
+  if (isAuthCheck)  return infoAction('Mission complete Researcher :)', '/researcher-profile')
 
-  if (isAuthCheck)  return infoAction()
 
-  
-  
+
 
   return <>
     <div className="researcher-login__heading">

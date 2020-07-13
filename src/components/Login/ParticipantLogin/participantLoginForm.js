@@ -4,29 +4,16 @@ import { Redirect } from "react-router-dom";
 import "./participantLoginForm.scss";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
+import {infoAction} from '../../utils/notification'
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiLoginRequest } from '../../../modules/session/session-reducers';
 
-const ParticipantLoginForm = ({ setState }) => {
 
+
+const ParticipantLoginForm = ({ setState }) => {
   let dispatch = useDispatch()
   const isAuthCheck = useSelector(state => state.isAuth)
-
-  const infoAction = () => {
-    const openNotification = () => {
-      notification.open({
-        message: 'Notification Title',
-        description: 'Mission complete Participant :)',
-        icon: <SmileOutlined style={{ color: '#108ee9' }} />
-      })
-    }
-    openNotification()
-    return <Redirect to={'/participant-profile'} />
-  }
-
-  if (isAuthCheck)  return infoAction()
-
-
+  if (isAuthCheck)  return infoAction('Mission complete Participant :)', '/participant-profile')
   return <>
       <div className="participant-login__heading">
         V-RAP: Participant

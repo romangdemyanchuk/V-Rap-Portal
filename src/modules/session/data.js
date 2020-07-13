@@ -1,8 +1,7 @@
-
-import React from 'react'
 /*eslint-disable*/
+import React from 'react'
 
-export const allData = {
+export const allData =  ({
     caseStudies: [
         {
             key: "1",
@@ -95,7 +94,64 @@ export const allData = {
             actions: "Edit/Delete",
         },
     ],
-    researcherListColumns: [
+
+})
+
+export const caseStudiesColumns = (modalsOpen) => ({    caseStudiesColumns: [
+      {
+          title: "Title",
+          dataIndex: "title",
+          key: "title",
+      },
+      {
+          title: "VR File",
+          dataIndex: "vr_file",
+          key: "vr_file",
+          render: (text) => (
+            <a onClick={() => modalsOpen(true)}>{text}</a>
+          )
+      },
+  {
+      title: "Created at",
+      dataIndex: "created",
+      key: "created",
+  },
+  {
+      title: "Location",
+      key: "location",
+      dataIndex: "location",
+  },
+  {
+      title: "Age",
+      key: "age",
+      dataIndex: "age",
+  },
+  {
+      title: "Average Income",
+      key: "average",
+      dataIndex: "average",
+  },
+  {
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+  },
+  {
+      title: "Participated",
+      key: "participated",
+      dataIndex: "participated",
+  },
+  {
+      title: "Actions",
+      key: "actions",
+      dataIndex: "actions",
+      render: (text) => (
+        <a onClick={() => modalsOpen(true)}>{text}</a>
+      )
+},
+],})
+
+export const  researcherListColumns = (modalsOpen) => ({    researcherListColumns: [
         {
             title: "Name",
             dataIndex: "name",
@@ -117,58 +173,7 @@ export const allData = {
             dataIndex: "actions",
 
             render: (text) => (
-                <a>{text}</a>
-
+              <a onClick={() => modalsOpen(true)}>{text}</a>
             )
         }
-    ],
-    caseStudiesColumns: [
-        {
-            title: "Title",
-            dataIndex: "title",
-            key: "title",
-        },
-        {
-            title: "VR File",
-            dataIndex: "vr_file",
-            key: "vr_file",
-            render: (text) => <a>{text}</a>,
-        },
-        {
-            title: "Created at",
-            dataIndex: "created",
-            key: "created",
-        },
-        {
-            title: "Location",
-            key: "location",
-            dataIndex: "location",
-        },
-        {
-            title: "Age",
-            key: "age",
-            dataIndex: "age",
-        },
-        {
-            title: "Average Income",
-            key: "average",
-            dataIndex: "average",
-        },
-        {
-            title: "Status",
-            key: "status",
-            dataIndex: "status",
-        },
-        {
-            title: "Participated",
-            key: "participated",
-            dataIndex: "participated",
-        },
-        {
-            title: "Actions",
-            key: "actions",
-            dataIndex: "actions",
-            render: (text) => <a>{text}</a>,
-        },
-    ],
-}
+    ],})
