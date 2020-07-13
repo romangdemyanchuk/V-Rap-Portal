@@ -5,7 +5,7 @@ import { Form, Input, Button, notification } from "antd";
 import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { ApiLoginRequest } from '../../../modules/session/session-reducers'
-import {infoAction} from '../../utils/notification'
+import {infoAction} from '../../../utils/notification'
 import { Redirect } from 'react-router'
 
 const ResearcherLogin = () => {

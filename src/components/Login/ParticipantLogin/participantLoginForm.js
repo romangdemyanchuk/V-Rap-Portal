@@ -1,19 +1,29 @@
 /* eslint-disable */
-import React from 'react'
+import React, {useState} from 'react'
 import { Redirect } from "react-router-dom";
+import Loader from '../../Loader/loader'
 import "./participantLoginForm.scss";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons';
-import {infoAction} from '../../utils/notification'
+import {infoAction} from '../../../utils/notification'
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiLoginRequest } from '../../../modules/session/session-reducers';
 
-
-
 const ParticipantLoginForm = ({ setState }) => {
+
   let dispatch = useDispatch()
+
   const isAuthCheck = useSelector(state => state.isAuth)
-  if (isAuthCheck)  return infoAction('Mission complete Participant :)', '/participant-profile')
+
+  if (isAuthCheck) {
+    setisLoading(false);
+    return infoAction('Mission complete Participant :)', '/participant-profile')
+  }
+
+  const isLoading = useSelector(state => state.isLoading)
+  console.log(isLoading)
+
+
   return <>
       <div className="participant-login__heading">
         V-RAP: Participant
@@ -63,7 +73,7 @@ const ParticipantLoginForm = ({ setState }) => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" >
-          Login
+            {isLoading ? <Loader/> : 'Login'}
           </Button>
           <span className='orRegister-proposal'>
           Or

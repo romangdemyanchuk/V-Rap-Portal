@@ -1,12 +1,11 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOGIN_ERROR } from './session-constants'
+import { LOGIN, REGISTER, LOADING} from './session-constants'
 import { allData } from './data'
 import { RegisterApi, LoginApi } from '../../api'
-import { notification } from 'antd'
-import { SmileOutlined } from '@ant-design/icons'
-import {infoAction} from '../../components/utils/notification'
-import { Redirect } from 'react-router-dom'
-import React from 'react'
+import ParticipantLoginForm from '../../components/Login/ParticipantLogin/participantLoginForm'
+import {infoAction} from '../../utils/notification'
+import { loadingInfo } from '../../components/Main/Participant/ParticipantProfile/participantProfile'
+import React, { useState } from 'react'
 
 let { caseStudies, researchersList, caseStudiesColumns } = allData
 
@@ -17,10 +16,12 @@ const initialState = {
   adminLoginData: [],
   adminRegisterData: '',
   loginError: '',
-  isAuth: localStorage.getItem('isAuth')
+  isAuth: localStorage.getItem('isAuth'),
+  isLoading: false
 }
 
 const MainReducer = (state = initialState, action) => {
+  console.log('action', action);
   switch (action.type) {
     case LOGIN:
       return {
@@ -34,11 +35,12 @@ const MainReducer = (state = initialState, action) => {
         adminRegisterData: action.payload,
         isAuth: true,
       }
-  case LOGIN_ERROR:
-    return {
-      ...state,
-      loginError: action.payload,
-    }
+    case LOADING:
+
+      return {
+        ...state,
+        isLoading: action.payload
+      }
     default:
       return state;
   }
@@ -50,7 +52,7 @@ export const LoginAC = data => ({ type: LOGIN, payload: data })
 
 export const RegisterAC = data => ({ type: REGISTER, payload: data })
 
-export const LoginErrorAC = data => ({ type: LOGIN_ERROR, payload: data })
+export const LoadingAC = data => ({ type: LOADING, payload: data })
 
 export const ApiRegisterRequest = data => dispatch => {
   RegisterApi(data)
@@ -64,18 +66,19 @@ export const ApiRegisterRequest = data => dispatch => {
 export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
-      if (response.statusText == "OK") {
+      if (response.statusText == 'OK') {
+        dispatch(LoadingAC(true))
         dispatch(LoginAC(response))
         localStorage.setItem('userLoginToken', response.data.token)
         localStorage.setItem('isAuth', true)
+        dispatch(LoadingAC(false))
       }
-      // if (response.message) {
-      //   console.log(response.message);
-      //   dispatch(LoginAC(response))
-      // }
     }
   )
     .catch(e => {
-      infoAction(e.response.data.message, '/participant-profile');
+      if (e.response.data) {
+        infoAction(e.response.data.message, '/participant-profile');
+      }
   })
+
 }

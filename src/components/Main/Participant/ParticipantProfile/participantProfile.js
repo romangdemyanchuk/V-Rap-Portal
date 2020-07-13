@@ -5,7 +5,9 @@ import { Input, Button, Menu, Dropdown, message, InputNumber } from "antd";
 import { DownOutlined } from '@ant-design/icons';
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
-
+import { RegisterApi } from '../../../../api'
+import { RegisterAC } from '../../../../modules/session/session-reducers'
+import { useSelector } from 'react-redux'
 const ParticipantProfile = () => {
   function handleMenuClick(e) {
     message.info('Click on menu item.');
