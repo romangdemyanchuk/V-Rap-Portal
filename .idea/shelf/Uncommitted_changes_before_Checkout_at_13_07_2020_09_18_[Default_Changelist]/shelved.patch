@@ -1,0 +1,16 @@
+Index: src/api/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as axios from 'axios'\r\n/*eslint-disable*/\r\n\r\nconst instance = axios.create({\r\n    baseURL: 'https://v-rap.herokuapp.com/'\r\n})\r\n\r\nexport const RegisterApi = (regData) => {\r\n    return instance.post(`api/auth/register`, regData)\r\n}\r\n\r\nexport const LoginApi = (loginData) => {\r\n    return instance.post(`api/auth/login`, loginData)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/api/index.js	(revision a9b4bde09c14da8b50015e5d41e76b81b93ffbcf)
++++ src/api/index.js	(date 1594583197447)
+@@ -11,4 +11,4 @@
+ 
+ export const LoginApi = (loginData) => {
+     return instance.post(`api/auth/login`, loginData)
+-}
+\ No newline at end of file
++}
