@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React from 'react'
-import "./researcherLoginForm.css"
 import { Form, Input, Button} from "antd";
 import { UserOutlined, LockOutlined} from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
 import Loader from '../../Loader/loader'
 import {infoAction} from '../../../utils/notification'
+import "./researcherLoginForm.css"
 
 const ResearcherLogin = () => {
 

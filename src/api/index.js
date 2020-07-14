@@ -1,14 +1,18 @@
-import * as axios from 'axios'
+import axios from 'axios'
 /*eslint-disable*/
 
-const instance = axios.create({
-    baseURL: 'https://v-rap.herokuapp.com/'
-})
+// const instance = axios.create({
+     const baseURL ='https://varapan.herokuapp.com'
+// })
 
 export const RegisterApi = (regData) => {
-    return instance.post(`api/auth/register`, regData)
+    return axios(`${baseURL}/api/auth/register`, {method: 'post', regData})
 }
 
 export const LoginApi = (loginData) => {
-    return instance.post(`api/auth/login`, loginData)
+    return axios(`${baseURL}/api/auth/login`, {method: 'post', loginData})
+}
+
+export const EditUserInfoApi = (token, data) => {
+    return axios(`${baseURL}/api/users/useredit`, {headers: {'Authorization': token,},  method: 'post' , data})
 }

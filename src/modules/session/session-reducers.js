@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOADING} from './session-constants'
+import { LOGIN, REGISTER, LOADING, EDIT_USER} from './session-constants'
 import { allData } from './data'
-import { RegisterApi, LoginApi } from '../../api'
+import { RegisterApi, LoginApi, EditUserInfoApi } from '../../api'
 import {infoAction} from '../../utils/notification'
 import React from 'react'
 
@@ -15,11 +15,11 @@ const initialState = {
   adminRegisterData: '',
   loginError: '',
   isAuth: localStorage.getItem('isAuth'),
-  isLoading: false
+  isLoading: false,
+  editUsersInfo: {}
 }
 
 const MainReducer = (state = initialState, action) => {
-  console.log('action', action);
   switch (action.type) {
     case LOGIN:
       return {
@@ -38,11 +38,16 @@ const MainReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload
       }
+  case EDIT_USER:
+    console.log('action.payload', action.payload)
+    return {
+      ...state,
+      editUsersInfo: action.payload
+    }
     default:
       return state;
   }
 }
-
 export default MainReducer
 
 export const LoginAC = data => ({ type: LOGIN, payload: data })
@@ -50,6 +55,8 @@ export const LoginAC = data => ({ type: LOGIN, payload: data })
 export const RegisterAC = data => ({ type: REGISTER, payload: data })
 
 export const LoadingAC = data => ({ type: LOADING, payload: data })
+
+export const EditUserInfoAC = data => ({ type: EDIT_USER, payload: data })
 
 export const ApiRegisterRequest = data => dispatch => {
   RegisterApi(data)
@@ -59,22 +66,31 @@ export const ApiRegisterRequest = data => dispatch => {
       }
     })
 }
+const userToken = localStorage.getItem("userLoginToken");
+
+export const ApiEditUserInfo = data => dispatch => {
+  EditUserInfoApi(userToken, data)
+    .then(response => {
+      if (response) {
+        dispatch(EditUserInfoAC(response))
+      }
+    })
+}
 
 export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
-      if (response.statusText == 'OK') {
+      // if (response.statusText == 'OK') {
         dispatch(LoginAC(response))
         localStorage.setItem('userLoginToken', response.data.token)
         localStorage.setItem('isAuth', true)
-      }
+      // }
     }
   )
     .catch(e => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, '/participant-profile');
       }
-      infoAction('ERROR', '/participant-profile')
   }).finally(() => {
     dispatch(LoadingAC(false))
   })

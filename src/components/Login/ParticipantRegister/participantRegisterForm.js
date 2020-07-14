@@ -6,11 +6,17 @@ import Loader from '../../Loader/loader'
 import "./participantRegisterForm.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { ApiRegisterRequest, LoadingAC } from '../../../modules/session/session-reducers'
+import { infoAction } from '../../../utils/notification'
 
 const ParticipantRegisterForm = ({ setState }) => {
-
   let dispatch = useDispatch()
+
+  const isAuthCheck = useSelector(state => state.isAuth)
   const isLoading = useSelector(state => state.isLoading)
+
+  if (isAuthCheck) {
+    return infoAction('Mission complete Participant :)', '/participant-profile')
+  }
 
   const handleSubmit = (values) => {
     ApiRegisterRequest(values)(dispatch);
@@ -60,7 +66,9 @@ const ParticipantRegisterForm = ({ setState }) => {
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" >
-                {isLoading ? <Loader/> : 'Register'}
+                {/*{isLoading ? <Loader/> : */}
+                  'Register'
+                {/*}*/}
                 </Button>
             </Form.Item>
           </Form>

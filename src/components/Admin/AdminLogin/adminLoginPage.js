@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React from "react";
-import "./adminLoginPage.css";
 import Loader from '../../Loader/loader'
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from 'react-redux'
 import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
+import "./adminLoginPage.css";
 
 const AdminLoginForm = () => {
-
   let dispatch = useDispatch()
 
   const isLoading = useSelector(state => state.isLoading)

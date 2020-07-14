@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { useState } from 'react'
-import "./listOfCaseStudies.css";
 import { Table } from "antd";
 import { useSelector } from "react-redux";
 import AdminsChanges from './CaseStudiesChanges'
 import { caseStudiesColumns as list } from  '../../../../modules/session/data'
+import "./listOfCaseStudies.css";
 
 const ListOfCaseStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);

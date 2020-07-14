@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React from "react";
 import {Link} from "react-router-dom";
-import "./adminPage.scss";
 import { Button } from 'antd'
+import "./adminPage.scss";
 
 const AdminPage = () => {
   return <div className="admin-page">

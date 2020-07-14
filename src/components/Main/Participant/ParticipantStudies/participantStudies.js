@@ -3,9 +3,9 @@ import React, {useState} from "react";
 import { Button } from "antd";
 import { Link} from "react-router-dom";
 import userImg from "../../../../images/user.svg";
-import "./participantStudies.scss";
 import FileUpload from './FileUpload'
 import WithAuthRedirect from "../../../../hoc/hoc";
+import "./participantStudies.scss";
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);

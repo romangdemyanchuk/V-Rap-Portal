@@ -46,13 +46,7 @@ const ParticipantProfile = () => {
             </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Location</p>
-              <div id="components-dropdown-demo-dropdown-button">
-                <Dropdown overlay={menu}>
-                  <Button>
-                    --Countries-- <DownOutlined />
-                  </Button>
-                </Dropdown>
-              </div>
+
             </div>
            <div className="participant-profile__fields-wrapper">
              <p>Average Income(USD)</p>
@@ -60,13 +54,7 @@ const ParticipantProfile = () => {
            </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Main VR Headset</p>
-              <div id="components-dropdown-demo-dropdown-button">
-                <Dropdown overlay={menu}>
-                  <Button>
-                    --Headsets-- <DownOutlined />
-                  </Button>
-                </Dropdown>
-              </div>
+
             </div>
           </div>
           <div className="participant-profile__changes-btns">

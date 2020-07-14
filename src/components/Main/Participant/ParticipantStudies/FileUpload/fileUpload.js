@@ -7,10 +7,12 @@ import "antd/dist/antd.css";
 
 const FileUpload = ({modalOpen, setmodalOpen}) => {
   const [successModalIsOpen, setsuccessModalIsOpen] = useState(false);
+
   const uploadClick = () => {
     setmodalOpen(false);
     setsuccessModalIsOpen(true)
   }
+
   const closeModal = () => {
     setmodalOpen(false);
   }
@@ -21,7 +23,6 @@ const FileUpload = ({modalOpen, setmodalOpen}) => {
       authorization: "authorization-text",
     },
     onChange(info) {
-      console.log(1);
       if (info.file.status !== "uploading") {
         setmodalOpen(false);
       }

@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React from "react";
-import "./aboutStudies.css";
 import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
 import {message, Button, Modal, Progress } from "antd";
+import "./aboutStudies.css";
 
 const AboutStudies = ({ successModalIsOpen, setsuccessModalIsOpen }) => {
   const  closeModal = e => {

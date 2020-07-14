@@ -1,14 +1,14 @@
 /* eslint-disable */
 import React, {useState} from "react";
 import { message, Button, Modal, Input } from 'antd'
-import "./researcherCreate.css";
 import "antd/dist/antd.css";
+import "./researcherCreate.css";
 
 const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
   const deleteClick = () => {
     setmodalOpen(false);
   }
-  const  closeModal = () => {
+  const closeModal = () => {
     setmodalOpen(false);
   }
   const props = {

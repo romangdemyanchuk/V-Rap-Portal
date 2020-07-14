@@ -3,8 +3,8 @@ import React from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import userImg from "../../../../images/user.svg";
-import "./researcherStudies.css";
 import WithAuthRedirect from "../../../../hoc/hoc";
+import "./researcherStudies.css";
 
 const ResearcherStudies = () => {
   return (

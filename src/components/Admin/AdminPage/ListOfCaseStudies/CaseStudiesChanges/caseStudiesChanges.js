@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, {useState} from "react";
 import { message, Button, Modal, Input } from 'antd'
-import "./caseStudiesChanges.css";
 import "antd/dist/antd.css";
 import DeleteModal from '../../ListOfResearchers/ResearcherChanges/DeleteModal'
+import "./caseStudiesChanges.css";
 
 const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
