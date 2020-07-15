@@ -101,7 +101,7 @@
 .changes-modal__changes-btns{
     margin-top: 20px;
     display: flex;
-                justify-content: space-between;
+    justify-content: space-between;
     button {
         border-radius: 5px;
     }
@@ -110,5 +110,13 @@
         margin-right: 8px;
         font-weight: 600;
     }
+}
+.ant-cascader-picker,
+.ant-cascader-menu {
+    width: 100%;
+}
+.ant-cascader-menus {
+    width: 250px;
+    text-align: center;
 }
 

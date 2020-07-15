@@ -7,15 +7,19 @@ import { DownOutlined } from '@ant-design/icons'
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
 import "./personalStats.scss";
+import { countryVariants, headsetsVariants } from '../../../../../modules/session/data'
+import { ApiEditUserInfo, ApiNewCaseInfo } from '../../../../../modules/session/session-reducers'
+import { useDispatch } from 'react-redux'
 
 const PersonalStats = () => {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
   const [location, setLocation] = useState('');
-  const [age, setAge] = useState('');
-  const [avgIncome, setAvgIncome] = useState('');
-  const [parNum, setParNum] = useState('');
+  const [age, setAge] = useState([10,85]);
+  const [avgIncome, setAvgIncome] = useState([10,85]);
+  const [parNum, setParNum] = useState(100);
   const [headsets, setHeadsets] = useState('');
+  let dispatch = useDispatch()
 
   const resetFieldsValue = () => {
     setTitle('')
@@ -26,30 +30,21 @@ const PersonalStats = () => {
     setParNum('')
     setHeadsets('')
   }
-  const options = [
-    {
-      value: 'ukraine',
-      label: 'Ukraine',
-    },
-    {
-      value: 'italy',
-      label: 'Italy',
-    },
-    {
-      value: 'usa',
-      label: 'USA',
-    },
-    {
-      value: 'canada',
-      label: 'Canada',
-    },
-    {
-      value: 'german',
-      label: 'German',
-    },
-
-  ];
-
+  const ageRangeChange = (value) => {
+    setAge(value);
+  }
+  const avgRangeChange = (value) => {
+    setAvgIncome(value)
+  }
+  const parNumberChange = (value) => {
+    setParNum(value);
+  }
+  const cascaderHeadsetsChange = (value) => {
+    setHeadsets(value);
+  }
+  const cascaderLocationChange = (value) => {
+    setLocation(value);
+  }
   return (
     <div className="root-PersonalStats">
       <div className="personal-stats__tns-wrapper">
@@ -89,8 +84,8 @@ const PersonalStats = () => {
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Location</p>
-                <Cascader options={options} placeholder="--Countries--"
-                          onChange={e => setLocation(e.target.value)}
+                <Cascader options={countryVariants} placeholder="--Countries--"
+                          onChange={cascaderLocationChange}
                           value={location}
                 />
               </div>
@@ -98,30 +93,42 @@ const PersonalStats = () => {
             <div className="personal-stats__right-block">
               <div className="personal-stats__fields-wrapper">
                 <p>Age(range)</p>
-                <Slider range defaultValue={[10, 85]}
-                        // onChange={e => setAge(e.target.value)}
-                        // value={age}
+                <Slider range
+                        onChange={ageRangeChange}
+                        value={age}
                   />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Average Income(range)</p>
-                <Slider range defaultValue={[10, 85]}
-                        // onChange={e => setAvgIncome(e.target.value)}
-                        // value={avgIncome}
+                <Slider range
+                        onChange={avgRangeChange}
+                        value={avgIncome}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Required number of participant</p>
-                <InputNumber min={1} max={300} defaultValue={100}
-                             className="input-number"/>
+                <InputNumber min={1} max={300}
+                             className="input-number"
+                             onChange={parNumberChange}
+                             value={parNum}
+                />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Supported Headsets</p>
+                <Cascader options={headsetsVariants} placeholder="--Headsets--"
+                          onChange={cascaderHeadsetsChange}
+                          value={headsets}
+                />
               </div>
             </div>
           </div>
           <div className="personal-stats__footer-btns">
-            <Button type="primary" className="personal-stats__create-research-btn">Create Research Study</Button>
+            <Button type="primary" className="personal-stats__create-research-btn"
+                onClick={() => ApiNewCaseInfo({title:title, description:descr, location:location,
+                age:age, income:avgIncome, participant:parNum, headset:headsets})(dispatch)}
+            >
+              Create Research Study
+            </Button>
             <Link to={'/researcher-profile'}>
               <Button>Close Page</Button>
             </Link>

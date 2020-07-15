@@ -96,7 +96,6 @@ export const allData =  ({
     ],
 
 })
-
 export const caseStudiesColumns = (modalsOpen) => ({caseStudiesColumns: [
       {
           title: "Title",
@@ -150,7 +149,6 @@ export const caseStudiesColumns = (modalsOpen) => ({caseStudiesColumns: [
           )
      },
 ],})
-
 export const  researcherListColumns = (modalsOpen) => ({researcherListColumns:[
         {
             title: "Name",
@@ -177,3 +175,39 @@ export const  researcherListColumns = (modalsOpen) => ({researcherListColumns:[
             )
         }
     ],})
+export const countryVariants = [
+    {
+        value: 'ukraine',
+        label: 'Ukraine',
+    },
+    {
+        value: 'italy',
+        label: 'Italy',
+    },
+    {
+        value: 'usa',
+        label: 'USA',
+    },
+    {
+        value: 'canada',
+        label: 'Canada',
+    },
+    {
+        value: 'german',
+        label: 'German',
+    },
+];
+export const headsetsVariants = [
+    {
+        value: 'headsets1',
+        label: 'Headsets1',
+    },
+    {
+        value: 'headsets2',
+        label: 'Headsets2',
+    },
+    {
+        value: 'headsets3',
+        label: 'Headsets3',
+    }
+];

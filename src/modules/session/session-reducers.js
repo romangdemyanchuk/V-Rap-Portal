@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOADING, EDIT_USER} from './session-constants'
+import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO} from './session-constants'
 import { allData } from './data'
-import { RegisterApi, LoginApi, EditUserInfoApi } from '../../api'
+import { RegisterApi, LoginApi, EditUserInfoApi, UserInfoApi, AddCaseApi } from '../../api'
 import {infoAction} from '../../utils/notification'
 import React from 'react'
 
@@ -16,7 +16,8 @@ const initialState = {
   loginError: '',
   isAuth: localStorage.getItem('isAuth'),
   isLoading: false,
-  editUsersInfo: {}
+  newCaseInfo: {},
+  userInfo: {}
 }
 
 const MainReducer = (state = initialState, action) => {
@@ -38,11 +39,16 @@ const MainReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload
       }
-  case EDIT_USER:
+  case ADD_CASE:
+    return {
+      ...state,
+      newCaseInfo: action.payload
+    }
+  case USER_INFO:
     console.log('action.payload', action.payload)
     return {
       ...state,
-      editUsersInfo: action.payload
+      userInfo: action.payload
     }
     default:
       return state;
@@ -56,7 +62,9 @@ export const RegisterAC = data => ({ type: REGISTER, payload: data })
 
 export const LoadingAC = data => ({ type: LOADING, payload: data })
 
-export const EditUserInfoAC = data => ({ type: EDIT_USER, payload: data })
+export const addCaseAC = data => ({ type: ADD_CASE, payload: data })
+
+export const UserInfoAC = data => ({ type: USER_INFO, payload: data })
 
 export const ApiRegisterRequest = data => dispatch => {
   RegisterApi(data)
@@ -67,24 +75,59 @@ export const ApiRegisterRequest = data => dispatch => {
     })
 }
 const userToken = localStorage.getItem("userLoginToken");
+console.log(userToken);
 
 export const ApiEditUserInfo = data => dispatch => {
+  // console.log('data', data);
+  // console.log('userToken', userToken);
   EditUserInfoApi(userToken, data)
     .then(response => {
+      // console.log('response', response);
       if (response) {
-        dispatch(EditUserInfoAC(response))
+        dispatch(UserInfoAC(response))
+      }
+    }).finally(() => {
+    dispatch(LoadingAC(false))
+  })
+  dispatch(LoadingAC(true))
+}
+
+export const ApiNewCaseInfo = data => dispatch => {
+  console.log(userToken);
+  AddCaseApi(userToken, data)
+    .then(response => {
+      console.log('response', response);
+      if (response) {
+        dispatch(addCaseAC(response))
       }
     })
 }
 
+
+export const ApiUserInfo = () => dispatch => {
+  UserInfoApi(userToken)
+    .then(response => {
+      if (response.data) {
+        const {area, name, school} = response.data;
+        dispatch(UserInfoAC({area, school, name}))
+      }
+    }).finally(() => {
+    dispatch(LoadingAC(false))
+  })
+}
+
+
+
+
+
 export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
-      // if (response.statusText == 'OK') {
+      if (response.statusText == 'OK') {
         dispatch(LoginAC(response))
         localStorage.setItem('userLoginToken', response.data.token)
         localStorage.setItem('isAuth', true)
-      // }
+      }
     }
   )
     .catch(e => {
@@ -94,6 +137,4 @@ export const ApiLoginRequest = data => dispatch => {
   }).finally(() => {
     dispatch(LoadingAC(false))
   })
-
-
 }

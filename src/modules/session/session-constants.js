@@ -1,4 +1,5 @@
 export const LOGIN = 'LOGIN'
 export const REGISTER = 'REGISTER'
 export const LOADING = 'LOADING'
-export const EDIT_USER = 'EDIT_USER'
+export const ADD_CASE = 'ADD_CASE'
+export const USER_INFO = 'USER_INFO'

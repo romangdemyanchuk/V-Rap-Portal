@@ -1,26 +1,13 @@
 /* eslint-disable */
 import React from "react";
 import { Link } from "react-router-dom";
-import { Input, Button, Menu, Dropdown, InputNumber } from "antd";
+import { Input, Button, Menu, Dropdown, InputNumber, Cascader } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
+import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
 
 const ParticipantProfile = () => {
-  const menu = (
-    <Menu>
-      <Menu.Item key="1">
-        1st menu item
-      </Menu.Item>
-      <Menu.Item key="2">
-        2nd menu item
-      </Menu.Item>
-      <Menu.Item key="3">
-        3rd item
-      </Menu.Item>
-    </Menu>
-  );
-
   return (
     <div className="root-PartProfile">
       <div className="participant-profile__btns-wrapper">
@@ -46,7 +33,10 @@ const ParticipantProfile = () => {
             </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Location</p>
-
+              <Cascader options={countryVariants} placeholder="--Countries--"
+                // onChange={e => setLocation(e.target.value)}
+                // value={location}
+              />
             </div>
            <div className="participant-profile__fields-wrapper">
              <p>Average Income(USD)</p>
@@ -54,7 +44,7 @@ const ParticipantProfile = () => {
            </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Main VR Headset</p>
-
+              <Cascader options={headsetsVariants} placeholder="--Headsets--"/>
             </div>
           </div>
           <div className="participant-profile__changes-btns">
