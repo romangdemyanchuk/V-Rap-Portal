@@ -35,17 +35,20 @@
 .ant-modal-footer {
     display: none;
 }
-.ant-progress-outer {
-    width: 70%;
-}
-.ant-progress-line {
-    text-align: center;
-}
-.ant-progress-inner {
-    height: 15px;
-}
+//.ant-progress-outer {
+//    width: 70%;
+//}
+//.ant-progress-line {
+//    text-align: center;
+//}
+//.ant-progress-inner {
+//    height: 15px;
+//}
 .ant-progress-bg {
     height: 100% !important;
+}
+.personal-stats__left-block .ant-progress-bg {
+    //margin-top: 10px;
 }
 .ant-modal-body {
     padding: 0;
@@ -53,6 +56,6 @@
 .ant-modal {
     width: 25vw;
 }
-.ant-progress {
-    margin: 15px 0;
-}
+//.ant-progress {
+//    margin: 15px 0;
+//}

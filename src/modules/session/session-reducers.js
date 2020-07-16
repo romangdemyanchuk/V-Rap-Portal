@@ -1,7 +1,15 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO} from './session-constants'
+import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO, DELETE_CASE, CHANGE_STATUS} from './session-constants'
 import { allData } from './data'
-import { RegisterApi, LoginApi, EditUserInfoApi, UserInfoApi, AddCaseApi } from '../../api'
+import {
+  RegisterApi,
+  LoginApi,
+  EditUserInfoApi,
+  UserInfoApi,
+  AddCaseApi,
+  DeleteCaseApi,
+  ChangeStatusApi,
+} from '../../api'
 import {infoAction} from '../../utils/notification'
 import React from 'react'
 
@@ -17,7 +25,34 @@ const initialState = {
   isAuth: localStorage.getItem('isAuth'),
   isLoading: false,
   newCaseInfo: {},
-  userInfo: {}
+  userInfo: {},
+  statusNumber : null,
+  researcherStudies: [
+    {
+      id:1,
+      heading: 'Research Study 1',
+      info: 'Compatible Devices: ATC Vive, Oculus Rift / Rift' +
+            'ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S',
+      required: 'Required Headset',
+      device: 'Compatible Devices: ATC Vive, Oculus Rift / Rift S'
+    },
+    {
+      id:2,
+      heading: 'Research Study 2',
+      info: 'Compatible Devices: ATC Vive, Oculus Rift / Rift' +
+        'ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S',
+      required: 'Required Headset',
+      device: 'Compatible Devices: ATC Vive, Oculus Rift / Rift S'
+    },
+    {
+      id:3,
+      heading: 'Research Study 3',
+      info: 'Compatible Devices: ATC Vive, Oculus Rift / Rift' +
+        'ATC Vive, Oculus Rift ATC Vive, Oculus Rift / Rift S',
+      required: 'Required Headset',
+      device: 'Compatible Devices: ATC Vive, Oculus Rift / Rift S'
+    }
+  ]
 }
 
 const MainReducer = (state = initialState, action) => {
@@ -44,10 +79,20 @@ const MainReducer = (state = initialState, action) => {
       ...state,
       newCaseInfo: action.payload
     }
+  case DELETE_CASE:
+    return {
+      ...state,
+      researcherStudies: action.payload
+    }
   case USER_INFO:
     return {
       ...state,
       userInfo: action.payload
+    }
+  case CHANGE_STATUS:
+    return {
+      ...state,
+      statusNumber: action.payload
     }
     default:
       return state;
@@ -63,6 +108,10 @@ export const LoadingAC = data => ({ type: LOADING, payload: data })
 
 export const addCaseAC = data => ({ type: ADD_CASE, payload: data })
 
+export const deleteCaseAC = data => ({ type: DELETE_CASE, payload: data })
+
+export const changeStatusAC = data => ({ type: CHANGE_STATUS, payload: data })
+
 export const UserInfoAC = data => ({ type: USER_INFO, payload: data })
 
 export const ApiRegisterRequest = data => dispatch => {
@@ -76,11 +125,8 @@ export const ApiRegisterRequest = data => dispatch => {
 let userToken = localStorage.getItem("userLoginToken");
 
 export const ApiEditUserInfo = data => dispatch => {
-  // console.log(userToken);
-  // console.log(data);
   EditUserInfoApi(userToken, data)
     .then(response => {
-      console.log('response', response)
       if (response) {
         dispatch(UserInfoAC(response))
       }
@@ -95,18 +141,35 @@ export const ApiNewCaseInfo = data => dispatch => {
   console.log(userToken);
   AddCaseApi(userToken, data)
     .then(response => {
-      console.log('response', response);
+      dispatch(LoadingAC(true))
       if (response) {
         dispatch(addCaseAC(response))
       }
-    })
+    }).finally(() => {
+    infoAction('You successfully create new study!', '/researcher-studies')
+    dispatch(LoadingAC(false))
+  })
+  dispatch(LoadingAC(true))
 }
-export const ApiDeleteCaseInfo = data => dispatch => {
-  DeleteCaseApi(userToken, data)
+export const ApiDeleteCaseInfo = (id) => dispatch => {
+  DeleteCaseApi(userToken, id)
     .then(response => {
-      console.log('response', response);
+      dispatch(LoadingAC(true))
       if (response) {
-        dispatch(addCaseAC(response))
+        dispatch(deleteCaseAC(response))
+      }
+    }).finally(() => {
+    infoAction('Case study was successfully deleted!', '/researcher-studies')
+    dispatch(LoadingAC(false))
+  })
+  dispatch(LoadingAC(true))
+}
+
+export const ApiChangeStatus = (id, num_status) => dispatch => {
+  ChangeStatusApi(id, num_status)
+    .then(response => {
+      if (response) {
+        dispatch(changeStatusAC(response))
       }
     })
 }
@@ -126,16 +189,12 @@ export const ApiUserInfo = () => dispatch => {
 }
 
 
-
-
-
 export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
       if (response.statusText == 'OK') {
         let  tokenData = response.data.token;
         let token = tokenData.substr(tokenData.indexOf(" ") + 1);
-        console.log('response.data.token', token)
         dispatch(LoginAC(response))
         localStorage.setItem('userLoginToken', token)
         localStorage.setItem('isAuth', true)

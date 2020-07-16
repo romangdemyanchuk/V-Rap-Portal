@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, {useState} from "react";
-import { Button } from "antd";
+import { Button, Tag } from 'antd'
 import { Link} from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import FileUpload from './FileUpload'
@@ -43,7 +43,7 @@ const ParticipantStudies = () => {
             </div>
           </div>
           <div className="participant-studies__btns">
-            <Button className="status-btn">Closed</Button>
+            <Tag className="status-btn">Closed</Tag>
           </div>
         </div>
         <div className="participant-studies__load-btns">
@@ -74,7 +74,7 @@ const ParticipantStudies = () => {
             </div>
           </div>
           <div className="participant-studies__btns">
-            <Button className="status-btn">Closed</Button>
+            <Tag className="status-btn">Closed</Tag>
           </div>
         </div>
         <div className="participant-studies__load-btns">
@@ -105,7 +105,7 @@ const ParticipantStudies = () => {
             </div>
           </div>
           <div className="participant-studies__btns">
-            <Button className="status-btn">Closed</Button>
+            <Tag className="status-btn">Closed</Tag>
           </div>
         </div>
         <div className="participant-studies__load-btns">

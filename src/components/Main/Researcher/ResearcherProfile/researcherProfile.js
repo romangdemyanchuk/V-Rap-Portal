@@ -13,10 +13,10 @@ const ResearcherProfile = () => {
   const [nameField, setnameField] = useState('');
   const [schoolField, setschoolField] = useState('');
   const [areaField, setareaField] = useState('');
-  console.log('nameField', nameField)
 
   const isLoading = useSelector(state => state.isLoading)
   const userData = useSelector(state => state.userInfo)
+  console.log(userData)
 
   let dispatch = useDispatch()
 
@@ -68,7 +68,7 @@ const ResearcherProfile = () => {
           </div>
           <div className="researcher-profile__changes-btns">
             <Button className="researcher-profile__save-btn" type="primary"
-                    onClick={() =>{ submitEditUserInfo({name: nameField, school: schoolField, area: areaField})(dispatch)}} >
+                    onClick={() =>{ ApiEditUserInfo({name: nameField, school: schoolField, area: areaField})(dispatch)}} >
               {isLoading ? <Loader/> :'Save changes'}
             </Button>
             <Button className="researcher-profile__cancel-btn"

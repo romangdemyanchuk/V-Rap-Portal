@@ -2,14 +2,15 @@
 import React, { useState } from 'react'
 import userImg from "../../../../../images/user.svg";
 import { Link } from "react-router-dom";
-import { Input, Button, Progress, Dropdown, Menu, message, Slider, InputNumber, Cascader } from 'antd'
+import { Input, Button, Progress, Dropdown, Menu, message, Slider, InputNumber, Cascader, Upload } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
 import "./personalStats.scss";
 import { countryVariants, headsetsVariants } from '../../../../../modules/session/data'
 import { ApiEditUserInfo, ApiNewCaseInfo } from '../../../../../modules/session/session-reducers'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../../../../Loader/loader'
 
 const PersonalStats = () => {
   const [title, setTitle] = useState('');
@@ -20,6 +21,8 @@ const PersonalStats = () => {
   const [parNum, setParNum] = useState(100);
   const [headsets, setHeadsets] = useState('');
   let dispatch = useDispatch()
+  const isLoading = useSelector(state => state.isLoading)
+  console.log('isLoading', isLoading);
 
   const resetFieldsValue = () => {
     setTitle('')
@@ -45,6 +48,9 @@ const PersonalStats = () => {
   const cascaderLocationChange = (value) => {
     setLocation(value);
   }
+  const uploadProps = {
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
+  };
   return (
     <div className="root-PersonalStats">
       <div className="personal-stats__tns-wrapper">
@@ -61,13 +67,23 @@ const PersonalStats = () => {
           <div className="personal-stats__info-img">
             <img src={userImg} alt="userImg" />
             <div className="personal-stats__upload-btns">
-              <Button className="file-upload-btn" type="primary">Upload Image</Button>
+              <Upload {...uploadProps}>
+                <Button className="file-upload-btn" type="primary">
+                  Upload Image
+                </Button>
+              </Upload>
             </div>
           </div>
           <div className="personal-stats__blocks-wrapper">
             <div className="personal-stats__left-block">
-              <Button className="personal-stats__btn">Upload VR File</Button>
-              <Progress percent={30} size="small" />
+              <div className="personal-stats__vr-upload">
+                <Upload {...uploadProps}>
+                  <Button className="personal-stats__btn">
+                    Upload VR File
+                  </Button>
+                </Upload>
+              </div>
+              {/*<Progress percent={30} size="small" />*/}
               <div className="personal-stats__fields-wrapper">
                 <p>Title</p>
                 <Input placeholder="Title"
@@ -127,7 +143,7 @@ const PersonalStats = () => {
                 onClick={() => ApiNewCaseInfo({title:title, description:descr, location:location,
                 age:age, income:avgIncome, participant:parNum, headset:headsets})(dispatch)}
             >
-              Create Research Study
+              {isLoading ? <Loader/> : 'Create Research Study'}
             </Button>
             <Link to={'/researcher-profile'}>
               <Button>Close Page</Button>
