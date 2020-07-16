@@ -7,6 +7,7 @@ import { ApiEditUserInfo, ApiUserInfo, LoadingAC } from '../../../../modules/ses
 import Loader from '../../../Loader/loader'
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from 'react-redux'
+import { infoAction } from '../../../../utils/notification'
 
 const ResearcherProfile = () => {
   const [nameField, setnameField] = useState('');

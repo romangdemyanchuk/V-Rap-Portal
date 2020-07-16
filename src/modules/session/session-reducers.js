@@ -45,7 +45,6 @@ const MainReducer = (state = initialState, action) => {
       newCaseInfo: action.payload
     }
   case USER_INFO:
-    console.log('action.payload', action.payload)
     return {
       ...state,
       userInfo: action.payload
@@ -74,20 +73,20 @@ export const ApiRegisterRequest = data => dispatch => {
       }
     })
 }
-const userToken = localStorage.getItem("userLoginToken");
-console.log(userToken);
+let userToken = localStorage.getItem("userLoginToken");
 
 export const ApiEditUserInfo = data => dispatch => {
-  // console.log('data', data);
-  // console.log('userToken', userToken);
+  // console.log(userToken);
+  // console.log(data);
   EditUserInfoApi(userToken, data)
     .then(response => {
-      // console.log('response', response);
+      console.log('response', response)
       if (response) {
         dispatch(UserInfoAC(response))
       }
     }).finally(() => {
     dispatch(LoadingAC(false))
+    infoAction('Your information is successfully updated!', '/researcher-profile')
   })
   dispatch(LoadingAC(true))
 }
@@ -102,11 +101,21 @@ export const ApiNewCaseInfo = data => dispatch => {
       }
     })
 }
+export const ApiDeleteCaseInfo = data => dispatch => {
+  DeleteCaseApi(userToken, data)
+    .then(response => {
+      console.log('response', response);
+      if (response) {
+        dispatch(addCaseAC(response))
+      }
+    })
+}
 
 
 export const ApiUserInfo = () => dispatch => {
   UserInfoApi(userToken)
     .then(response => {
+      console.log(response)
       if (response.data) {
         const {area, name, school} = response.data;
         dispatch(UserInfoAC({area, school, name}))
@@ -124,8 +133,11 @@ export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
       if (response.statusText == 'OK') {
+        let  tokenData = response.data.token;
+        let token = tokenData.substr(tokenData.indexOf(" ") + 1);
+        console.log('response.data.token', token)
         dispatch(LoginAC(response))
-        localStorage.setItem('userLoginToken', response.data.token)
+        localStorage.setItem('userLoginToken', token)
         localStorage.setItem('isAuth', true)
       }
     }

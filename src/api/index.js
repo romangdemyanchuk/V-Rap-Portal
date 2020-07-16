@@ -1,4 +1,4 @@
-import axios from 'axios'
+import * as axios from 'axios'
 /*eslint-disable*/
 
 const instance = axios.create({
@@ -14,13 +14,21 @@ export const LoginApi = (loginData) => {
 }
 
 export const EditUserInfoApi = (token, data) => {
-    return instance(`https://varapan.herokuapp.com/api/users/useredit`, {headers: {'Authorization': token},  method: 'post', data})
+    console.log('token1', token)
+    console.log('data', data)
+    return instance.post(`https://varapan.herokuapp.com/api/users/useredit`, {headers: {
+        'Content-Type': 'application/json','Authorization': token}, data})
 }
 
 export const UserInfoApi = (token) => {
-  return instance(`https://varapan.herokuapp.com/api/users/user`, {headers: {'Authorization': token},  method: 'post'})
+  console.log('token2', token);
+  return instance.post(`api/users/user`, {}, {headers: {'Authorization': token}})
 }
 
 export const AddCaseApi = (token, data) => {
   return instance(`https://varapan.herokuapp.com/api/case/add`, {headers: {'Authorization': token},  method: 'post', data})
+}
+
+export const DeleteCaseApi = (token, data) => {
+  return instance(`https://varapan.herokuapp.com/api/case/delete`, {headers: {'Authorization': token},  method: 'post', data})
 }
