@@ -1,8 +1,17 @@
 import * as axios from 'axios'
 /*eslint-disable*/
 
+const baseURL = 'https://varapan.herokuapp.com/' 
+
 const instance = axios.create({
-      baseURL:'https://varapan.herokuapp.com/'
+  baseURL
+})
+
+const instanceWithToken = (token) =>  axios.create({
+      baseURL,
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
 })
 
 export const RegisterApi = (regData) => {
@@ -14,23 +23,19 @@ export const LoginApi = (loginData) => {
 }
 
 export const EditUserInfoApi = (token, data) => {
-    return instance.post(`api/users/useredit`,
-      {headers: {'Authorization': token}, data})
+    return instanceWithToken(token).post(`api/users/useredit`, data)
 }
 
 export const UserInfoApi = (token) => {
-  return instance.post(`api/users/user`,
-    {headers: {'Authorization': token}})
+  return instanceWithToken(token).post(`api/users/user`,{})
 }
 
 export const AddCaseApi = (token, data) => {
-  return instance.post(`api/case/add`,
-    {headers: {'Authorization': token}, data})
+  return instanceWithToken(token).post(`api/case/add`,data)
 }
 
 export const DeleteCaseApi = (token, id) => {
-  return instance.delete(`api/case/delete`,
-    {caseId: id}, {headers: {'Authorization': token}})
+  return instanceWithToken(token).delete(`api/case/delete`, {caseId: id})
 }
 
 export const ChangeStatusApi = (id, num_status) => {
