@@ -1,7 +1,7 @@
 import * as axios from 'axios'
 /*eslint-disable*/
 
-const baseURL = 'https://varapan.herokuapp.com/' 
+const baseURL = 'https://varapan.herokuapp.com/'
 
 const instance = axios.create({
   baseURL
@@ -35,9 +35,24 @@ export const AddCaseApi = (token, data) => {
 }
 
 export const DeleteCaseApi = (token, id) => {
-  return instanceWithToken(token).delete(`api/case/delete`, {caseId: id})
+  return instanceWithToken(token).delete(`api/case/delete`, { caseId: id })
 }
 
-export const ChangeStatusApi = (id, num_status) => {
-  return instance.post(`api/case/status`, id, num_status)
+export const ChangeStatusApi = (id) => {
+  return instance.post(`api/case/status`, {data: {caseId: id}})
+}
+
+export const AllCasesApi = () => {
+  return instance.get(`/api/case/cases`, {headers: {'Authorization': token}})
+}
+
+export const NumberOfDownloadsApi = (id) => {
+  return instance.post(`/api/case/downloads`, { caseId: id })
+}
+
+export const EditingCaseApi = (id, data) => {
+  return instance.post(`/api/case/edit`, {caseId: id, data:data })
+}
+export const PasswordRecoveryApi = (password, id) => {
+  return instance.post(`/api/users/forgotpassword`,{password: password, caseId: id })
 }

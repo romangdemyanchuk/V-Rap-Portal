@@ -199,15 +199,62 @@ export const countryVariants = [
 ];
 export const headsetsVariants = [
     {
-        value: 'headsets1',
-        label: 'Headsets1',
+        value: 'htc vive/vive pro',
+        label: 'Htc Vive/Vive Pro',
     },
     {
-        value: 'headsets2',
-        label: 'Headsets2',
+        value: 'htc vive/vive eye',
+        label: 'Htc Vive/Vive Eye',
     },
     {
-        value: 'headsets3',
-        label: 'Headsets3',
+        value: 'oculus rift/rift s',
+        label: 'Oculus Rift/Rift S',
+    },
+    {
+        value: 'oculus quest',
+        label: 'Oculus Quest',
+    },
+    {
+        value: 'oculus quest + link',
+        label: 'Oculus Quest + Link',
+    },
+    {
+        value: 'vavle index',
+        label: 'Vavle Index',
+    },
+    {
+        value: 'pico neo 2',
+        label: 'Pico Neo 2',
+    },
+    {
+        value: 'pico neo 2 eye',
+        label: 'Pico Neo 2 Eye',
+    },
+    {
+        value: 'pico neo 2 eye',
+        label: 'Pico Neo 2 Eye',
+    },
+    {
+        value: 'pimax',
+        label: 'Pimax',
+    }
+];
+
+export const professionsVariants = [
+    {
+        value: 'accounting',
+        label: 'Accounting',
+    },
+    {
+        value: 'administration & office support',
+        label: 'Administration & Office Support',
+    },
+    {
+        value: 'advertising, arts & media',
+        label: 'Advertising, Arts & Media',
+    },
+    {
+        value: 'banking & financial services',
+        label: 'Banking & Financial Services',
     }
 ];

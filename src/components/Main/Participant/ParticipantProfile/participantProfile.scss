@@ -84,7 +84,9 @@
         padding-bottom: 2px;
     }
 }
-
+.researcher-profile__fields-wrapper .ant-row {
+    display: block;
+}
 .personal-stats__info-img,
 .researcher-studies__study-info-img{
     width: 200px;
@@ -116,10 +118,19 @@
     width: 100%;
 }
 .ant-cascader-menu {
-    height: 100% !important;
+    //height: 100% !important;
 }
 .ant-cascader-menus {
     width: 250px;
     text-align: center;
+}
+.researcher-profile__changes-btns {
+    margin-top: 10px;
+    .ant-btn {
+        width: 120px;
+    }
+}
+.researcher-profile__fields-wrapper .ant-form {
+        align-items: start;
 }
 

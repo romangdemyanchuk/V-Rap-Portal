@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO, DELETE_CASE, CHANGE_STATUS} from './session-constants'
+import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO, DELETE_CASE,
+  CHANGE_STATUS, ALL_CASES, NUMBER_OF_DOWNLOADS, EDITING_CASE, PASSWORD_RECOVERY } from './session-constants'
 import { allData } from './data'
 import {
   RegisterApi,
@@ -8,7 +9,7 @@ import {
   UserInfoApi,
   AddCaseApi,
   DeleteCaseApi,
-  ChangeStatusApi,
+  ChangeStatusApi, AllCasesApi, NumberOfDownloadsApi, EditingCaseApi, PasswordRecoveryApi,
 } from '../../api'
 import {infoAction} from '../../utils/notification'
 import React from 'react'
@@ -27,6 +28,8 @@ const initialState = {
   newCaseInfo: {},
   userInfo: {},
   statusNumber : null,
+  numberOfDownloads: 0,
+  newPassword: '',
   researcherStudies: [
     {
       id:1,
@@ -94,6 +97,21 @@ const MainReducer = (state = initialState, action) => {
       ...state,
       statusNumber: action.payload
     }
+  case ALL_CASES:
+    return {
+      ...state,
+      researcherStudies: action.payload
+    }
+    case NUMBER_OF_DOWNLOADS:
+      return {
+        ...state,
+        numberOfDownloads: action.payload
+      }
+  case PASSWORD_RECOVERY:
+    return {
+      ...state,
+      newPassword: action.payload
+    }
     default:
       return state;
   }
@@ -106,11 +124,19 @@ export const RegisterAC = data => ({ type: REGISTER, payload: data })
 
 export const LoadingAC = data => ({ type: LOADING, payload: data })
 
-export const addCaseAC = data => ({ type: ADD_CASE, payload: data })
+export const AddCaseAC = data => ({ type: ADD_CASE, payload: data })
 
-export const deleteCaseAC = data => ({ type: DELETE_CASE, payload: data })
+export const DeleteCaseAC = data => ({ type: DELETE_CASE, payload: data })
 
-export const changeStatusAC = data => ({ type: CHANGE_STATUS, payload: data })
+export const ChangeStatusAC = data => ({ type: CHANGE_STATUS, payload: data })
+
+export const AllCasesAC = data => ({ type: ALL_CASES, payload: data })
+
+export const NumberOfDownloadsAC = data => ({ type: NUMBER_OF_DOWNLOADS, payload: data })
+
+export const EditingCaseAC = data => ({ type: EDITING_CASE, payload: data })
+
+export const PasswordRecoveryAC = data => ({ type: PASSWORD_RECOVERY, payload: data })
 
 export const UserInfoAC = data => ({ type: USER_INFO, payload: data })
 
@@ -122,10 +148,9 @@ export const ApiRegisterRequest = data => dispatch => {
       }
     })
 }
-let userToken = localStorage.getItem("userLoginToken");
 
 export const ApiEditUserInfo = data => dispatch => {
-  EditUserInfoApi(userToken, data)
+  EditUserInfoApi(data)
     .then(response => {
       if (response) {
         dispatch(UserInfoAC(response))
@@ -138,12 +163,11 @@ export const ApiEditUserInfo = data => dispatch => {
 }
 
 export const ApiNewCaseInfo = data => dispatch => {
-  console.log(userToken);
-  AddCaseApi(userToken, data)
+  AddCaseApi(data)
     .then(response => {
       dispatch(LoadingAC(true))
       if (response) {
-        dispatch(addCaseAC(response))
+        dispatch(AddCaseAC(response))
       }
     }).finally(() => {
     infoAction('You successfully create new study!', '/researcher-studies')
@@ -152,31 +176,62 @@ export const ApiNewCaseInfo = data => dispatch => {
   dispatch(LoadingAC(true))
 }
 export const ApiDeleteCaseInfo = (id) => dispatch => {
-  DeleteCaseApi(userToken, id)
+  DeleteCaseApi(id)
     .then(response => {
-      dispatch(LoadingAC(true))
       if (response) {
-        dispatch(deleteCaseAC(response))
+        dispatch(DeleteCaseAC(response))
       }
     }).finally(() => {
     infoAction('Case study was successfully deleted!', '/researcher-studies')
-    dispatch(LoadingAC(false))
   })
-  dispatch(LoadingAC(true))
 }
-
-export const ApiChangeStatus = (id, num_status) => dispatch => {
-  ChangeStatusApi(id, num_status)
+export const ApiChangeStatus = (id) => dispatch => {
+  ChangeStatusApi(id)
     .then(response => {
       if (response) {
-        dispatch(changeStatusAC(response))
+        dispatch(ChangeStatusAC(response))
       }
     })
 }
 
+export const ApiAllCasesInfo = () => dispatch => {
+  AllCasesApi()
+    .then(response => {
+      if (response) {
+        dispatch(AllCasesAC(response))
+      }
+    })
+}
 
-export const ApiUserInfo = () => dispatch => {
-  UserInfoApi(userToken)
+ export const NumberOfDownloads = (id) => dispatch => {
+   NumberOfDownloadsApi(id)
+     .then(response => {
+       if (response) {
+         dispatch(NumberOfDownloadsAC(response))
+       }
+     })
+ }
+
+ export const ApiEditingCase = (id, data) => dispatch => {
+   EditingCaseApi(id, data)
+     .then(response => {
+       if (response) {
+         dispatch(EditingCaseAC(response))
+       }
+     })
+ }
+
+export const ApiPasswordRecovery = (password, id) => dispatch => {
+  PasswordRecoveryApi(password, id)
+    .then(response => {
+      if (response) {
+        dispatch(PasswordRecoveryAC(response))
+      }
+    })
+}
+
+ export const ApiUserInfo = () => dispatch => {
+  UserInfoApi()
     .then(response => {
       console.log(response)
       if (response.data) {
@@ -187,8 +242,6 @@ export const ApiUserInfo = () => dispatch => {
     dispatch(LoadingAC(false))
   })
 }
-
-
 export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {

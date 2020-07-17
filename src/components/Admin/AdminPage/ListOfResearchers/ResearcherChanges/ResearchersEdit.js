@@ -35,7 +35,8 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen }) => {
   };
   return (
     <div>
-      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
+      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}
+                   title={'Are tou sure you want to delete this profile?'}/>
       <Modal
         title="Admins Changes"
         visible={modalOpen}

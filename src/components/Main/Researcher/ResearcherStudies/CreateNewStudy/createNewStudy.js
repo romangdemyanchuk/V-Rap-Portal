@@ -2,17 +2,16 @@
 import React, { useState } from 'react'
 import userImg from "../../../../../images/user.svg";
 import { Link } from "react-router-dom";
-import { Input, Button, Progress, Dropdown, Menu, message, Slider, InputNumber, Cascader, Upload } from 'antd'
-import { DownOutlined } from '@ant-design/icons'
+import { Input, Button, Slider, InputNumber, Cascader, Upload } from 'antd'
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
-import "./personalStats.scss";
-import { countryVariants, headsetsVariants } from '../../../../../modules/session/data'
-import { ApiEditUserInfo, ApiNewCaseInfo } from '../../../../../modules/session/session-reducers'
+import "./createNewStudy.scss";
+import { countryVariants, headsetsVariants, professionsVariants } from '../../../../../modules/session/data'
+import {ApiNewCaseInfo } from '../../../../../modules/session/session-reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../../Loader/loader'
 
-const PersonalStats = () => {
+const CreateNewStudy = () => {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
   const [location, setLocation] = useState('');
@@ -20,6 +19,7 @@ const PersonalStats = () => {
   const [avgIncome, setAvgIncome] = useState([10,85]);
   const [parNum, setParNum] = useState(100);
   const [headsets, setHeadsets] = useState('');
+  const [professions, setProfessions] = useState('');
   let dispatch = useDispatch()
   const isLoading = useSelector(state => state.isLoading)
   console.log('isLoading', isLoading);
@@ -44,6 +44,9 @@ const PersonalStats = () => {
   }
   const cascaderHeadsetsChange = (value) => {
     setHeadsets(value);
+  }
+  const cascaderProfessionsChange = (value) => {
+    setProfessions(value);
   }
   const cascaderLocationChange = (value) => {
     setLocation(value);
@@ -83,7 +86,6 @@ const PersonalStats = () => {
                   </Button>
                 </Upload>
               </div>
-              {/*<Progress percent={30} size="small" />*/}
               <div className="personal-stats__fields-wrapper">
                 <p>Title</p>
                 <Input placeholder="Title"
@@ -132,8 +134,15 @@ const PersonalStats = () => {
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Supported Headsets</p>
                 <Cascader options={headsetsVariants} placeholder="--Headsets--"
-                          onChange={cascaderHeadsetsChange}
-                          value={headsets}
+                            onChange={cascaderHeadsetsChange}
+                            value={headsets}
+              />
+              </div>
+              <div className="personal-stats__fields-wrapper">
+                <p className="before-dropdown">Professions</p>
+                <Cascader options={professionsVariants} placeholder="--Proffessions--"
+                          onChange={cascaderProfessionsChange}
+                          value={professions}
                 />
               </div>
             </div>
@@ -146,7 +155,11 @@ const PersonalStats = () => {
               {isLoading ? <Loader/> : 'Create Research Study'}
             </Button>
             <Link to={'/researcher-profile'}>
-              <Button>Close Page</Button>
+              <Button
+                onClick={resetFieldsValue}
+              >
+                Close Page
+              </Button>
             </Link>
           </div>
         </div>
@@ -155,6 +168,6 @@ const PersonalStats = () => {
   );
 };
 
-const AuthRedirectComponent = WithAuthRedirect(PersonalStats)
+const AuthRedirectComponent = WithAuthRedirect(CreateNewStudy)
 
 export default AuthRedirectComponent;
