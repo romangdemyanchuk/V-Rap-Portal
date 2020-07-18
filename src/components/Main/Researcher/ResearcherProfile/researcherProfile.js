@@ -1,143 +1,91 @@
 /* eslint-disable */
-import React, {useState, useEffect} from "react";
-import {Link } from "react-router-dom";
-import { Input, Button, Form} from "antd";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Input, Button } from "antd";
 import WithAuthRedirect from "../../../../hoc/hoc";
-import { ApiEditUserInfo, ApiUserInfo, LoadingAC } from '../../../../modules/session/session-reducers'
+import { ApiEditUserInfo, ApiUserInfo } from '../../../../modules/session/session-reducers'
 import Loader from '../../../Loader/loader'
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from 'react-redux'
 
+
 const ResearcherProfile = () => {
-  const [nameField, setNameField] = useState('');
-  const [schoolField, setSchoolField] = useState('');
-  const [areaField, setAreaField] = useState('');
+
+  const userData = useSelector(state => state.userInfo)
+
+  const [nameField, setnameField] = useState(userData.name);
+  const [schoolField, setschoolField] = useState(userData.school);
+  const [areaField, setareaField] = useState(userData.area);
 
   const isLoading = useSelector(state => state.isLoading)
-  const userData = useSelector(state => state.userInfo)
-  console.log(areaField)
+
+  console.log(schoolField)
 
   let dispatch = useDispatch()
 
   useEffect(() => {
+    setnameField(userData.name)
+    setschoolField(userData.school)
+    setareaField(userData.area)
     ApiUserInfo()(dispatch)
-    setNameField(userData.name)
-    setSchoolField(userData.school)
-    setAreaField(userData.area)
-  }, [userData.name, userData.school, userData.area])
+  }, [userData.school, userData.area, userData.name])
 
   const resetFieldsValue = () => {
-    setNameField('')
-    setSchoolField('')
-    setAreaField('')
+    setnameField('')
+    setschoolField('')
+    setareaField('')
   }
-  const layout = {
-    labelCol: {
-      span: 16,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
-    return (
-      <div className="root-ResearcherProfile">
-        <div className="researcher-profile__btns-wrapper">
-          <Link to={'/researcher-profile'}>
-            <Button className="profile-btn active researcher-profile__btn">Profile</Button>
-          </Link>
-          <Link to={'/researcher-studies'}>
-            <Button className="research-btn">Research Studies</Button>
-          </Link>
+  // const submitEditUserInfo = (values) => {
+  //   ApiEditUserInfo(values)(dispatch);
+  //   dispatch(LoadingAC(true))
+  // }
+  return (
+    <div className="root-ResearcherProfile">
+      <div className="researcher-profile__btns-wrapper">
+        <Link to={'/researcher-profile'}>
+          <Button className="profile-btn active researcher-profile__btn">Profile</Button>
+        </Link>
+        <Link to={'/researcher-studies'}>
+          <Button className="research-btn">Research Studies</Button>
+        </Link>
+      </div>
+      <div className="researcher-profile__personal-fields-wrapper">
+        <div className="researcher-profile__personal-heading">Profile Information</div>
+        <div className="researcher-profile__fields-wrapper">
+          <p>Name</p>
+          <Input placeholder="Type here.."
+            onChange={e => setnameField(e.target.value)}
+            value={nameField}
+          />
         </div>
-        <div className="researcher-profile__personal-fields-wrapper">
-          <div className="researcher-profile__personal-heading">Profile Information</div>
-          <div className="researcher-profile__fields-wrapper">
-            <Form
-              {...layout}
-              name="basic"
-              initialValues={{
-                remember: true
-              }}
-
-              onFinish={() =>{ ApiEditUserInfo({name: nameField, school: schoolField, area: areaField})(dispatch)}}
-            >
-              <Form.Item
-                label="Name"
-                name="username"
-                rules={[
-                  {
-                    required: true,
-                    message: '\n' +
-                      'field cannot be empty!',
-                  },
-                ]}
-                value={userData.name}
-              >
-                <Input placeholder="Type here.."
-                       onChange={e => setNameField(e.target.value)}
-                       value={'name'}
-                />
-              </Form.Item>
-              <Form.Item
-                label="School/Institution Name"
-                name="school"
-                rules={[
-                  {
-                    required: true,
-                    message: '\n' +
-                      'field cannot be empty!',
-                  },
-                ]}
-              >
-                <Input placeholder="Type here.."
-                       onChange={e => setSchoolField(e.target.value)}
-                       value={schoolField}
-                />
-              </Form.Item>
-              <Form.Item
-                label="Area of Research"
-                name="area"
-                rules={[
-                  {
-                    required: true,
-                    message: '\n' +
-                      'field cannot be empty!',
-                  },
-                ]}
-              >
-                <Input placeholder="Type here.."
-                       onChange={e => setAreaField(e.target.value)}
-                       value={areaField}
-                />
-              </Form.Item>
-              <div className="researcher-profile__changes-btns">
-                <Button  className="researcher-profile__save-btn" type="primary" htmlType="submit"
-                        // onSubmit={() =>{ ApiEditUserInfo({name: nameField, school: schoolField, area: areaField})(dispatch)}}
-                >
-                  {isLoading ? <Loader/> :'Save changes'}
-                </Button>
-                <Button className="researcher-profile__cancel-btn"
-                        onClick={resetFieldsValue}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </Form>
-
-
-          </div>
-          <div className="researcher-profile__fields-wrapper">
-            {/*<p>School/Institution Name</p>*/}
-
-          </div>
-          <div className="researcher-profile__fields-wrapper">
-            {/*<p>Area of Research</p>*/}
-
-          </div>
-
+        <div className="researcher-profile__fields-wrapper">
+          <p>School/Institution Name</p>
+          <Input placeholder="Type here.."
+            onChange={e => setschoolField(e.target.value)}
+            value={schoolField}
+          />
+        </div>
+        <div className="researcher-profile__fields-wrapper">
+          <p>Area of Research</p>
+          <Input placeholder="Type here.."
+            onChange={e => setareaField(e.target.value)}
+            value={areaField}
+          />
+        </div>
+        <div className="researcher-profile__changes-btns">
+          <Button className="researcher-profile__save-btn" type="primary"
+            onClick={() => { ApiEditUserInfo({ name: nameField, school: schoolField, area: areaField })(dispatch) }} >
+            {isLoading ? <Loader /> : 'Save changes'}
+          </Button>
+          <Button className="researcher-profile__cancel-btn"
+            onClick={resetFieldsValue}
+          >
+            Cancel
+            </Button>
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 const AuthRedirectComponent = WithAuthRedirect(ResearcherProfile)

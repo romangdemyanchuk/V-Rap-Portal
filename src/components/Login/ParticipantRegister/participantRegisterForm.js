@@ -15,7 +15,7 @@ const ParticipantRegisterForm = ({ setState }) => {
   const isLoading = useSelector(state => state.isLoading)
 
   if (isAuthCheck) {
-    return infoAction('Mission complete Participant :)', '/participant-profile')
+    return infoAction('Successfully registered, please log In :)', '/')
   }
 
   const handleSubmit = (values) => {
@@ -67,7 +67,7 @@ const ParticipantRegisterForm = ({ setState }) => {
             <Form.Item>
               <Button type="primary" htmlType="submit" >
                 {/*{isLoading ? <Loader/> : */}
-                  'Register'
+                  Register
                 {/*}*/}
                 </Button>
             </Form.Item>

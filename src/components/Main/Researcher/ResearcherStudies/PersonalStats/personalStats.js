@@ -5,34 +5,27 @@ import { Link } from "react-router-dom";
 import { Input, Button, Slider, InputNumber, Cascader, Upload } from 'antd'
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
-import "./createNewStudy.scss";
-import { countryVariants, headsetsVariants, professionsVariants } from '../../../../../modules/session/data'
-import {ApiNewCaseInfo } from '../../../../../modules/session/session-reducers'
+import "./personalStats.scss";
+import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
+import { ApiNewCaseInfo } from '../../../../../modules/session/session-reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../../Loader/loader'
 
-const CreateNewStudy = () => {
+const PersonalStats = () => {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
   const [location, setLocation] = useState('');
-  const [age, setAge] = useState([10,85]);
-  const [avgIncome, setAvgIncome] = useState([10,85]);
+  const [age, setAge] = useState([10, 85]);
+  const [avgIncome, setAvgIncome] = useState([10, 85]);
   const [parNum, setParNum] = useState(100);
   const [headsets, setHeadsets] = useState('');
-  const [professions, setProfessions] = useState('');
+  const [listOfProfessions, setListOfProfessions] = useState('');
   let dispatch = useDispatch()
-  const isLoading = useSelector(state => state.isLoading)
-  console.log('isLoading', isLoading);
 
-  const resetFieldsValue = () => {
-    setTitle('')
-    setDescr('')
-    setLocation('')
-    setAge('')
-    setAvgIncome('')
-    setParNum('')
-    setHeadsets('')
-  }
+  const newCaseStudyInfo = useSelector(state => state.newCaseInfo)
+  const isLoading = useSelector(state => state.isLoading)
+  console.log('newCaseStudyInfo', newCaseStudyInfo);
+
   const ageRangeChange = (value) => {
     setAge(value);
   }
@@ -45,12 +38,13 @@ const CreateNewStudy = () => {
   const cascaderHeadsetsChange = (value) => {
     setHeadsets(value);
   }
-  const cascaderProfessionsChange = (value) => {
-    setProfessions(value);
-  }
   const cascaderLocationChange = (value) => {
     setLocation(value);
   }
+  const cascaderlistOfProfessionsChange = (value) => {
+    setListOfProfessions(value);
+  }
+
   const uploadProps = {
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
   };
@@ -60,7 +54,7 @@ const CreateNewStudy = () => {
         <Link to={'/researcher-profile'}>
           <Button className="profile-btn">Profile</Button>
         </Link>
-        <Link to={'/participant-studies'}>
+        <Link to={'/researcher-studies'}>
           <Button className="research-btn active">Research Studies</Button>
         </Link>
       </div>
@@ -86,25 +80,26 @@ const CreateNewStudy = () => {
                   </Button>
                 </Upload>
               </div>
+              {/*<Progress percent={30} size="small" />*/}
               <div className="personal-stats__fields-wrapper">
                 <p>Title</p>
                 <Input placeholder="Title"
-                       onChange={e => setTitle(e.target.value)}
-                       value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  value={title}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Description</p>
                 <TextArea placeholder="Type here" rows={3} className="personal-stats-area"
-                          onChange={e => setDescr(e.target.value)}
-                          value={descr}
+                  onChange={e => setDescr(e.target.value)}
+                  value={descr}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Location</p>
                 <Cascader options={countryVariants} placeholder="--Countries--"
-                          onChange={cascaderLocationChange}
-                          value={location}
+                  onChange={cascaderLocationChange}
+                  value={location}
                 />
               </div>
             </div>
@@ -112,54 +107,52 @@ const CreateNewStudy = () => {
               <div className="personal-stats__fields-wrapper">
                 <p>Age(range)</p>
                 <Slider range
-                        onChange={ageRangeChange}
-                        value={age}
-                  />
+                  onChange={ageRangeChange}
+                  value={age}
+                />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Average Income(range)</p>
                 <Slider range
-                        onChange={avgRangeChange}
-                        value={avgIncome}
+                  onChange={avgRangeChange}
+                  value={avgIncome}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Required number of participant</p>
                 <InputNumber min={1} max={300}
-                             className="input-number"
-                             onChange={parNumberChange}
-                             value={parNum}
+                  className="input-number"
+                  onChange={parNumberChange}
+                  value={parNum}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Supported Headsets</p>
                 <Cascader options={headsetsVariants} placeholder="--Headsets--"
-                            onChange={cascaderHeadsetsChange}
-                            value={headsets}
-              />
+                  onChange={cascaderHeadsetsChange}
+                  value={headsets}
+                />
               </div>
               <div className="personal-stats__fields-wrapper">
-                <p className="before-dropdown">Professions</p>
-                <Cascader options={professionsVariants} placeholder="--Proffessions--"
-                          onChange={cascaderProfessionsChange}
-                          value={professions}
+                <p className="before-dropdown">List of Professions</p>
+                <Cascader options={professionsList} placeholder="--Professions--"
+                  onChange={cascaderlistOfProfessionsChange}
+                  value={listOfProfessions} style={{}}
                 />
               </div>
             </div>
           </div>
           <div className="personal-stats__footer-btns">
             <Button type="primary" className="personal-stats__create-research-btn"
-                onClick={() => ApiNewCaseInfo({title:title, description:descr, location:location,
-                age:age, income:avgIncome, participant:parNum, headset:headsets})(dispatch)}
+              onClick={() => ApiNewCaseInfo({
+                title: title, description: descr, location: location,
+                age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
+              })(dispatch)}
             >
-              {isLoading ? <Loader/> : 'Create Research Study'}
+              {isLoading ? <Loader /> : 'Create Research Study'}
             </Button>
             <Link to={'/researcher-profile'}>
-              <Button
-                onClick={resetFieldsValue}
-              >
-                Close Page
-              </Button>
+              <Button>Close Page</Button>
             </Link>
           </div>
         </div>
@@ -168,6 +161,6 @@ const CreateNewStudy = () => {
   );
 };
 
-const AuthRedirectComponent = WithAuthRedirect(CreateNewStudy)
+const AuthRedirectComponent = WithAuthRedirect(PersonalStats)
 
 export default AuthRedirectComponent;

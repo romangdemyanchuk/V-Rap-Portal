@@ -16,7 +16,7 @@
     margin-top: 40px;
     .personal-stats__left-block,
     .personal-stats__right-block {
-        width: 250px;
+        width: 300px;
         text-align: left;
     }
     .personal-stats__right-block {
@@ -37,9 +37,6 @@
     .personal-stats__create-research-btn {
         margin-right: 15px;
     }
-    .ant-btn {
-        width: 175px;
-    }
 }
 
 .personal-stats__vr-upload {
@@ -52,4 +49,16 @@
 }
 .ant-progress-small {
     text-align: left;
+}
+
+.ant-cascader-menus {
+    left: 370px;
+    top: 437px;
+    overflow-x: hidden;
+    height: 300px;
+    width: 300px;
+}
+
+.ant-cascader-picker{
+    width: 300px
 }

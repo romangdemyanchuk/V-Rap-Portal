@@ -5,7 +5,6 @@ import ParticipantRegisterForm from './ParticipantRegister'
 
 
 const MainLogin = () => {
-
   let [state, setState] = useState(false)
 
   return <>

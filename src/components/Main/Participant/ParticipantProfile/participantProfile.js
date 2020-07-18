@@ -46,6 +46,10 @@ const ParticipantProfile = () => {
               <p className="before-dropdown">Main VR Headset</p>
               <Cascader options={headsetsVariants} placeholder="--Headsets--"/>
             </div>
+            <div className="participant-profile__fields-wrapper">
+              <p className="before-dropdown">New Select Box(Trello)</p>
+              <Cascader options={headsetsVariants} placeholder="--Trello Select--"/>
+            </div>
           </div>
           <div className="participant-profile__changes-btns">
             <Button className="participant-profile__save-btn"

@@ -6,7 +6,7 @@ import { Form, Input, Button, Checkbox} from "antd";
 import { UserOutlined, LockOutlined} from '@ant-design/icons';
 import {infoAction} from '../../../utils/notification'
 import { useDispatch, useSelector } from 'react-redux';
-import { ApiLoginRequest, LoadingAC, ApiAllUsers } from '../../../modules/session/session-reducers'
+import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
 import "./participantLoginForm.scss";
 
 const ParticipantLoginForm = ({ setState }) => {
