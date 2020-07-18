@@ -16,7 +16,6 @@ const ResearcherStudies = () => {
   useEffect(() => {
     ApiAllCasesInfo()(dispatch)
   }, [])
-
   const studies = researcherStudies.map(study => <EachStudy key={study.id} study={study}/>);
 
   return (

@@ -6,11 +6,12 @@ const baseURL = 'https://varapan.herokuapp.com/'
 const instance = axios.create({
   baseURL
 })
+let token = localStorage.getItem('userLoginToken')
 
-const instanceWithToken = (token) =>  axios.create({
+const instanceWithToken = () =>  axios.create({
       baseURL,
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': token
       }
 })
 

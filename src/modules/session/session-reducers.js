@@ -246,8 +246,7 @@ export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
       if (response.statusText == 'OK') {
-        let  tokenData = response.data.token;
-        let token = tokenData.substr(tokenData.indexOf(" ") + 1);
+        let  token = response.data.token;
         dispatch(LoginAC(response))
         localStorage.setItem('userLoginToken', token)
         localStorage.setItem('isAuth', true)

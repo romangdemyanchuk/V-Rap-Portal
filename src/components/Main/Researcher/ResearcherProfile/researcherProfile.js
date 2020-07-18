@@ -9,24 +9,27 @@ import "./researcherProfile.scss";
 import { useDispatch, useSelector } from 'react-redux'
 
 const ResearcherProfile = () => {
-  const [nameField, setnameField] = useState('');
-  const [schoolField, setschoolField] = useState('');
-  const [areaField, setareaField] = useState('');
+  const [nameField, setNameField] = useState('');
+  const [schoolField, setSchoolField] = useState('');
+  const [areaField, setAreaField] = useState('');
 
   const isLoading = useSelector(state => state.isLoading)
   const userData = useSelector(state => state.userInfo)
-  console.log(userData)
+  console.log(areaField)
 
   let dispatch = useDispatch()
 
   useEffect(() => {
     ApiUserInfo()(dispatch)
-  }, [])
+    setNameField(userData.name)
+    setSchoolField(userData.school)
+    setAreaField(userData.area)
+  }, [userData.name, userData.school, userData.area])
 
   const resetFieldsValue = () => {
-    setnameField('')
-    setschoolField('')
-    setareaField('')
+    setNameField('')
+    setSchoolField('')
+    setAreaField('')
   }
   const layout = {
     labelCol: {
@@ -53,8 +56,9 @@ const ResearcherProfile = () => {
               {...layout}
               name="basic"
               initialValues={{
-                remember: true,
+                remember: true
               }}
+
               onFinish={() =>{ ApiEditUserInfo({name: nameField, school: schoolField, area: areaField})(dispatch)}}
             >
               <Form.Item
@@ -67,10 +71,11 @@ const ResearcherProfile = () => {
                       'field cannot be empty!',
                   },
                 ]}
+                value={userData.name}
               >
                 <Input placeholder="Type here.."
-                       onChange={e => setnameField(e.target.value)}
-                       value={userData ? userData.name : nameField}
+                       onChange={e => setNameField(e.target.value)}
+                       value={'name'}
                 />
               </Form.Item>
               <Form.Item
@@ -85,8 +90,8 @@ const ResearcherProfile = () => {
                 ]}
               >
                 <Input placeholder="Type here.."
-                       onChange={e => setschoolField(e.target.value)}
-                       value={userData ? userData.school : ''}
+                       onChange={e => setSchoolField(e.target.value)}
+                       value={schoolField}
                 />
               </Form.Item>
               <Form.Item
@@ -101,8 +106,8 @@ const ResearcherProfile = () => {
                 ]}
               >
                 <Input placeholder="Type here.."
-                       onChange={e => setareaField(e.target.value)}
-                       value={userData ? userData.area : ''}
+                       onChange={e => setAreaField(e.target.value)}
+                       value={areaField}
                 />
               </Form.Item>
               <div className="researcher-profile__changes-btns">
