@@ -8,7 +8,7 @@ import {
   UserInfoApi,
   AddCaseApi,
   DeleteCaseApi,
-  ChangeStatusApi,
+  // ChangeStatusApi,
   AllCasesApi,
 } from '../../api'
 import { infoAction } from '../../utils/notification'
@@ -176,14 +176,14 @@ export const ApiDeleteCaseInfo = id => dispatch => {
   dispatch(LoadingAC(true))
 }
 
-export const ApiChangeStatus = (id, num_status) => dispatch => {
-  ChangeStatusApi(id, num_status)
-    .then(response => {
-      if (response) {
-        dispatch(changeStatusAC(response))
-      }
-    })
-}
+// export const ApiChangeStatus = (id, num_status) => dispatch => {
+//   ChangeStatusApi(id, num_status)
+//     .then(response => {
+//       if (response) {
+//         dispatch(changeStatusAC(response))
+//       }
+//     })
+// }
 
 
 export const ApiUserInfo = () => dispatch => {

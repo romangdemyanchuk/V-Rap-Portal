@@ -40,10 +40,11 @@ export const DeleteCaseApi = (id) => {
   return instanceWithToken().delete(`api/case/delete`, { data: { id: id } })
 }
 
-export const ChangeStatusApi = (id, num_status) => {
-  return instance.post(`api/case/status`, id, num_status)
-}
-
 export const AllCasesApi = () => {
   return instance.get(`/api/case/cases`, { headers: { 'Authorization': token } })
+}
+
+export const ChangingStatus = (id) => {
+  debugger
+  return instanceWithToken().post(`/api/case/status`, {status: '3', id: id})
 }

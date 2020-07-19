@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import { Button, Tag } from "antd";
+import { Button, Tag, Progress } from "antd";
 import { Link } from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from 'react-redux'
-import { ApiChangeStatus, ApiDeleteCaseInfo, ApiAllCasesInfo } from '../../../../modules/session/session-reducers'
+import { ApiDeleteCaseInfo, ApiAllCasesInfo } from '../../../../modules/session/session-reducers'
+import { ChangingStatus } from '../../../../api/index'
 import Loader from '../../../Loader/loader'
 
 const ResearcherStudies = () => {
@@ -21,6 +22,59 @@ const ResearcherStudies = () => {
     ApiAllCasesInfo()(dispatch)
     ,[])
 
+  let caseStatusName = (status) => {
+    if (status === 0) return <Tag color='gold'>Pending</Tag>
+    else if (status === 1) return <Tag color='gray'>Reject</Tag>
+    else if (status === 2) return <Tag color='green'>In Progress</Tag>
+    else if (status === 3) return <Tag color='red'>Closed</Tag>
+  }
+
+  let caseButtonsShown = (status) => {
+    if (status === 0) return (
+    <div className="research-study-btns">
+        <Button style={{backgroundColor: '#0E4BEF', color: 'white'}} className="upload-btn" onClick={() => {ChangingStatus(study._id)}}>Edit</Button>
+    <Button type="danger" className="upload-btn"
+      onClick={() => { ApiDeleteCaseInfo(study._id)(dispatch) }}>
+      {isLoading ? <Loader /> : 'Delete'}
+    </Button>
+  </div>)
+    else if (status === 1) return (
+      <div className="research-study-btns">
+      <Button type="danger" className="upload-btn"
+        onClick={() => { ApiDeleteCaseInfo(study._id)(dispatch) }}>
+        {isLoading ? <Loader /> : 'Delete'}
+      </Button>
+      </div>
+    )
+    else if (status === 2) return (
+      <div className="research-study-btns">
+    <Button className="status-btn">View Results</Button>
+    <Button type="danger" className="upload-btn" onClick={() => {ChangingStatus(study._id)}}>Close</Button>
+    <Button type="danger" className="upload-btn"
+      onClick={() => { ApiDeleteCaseInfo(study._id)(dispatch) }}>
+      {isLoading ? <Loader /> : 'Delete'}
+    </Button>
+      </div>
+    )
+    else if (status === 3) return (
+      <div className="research-study-btns">
+      <Button type="danger" className="upload-btn"
+        onClick={() => { ApiDeleteCaseInfo(study._id)(dispatch) }}>
+        {isLoading ? <Loader /> : 'Delete'}
+      </Button>
+      </div>
+    )
+  }
+
+     <div className="research-study-btns">
+        <Button className="status-btn">View Results</Button>
+        <Button type="danger" className="upload-btn" onClick={() => {ChangingStatus(study._id)}}>Close</Button>
+        <Button type="danger" className="upload-btn"
+          onClick={() => { ApiDeleteCaseInfo(study._id)(dispatch) }}>
+          {isLoading ? <Loader /> : 'Delete'}
+        </Button>
+      </div>
+  
   const studies = allCaseStudies.map((study) =>
     <div key={study.id} className="researcher-studies__study-wrapper">
       <div className="researcher-studies__info-wrapper">
@@ -42,22 +96,18 @@ const ResearcherStudies = () => {
           </div>
         </div>
         <div className="researcher-studies__btns">
-          {/* <Button className="status-btn"
-            onClick={() => { ApiChangeStatus(study.isLoading, 3)(dispatch) }}
-          >
-            In progress
-          </Button> */}
-          <Tag color="green">In Progress</Tag>
+          {caseStatusName(study.status)}
         </div>
       </div>
-      <div className="research-study-btns">
+      {caseButtonsShown(study.status)}
+      {/* <div className="research-study-btns">
         <Button className="status-btn">View Results</Button>
-        <Button type="danger" className="upload-btn">Close</Button>
+        <Button type="danger" className="upload-btn" onClick={() => {ChangingStatus(study._id)}}>Close</Button>
         <Button type="danger" className="upload-btn"
           onClick={() => { ApiDeleteCaseInfo(study._id)(dispatch) }}>
           {isLoading ? <Loader /> : 'Delete'}
         </Button>
-      </div>
+      </div> */}
     </div>
   )
 
