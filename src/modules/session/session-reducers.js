@@ -9,7 +9,7 @@ import {
   AddCaseApi,
   DeleteCaseApi,
   // ChangeStatusApi,
-  AllCasesApi,
+  AllCasesApi, EditCaseApi,
 } from '../../api'
 import { infoAction } from '../../utils/notification'
 
@@ -133,10 +133,9 @@ export const ApiRegisterRequest = data => dispatch => {
       }
     })
 }
-let userToken = localStorage.getItem("userLoginToken");
 
 export const ApiEditUserInfo = data => dispatch => {
-  EditUserInfoApi(userToken, data)
+  EditUserInfoApi(data)
     .then(response => {
       if (response) {
         dispatch(UserInfoAC(response))
@@ -149,7 +148,7 @@ export const ApiEditUserInfo = data => dispatch => {
 }
 
 export const ApiNewCaseInfo = data => dispatch => {
-  AddCaseApi(userToken, data)
+  AddCaseApi(data)
     .then(response => {
       dispatch(LoadingAC(true))
       if (response) {
@@ -162,18 +161,30 @@ export const ApiNewCaseInfo = data => dispatch => {
   dispatch(LoadingAC(true))
 }
 
+export const ApiEditCaseInfo = data => dispatch => {
+  console.log('data', data)
+  EditCaseApi(data)
+    .then(response => {
+      dispatch(LoadingAC(true))
+      if (response) {
+        dispatch(addCaseAC(response.data))
+      }
+    }).finally(() => {
+    infoAction('You successfully change uour study!', '/researcher-studies')
+    dispatch(LoadingAC(false))
+  })
+  dispatch(LoadingAC(true))
+}
+
 export const ApiDeleteCaseInfo = id => dispatch => {
   DeleteCaseApi(id)
     .then(response => {
-      dispatch(LoadingAC(true))
       if (response) {
         dispatch(deleteCaseAC(response))
       }
     }).finally(() => {
       infoAction('Case study was successfully deleted!', '/researcher-studies')
-      dispatch(LoadingAC(false))
     })
-  dispatch(LoadingAC(true))
 }
 
 // export const ApiChangeStatus = (id, num_status) => dispatch => {
@@ -187,9 +198,8 @@ export const ApiDeleteCaseInfo = id => dispatch => {
 
 
 export const ApiUserInfo = () => dispatch => {
-  UserInfoApi(userToken)
+  UserInfoApi()
     .then(response => {
-      console.log(response)
       if (response.data) {
         const { area, name, school } = response.data;
         dispatch(UserInfoAC({ area, school, name }))

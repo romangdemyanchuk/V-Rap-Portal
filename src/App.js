@@ -14,6 +14,7 @@ import ListOfCaseStudies from "./components/Admin/AdminPage/ListOfCaseStudies"
 import ListOfResearchers from "./components/Admin/AdminPage/ListOfResearchers"
 import MainLogin from './components/Login/Login'
 import './styles/index.styl'
+import EditCase from './components/Main/Researcher/ResearcherStudies/EditCase'
 
 
 const App = () => {
@@ -31,6 +32,11 @@ const App = () => {
       <Route path="/admin" component={LoginPage} />
       <Route path="/researchers-list" component={ListOfResearchers} />
       <Route path="/all-studies-list" component={ListOfCaseStudies} />
+      <Route path="/edit-case/:id"
+             render={({match}) => {
+                 const {id} = match.params;
+                 return <EditCase id={id}/>
+             }}/>
     </div>
   )
 }

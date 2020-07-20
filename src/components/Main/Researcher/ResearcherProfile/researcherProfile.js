@@ -18,9 +18,6 @@ const ResearcherProfile = () => {
   const [areaField, setareaField] = useState(userData.area);
 
   const isLoading = useSelector(state => state.isLoading)
-
-  console.log(schoolField)
-
   let dispatch = useDispatch()
 
   useEffect(() => {

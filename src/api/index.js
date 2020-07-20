@@ -9,7 +9,7 @@ const instance = axios.create({
 
 let token = localStorage.getItem('userLoginToken')
 
-const instanceWithToken = () => axios.create({
+const instanceWithToken = (token) => axios.create({
   baseURL,
   headers: {
     'Authorization': token
@@ -24,20 +24,21 @@ export const LoginApi = (loginData) => {
   return instance.post(`api/auth/login`, loginData)
 }
 
-export const EditUserInfoApi = (token, data) => {
+export const EditUserInfoApi = (data) => {
   return instanceWithToken(token).post(`api/users/useredit`, data)
 }
 
-export const UserInfoApi = (token) => {
+export const UserInfoApi = () => {
+  console.log(token);
   return instanceWithToken(token).post(`api/users/user`, {})
 }
 
-export const AddCaseApi = (token, data) => {
+export const AddCaseApi = (data) => {
   return instanceWithToken(token).post(`api/case/add`, data)
 }
 
 export const DeleteCaseApi = (id) => {
-  return instanceWithToken().delete(`api/case/delete`, { data: { id: id } })
+  return instanceWithToken(token).delete(`api/case/delete`, { data: { id: id } })
 }
 
 export const AllCasesApi = () => {
@@ -45,6 +46,9 @@ export const AllCasesApi = () => {
 }
 
 export const ChangingStatus = (id) => {
-  debugger
   return instanceWithToken().post(`/api/case/status`, {status: '3', id: id})
+}
+
+export const EditCaseApi = (data) => {
+  return instanceWithToken(token).post(`api/case/edit`, data)
 }
