@@ -10,6 +10,14 @@ import { ApiDeleteCaseInfo, ApiAllCasesInfo } from '../../../../modules/session/
 import { ChangingStatus } from '../../../../api/index'
 import Loader from '../../../Loader/loader'
 
+export const caseStatusName = (status) => {
+  if (status === 0) return <Tag color='gold'>Pending</Tag>
+  else if (status === 1) return <Tag color='gray'>Reject</Tag>
+  else if (status === 2) return <Tag color='green'>In Progress</Tag>
+  else if (status === 3) return <Tag color='red'>Closed</Tag>
+}
+
+
 const ResearcherStudies = () => {
   let dispatch = useDispatch()
 
@@ -21,13 +29,6 @@ const ResearcherStudies = () => {
   useEffect(() =>
     ApiAllCasesInfo()(dispatch)
     ,[])
-
-  let caseStatusName = (status) => {
-    if (status === 0) return <Tag color='gold'>Pending</Tag>
-    else if (status === 1) return <Tag color='gray'>Reject</Tag>
-    else if (status === 2) return <Tag color='green'>In Progress</Tag>
-    else if (status === 3) return <Tag color='red'>Closed</Tag>
-  }
 
   let caseButtonsShown = (status) => {
     if (status === 0) return (

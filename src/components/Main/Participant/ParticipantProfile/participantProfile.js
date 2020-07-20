@@ -1,14 +1,14 @@
 /* eslint-disable */
 import React from "react";
 import { Link } from "react-router-dom";
-import { Input, Button, Menu, Dropdown, InputNumber, Cascader } from 'antd'
-import { DownOutlined } from '@ant-design/icons';
+import { Input, Button, InputNumber, Cascader, Form, Select, TreeSelect } from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
 
 const ParticipantProfile = () => {
   return (
+    <Form>
     <div className="root-PartProfile">
       <div className="participant-profile__btns-wrapper">
         <Link to={'/participant-profile'}>
@@ -28,8 +28,7 @@ const ParticipantProfile = () => {
             </div>
             <div className="participant-profile__fields-wrapper">
               <p>Age</p>
-              <InputNumber min={1} max={100} defaultValue={25}
-                className="input-number"/>
+              <InputNumber min={1} max={100} className="input-number" placeholder="Age"/> 
             </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Location</p>
@@ -60,7 +59,39 @@ const ParticipantProfile = () => {
           </div>
         </div>
       </div>
+      {/* <Form.Item label="Input">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Select">
+          <Select>
+            <Select.Option value="demo">Demo</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="TreeSelect">
+          <TreeSelect
+            treeData={[
+              { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
+            ]}
+          />
+        </Form.Item>
+        <Form.Item label="Cascader">
+          <Cascader
+            options={[
+              {
+                value: 'zhejiang',
+                label: 'Zhejiang',
+                children: [
+                  {
+                    value: 'hangzhou',
+                    label: 'Hangzhou',
+                  },
+                ],
+              },
+            ]}
+          />
+        </Form.Item> */}
     </div>
+    </Form>
   );
 };
 
