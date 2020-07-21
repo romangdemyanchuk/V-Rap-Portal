@@ -1,8 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import { Input, Button, Menu, Dropdown, InputNumber, Cascader } from 'antd'
-import { DownOutlined } from '@ant-design/icons';
+import { Input, Button, InputNumber, Cascader, Form, Select, TreeSelect } from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'

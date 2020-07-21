@@ -19,7 +19,18 @@ const ResearcherStudies = () => {
     ApiAllCasesInfo()(dispatch)
     ,[])
 
-  // const studies = )
+
+
+     // <div className="research-study-btns">
+     //    <Button className="status-btn">View Results</Button>
+     //    <Button type="danger" className="upload-btn" onClick={() => {ChangingStatus(study._id)}}>Close</Button>
+     //    <Button type="danger" className="upload-btn"
+     //      onClick={() => { ApiDeleteCaseInfo(study._id)(dispatch) }}>
+     //      {isLoading ? <Loader /> : 'Delete'}
+     //    </Button>
+     //  </div>
+
+  const studies = allCaseStudies.map((study) => <EachStudy study={study}/>)
 
   return (
     <div className="ResearcherStudies">
