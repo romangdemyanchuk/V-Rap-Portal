@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO, DELETE_CASE, CHANGE_STATUS } from './session-constants'
+import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO, DELETE_CASE, CHANGE_STATUS, PART_INFO } from './session-constants'
 import { allData } from './data'
 import {
   RegisterApi,
@@ -9,7 +9,7 @@ import {
   AddCaseApi,
   DeleteCaseApi,
   // ChangeStatusApi,
-  AllCasesApi, EditCaseApi,
+  AllCasesApi, EditCaseApi, PartInfoApi,
 } from '../../api'
 import { infoAction } from '../../utils/notification'
 
@@ -26,6 +26,7 @@ const initialState = {
   isLoading: false,
   newCaseInfo: {},
   userInfo: {},
+  partInfo:{},
   statusNumber: null,
   researcherStudies: [
     {
@@ -92,6 +93,12 @@ const MainReducer = (state = initialState, action) => {
         ...state,
         userInfo: action.payload
       }
+  case PART_INFO:
+    console.log(action.payload)
+    return {
+      ...state,
+      partInfo: action.payload
+    }
     case CHANGE_STATUS:
       return {
         ...state,
@@ -122,6 +129,8 @@ export const deleteCaseAC = data => ({ type: DELETE_CASE, payload: data })
 export const changeStatusAC = data => ({ type: CHANGE_STATUS, payload: data })
 
 export const UserInfoAC = data => ({ type: USER_INFO, payload: data })
+
+export const PartInfoAC = data => ({ type: PART_INFO, payload: data })
 
 export const AllCasesAC = data => ({ type: ALL_CASES, payload: data })
 
@@ -162,15 +171,16 @@ export const ApiNewCaseInfo = data => dispatch => {
 }
 
 export const ApiEditCaseInfo = data => dispatch => {
-  console.log('data', data)
+  console.log(data);
   EditCaseApi(data)
     .then(response => {
       dispatch(LoadingAC(true))
       if (response) {
-        dispatch(addCaseAC(response.data))
+        console.log('response', response);
+        dispatch(AllCasesAC(response.data))
       }
     }).finally(() => {
-    infoAction('You successfully change uour study!', '/researcher-studies')
+    infoAction('You successfully change your study!', '/researcher-studies')
     dispatch(LoadingAC(false))
   })
   dispatch(LoadingAC(true))
@@ -209,6 +219,18 @@ export const ApiUserInfo = () => dispatch => {
     })
 }
 
+export const ApiPartInfo = () => dispatch => {
+  PartInfoApi()
+    .then(response => {
+      if (response.data) {
+        console.log(response)
+        dispatch(PartInfoAC(response))
+      }
+    }).finally(() => {
+    dispatch(LoadingAC(false))
+  })
+}
+
 
 export const ApiLoginRequest = data => dispatch => {
   LoginApi(data)
@@ -234,8 +256,12 @@ export const ApiLoginRequest = data => dispatch => {
 export const ApiAllCasesInfo = () => dispatch => {
   AllCasesApi()
     .then(response => {
+      dispatch(LoadingAC(true))
       if (response) {
         dispatch(AllCasesAC(response.data))
       }
-    })
+    }).finally(() => {
+    dispatch(LoadingAC(false))
+  })
+  dispatch(LoadingAC(true))
 }

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import userImg from '../../../../../images/user.svg'
 import { Link } from 'react-router-dom'
 import { Button, Cascader, Input, InputNumber, Slider, Upload } from 'antd'
@@ -15,43 +15,57 @@ const { TextArea } = Input;
 
 const EditCase = ({id}) => {
   const allCaseStudies = useSelector(state => state.allCaseStudies)
+  let filteredCases = [];
   let dispatch = useDispatch()
-  let filteredCases = allCaseStudies.filter(item => {
-    return item._id === id
-  } );
-
-  console.log(allCaseStudies)
-  if(!filteredCases.length) {
-    ApiAllCasesInfo()(dispatch)
+  console.log('allCaseStudies', allCaseStudies);
+  if (allCaseStudies) {
+    filteredCases = allCaseStudies.filter(item => {
+      return item._id === id
+    } );
   }
-
-  filteredCases = filteredCases.length ? filteredCases[0] : []
-
-  const newCaseStudyInfo = useSelector(state => state.newCaseInfo)
+  else {
+    ApiAllCasesInfo() (dispatch)
+    const allCaseStudies = useSelector(state => state.allCaseStudies)
+    console.log(allCaseStudies);
+    filteredCases = allCaseStudies?.filter(item => {
+      return item._id === id
+    } );
+  }
+  filteredCases = filteredCases?.length ? filteredCases[0] : []
   const isLoading = useSelector(state => state.isLoading)
-  console.log('newCaseStudyInfo', newCaseStudyInfo);
+
 
   const [title, setTitle] = useState(filteredCases.title);
   const [descr, setDescr] = useState(filteredCases.description);
   const [location, setLocation] = useState(filteredCases.location);
-  const [age, setAge] = useState([10, 85]);
-  const [avgIncome, setAvgIncome] = useState([10, 85]);
+  const [age, setAge] = useState(filteredCases.age);
+  const [avgIncome, setAvgIncome] = useState(filteredCases.income);
   const [parNum, setParNum] = useState(filteredCases.participant);
   const [headsets, setHeadsets] = useState(filteredCases.headset);
   const [listOfProfessions, setListOfProfessions] = useState(filteredCases.project);
-  // useEffect(() => {
-  //   setTitle(filteredCases.title);
-  //   setDescr(filteredCases.description);
-  //   setLocation(filteredCases.location);
-  //   setAge([filteredCases.age[0], filteredCases.age[1]]);
-  //   setAvgIncome([filteredCases.income[0], filteredCases.income[1]]);
-  //   setParNum(filteredCases.participant);
-  //   setHeadsets(filteredCases.headset);
-  //   setListOfProfessions(filteredCases.project);
-  // }, [filteredCases.title, filteredCases.description, filteredCases.location,[filteredCases.age[0], filteredCases.age[1]],
-  //   [filteredCases.income[0], filteredCases.income[1]], filteredCases.participant, filteredCases.headset, filteredCases.project])
+  useEffect(() => {
+    console.log('useEffect')
+    setTitle(filteredCases.title);
+    setDescr(filteredCases.description);
+    setLocation(filteredCases.location);
+    setAge(filteredCases.age);
+    setAvgIncome(filteredCases.income);
+    setParNum(filteredCases.participant);
+    setHeadsets(filteredCases.headset);
+    setListOfProfessions(filteredCases.project);
+  }, [filteredCases.title, filteredCases.description, filteredCases.location,
+    filteredCases.participant, filteredCases.headset, filteredCases.project])
 
-
+  const resetFieldsValue = () => {
+    setTitle('')
+    setDescr('')
+    setLocation('')
+    setAge([10, 85])
+    setAvgIncome([10, 85])
+    setParNum('')
+    setHeadsets('')
+    setListOfProfessions('')
+  }
   const ageRangeChange = (value) => {
     setAge(value);
   }
@@ -111,14 +125,14 @@ const EditCase = ({id}) => {
                 <p>Title</p>
                 <Input placeholder="Title"
                        onChange={e => setTitle(e.target.value)}
-                       value={filteredCases.title}
+                       value={title}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Description</p>
                 <TextArea placeholder="Type here" rows={3} className="personal-stats-area"
                           onChange={e => setDescr(e.target.value)}
-                          value={filteredCases.description}
+                          value={descr}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
@@ -133,14 +147,14 @@ const EditCase = ({id}) => {
                 <p>Age(range)</p>
                 <Slider range
                         onChange={ageRangeChange}
-                        value={[10,85]}
+                        value={age}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Average Income</p>
                 <Slider range
                         onChange={avgRangeChange}
-                        value={[10,85]}
+                        value={avgIncome}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
@@ -148,7 +162,7 @@ const EditCase = ({id}) => {
                 <InputNumber min={1} max={300}
                              className="input-number"
                              onChange={parNumberChange}
-                             value={filteredCases.participant}
+                             value={parNum}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
@@ -169,15 +183,15 @@ const EditCase = ({id}) => {
           <div className="personal-stats__footer-btns">
             <Button type="primary" className="personal-stats__create-research-btn"
                     onClick={() => ApiEditCaseInfo({
-                      title: title, description: descr, location: location,
+                      caseId: id,title: title, description: descr, location: location,
                       age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
                     })(dispatch)}
             >
               {isLoading ? <Loader /> : 'Save Changes'}
             </Button>
-            <Link to={'/researcher-profile'}>
-              <Button>Cancel</Button>
-            </Link>
+            {/*<Link to={'/researcher-profile'}>*/}
+              <Button onClick={resetFieldsValue}>Cancel</Button>
+            {/*</Link>*/}
           </div>
         </div>
       </div>

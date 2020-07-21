@@ -8,6 +8,7 @@ const instance = axios.create({
 })
 
 let token = localStorage.getItem('userLoginToken')
+console.log(token);
 
 const instanceWithToken = (token) => axios.create({
   baseURL,
@@ -29,7 +30,10 @@ export const EditUserInfoApi = (data) => {
 }
 
 export const UserInfoApi = () => {
-  console.log(token);
+  return instanceWithToken(token).post(`api/users/user`, {})
+}
+
+export const PartInfoApi = () => {
   return instanceWithToken(token).post(`api/users/user`, {})
 }
 
