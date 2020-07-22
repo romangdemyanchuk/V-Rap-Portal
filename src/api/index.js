@@ -38,7 +38,7 @@ export const PartInfoApi = () => {
 }
 
 export const AddCaseApi = (data) => {
-  return instanceWithToken().post(`api/case/add`, data)
+  return instanceWithToken(token).post(`api/case/add`, data)
 }
 
 export const DeleteCaseApi = (id) => {

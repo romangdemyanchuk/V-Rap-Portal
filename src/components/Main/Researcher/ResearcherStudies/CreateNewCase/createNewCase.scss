@@ -32,6 +32,7 @@
     width: 100%;
 }
 .personal-stats__footer-btns {
+    display: flex;
     margin: 20px 0;
     text-align: left;
     .personal-stats__create-research-btn {
@@ -61,4 +62,17 @@
 
 .ant-cascader-picker{
     width: 250px
+}
+.ant-row.ant-form-item.personal-stats__fields-wrapper, .ant-row.ant-form-item {
+    display: block;
+    text-align: left;
+}
+.ant-form-item {
+    margin-bottom: 0;
+}
+.ant-input-number.input-number {
+    width: 100%;
+}
+.ant-slider {
+    width: 100%;
 }

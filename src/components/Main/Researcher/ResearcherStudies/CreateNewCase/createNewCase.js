@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import userImg from "../../../../../images/user.svg";
 import { Link } from "react-router-dom";
-import { Input, Button, Slider, InputNumber, Cascader, Upload } from 'antd'
+import { Input, Button, Slider, InputNumber, Cascader, Upload, Form } from 'antd'
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
 import "./createNewCase.scss";
@@ -15,8 +15,8 @@ const CreateNewCase = () => {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
   const [location, setLocation] = useState('');
-  const [age, setAge] = useState([10, 85]);
-  const [avgIncome, setAvgIncome] = useState([10, 85]);
+  const [age, setAge] = useState([0,0]);
+  const [avgIncome, setAvgIncome] = useState([0, 0]);
   const [parNum, setParNum] = useState(100);
   const [headsets, setHeadsets] = useState('');
   const [listOfProfessions, setListOfProfessions] = useState('');
@@ -48,6 +48,14 @@ const CreateNewCase = () => {
   const uploadProps = {
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
   };
+
+  const layout = {
+    labelCol: { span: 16 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
   return (
     <div className="root-PersonalStats">
       <div className="personal-stats__tns-wrapper">
@@ -71,90 +79,129 @@ const CreateNewCase = () => {
               </Upload>
             </div>
           </div>
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={() => ApiNewCaseInfo({
+              title: title, description: descr, location: location,
+              age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
+            })(dispatch)}
+          >
           <div className="personal-stats__blocks-wrapper">
             <div className="personal-stats__left-block">
-              <div className="personal-stats__vr-upload">
-                <Upload {...uploadProps}>
-                  <Button className="personal-stats__btn">
-                    Upload VR File
-                  </Button>
-                </Upload>
-              </div>
-              {/*<Progress percent={30} size="small" />*/}
-              <div className="personal-stats__fields-wrapper">
-                <p>Title</p>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Title"
+                name="title"
+                rules={[{ required: true, message: 'Please input title!' }]}
+              >
                 <Input placeholder="Title"
-                  onChange={e => setTitle(e.target.value)}
-                  value={title}
+                       onChange={e => setTitle(e.target.value)}
+                       value={title}
                 />
-              </div>
-              <div className="personal-stats__fields-wrapper">
-                <p>Description</p>
+              </Form.Item>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Description"
+                name="descr"
+                rules={[{ required: true, message: 'Please input description!' }]}
+              >
                 <TextArea placeholder="Type here" rows={3} className="personal-stats-area"
-                  onChange={e => setDescr(e.target.value)}
-                  value={descr}
+                          onChange={e => setDescr(e.target.value)}
+                          value={descr}
                 />
-              </div>
-              <div className="personal-stats__fields-wrapper">
-                <p className="before-dropdown">Location</p>
+              </Form.Item>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Location"
+                name="location"
+                rules={[{ required: true, message: 'Please choose location!' }]}
+              >
                 <Cascader options={countryVariants} placeholder="--Countries--"
-                  onChange={cascaderLocationChange}
-                  value={location}
+                          onChange={cascaderLocationChange}
+                          value={location}
                 />
-              </div>
-            </div>
+              </Form.Item>
+
+          </div>
             <div className="personal-stats__right-block">
-              <div className="personal-stats__fields-wrapper">
-                <p>Age(range)</p>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Age"
+                name="age"
+                rules={[{ required: true, message: 'Please input range of age' }]}
+              >
                 <Slider range
-                  onChange={ageRangeChange}
-                  value={age}
+                        onChange={ageRangeChange}
+                        defaultValue={age}
                 />
-              </div>
-              <div className="personal-stats__fields-wrapper">
-                <p>Average Income(range)</p>
+              </Form.Item>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Average Income"
+                name="avgIncome"
+                rules={[{ required: true, message: 'Please input range of Average Income!' }]}
+              >
                 <Slider range
-                  onChange={avgRangeChange}
-                  value={avgIncome}
+                        onChange={avgRangeChange}
+                        defaultValue={avgIncome}
                 />
-              </div>
-              <div className="personal-stats__fields-wrapper">
-                <p>Required number of participant</p>
+              </Form.Item>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Required number of participants"
+                name="parNum"
+                rules={[{ required: true, message: 'Please input number of participants!' }]}
+              >
                 <InputNumber min={1} max={300}
-                  className="input-number"
-                  onChange={parNumberChange}
-                  value={parNum}
+                             defaultValue={100}
+                             className="input-number"
+                             onChange={parNumberChange}
+                             value={parNum}
                 />
-              </div>
-              <div className="personal-stats__fields-wrapper">
-                <p className="before-dropdown">Supported Headsets</p>
+              </Form.Item>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Supported headsets"
+                name="headsets"
+                rules={[{ required: true, message: 'Please choose headset!' }]}
+              >
                 <Cascader options={headsetsVariants} placeholder="--Headsets--"
-                  onChange={cascaderHeadsetsChange}
-                  value={headsets}
+                          onChange={cascaderHeadsetsChange}
+                          value={headsets}
                 />
-              </div>
-              <div className="personal-stats__fields-wrapper">
-                <p className="before-dropdown">List of Professions</p>
+              </Form.Item>
+              <Form.Item
+                className="personal-stats__fields-wrapper"
+                label="Proffessions"
+                name="proffessions"
+                rules={[{ required: true, message: 'Please choose profession!' }]}
+              >
                 <Cascader options={professionsList} placeholder="--Professions--"
-                  onChange={cascaderlistOfProfessionsChange}
-                  value={listOfProfessions} style={{}}
+                          onChange={cascaderlistOfProfessionsChange}
+                          style={{}}
                 />
-              </div>
+              </Form.Item>
+
             </div>
           </div>
-          <div className="personal-stats__footer-btns">
-            <Button type="primary" className="personal-stats__create-research-btn"
-              onClick={() => ApiNewCaseInfo({
-                title: title, description: descr, location: location,
-                age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
-              })(dispatch)}
+            <Form.Item
+              className="personal-stats__footer-btns"
             >
-              {isLoading ? <Loader /> : 'Create Research Study'}
-            </Button>
-            <Link to={'/researcher-profile'}>
-              <Button>Close Page</Button>
-            </Link>
-          </div>
+              <Button type="primary"  htmlType="submit" className="personal-stats__create-research-btn"
+                      // onClick={() => ApiNewCaseInfo({
+                      //   title: title, description: descr, location: location,
+                      //   age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
+                      // })(dispatch)}
+              >
+                {isLoading ? <Loader /> : 'Create Research Study'}
+              </Button>
+              <Link to={'/researcher-profile'}>
+                <Button>Close Page</Button>
+              </Link>
+            </Form.Item>
+          </Form>
         </div>
       </div>
     </div>

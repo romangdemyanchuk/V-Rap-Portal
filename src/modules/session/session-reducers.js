@@ -148,7 +148,11 @@ export const ApiEditUserInfo = data => dispatch => {
       if (response) {
         dispatch(UserInfoAC(response))
       }
-    }).finally(() => {
+    }).catch(e => {
+    if (e.response && e.response.data) {
+      infoAction(e.response.data.message, '/researcher-profile');
+    }
+  }).finally(() => {
       dispatch(LoadingAC(false))
       infoAction('Your information is successfully updated!', '/researcher-profile')
     })
@@ -156,28 +160,39 @@ export const ApiEditUserInfo = data => dispatch => {
 }
 
 export const ApiEditPartInfo = data => dispatch => {
-  console.log(data);
   EditPartApi(data)
     .then(response => {
       if (response) {
+        infoAction('You successfully change your profile!', '/participant-profile')
         dispatch(PartInfoAC(response))
       }
-    }).finally(() => {
+    }).catch(e => {
+    if (e.response && e.response.data) {
+      infoAction(e.response.data.message, '/participant-profile');
+    }
+  }).finally(() => {
     dispatch(LoadingAC(false))
-    infoAction('You successfully change your profile!', '/participant-profile')
+
   })
   dispatch(LoadingAC(true))
 }
 
 export const ApiNewCaseInfo = data => dispatch => {
+  console.log('data1', data)
   AddCaseApi(data)
     .then(response => {
+      console.log('response', response)
       dispatch(LoadingAC(true))
       if (response) {
         dispatch(addCaseAC(response.data))
+        infoAction('You successfully create new study!', '/researcher-studies')
       }
-    }).finally(() => {
-      infoAction('You successfully create new study!', '/researcher-studies')
+    }).catch(e => {
+    if (e.response && e.response.data) {
+      infoAction(e.response.data.message, '/researcher-studies');
+    }
+  }).finally(() => {
+
       dispatch(LoadingAC(false))
     })
   dispatch(LoadingAC(true))
@@ -207,7 +222,11 @@ export const ApiDeleteCaseInfo = id => dispatch => {
       if (response) {
         dispatch(deleteCaseAC(response))
       }
-    }).finally(() => {
+    }).catch(e => {
+    if (e.response && e.response.data) {
+      infoAction(e.response.data.message, '/researcher-studies');
+    }
+  }).finally(() => {
       infoAction('Case study was successfully deleted!', '/researcher-studies')
     })
 }
@@ -223,11 +242,17 @@ export const ApiDeleteCaseInfo = id => dispatch => {
 export const ApiUserInfo = () => dispatch => {
   UserInfoApi()
     .then(response => {
+      console.log(1);
+
       if (response.data) {
         const { area, name, school } = response.data;
         dispatch(UserInfoAC({ area, school, name }))
       }
-    }).finally(() => {
+    }).catch(e => {
+    if (response.status === 401) {
+      storage.clear();
+    }
+  }).finally(() => {
       dispatch(LoadingAC(false))
     })
 }
@@ -273,7 +298,11 @@ export const ApiAllCasesInfo = () => dispatch => {
       if (response) {
         dispatch(AllCasesAC(response.data))
       }
-    }).finally(() => {
+    }).catch(e => {
+    if (e.response && e.response.data) {
+      infoAction(e.response.data.message, '/researcher-profile');
+    }
+  }).finally(() => {
     dispatch(LoadingAC(false))
   })
   dispatch(LoadingAC(true))
