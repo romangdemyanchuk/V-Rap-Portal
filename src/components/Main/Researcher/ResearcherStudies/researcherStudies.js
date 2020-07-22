@@ -1,22 +1,25 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
-import { Button, Skeleton} from "antd";
+import { Button, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from 'react-redux'
-import {ApiAllCasesInfo } from '../../../../modules/session/session-reducers'
+import { ApiAllCasesInfo } from '../../../../modules/session/session-reducers'
 import Case from './Case'
 
 const ResearcherStudies = () => {
+
   let dispatch = useDispatch()
+
   const allCaseStudies = useSelector(state => state.allCaseStudies)
 
   const isLoading = useSelector(state => state.isLoading)
 
   useEffect(() =>
     ApiAllCasesInfo()(dispatch)
-    ,[])
+    , [])
+
   return (
     <div className="ResearcherStudies">
       <div className="researcher-studies__btns-wrapper">
@@ -33,7 +36,7 @@ const ResearcherStudies = () => {
           <Button type="primary" className="create-new-study">Create New Research Study</Button>
         </Link>
       </div>
-      {isLoading ? <Skeleton active /> : allCaseStudies.map((study) => <Case study={study} key={study.id}/>) }
+      {isLoading ? <Skeleton active /> : allCaseStudies.map((study) => <Case study={study} key={study.id} />)}
     </div>
   );
 };

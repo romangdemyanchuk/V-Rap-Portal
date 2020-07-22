@@ -20,7 +20,6 @@ import EditCase from './components/Main/Researcher/ResearcherStudies/EditCase'
 const App = () => {
   return (
     <div className="root-App">
-      <button onClick={() => localStorage.clear()} style={{position: 'sticky', left: '92.4%'}}>LogOut</button>
       <Route path="/" component={Main} exact />
       <Route path="/participant-login" component={MainLogin} />
       <Route path="/researcher-studies" component={CaseStudies} />
@@ -34,10 +33,10 @@ const App = () => {
       <Route path="/researchers-list" component={ListOfResearchers} />
       <Route path="/all-studies-list" component={ListOfCaseStudies} />
       <Route path="/edit-case/:id"
-             render={({match}) => {
-                 const {id} = match.params;
-                 return <EditCase id={id}/>
-             }}/>
+        render={({ match }) => {
+          const { id } = match.params;
+          return <EditCase id={id} />
+        }} />
     </div>
   )
 }

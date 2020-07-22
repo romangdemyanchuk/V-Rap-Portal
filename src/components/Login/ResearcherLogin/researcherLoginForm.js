@@ -1,11 +1,12 @@
 /* eslint-disable */
 import React from 'react'
-import { Form, Input, Button} from "antd";
-import { UserOutlined, LockOutlined} from '@ant-design/icons';
+import { Form, Input, Button } from "antd";
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
-import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
+import { Loading } from '../../../modules/session/session-actions'
+import { ApiLoginRequest } from '../../../modules/session/session-reducers'
 import Loader from '../../Loader/loader'
-import {infoAction} from '../../../utils/notification'
+import { infoAction } from '../../../utils/notification'
 import "./researcherLoginForm.css"
 
 const ResearcherLogin = () => {
@@ -19,7 +20,7 @@ const ResearcherLogin = () => {
 
   const handleSubmit = (values) => {
     ApiLoginRequest(values)(dispatch);
-    dispatch(LoadingAC(true))
+    dispatch(Loading(true))
   }
 
   return <>
@@ -57,7 +58,7 @@ const ResearcherLogin = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" >
-          {isLoading ? <Loader/> : 'Login'}
+          {isLoading ? <Loader /> : 'Login'}
         </Button>
       </Form.Item>
     </Form>

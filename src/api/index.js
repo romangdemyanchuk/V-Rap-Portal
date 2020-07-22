@@ -33,7 +33,6 @@ export const UserInfoApi = () => {
 }
 
 export const PartInfoApi = () => {
-  debugger
   return instanceWithToken().post(`api/users/user`, {})
 }
 
@@ -50,7 +49,7 @@ export const AllCasesApi = () => {
 }
 
 export const ChangingStatus = (id) => {
-  return instanceWithToken().post(`/api/case/status`, {status: '3', id: id})
+  return instanceWithToken().post(`/api/case/status`, { status: '3', id: id })
 }
 
 export const EditCaseApi = (data) => {

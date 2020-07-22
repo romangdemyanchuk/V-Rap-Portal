@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import { Input, Button, InputNumber, Cascader} from 'antd'
+import { Input, Button, InputNumber, Cascader } from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
@@ -30,7 +30,7 @@ const ParticipantProfile = () => {
     setIncome(partData.income)
     setHeadset(partData.headset)
     ApiPartInfo()(dispatch)
-  }, [])
+  }, [partData.name, partData.age, partData.location, partData.income, partData.headset])
 
   const resetFieldsValue = () => {
     setName(partData.name)
@@ -40,15 +40,15 @@ const ParticipantProfile = () => {
     setHeadset(partData.headset)
   }
 
-  const ageChange = (value) => {
-    setAge(value);
-  }
-  const cascaderLocationChange = (value) => {
-    setLocation(value);
-  }
-  const cascaderHeadsetChange = (value) => {
-    setHeadset(value);
-  }
+  // const ageChange = (value) => {
+  //   setAge(value);
+  // }
+  // const cascaderLocationChange = (value) => {
+  //   setLocation(value);
+  // }
+  // const cascaderHeadsetChange = (value) => {
+  //   setHeadset(value);
+  // }
 
   return (
     <div className="root-PartProfile">
@@ -67,44 +67,45 @@ const ParticipantProfile = () => {
             <div className="participant-profile__fields-wrapper">
               <p>Name</p>
               <Input placeholder="Type here.."
-                     onChange={e => setName(e.target.value)}
-                     value={name}
-               />
+                onChange={setName}
+                value={name}
+              />
             </div>
             <div className="participant-profile__fields-wrapper">
               <p>Age</p>
               <InputNumber min={1} max={300}
-                           className="input-number"
-                           onChange={ageChange}
-                           value={age}
+                className="input-number"
+                onChange={setAge}
+                value={age}
               />
             </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Location</p>
               <Cascader options={countryVariants} placeholder={location ? location : "--Countries--"}
-                        onChange={cascaderLocationChange}
+                onChange={setLocation}
 
               />
             </div>
-           <div className="participant-profile__fields-wrapper">
-             <p>Average Income(USD)</p>
-             <Input placeholder="Average Income"
-                    onChange={e => setIncome(e.target.value)}
-                    value={income}
-             />
-           </div>
+            <div className="participant-profile__fields-wrapper">
+              <p>Average Income(USD)</p>
+              <Input placeholder="Average Income"
+                onChange={setIncome}
+                value={income}
+              />
+            </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Main VR Headset</p>
               <Cascader options={headsetsVariants} placeholder={headset ? headset : "--Headsets--"}
-                        onChange={cascaderHeadsetChange}/>
+                onChange={setHeadset} />
             </div>
           </div>
           <div className="participant-profile__changes-btns">
             <Button className="participant-profile__save-btn"
               type="primary"
-                    onClick={() => ApiEditPartInfo({
-                      name: name, age: age, location: location,
-                      income: income, headset: headset})(dispatch)}
+              onClick={() => ApiEditPartInfo({
+                name: name, age: age, location: location,
+                income: income, headset: headset
+              })(dispatch)}
             >
               {isLoading ? <Loader /> : 'Save changes'}
             </Button>
