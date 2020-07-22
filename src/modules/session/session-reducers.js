@@ -1,14 +1,15 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO, DELETE_CASE, CHANGE_STATUS, PART_INFO, ALL_CASES } from './session-constants'
+import {
+  LOGIN, REGISTER, LOADING, ADD_CASE, USER_INFO,
+  DELETE_CASE, CHANGE_STATUS, PART_INFO, ALL_CASES
+} from './session-constants'
 import { allData } from './data'
 import {
-  RegisterApi,
-  LoginApi,
-  EditUserInfoApi,
-  UserInfoApi,
-  AddCaseApi,
-  DeleteCaseApi,
-  AllCasesApi, EditCaseApi, PartInfoApi, EditPartApi,
+  RegisterApi, LoginApi,
+  EditUserInfoApi, UserInfoApi,
+  AddCaseApi, DeleteCaseApi,
+  AllCasesApi, EditCaseApi,
+  PartInfoApi, EditPartApi,
 } from '../../api'
 import {
   Register, Loading,
@@ -16,7 +17,6 @@ import {
   UserInfo, PartInfo, AllCases
 } from './session-actions'
 import { infoAction } from '../../utils/notification'
-
 
 let { caseStudies, researchersList, caseStudiesColumns } = allData
 
@@ -49,7 +49,6 @@ const MainReducer = (state = initialState, action) => {
       return {
         ...state,
         adminRegisterData: action.payload,
-        isAuth: true,
       }
     case LOADING:
       return {
@@ -95,16 +94,23 @@ export default MainReducer
 
 
 
-export const ApiRegisterRequest = data => dispatch => {
+export const RegisterRequest = data => dispatch => {
   RegisterApi(data)
     .then(response => {
       if (response) {
         dispatch(Register(response))
       }
+      dispatch(Loading(false))
     })
+    .catch(e => {
+      if (e.response) {
+        dispatch(Loading(false))
+      }
+    }
+    )
 }
 
-export const ApiEditUserInfo = data => dispatch => {
+export const EditUserInfo = data => dispatch => {
   EditUserInfoApi(data)
     .then(response => {
       if (response) {
@@ -121,7 +127,7 @@ export const ApiEditUserInfo = data => dispatch => {
   dispatch(Loading(true))
 }
 
-export const ApiEditPartInfo = data => dispatch => {
+export const EditPartIcipantProfile = data => dispatch => {
   EditPartApi(data)
     .then(response => {
       if (response) {
@@ -139,7 +145,7 @@ export const ApiEditPartInfo = data => dispatch => {
   dispatch(Loading(true))
 }
 
-export const ApiNewCaseInfo = data => dispatch => {
+export const NewCaseInfo = data => dispatch => {
   console.log('data1', data)
   AddCaseApi(data)
     .then(response => {
@@ -160,7 +166,7 @@ export const ApiNewCaseInfo = data => dispatch => {
   dispatch(Loading(true))
 }
 
-export const ApiEditCaseInfo = data => dispatch => {
+export const EditCaseInfo = data => dispatch => {
   console.log(data);
   EditCaseApi(data)
     .then(response => {
@@ -176,7 +182,7 @@ export const ApiEditCaseInfo = data => dispatch => {
   // dispatch(Loading(true))
 }
 
-export const ApiDeleteCaseInfo = id => dispatch => {
+export const DeleteCaseInfo = id => dispatch => {
   DeleteCaseApi(id)
     .then(response => {
       if (response) {
@@ -191,7 +197,7 @@ export const ApiDeleteCaseInfo = id => dispatch => {
     })
 }
 
-export const ApiUserInfo = () => dispatch => {
+export const UserInfoTC = () => dispatch => {
   UserInfoApi()
     .then(response => {
       console.log(1);
@@ -209,7 +215,7 @@ export const ApiUserInfo = () => dispatch => {
     })
 }
 
-export const ApiPartInfo = () => dispatch => {
+export const ParticipantInfo = () => dispatch => {
   PartInfoApi()
     .then(response => {
       if (response.data) {
@@ -221,7 +227,7 @@ export const ApiPartInfo = () => dispatch => {
     })
 }
 
-export const ApiLoginRequest = data => dispatch => {
+export const LoginRequest = data => dispatch => {
   LoginApi(data)
     .then(response => {
       if (response.statusText == 'OK') {
@@ -241,7 +247,7 @@ export const ApiLoginRequest = data => dispatch => {
     })
 }
 
-export const ApiAllCasesInfo = () => dispatch => {
+export const AllCasesInfo = () => dispatch => {
   AllCasesApi()
     .then(response => {
       dispatch(Loading(true))
@@ -261,7 +267,7 @@ export const ApiAllCasesInfo = () => dispatch => {
   dispatch(Loading(true))
 }
 
-export const ApiForgotPassword = () => dispatch => {
+export const ForgotPassword = () => dispatch => {
   AllCasesApi()
     .then(response => {
       dispatch(Loading(true))

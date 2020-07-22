@@ -6,7 +6,7 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { infoAction } from '../../../utils/notification'
 import { useDispatch, useSelector } from 'react-redux';
-import { ApiLoginRequest, } from '../../../modules/session/session-reducers'
+import { LoginRequest, } from '../../../modules/session/session-reducers'
 import { Loading } from '../../../modules/session/session-actions'
 import "./participantLoginForm.scss";
 import ForgotPasswordModal from './ForgotPasswordModal'
@@ -23,7 +23,7 @@ const ParticipantLoginForm = ({ setState }) => {
   }
 
   const handleSubmit = (values) => {
-    ApiLoginRequest(values)(dispatch);
+    LoginRequest(values)(dispatch);
     dispatch(Loading(true))
   }
 

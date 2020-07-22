@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input, Button } from "antd";
 import WithAuthRedirect from "../../../../hoc/hoc";
-import { ApiEditUserInfo, ApiUserInfo } from '../../../../modules/session/session-reducers'
+import { EditUserInfo, UserInfoTC } from '../../../../modules/session/session-reducers'
 import Loader from '../../../Loader/loader'
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,11 +22,11 @@ const ResearcherProfile = () => {
   let dispatch = useDispatch()
 
   useEffect(() => {
-    ApiUserInfo()(dispatch)
+    UserInfoTC()(dispatch)
     setnameField(userData.name)
     setschoolField(userData.school)
     setareaField(userData.area)
-    
+
   }, [userData.school, userData.area, userData.name])
 
   const resetFieldsValue = () => {
@@ -69,7 +69,7 @@ const ResearcherProfile = () => {
         </div>
         <div className="researcher-profile__changes-btns">
           <Button className="researcher-profile__save-btn" type="primary"
-            onClick={() => { ApiEditUserInfo({ name: nameField, school: schoolField, area: areaField })(dispatch) }} >
+            onClick={() => { EditUserInfo({ name: nameField, school: schoolField, area: areaField })(dispatch) }} >
             {isLoading ? <Loader /> : 'Save changes'}
           </Button>
           <Button className="researcher-profile__cancel-btn"

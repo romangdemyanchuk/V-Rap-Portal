@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom'
 import { Button, Cascader, Input, InputNumber, Slider, Upload } from 'antd'
 import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
 import {
-  ApiAllCasesInfo,
-  ApiEditCaseInfo,
+  AllCasesInfo,
+  EditCaseInfo,
 } from '../../../../../modules/session/session-reducers'
 import Loader from '../../../../Loader/loader'
 import { useDispatch, useSelector } from 'react-redux'
 const { TextArea } = Input;
 
 
-const EditCase = ({id}) => {
+const EditCase = ({ id }) => {
   const allCaseStudies = useSelector(state => state.allCaseStudies)
 
   let dispatch = useDispatch()
@@ -21,15 +21,15 @@ const EditCase = ({id}) => {
   if (allCaseStudies) {
     filteredCases = allCaseStudies?.filter(item => {
       return item._id === id
-    } );
+    });
   }
   else {
-    ApiAllCasesInfo() (dispatch)
+    AllCasesInfo()(dispatch)
     const allCaseStudies = useSelector(state => state.allCaseStudies)
     console.log(allCaseStudies);
     filteredCases = allCaseStudies?.filter(item => {
       return item._id === id
-    } );
+    });
   }
   filteredCases = filteredCases.length ? filteredCases[0] : []
   const isLoading = useSelector(state => state.isLoading)
@@ -55,7 +55,7 @@ const EditCase = ({id}) => {
     setHeadsets(filteredCases.headset);
     setListOfProfessions(filteredCases.project);
   }, [filteredCases.title, filteredCases.description, filteredCases.location,
-    filteredCases.participant, filteredCases.headset, filteredCases.project])
+  filteredCases.participant, filteredCases.headset, filteredCases.project])
 
   const resetFieldsValue = () => {
     setTitle('')
@@ -125,21 +125,21 @@ const EditCase = ({id}) => {
               <div className="personal-stats__fields-wrapper">
                 <p>Title</p>
                 <Input placeholder="Title"
-                       onChange={e => setTitle(e.target.value)}
-                       value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  value={title}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Description</p>
                 <TextArea placeholder="Type here" rows={3} className="personal-stats-area"
-                          onChange={e => setDescr(e.target.value)}
-                          value={descr}
+                  onChange={e => setDescr(e.target.value)}
+                  value={descr}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Location</p>
                 <Cascader options={countryVariants} placeholder={filteredCases.location ? filteredCases.location : "--Location--"}
-                          onChange={cascaderLocationChange}
+                  onChange={cascaderLocationChange}
                 />
               </div>
             </div>
@@ -147,51 +147,51 @@ const EditCase = ({id}) => {
               <div className="personal-stats__fields-wrapper">
                 <p>Age(range)</p>
                 <Slider range
-                        onChange={ageRangeChange}
-                        value={age}
+                  onChange={ageRangeChange}
+                  value={age}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Average Income</p>
                 <Slider range
-                        onChange={avgRangeChange}
-                        value={avgIncome}
+                  onChange={avgRangeChange}
+                  value={avgIncome}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Required number of participant</p>
                 <InputNumber min={1} max={300}
-                             className="input-number"
-                             onChange={parNumberChange}
-                             value={parNum}
+                  className="input-number"
+                  onChange={parNumberChange}
+                  value={parNum}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Supported Headsets</p>
-                <Cascader options={headsetsVariants} placeholder={filteredCases.headset ? filteredCases.headset: "--Headsets--"}
-                          onChange={cascaderHeadsetsChange}
+                <Cascader options={headsetsVariants} placeholder={filteredCases.headset ? filteredCases.headset : "--Headsets--"}
+                  onChange={cascaderHeadsetsChange}
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">List of Professions</p>
                 <Cascader options={professionsList} placeholder={filteredCases.project ? filteredCases.project : "--Professions--"}
-                          onChange={cascaderlistOfProfessionsChange}
-                           style={{}}
+                  onChange={cascaderlistOfProfessionsChange}
+                  style={{}}
                 />
               </div>
             </div>
           </div>
           <div className="personal-stats__footer-btns">
             <Button type="primary" className="personal-stats__create-research-btn"
-                    onClick={() => ApiEditCaseInfo({
-                      id: id,title: title, description: descr, location: location,
-                      age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
-                    })(dispatch)}
+              onClick={() => EditCaseInfo({
+                id: id, title: title, description: descr, location: location,
+                age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
+              })(dispatch)}
             >
               {isLoading ? <Loader /> : 'Save Changes'}
             </Button>
             {/*<Link to={'/researcher-profile'}>*/}
-              <Button onClick={resetFieldsValue}>Cancel</Button>
+            <Button onClick={resetFieldsValue}>Cancel</Button>
             {/*</Link>*/}
           </div>
         </div>

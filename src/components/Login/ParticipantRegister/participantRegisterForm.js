@@ -5,7 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Loader from '../../Loader/loader'
 import "./participantRegisterForm.css";
 import { useDispatch, useSelector } from 'react-redux'
-import { ApiRegisterRequest } from '../../../modules/session/session-reducers'
+import { RegisterRequest } from '../../../modules/session/session-reducers'
 import { Loading } from '../../../modules/session/session-actions'
 import { infoAction } from '../../../utils/notification'
 
@@ -20,7 +20,7 @@ const ParticipantRegisterForm = ({ setState }) => {
   }
 
   const handleSubmit = (values) => {
-    ApiRegisterRequest(values)(dispatch);
+    RegisterRequest(values)(dispatch);
     dispatch(Loading(true))
   }
 
@@ -66,10 +66,10 @@ const ParticipantRegisterForm = ({ setState }) => {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" >
-            {/*{isLoading ? <Loader/> : */}
-                  Register
-                {/*}*/}
+          <Button type="primary" htmlType="submit">
+            {isLoading ? <Loader /> :
+              'Register'
+            }
           </Button>
         </Form.Item>
       </Form>

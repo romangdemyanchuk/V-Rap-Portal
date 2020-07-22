@@ -6,8 +6,8 @@ import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
 import {
-  ApiEditPartInfo,
-  ApiPartInfo
+  EditPartIcipantProfile,
+  ParticipantInfo
 } from '../../../../modules/session/session-reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../Loader/loader'
@@ -29,7 +29,7 @@ const ParticipantProfile = () => {
     setLocation(partData.location)
     setIncome(partData.income)
     setHeadset(partData.headset)
-    ApiPartInfo()(dispatch)
+    ParticipantInfo()(dispatch)
   }, [partData.name, partData.age, partData.location, partData.income, partData.headset])
 
   const resetFieldsValue = () => {
@@ -102,7 +102,7 @@ const ParticipantProfile = () => {
           <div className="participant-profile__changes-btns">
             <Button className="participant-profile__save-btn"
               type="primary"
-              onClick={() => ApiEditPartInfo({
+              onClick={() => EditPartIcipantProfile({
                 name: name, age: age, location: location,
                 income: income, headset: headset
               })(dispatch)}

@@ -4,7 +4,7 @@ import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { Loading } from '../../../modules/session/session-actions'
-import { ApiLoginRequest } from '../../../modules/session/session-reducers'
+import { LoginRequest } from '../../../modules/session/session-reducers'
 import Loader from '../../Loader/loader'
 import { infoAction } from '../../../utils/notification'
 import "./researcherLoginForm.css"
@@ -19,7 +19,7 @@ const ResearcherLogin = () => {
     return infoAction('Mission complete Researcher :)', '/researcher-profile')
 
   const handleSubmit = (values) => {
-    ApiLoginRequest(values)(dispatch);
+    LoginRequest(values)(dispatch);
     dispatch(Loading(true))
   }
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from 'react-redux'
-import { ApiAllCasesInfo } from '../../../../modules/session/session-reducers'
+import { AllCasesInfo } from '../../../../modules/session/session-reducers'
 import Case from './Case'
 
 const ResearcherStudies = () => {
@@ -17,7 +17,7 @@ const ResearcherStudies = () => {
   const isLoading = useSelector(state => state.isLoading)
 
   useEffect(() =>
-    ApiAllCasesInfo()(dispatch)
+    AllCasesInfo()(dispatch)
     , [])
 
   return (

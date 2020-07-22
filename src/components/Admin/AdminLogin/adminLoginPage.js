@@ -4,7 +4,7 @@ import Loader from '../../Loader/loader'
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from 'react-redux'
-import { ApiLoginRequest } from '../../../modules/session/session-reducers'
+import { LoginRequest } from '../../../modules/session/session-reducers'
 import { Loading } from '../../../modules/session/session-actions'
 import "./adminLoginPage.css";
 
@@ -14,7 +14,7 @@ const AdminLoginForm = () => {
   const isLoading = useSelector(state => state.isLoading)
 
   const handleSubmit = (values) => {
-    ApiLoginRequest(values)(dispatch);
+    LoginRequest(values)(dispatch);
     dispatch(Loading(true))
   }
 

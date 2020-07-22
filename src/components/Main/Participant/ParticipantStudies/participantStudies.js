@@ -1,13 +1,13 @@
 /* eslint-disable */
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Skeleton, Tag } from 'antd'
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import FileUpload from './FileUpload'
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { ApiAllCasesInfo } from "../../../../modules/session/session-reducers";
+import { AllCasesInfo } from "../../../../modules/session/session-reducers";
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
@@ -19,15 +19,15 @@ const ParticipantStudies = () => {
     else if (status === 2) return <Tag color='danger'>Closed</Tag>
   }
 
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() =>
-    ApiAllCasesInfo()(dispatch)
-    ,[])
+    AllCasesInfo()(dispatch)
+    , [])
 
   return (
     <div className="root-PartStudies">
-     <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
+      <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} />
       <div className="participant-studies__btns-wrapper">
         <Link to={'/participant-profile'}>
           <Button className="profile-btn">Profile</Button>
