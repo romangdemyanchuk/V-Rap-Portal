@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 
-const EachStudy = ({study}) => {
+const Case = ({study}) => {
   let dispatch = useDispatch()
   let [isloading, setLoading] = useState(false)
   let caseStatusName = (status) => {
@@ -87,4 +87,4 @@ const EachStudy = ({study}) => {
   </>
 }
 
-export default EachStudy
+export default Case

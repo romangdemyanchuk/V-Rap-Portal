@@ -278,3 +278,16 @@ export const ApiAllCasesInfo = () => dispatch => {
   })
   dispatch(LoadingAC(true))
 }
+
+export const ApiForgotPassword = () => dispatch => {
+  AllCasesApi()
+    .then(response => {
+      dispatch(LoadingAC(true))
+      if (response) {
+        dispatch(AllCasesAC(response.data))
+      }
+    }).finally(() => {
+    dispatch(LoadingAC(false))
+  })
+  dispatch(LoadingAC(true))
+}

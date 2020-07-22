@@ -29,14 +29,10 @@ const ResearcherProfile = () => {
   }, [userData.school, userData.area, userData.name])
 
   const resetFieldsValue = () => {
-    setnameField('')
-    setschoolField('')
-    setareaField('')
+    setnameField(userData.name)
+    setschoolField(userData.school)
+    setareaField(userData.area)
   }
-  // const submitEditUserInfo = (values) => {
-  //   ApiEditUserInfo(values)(dispatch);
-  //   dispatch(LoadingAC(true))
-  // }
   return (
     <div className="root-ResearcherProfile">
       <div className="researcher-profile__btns-wrapper">

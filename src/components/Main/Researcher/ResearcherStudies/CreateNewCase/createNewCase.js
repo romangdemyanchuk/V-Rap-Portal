@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 import { Input, Button, Slider, InputNumber, Cascader, Upload } from 'antd'
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
-import "./personalStats.scss";
+import "./createNewCase.scss";
 import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
 import { ApiNewCaseInfo } from '../../../../../modules/session/session-reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../../Loader/loader'
 
-const PersonalStats = () => {
+const CreateNewCase = () => {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
   const [location, setLocation] = useState('');
@@ -161,6 +161,6 @@ const PersonalStats = () => {
   );
 };
 
-const AuthRedirectComponent = WithAuthRedirect(PersonalStats)
+const AuthRedirectComponent = WithAuthRedirect(CreateNewCase)
 
 export default AuthRedirectComponent;

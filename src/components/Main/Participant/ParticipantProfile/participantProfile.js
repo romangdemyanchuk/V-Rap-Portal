@@ -33,6 +33,14 @@ const ParticipantProfile = () => {
   }, [partData.name, partData.age, partData.location, partData.income,
     partData.headset])
 
+  const resetFieldsValue = () => {
+    setName(partData.name)
+    setAge(partData.age)
+    setLocation(partData.location)
+    setIncome(partData.income)
+    setHeadset(partData.headset)
+  }
+
   const ageChange = (value) => {
     setAge(value);
   }
@@ -101,7 +109,11 @@ const ParticipantProfile = () => {
             >
               {isLoading ? <Loader /> : 'Save changes'}
             </Button>
-            <Button className="participant-profile__cancel-btn">Cancel</Button>
+            <Button className="participant-profile__cancel-btn"
+              onClick={resetFieldsValue}
+            >
+              Cancel
+            </Button>
           </div>
         </div>
       </div>

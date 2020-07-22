@@ -2,29 +2,13 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Link } from "react-router-dom";
-import {message, Button, Modal, Progress } from "antd";
-import "./aboutStudies.css";
+import {Button, Modal, Progress } from "antd";
+import "./successUploadModal.css";
 
-const AboutStudies = ({ successModalIsOpen, setsuccessModalIsOpen }) => {
+const SuccessUploadModal = ({ successModalIsOpen, setSuccessModalIsOpen}) => {
   const  closeModal = e => {
-    setsuccessModalIsOpen(false);
+    setSuccessModalIsOpen(false);
   }
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
   return (
       <Modal
         title="Upload results for Research Study 1"
@@ -45,4 +29,4 @@ const AboutStudies = ({ successModalIsOpen, setsuccessModalIsOpen }) => {
       </Modal>
   );
 };
-export default AboutStudies;
+export default SuccessUploadModal;

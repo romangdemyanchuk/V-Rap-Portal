@@ -4,7 +4,7 @@ import { Route } from "react-router-dom"
 import Main from "./components/Main"
 import CaseStudies from "./components/Main/Researcher/ResearcherStudies"
 import ParticipantProfile from "./components/Main/Participant/ParticipantProfile"
-import PersonalStats from "./components/Main/Researcher/ResearcherStudies/PersonalStats"
+import PersonalStats from "./components/Main/Researcher/ResearcherStudies/CreateNewCase"
 import ParticipantStudies from "./components/Main/Participant/ParticipantStudies"
 import ResearcherProfile from './components/Main/Researcher/ResearcherProfile'
 import ResearcherLogin from './components/Login/ResearcherLogin'

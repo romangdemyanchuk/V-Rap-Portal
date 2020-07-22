@@ -6,7 +6,7 @@ import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from 'react-redux'
 import {ApiAllCasesInfo } from '../../../../modules/session/session-reducers'
-import EachStudy from './EachStudy'
+import Case from './Case'
 
 const ResearcherStudies = () => {
   let dispatch = useDispatch()
@@ -33,7 +33,7 @@ const ResearcherStudies = () => {
           <Button type="primary" className="create-new-study">Create New Research Study</Button>
         </Link>
       </div>
-      {isLoading ? <Skeleton active /> : allCaseStudies.map((study) => <EachStudy study={study} key={study.id}/>) }
+      {isLoading ? <Skeleton active /> : allCaseStudies.map((study) => <Case study={study} key={study.id}/>) }
     </div>
   );
 };
