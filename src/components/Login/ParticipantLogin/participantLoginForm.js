@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import Loader from '../../Loader/loader'
 import { Form, Input, Button, Checkbox} from "antd";
@@ -8,8 +8,10 @@ import {infoAction} from '../../../utils/notification'
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiLoginRequest, LoadingAC } from '../../../modules/session/session-reducers'
 import "./participantLoginForm.scss";
+import ForgotPasswordModal from './ForgotPasswordModal'
 
 const ParticipantLoginForm = ({ setState }) => {
+  const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
   let dispatch = useDispatch()
 
   const isAuthCheck = useSelector(state => state.isAuth)
@@ -25,6 +27,7 @@ const ParticipantLoginForm = ({ setState }) => {
   }
 
   return <>
+    <ForgotPasswordModal forgotPasswordModal={forgotPasswordModal} setForgotPasswordModal={setForgotPasswordModal}/>
       <div className="participant-login__heading">
         V-RAP: Participant
       </div>
@@ -67,7 +70,8 @@ const ParticipantLoginForm = ({ setState }) => {
           <Form.Item name="remember" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-          <a className="login-form-forgot">
+          <a className="login-form-forgot"
+            onClick={() => setForgotPasswordModal(true)}>
             Forgot password
           </a>
         </Form.Item>

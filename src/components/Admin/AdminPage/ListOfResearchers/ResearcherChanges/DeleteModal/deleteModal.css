@@ -1,4 +1,5 @@
-.delete__btns {
+.delete__btns,
+.forgotPassword__btns {
     display: flex;
     justify-content: space-evenly;
     margin-top: 15px;

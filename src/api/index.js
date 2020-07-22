@@ -38,6 +38,7 @@ export const PartInfoApi = () => {
 }
 
 export const AddCaseApi = (data) => {
+  console.log(data)
   return instanceWithToken(token).post(`api/case/add`, data)
 }
 
