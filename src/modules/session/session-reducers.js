@@ -187,16 +187,16 @@ export const ApiEditCaseInfo = data => dispatch => {
   console.log(data);
   EditCaseApi(data)
     .then(response => {
-      dispatch(LoadingAC(true))
-      if (response) {
-        console.log('response', response);
-        dispatch(AllCasesAC(response.data))
-      }
+      // dispatch(LoadingAC(true))
+      // if (response) {
+      //   console.log('response', response);
+      //   dispatch(AllCasesAC(response.data))
+      // }
     }).finally(() => {
     infoAction('You successfully change your study!', '/researcher-studies')
-    dispatch(LoadingAC(false))
+    // dispatch(LoadingAC(false))
   })
-  dispatch(LoadingAC(true))
+  // dispatch(LoadingAC(true))
 }
 
 

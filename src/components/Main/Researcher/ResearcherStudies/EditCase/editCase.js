@@ -43,6 +43,7 @@ const EditCase = ({id}) => {
   const [parNum, setParNum] = useState(filteredCases.participant);
   const [headsets, setHeadsets] = useState(filteredCases.headset);
   const [listOfProfessions, setListOfProfessions] = useState(filteredCases.project);
+
   useEffect(() => {
     console.log('useEffect')
     setTitle(filteredCases.title);
@@ -183,7 +184,7 @@ const EditCase = ({id}) => {
           <div className="personal-stats__footer-btns">
             <Button type="primary" className="personal-stats__create-research-btn"
                     onClick={() => ApiEditCaseInfo({
-                      caseId: id,title: title, description: descr, location: location,
+                      id: id,title: title, description: descr, location: location,
                       age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
                     })(dispatch)}
             >
