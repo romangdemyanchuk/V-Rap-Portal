@@ -15,11 +15,11 @@ const { TextArea } = Input;
 
 const EditCase = ({id}) => {
   const allCaseStudies = useSelector(state => state.allCaseStudies)
-  let filteredCases = [];
+
   let dispatch = useDispatch()
   console.log('allCaseStudies', allCaseStudies);
   if (allCaseStudies) {
-    filteredCases = allCaseStudies.filter(item => {
+    filteredCases = allCaseStudies?.filter(item => {
       return item._id === id
     } );
   }
@@ -31,7 +31,7 @@ const EditCase = ({id}) => {
       return item._id === id
     } );
   }
-  filteredCases = filteredCases?.length ? filteredCases[0] : []
+  filteredCases = filteredCases.length ? filteredCases[0] : []
   const isLoading = useSelector(state => state.isLoading)
 
 

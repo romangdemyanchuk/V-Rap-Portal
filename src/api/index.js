@@ -8,9 +8,8 @@ const instance = axios.create({
 })
 
 let token = localStorage.getItem('userLoginToken')
-console.log(token);
 
-const instanceWithToken = (token) => axios.create({
+const instanceWithToken = () => axios.create({
   baseURL,
   headers: {
     'Authorization': token
@@ -26,23 +25,24 @@ export const LoginApi = (loginData) => {
 }
 
 export const EditUserInfoApi = (data) => {
-  return instanceWithToken(token).post(`api/users/useredit`, data)
+  return instanceWithToken().post(`api/users/useredit`, data)
 }
 
 export const UserInfoApi = () => {
-  return instanceWithToken(token).post(`api/users/user`, {})
+  return instanceWithToken().post(`api/users/user`, {})
 }
 
 export const PartInfoApi = () => {
-  return instanceWithToken(token).post(`api/users/user`, {})
+  debugger
+  return instanceWithToken().post(`api/users/user`, {})
 }
 
 export const AddCaseApi = (data) => {
-  return instanceWithToken(token).post(`api/case/add`, data)
+  return instanceWithToken().post(`api/case/add`, data)
 }
 
 export const DeleteCaseApi = (id) => {
-  return instanceWithToken(token).delete(`api/case/delete`, { data: { id: id } })
+  return instanceWithToken().delete(`api/case/delete`, { data: { id: id } })
 }
 
 export const AllCasesApi = () => {
@@ -54,9 +54,9 @@ export const ChangingStatus = (id) => {
 }
 
 export const EditCaseApi = (data) => {
-  return instanceWithToken(token).post(`api/case/edit`, data)
+  return instanceWithToken().post(`api/case/edit`, data)
 }
 
 export const EditPartApi = (data) => {
-  return instanceWithToken(token).post(`api/users/useredit`, data)
+  return instanceWithToken().post(`api/users/useredit`, data)
 }

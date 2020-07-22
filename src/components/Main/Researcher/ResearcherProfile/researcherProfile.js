@@ -22,10 +22,11 @@ const ResearcherProfile = () => {
   let dispatch = useDispatch()
 
   useEffect(() => {
+    ApiUserInfo()(dispatch)
     setnameField(userData.name)
     setschoolField(userData.school)
     setareaField(userData.area)
-    ApiUserInfo()(dispatch)
+    
   }, [userData.school, userData.area, userData.name])
 
   const resetFieldsValue = () => {

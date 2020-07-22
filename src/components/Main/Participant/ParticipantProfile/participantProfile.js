@@ -30,8 +30,7 @@ const ParticipantProfile = () => {
     setIncome(partData.income)
     setHeadset(partData.headset)
     ApiPartInfo()(dispatch)
-  }, [partData.name, partData.age, partData.location, partData.income,
-    partData.headset])
+  }, [])
 
   const resetFieldsValue = () => {
     setName(partData.name)
