@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 const ResearcherProfile = () => {
 
   const userData = useSelector(state => state.userInfo)
+  console.log('userData', userData);
 
   const [nameField, setnameField] = useState(userData.name);
   const [schoolField, setschoolField] = useState(userData.school);

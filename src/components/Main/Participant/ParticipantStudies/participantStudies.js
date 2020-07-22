@@ -8,11 +8,16 @@ import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { ApiAllCasesInfo } from "../../../../modules/session/session-reducers";
-import { caseStatusName } from "../../Researcher/ResearcherStudies/researcherStudies";
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
   const allCaseStudies = useSelector(state => state.allCaseStudies)
+  let caseStatusName = (status) => {
+    if (status === 0) return <Tag color='gold'>Pending</Tag>
+    else if (status === 1) return <Tag color='gray'>Reject</Tag>
+    else if (status === 2) return <Tag color='green'>In Progress</Tag>
+    else if (status === 3) return <Tag color='red'>Closed</Tag>
+  }
 
 const dispatch = useDispatch()
 

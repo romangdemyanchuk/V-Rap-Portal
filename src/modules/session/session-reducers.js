@@ -9,7 +9,7 @@ import {
   AddCaseApi,
   DeleteCaseApi,
   // ChangeStatusApi,
-  AllCasesApi, EditCaseApi, PartInfoApi,
+  AllCasesApi, EditCaseApi, PartInfoApi, EditPartApi,
 } from '../../api'
 import { infoAction } from '../../utils/notification'
 
@@ -94,7 +94,6 @@ const MainReducer = (state = initialState, action) => {
         userInfo: action.payload
       }
   case PART_INFO:
-    console.log(action.payload)
     return {
       ...state,
       partInfo: action.payload
@@ -156,6 +155,20 @@ export const ApiEditUserInfo = data => dispatch => {
   dispatch(LoadingAC(true))
 }
 
+export const ApiEditPartInfo = data => dispatch => {
+  console.log(data);
+  EditPartApi(data)
+    .then(response => {
+      if (response) {
+        dispatch(PartInfoAC(response))
+      }
+    }).finally(() => {
+    dispatch(LoadingAC(false))
+    infoAction('You successfully change your profile!', '/participant-profile')
+  })
+  dispatch(LoadingAC(true))
+}
+
 export const ApiNewCaseInfo = data => dispatch => {
   AddCaseApi(data)
     .then(response => {
@@ -186,6 +199,8 @@ export const ApiEditCaseInfo = data => dispatch => {
   dispatch(LoadingAC(true))
 }
 
+
+
 export const ApiDeleteCaseInfo = id => dispatch => {
   DeleteCaseApi(id)
     .then(response => {
@@ -196,7 +211,6 @@ export const ApiDeleteCaseInfo = id => dispatch => {
       infoAction('Case study was successfully deleted!', '/researcher-studies')
     })
 }
-
 // export const ApiChangeStatus = (id, num_status) => dispatch => {
 //   ChangeStatusApi(id, num_status)
 //     .then(response => {
@@ -205,7 +219,6 @@ export const ApiDeleteCaseInfo = id => dispatch => {
 //       }
 //     })
 // }
-
 
 export const ApiUserInfo = () => dispatch => {
   UserInfoApi()
@@ -223,8 +236,8 @@ export const ApiPartInfo = () => dispatch => {
   PartInfoApi()
     .then(response => {
       if (response.data) {
-        console.log(response)
-        dispatch(PartInfoAC(response))
+        const {name, age, location, income, headset} = response.data;
+        dispatch(PartInfoAC({ name, age, location, income, headset }))
       }
     }).finally(() => {
     dispatch(LoadingAC(false))

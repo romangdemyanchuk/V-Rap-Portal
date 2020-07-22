@@ -17,7 +17,12 @@
         font-size: 12px;
     }
 }
-
+.researcher-profile__changes-btns
+.researcher-profile__save-btn,
+.participant-profile__changes-btns
+.participant-profile__save-btn{
+    width: 115px;
+}
 .participant-profile__personal-info-block,
 .case-studies__changes-btns,
 .research-create__changes-btns,

@@ -1,12 +1,16 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import { Input, Button, InputNumber, Cascader, Form, Select, TreeSelect } from 'antd'
+import { Input, Button, InputNumber, Cascader} from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
-import { ApiPartInfo, ApiUserInfo } from '../../../../modules/session/session-reducers'
+import {
+  ApiEditPartInfo,
+  ApiPartInfo
+} from '../../../../modules/session/session-reducers'
 import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../../../Loader/loader'
 
 const ParticipantProfile = () => {
   const partData = useSelector(state => state.partInfo)
@@ -14,9 +18,8 @@ const ParticipantProfile = () => {
   const [name, setName] = useState(partData.name);
   const [age, setAge] = useState(partData.age);
   const [location, setLocation] = useState(partData.location);
-  const [avgIncome, setAvgIncome] = useState(partData.avgIncome);
+  const [income, setIncome] = useState(partData.avgIncome);
   const [headset, setHeadset] = useState(partData.headset);
-  const [trello, setTrello] = useState(partData.trello);
   const isLoading = useSelector(state => state.isLoading)
   let dispatch = useDispatch()
 
@@ -24,12 +27,11 @@ const ParticipantProfile = () => {
     setName(partData.name)
     setAge(partData.age)
     setLocation(partData.location)
-    setAvgIncome(partData.avgIncome)
+    setIncome(partData.income)
     setHeadset(partData.headset)
-    setTrello(partData.trello)
     ApiPartInfo()(dispatch)
-  }, [partData.name, partData.age, partData.location, partData.avgIncome,
-    partData.headset, partData.trello])
+  }, [partData.name, partData.age, partData.location, partData.income,
+    partData.headset])
 
   const ageChange = (value) => {
     setAge(value);
@@ -39,9 +41,6 @@ const ParticipantProfile = () => {
   }
   const cascaderHeadsetChange = (value) => {
     setHeadset(value);
-  }
-  const cascaderTrelloChange = (value) => {
-    setTrello(value);
   }
 
   return (
@@ -75,32 +74,32 @@ const ParticipantProfile = () => {
             </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Location</p>
-              <Cascader options={countryVariants} placeholder="--Countries--"
+              <Cascader options={countryVariants} placeholder={location ? location : "--Countries--"}
                         onChange={cascaderLocationChange}
+
               />
             </div>
            <div className="participant-profile__fields-wrapper">
              <p>Average Income(USD)</p>
              <Input placeholder="Average Income"
-                    onChange={e => setAvgIncome(e.target.value)}
-                    value={avgIncome}
+                    onChange={e => setIncome(e.target.value)}
+                    value={income}
              />
            </div>
             <div className="participant-profile__fields-wrapper">
               <p className="before-dropdown">Main VR Headset</p>
-              <Cascader options={headsetsVariants} placeholder="--Headsets--"
+              <Cascader options={headsetsVariants} placeholder={headset ? headset : "--Headsets--"}
                         onChange={cascaderHeadsetChange}/>
-            </div>
-            <div className="participant-profile__fields-wrapper">
-              <p className="before-dropdown">New Select Box(Trello)</p>
-              <Cascader options={headsetsVariants} placeholder="--Trello Select--"
-                        onChange={cascaderTrelloChange}/>
             </div>
           </div>
           <div className="participant-profile__changes-btns">
             <Button className="participant-profile__save-btn"
-              type="primary">
-              Save changes
+              type="primary"
+                    onClick={() => ApiEditPartInfo({
+                      name: name, age: age, location: location,
+                      income: income, headset: headset})(dispatch)}
+            >
+              {isLoading ? <Loader /> : 'Save changes'}
             </Button>
             <Button className="participant-profile__cancel-btn">Cancel</Button>
           </div>

@@ -56,3 +56,7 @@ export const ChangingStatus = (id) => {
 export const EditCaseApi = (data) => {
   return instanceWithToken(token).post(`api/case/edit`, data)
 }
+
+export const EditPartApi = (data) => {
+  return instanceWithToken(token).post(`api/users/useredit`, data)
+}
