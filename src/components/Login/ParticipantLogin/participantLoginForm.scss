@@ -45,11 +45,16 @@ h2 {
 .ant-form-item-control-input-content {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     flex: unset;
     width: 250px;
     .orRegister-proposal{
-        display: flex;
-    justify-content: space-between;
+    display: flex;
+    justify-content: flex-start;
+    }
+    .rememberMe-antd{
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 .ant-form-item-control-input {
