@@ -45,7 +45,6 @@ const EditCase = ({ id }) => {
   const [listOfProfessions, setListOfProfessions] = useState(filteredCases.project);
 
   useEffect(() => {
-    console.log('useEffect')
     setTitle(filteredCases.title);
     setDescr(filteredCases.description);
     setLocation(filteredCases.location);

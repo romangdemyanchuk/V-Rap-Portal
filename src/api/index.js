@@ -8,6 +8,7 @@ const instance = axios.create({
 })
 
 let token = localStorage.getItem('userLoginToken')
+console.log(token)
 
 const instanceWithToken = () => axios.create({
   baseURL,

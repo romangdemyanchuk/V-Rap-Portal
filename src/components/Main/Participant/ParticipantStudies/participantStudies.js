@@ -8,6 +8,7 @@ import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { AllCasesInfo } from "../../../../modules/session/session-reducers";
+import Case from '../../Researcher/ResearcherStudies/Case'
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
@@ -37,7 +38,8 @@ const ParticipantStudies = () => {
         </Link>
       </div>
       <div className="participant-studies__personal-heading">Research Studies</div>
-      {isLoading ? <Skeleton astive /> :
+      { isLoading ? <Skeleton active /> : allCaseStudies.length === 0 ?
+        <h1 className="emptyCaseStudies"> You have not selected for any Research Studies </h1> :
         allCaseStudies.map(d => <div className="participant-studies__wrapper" key={d.id}>
           <div className="participant-studies__info-wrapper">
             <div className="participant-studies__img">
@@ -69,7 +71,8 @@ const ParticipantStudies = () => {
               Upload Results
             </Button>
           </div>
-        </div>)}
+        </div>)
+      }
     </div>
   )
 }

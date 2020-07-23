@@ -18,7 +18,6 @@ const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
       authorization: "authorization-text",
     },
     onChange(info) {
-      console.log(1);
       if (info.file.status !== "uploading") {
         setmodalOpen(false);
       }
