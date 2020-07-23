@@ -15,7 +15,7 @@
     justify-content: center;
     button {
         border: none;
-        margin: 0 8px;
+        margin: 0 8px 20px 8px;
     }
 }
 h2 {
@@ -45,12 +45,16 @@ h2 {
 .ant-form-item-control-input-content {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
     flex: unset;
     width: 250px;
     .orRegister-proposal{
-        display: flex;
-    justify-content: space-between;
+    display: flex;
+    justify-content: flex-start;
+    }
+    .rememberMe-antd{
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 .ant-form-item-control-input {

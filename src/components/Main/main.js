@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./main.scss";
 import { Button } from 'antd'
-import MainLogin from '../Login/Login'
 
 const Main = () => {
 
-  return (
+  return <>
     <div className="Main-land-view">
       <div className="Main-V-Rap">V-Rap</div>
         <div className="Main-btns">
@@ -23,6 +22,7 @@ const Main = () => {
           </Link>
         </div>
     </div>
-  )
+  </>
 }
+
 export default Main;

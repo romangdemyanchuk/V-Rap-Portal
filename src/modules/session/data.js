@@ -148,7 +148,9 @@ export const caseStudiesColumns = (modalsOpen) => ({caseStudiesColumns: [
             <a onClick={() => modalsOpen(true)}>{text}</a>
           )
      },
-],})
+],
+})
+
 export const  researcherListColumns = (modalsOpen) => ({researcherListColumns:[
         {
             title: "Name",
@@ -174,32 +176,31 @@ export const  researcherListColumns = (modalsOpen) => ({researcherListColumns:[
               <a onClick={() => modalsOpen(true)}>{text}</a>
             )
         }
-    ],})
+],
+})
+    
 export const countryVariants = [
     {
-        value: 'ukraine',
+        value: 'Ukraine',
         label: 'Ukraine',
     },
     {
-        value: 'italy',
+        value: 'Italy',
         label: 'Italy',
     },
     {
-        value: 'usa',
+        value: 'USA',
         label: 'USA',
     },
     {
-        value: 'canada',
+        value: 'Canada',
         label: 'Canada',
     },
     {
-        value: 'german',
+        value: 'German',
         label: 'German',
     },
 ];
-
-
-
 
 export const headsetsVariants = [
     {

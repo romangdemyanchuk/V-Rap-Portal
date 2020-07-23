@@ -7,6 +7,7 @@ import "./researcherStudies.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { AllCasesInfo } from '../../../../modules/session/session-reducers'
 import Case from './Case'
+import Header from "./../header";
 
 const ResearcherStudies = () => {
 
@@ -22,24 +23,19 @@ const ResearcherStudies = () => {
 
   return (
     <div className="ResearcherStudies">
-      <div className="researcher-studies__btns-wrapper">
-        <Link to={'/researcher-profile'}>
-          <Button className="researcher-studies__profile-btn">Profile</Button>
-        </Link>
-        <Link to={'/researcher-studies'}>
-          <Button className="researcher-studies__btn active">Research Studies</Button>
-        </Link>
-      </div>
+      <Header />
       <div className="researcher-profile__header-wrapper">
         <div className="researcher-studies__personal-heading">Research Studies</div>
         <Link to={'/research-create-studies'}>
           <Button type="primary" className="create-new-study">Create New Research Study</Button>
         </Link>
       </div>
+      <div className='ResearcherStudies-cases'>
       { isLoading ? <Skeleton active /> : allCaseStudies.length === 0 ?
         <h1 className="emptyCaseStudies"> You have not created any research studies</h1> :
-        allCaseStudies.map((study) => <Case study={study} key={study.id} />)
-      }
+        allCaseStudies.map((study) => <Case study={study} key={study._id} />)
+        }
+      </div>
     </div>
   );
 };

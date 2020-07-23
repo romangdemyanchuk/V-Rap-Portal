@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Button, Skeleton, Tag } from 'antd'
-import { Link } from "react-router-dom";
 import userImg from "../../../../images/user.svg";
 import FileUpload from './FileUpload'
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { AllCasesInfo } from "../../../../modules/session/session-reducers";
-import Case from '../../Researcher/ResearcherStudies/Case'
+import Header from "./../header";
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
@@ -29,18 +28,13 @@ const ParticipantStudies = () => {
   return (
     <div className="root-PartStudies">
       <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} />
-      <div className="participant-studies__btns-wrapper">
-        <Link to={'/participant-profile'}>
-          <Button className="profile-btn">Profile</Button>
-        </Link>
-        <Link to={'/participant-studies'}>
-          <Button className="research-btn active">Research Studies</Button>
-        </Link>
-      </div>
+      <Header />
       <div className="participant-studies__personal-heading">Research Studies</div>
+      <div className="ParticipantStudies-Cases">
       { isLoading ? <Skeleton active /> : allCaseStudies.length === 0 ?
         <h1 className="emptyCaseStudies"> You have not selected for any Research Studies </h1> :
-        allCaseStudies.map(d => <div className="participant-studies__wrapper" key={d.id}>
+        allCaseStudies.map(d =>
+          <div className="participant-studies__wrapper" key={d._id}>
           <div className="participant-studies__info-wrapper">
             <div className="participant-studies__img">
               <img src={userImg} alt="userImg" />
@@ -71,8 +65,9 @@ const ParticipantStudies = () => {
               Upload Results
             </Button>
           </div>
-        </div>)
-      }
+          </div>
+          )}
+      </div>
     </div>
   )
 }

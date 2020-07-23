@@ -68,13 +68,15 @@ const ParticipantLoginForm = ({ setState }) => {
         />
       </Form.Item>
       <Form.Item>
+        <span className='rememberMe-antd'>
         <Form.Item name="remember" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
         <a className="login-form-forgot"
           onClick={() => setForgotPasswordModal(true)}>
-          Forgot password
+            Forgot password
           </a>
+          </span>
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
@@ -84,7 +86,8 @@ const ParticipantLoginForm = ({ setState }) => {
         <span className='orRegister-proposal'>
           Or
           <Link to={'/participant-login'}
-            onClick={() => setState(true)}>&ensp;register now!</Link>
+            onClick={() => setState(true)}>
+            &ensp;register now!</Link>
         </span>
       </Form.Item>
     </Form>
