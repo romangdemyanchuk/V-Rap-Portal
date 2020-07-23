@@ -244,11 +244,11 @@ const CreateNewCase = () => {
             <Form.Item
               className="personal-stats__footer-btns"
             >
-              {/*<Link to={'/researcher-studies'}>*/}
+              <Link to={'/researcher-studies'}>
                 <Button type="primary" htmlType="submit" className="personal-stats__create-research-btn">
                   {isLoading ? <Loader /> : 'Create Research Study'}
                 </Button>
-              {/*</Link>*/}
+              </Link>
               <Link to={'/researcher-profile'}>
                 <Button>Close Page</Button>
               </Link>
