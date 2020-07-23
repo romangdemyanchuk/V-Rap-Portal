@@ -30,10 +30,12 @@ const ResearcherStudies = () => {
           <Button type="primary" className="create-new-study">Create New Research Study</Button>
         </Link>
       </div>
+      <div className='ResearcherStudies-cases'>
       { isLoading ? <Skeleton active /> : allCaseStudies.length === 0 ?
         <h1 className="emptyCaseStudies"> You have not created any research studies</h1> :
         allCaseStudies.map((study) => <Case study={study} key={study._id} />)
-      }
+        }
+      </div>
     </div>
   );
 };

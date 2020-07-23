@@ -7,8 +7,7 @@ import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
 import {
   EditParticipantProfile,
-  ParticipantInfo,
-  UserInfoTC,
+  PartProfileInfo,
 } from '../../../../modules/session/session-reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../Loader/loader'
@@ -17,15 +16,17 @@ import Header from "./../header";
 const ParticipantProfile = () => {
 
   const partData = useSelector(state => state.partInfo)
+
+  console.log(partData, 'partData')
   const { name, age, location, income, headset } = partData
+  
 
   const isLoading = useSelector(state => state.isLoading)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    UserInfoTC()(dispatch)
+    PartProfileInfo()(dispatch)
   }, [])
-
 
   const formIsValid = (props) => {
     EditParticipantProfile({

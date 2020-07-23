@@ -25,3 +25,8 @@
     margin: 0 auto;
     padding-top: 50px;
 }
+
+.ResearcherStudies-cases{
+    overflow-y: auto;
+    height: 83vh;
+}

@@ -58,7 +58,7 @@ const Case = ({ study }) => {
     )
   }
 
-  return <>
+  return <div className='Root-Case'>
     <div key={study.id} className="researcher-studies__study-wrapper">
       <div className="researcher-studies__info-wrapper">
         <div className="researcher-studies__study-info-img">
@@ -84,7 +84,7 @@ const Case = ({ study }) => {
       </div>
       {caseButtonsShown(study)}
     </div>
-  </>
+  </div>
 }
 
 export default Case

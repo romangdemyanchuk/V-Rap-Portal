@@ -30,6 +30,7 @@ const ParticipantStudies = () => {
       <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} />
       <Header />
       <div className="participant-studies__personal-heading">Research Studies</div>
+      <div className="ParticipantStudies-Cases">
       { isLoading ? <Skeleton active /> : allCaseStudies.length === 0 ?
         <h1 className="emptyCaseStudies"> You have not selected for any Research Studies </h1> :
         allCaseStudies.map(d =>
@@ -65,7 +66,8 @@ const ParticipantStudies = () => {
             </Button>
           </div>
           </div>
-        )}
+          )}
+      </div>
     </div>
   )
 }

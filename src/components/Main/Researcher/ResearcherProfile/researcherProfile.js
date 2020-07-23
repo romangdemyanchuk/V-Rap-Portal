@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Input, Button, Form } from 'antd'
 import WithAuthRedirect from "../../../../hoc/hoc";
-import { EditResearcherProfile, UserInfoTC } from '../../../../modules/session/session-reducers'
+import { EditResearcherProfile, ResearcherProfileInfo } from '../../../../modules/session/session-reducers'
 import Loader from '../../../Loader/loader'
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,7 +18,7 @@ const ResearcherProfile = () => {
   const isLoading = useSelector(state => state.isLoading)
   let dispatch = useDispatch()
 
-  useEffect(() => {UserInfoTC()(dispatch)}, [])
+  useEffect(() => {ResearcherProfileInfo()(dispatch)}, [])
 
   const layout = {
     labelCol: {

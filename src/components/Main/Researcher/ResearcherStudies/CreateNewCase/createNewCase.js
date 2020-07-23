@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react'
 import userImg from "../../../../../images/user.svg";
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Input, Button, Slider, InputNumber, Cascader, Upload, Form, TreeSelect, message } from 'antd'
 const { TreeNode } = TreeSelect;
 import WithAuthRedirect from '../../../../../hoc/hoc';
@@ -11,6 +11,7 @@ import { countryVariants, headsetsVariants, professionsList } from '../../../../
 import { NewCaseInfo } from '../../../../../modules/session/session-reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../../Loader/loader'
+import Header from '../../header';
 
 const CreateNewCase = () => {
   const [title, setTitle] = useState('');
@@ -83,14 +84,7 @@ const CreateNewCase = () => {
   };
   return (
     <div className="root-PersonalStats">
-      <div className="personal-stats__tns-wrapper">
-        <Link to={'/researcher-profile'}>
-          <Button className="profile-btn">Profile</Button>
-        </Link>
-        <Link to={'/researcher-studies'}>
-          <Button className="research-btn active">Research Studies</Button>
-        </Link>
-      </div>
+      <Header />
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
           <div className="personal-stats__personal-heading">Create Research Studies</div>
@@ -249,7 +243,7 @@ const CreateNewCase = () => {
                   {isLoading ? <Loader /> : 'Create Research Study'}
                 </Button>
               {/*</Link>*/}
-              <Link to={'/researcher-profile'}>
+              <Link to={'/researcher-studies'}>
                 <Button>Close Page</Button>
               </Link>
             </Form.Item>

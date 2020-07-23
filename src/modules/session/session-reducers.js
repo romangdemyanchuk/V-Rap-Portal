@@ -197,11 +197,9 @@ export const DeleteCaseInfo = id => dispatch => {
     })
 }
 
-export const UserInfoTC = () => dispatch => {
+export const ResearcherProfileInfo = () => dispatch => {
   UserInfoApi()
     .then(response => {
-      console.log(1);
-
       if (response.data) {
         const { area, name, school } = response.data;
         dispatch(UserInfo({ area, school, name }))
@@ -215,7 +213,7 @@ export const UserInfoTC = () => dispatch => {
     })
 }
 
-export const ParticipantInfo = () => dispatch => {
+export const PartProfileInfo = () => dispatch => {
   PartInfoApi()
     .then(response => {
       if (response.data) {
