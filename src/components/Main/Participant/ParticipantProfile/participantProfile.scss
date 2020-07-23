@@ -5,6 +5,7 @@
 .personal-stats__tns-wrapper{
     display: flex;
     border-bottom: 1px solid;
+    justify-content: space-between;
     button {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -17,6 +18,7 @@
         font-size: 12px;
     }
 }
+
 .researcher-profile__changes-btns
 .researcher-profile__save-btn,
 .participant-profile__changes-btns
@@ -130,4 +132,5 @@
 .participant-profile__changes-btns {
     margin-top: 25px;
 }
+
 

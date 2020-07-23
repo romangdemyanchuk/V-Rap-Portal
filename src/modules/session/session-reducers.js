@@ -110,11 +110,10 @@ export const RegisterRequest = data => dispatch => {
     )
 }
 
-export const EditUserInfo = data => dispatch => {
+export const EditResearcherProfile = data => dispatch => {
   EditUserInfoApi(data)
     .then(response => {
       if (response) {
-        infoAction('Your information is successfully updated!', '/researcher-profile')
         dispatch(UserInfo(response))
       }
     }).catch(e => {
@@ -123,7 +122,7 @@ export const EditUserInfo = data => dispatch => {
       }
     }).finally(() => {
       dispatch(Loading(false))
-
+      infoAction('Your information is successfully updated!', '/researcher-profile')
     })
   dispatch(Loading(true))
 }
@@ -133,7 +132,7 @@ export const EditParticipantProfile = data => dispatch => {
     .then(response => {
       if (response) {
         infoAction('You successfully change your profile!', '/participant-profile')
-        dispatch(PartInfo(response))
+        dispatch(PartInfo(response.data))
       }
     }).catch(e => {
       if (e.response && e.response.data) {
@@ -147,8 +146,10 @@ export const EditParticipantProfile = data => dispatch => {
 }
 
 export const NewCaseInfo = data => dispatch => {
+  console.log('data1', data)
   AddCaseApi(data)
     .then(response => {
+      console.log('response', response)
       dispatch(Loading(true))
       if (response) {
         dispatch(addCase(response.data))
@@ -166,6 +167,7 @@ export const NewCaseInfo = data => dispatch => {
 }
 
 export const EditCaseInfo = data => dispatch => {
+  console.log(data);
   EditCaseApi(data)
     .then(response => {
       // dispatch(Loading(true))
@@ -198,6 +200,8 @@ export const DeleteCaseInfo = id => dispatch => {
 export const UserInfoTC = () => dispatch => {
   UserInfoApi()
     .then(response => {
+      console.log(1);
+
       if (response.data) {
         const { area, name, school } = response.data;
         dispatch(UserInfo({ area, school, name }))
