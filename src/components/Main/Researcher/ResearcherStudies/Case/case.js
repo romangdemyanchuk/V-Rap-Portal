@@ -7,11 +7,19 @@ import { DeleteCaseInfo } from '../../../../../modules/session/session-reducers'
 import Loader from '../../../../Loader/loader'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import DeleteModal from '../../../../Admin/AdminPage/ListOfResearchers/ResearcherChanges/DeleteModal'
 
 
 const Case = ({ study }) => {
   let dispatch = useDispatch()
   let [isloading, setLoading] = useState(false)
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+
+  const deleteClick = (id) => {
+    setDeleteModalIsOpen(true);
+  }
+
+
   let caseStatusName = (status) => {
     if (status === 0) return <Tag color='gold'>Pending</Tag>
     else if (status === 1) return <Tag color='gray'>Reject</Tag>
@@ -26,14 +34,14 @@ const Case = ({ study }) => {
           <Button style={{ backgroundColor: '#0E4BEF', color: 'white' }} className="upload-btn">Edit</Button>
         </Link>
         <Button type="danger" className="upload-btn"
-          onClick={() => { DeleteCaseInfo(study._id)(dispatch) }}>
+          onClick={() => deleteClick(study._id)}>
           {isloading ? <Loader /> : 'Delete'}
         </Button>
       </div>)
     else if (study.status === 1) return (
       <div className="research-study-btns">
         <Button type="danger" className="upload-btn"
-          onClick={() => { DeleteCaseInfo(study._id)(dispatch) }}>
+                onClick={() => deleteClick(study._id)}>
           {isloading ? <Loader /> : 'Delete'}
         </Button>
       </div>
@@ -43,7 +51,7 @@ const Case = ({ study }) => {
         <Button className="status-btn">View Results</Button>
         <Button type="danger" className="upload-btn" onClick={() => { ChangingStatus(study._id) }}>Close</Button>
         <Button type="danger" className="upload-btn"
-          onClick={() => { DeleteCaseInfo(study._id)(dispatch) }}>
+                onClick={() => deleteClick(study._id)}>
           {isloading ? <Loader /> : 'Delete'}
         </Button>
       </div>
@@ -51,7 +59,7 @@ const Case = ({ study }) => {
     else if (study.status === 3) return (
       <div className="research-study-btns">
         <Button type="danger" className="upload-btn"
-          onClick={() => { DeleteCaseInfo(study._id)(dispatch) }}>
+                onClick={() => deleteClick(study._id)}>
           {isloading ? <Loader /> : 'Delete'}
         </Button>
       </div>
@@ -59,7 +67,8 @@ const Case = ({ study }) => {
   }
 
   return <div className='Root-Case'>
-    <div key={study.id} className="researcher-studies__study-wrapper">
+    <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={study._id}/>
+    <div key={study._id} className="researcher-studies__study-wrapper">
       <div className="researcher-studies__info-wrapper">
         <div className="researcher-studies__study-info-img">
           <img src={userImg} alt="userImg" />

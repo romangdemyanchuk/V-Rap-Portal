@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useEffect} from 'react'
-import { Input, Button, InputNumber, Cascader, Form, Select } from 'antd'
+import { Input, Button, InputNumber, Cascader, Form, Select, TreeSelect } from 'antd'
+const { TreeNode } = TreeSelect;
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
@@ -15,7 +16,7 @@ import Header from "./../header";
 const ParticipantProfile = () => {
 
   const partData = useSelector(state => state.partInfo)
-  const { name, age, location, income, headset } = partData
+  let { name, age, location, income, headset } = partData
 
   const isLoading = useSelector(state => state.isLoading)
   const dispatch = useDispatch()
@@ -29,6 +30,9 @@ const ParticipantProfile = () => {
       ...props
     })(dispatch);
   }
+  const headsetsChange = value => {
+    headset = value
+  };
 
   const layout = {
     labelCol: {
@@ -76,7 +80,22 @@ const ParticipantProfile = () => {
                   name="location"
                   rules={[{ required: true, message: 'Please choose location!' }]}
                 >
-                  <Select options={countryVariants} placeholder={location ? location : "--Countries--"} />
+                  <TreeSelect
+                    showSearch
+                    style={{ width: '100%' }}
+                    value={headset}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    placeholder="Please select"
+                    allowClear
+                    multiple
+                    treeDefaultExpandAll
+                    // onChange={headsetsChange}
+                  >
+                    {countryVariants.map((item) =>
+                      <TreeNode value={item.value} title={item.label} key={item.value} />
+                    )}
+
+                  </TreeSelect>
                 </Form.Item>
                 <Form.Item
                   name="income"
@@ -89,9 +108,24 @@ const ParticipantProfile = () => {
                   className="personal-stats__fields-wrapper"
                   label="Main VR Headset"
                   name="headset"
-                  rules={[{ required: true, message: 'Please input headset!!' }]}
+                  rules={[{ required: true, message: 'Please choose location!' }]}
                 >
-                  <Cascader options={headsetsVariants} placeholder={headset ? headset : "--Headsets--"} />
+                  <TreeSelect
+                    showSearch
+                    style={{ width: '100%' }}
+                    value={headset}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    placeholder="Please select"
+                    allowClear
+                    multiple
+                    treeDefaultExpandAll
+                    // onChange={headsetsChange}
+                  >
+                    {headsetsVariants.map((item) =>
+                      <TreeNode value={item.value} title={item.label} key={item.value} />
+                    )}
+
+                  </TreeSelect>
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"

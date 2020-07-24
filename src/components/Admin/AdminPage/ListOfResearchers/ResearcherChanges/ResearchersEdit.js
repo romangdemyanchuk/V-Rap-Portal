@@ -6,8 +6,6 @@ import "./ResearchersEdit.css";
 import "antd/dist/antd.css";
 
 const ResearcherChanges = ({ modalOpen, setmodalOpen }) => {
-
-  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const deleteClick = () => {
     setmodalOpen(false);
     setDeleteModalIsOpen(true)
@@ -34,7 +32,6 @@ const ResearcherChanges = ({ modalOpen, setmodalOpen }) => {
   };
   return (
     <div>
-      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
       <Modal
         title="Admins Changes"
         visible={modalOpen}
