@@ -29,8 +29,8 @@ export const EditUserInfoApi = (data) => {
   return instanceWithToken().post(`api/users/useredit`, data)
 }
 
-export const UserInfoApi = () => {
-  return instanceWithToken().post(`api/users/user`, {})
+export const UserInfoApi = (token) => {
+  return instanceWithToken(token).post(`api/users/user`, {})
 }
 
 export const PartInfoApi = () => {

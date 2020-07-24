@@ -19,7 +19,11 @@ const ResearcherProfile = () => {
   let dispatch = useDispatch()
   let buttonIsDisabled = true
 
-  useEffect(() => {ResearcherProfileInfo()(dispatch)}, [])
+  let token = localStorage.getItem('userLoginToken')
+
+  console.log(token, 'token')
+
+  useEffect(() => {ResearcherProfileInfo(token)(dispatch)}, [])
 
   const layout = {
     labelCol: {
@@ -38,10 +42,11 @@ const ResearcherProfile = () => {
   const logOut = () => {
     localStorage.clear();
   }
+
   return <>
-    {/*{!userData.name ? <Loader /> :*/}
+    {isLoading ? <Loader /> :
     <div className="root-ResearcherProfile">
-        <Header profile={'researcher-profile'} studies={'researcher-studies'} disableButtons={!!(userData.name && userData.area && userData.school)}/>
+        <Header profile={'researcher-profile'} studies={'researcher-studies'} disableButtons={!!(!userData.name && !userData.area && !userData.school)}/>
       <div className="researcher-profile__personal-fields-wrapper">
         <div className="researcher-profile__personal-heading">Profile Information</div>
         <Form {...layout}name="control-hooks"
@@ -86,7 +91,7 @@ const ResearcherProfile = () => {
         </Form>
       </div>
       </div>
-    {/*}*/}
+}
 </>
 }
 

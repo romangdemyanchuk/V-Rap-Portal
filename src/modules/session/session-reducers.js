@@ -45,6 +45,11 @@ const MainReducer = (state = initialState, action) => {
         adminLoginData: action.payload,
         isAuth: true
       }
+      case LOGOUT:
+      return {
+        ...state,
+        дщпЩгеИщщдуфт: action.payload,
+      }
     case REGISTER:
       return {
         ...state,
@@ -91,10 +96,8 @@ const MainReducer = (state = initialState, action) => {
 }
 
 export default MainReducer
-
-
-
-
+const LOGOUT = 'LOGOUT'
+export const logOutAC = ({type: LOGOUT})
 
 export const EditResearcherProfile = data => dispatch => {
   EditUserInfoApi(data)
@@ -183,9 +186,10 @@ export const DeleteCaseInfo = id => dispatch => {
     })
 }
 
-export const ResearcherProfileInfo = () => dispatch => {
-  UserInfoApi()
+export const ResearcherProfileInfo = (token) => dispatch => {
+  UserInfoApi(token)
     .then(response => {
+      dispatch(Loading(true))
       if (response.data) {
         const { area, name, school } = response.data;
         dispatch(UserInfo({ area, school, name }))
@@ -223,8 +227,7 @@ export const LoginRequest = data => dispatch => {
         localStorage.setItem('isAuth', true)
         dispatch(Login(response))
       }
-    }
-    )
+    })
     .catch(e => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, '/participant-profile');

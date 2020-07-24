@@ -16,18 +16,18 @@ const ResearcherLogin = () => {
   const isAuthCheck = useSelector(state => state.isAuth)
   const isLoading = useSelector(state => state.isLoading)
 
-  // if (isAuthCheck)
-  //   return infoAction('Mission complete Researcher :)', '/researcher-profile')
+  if (isAuthCheck)
+    return infoAction('Mission complete Researcher :)', '/researcher-profile')
 
   const handleSubmit = (values) => {
-    setDoubleEntryPasswordModal(true)
+    // setDoubleEntryPasswordModal(true)
     LoginRequest(values)(dispatch);
     dispatch(Loading(true))
   }
 
   return <>
-    <EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}
-      title={'Change your password'}/>
+    {/* <EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}
+      title={'Change your password'}/> */}
     <div className="researcher-login__heading">
       V-RAP: Researcher
       </div>
