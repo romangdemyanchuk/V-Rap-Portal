@@ -4,12 +4,12 @@ import { Button } from 'antd'
 /*eslint-disable*/
 
 const Header = ({disableButtons}) => {
-  console.log(disableButtons)
-
   const logOut = () => {
-    localStorage.clear()
+    localStorage.clear();
+    if (typeof window !== 'undefined') {
+      window.location = '/'
+    }
   }
-
   return <div className='participant-profile__btns-wrapper'>
     <div>
         <Link to={'/researcher-profile'}>

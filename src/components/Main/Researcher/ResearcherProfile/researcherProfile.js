@@ -41,7 +41,7 @@ const ResearcherProfile = () => {
   return <>
     {/*{!userData.name ? <Loader /> :*/}
     <div className="root-ResearcherProfile">
-        <Header profile={'researcher-profile'} studies={'researcher-studies'} disableButtons={!!(userData.name && userData.area && userData.school)}/>
+        <Header profile={'researcher-profile'} studies={'researcher-studies'} disableButtons={!!(userData.name || userData.area || userData.school)}/>
       <div className="researcher-profile__personal-fields-wrapper">
         <div className="researcher-profile__personal-heading">Profile Information</div>
         <Form {...layout}name="control-hooks"

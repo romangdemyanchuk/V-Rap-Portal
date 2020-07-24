@@ -1,3 +1,6 @@
 body .container .main-page-wrapper {
     padding: 0;
 }
+.root-ParticipantRegister .ant-form-horizontal {
+    align-items: center;
+}
