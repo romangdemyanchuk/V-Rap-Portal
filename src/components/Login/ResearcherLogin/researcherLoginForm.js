@@ -25,9 +25,9 @@ const ResearcherLogin = () => {
     dispatch(Loading(true))
   }
 
-  return <>
-    {/* <EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}
-      title={'Change your password'}/> */}
+  return <div className="root-ResearcherLogin">
+    {/*<EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}*/}
+    {/*  title={'Change your password'}/>*/}
     <div className="researcher-login__heading">
       V-RAP: Researcher
       </div>
@@ -66,7 +66,7 @@ const ResearcherLogin = () => {
         </Button>
       </Form.Item>
     </Form>
-  </>
+  </div>
 }
 
 export default ResearcherLogin;

@@ -17,6 +17,8 @@ import {
   UserInfo, PartInfo, AllCases
 } from './session-actions'
 import { infoAction } from '../../utils/notification'
+import { Redirect } from 'react-router-dom'
+import React from 'react'
 
 let { caseStudies, researchersList, caseStudiesColumns } = allData
 
@@ -94,7 +96,6 @@ const MainReducer = (state = initialState, action) => {
       return state;
   }
 }
-
 export default MainReducer
 const LOGOUT = 'LOGOUT'
 export const logOutAC = ({type: LOGOUT})
@@ -107,11 +108,11 @@ export const EditResearcherProfile = data => dispatch => {
       }
     }).catch(e => {
       if (e.response && e.response.data) {
-        // infoAction(e.response.data.message, '/researcher-profile');
+        infoAction(e.response.data.message, '/researcher-profile');
       }
     }).finally(() => {
       dispatch(Loading(false))
-      // infoAction('Your information is successfully updated!', '/researcher-profile')
+      infoAction('Your information is successfully updated!', '/researcher-profile')
     })
   dispatch(Loading(true))
 }
@@ -143,12 +144,16 @@ export const NewCaseInfo = data => dispatch => {
       if (response) {
         dispatch(addCase(response.data))
         infoAction('You successfully create new study!', '/researcher-studies')
+
       }
     }).catch(e => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, '/researcher-studies');
       }
     }).finally(() => {
+    if (typeof window !== 'undefined') {
+      window.location = '/researcher-studies'
+    }
 
       dispatch(Loading(false))
     })
@@ -219,9 +224,7 @@ export const LoginRequest = data => dispatch => {
   console.log(data)
   LoginApi(data)
     .then(response => {
-        console.log(response);
       if (response.statusText == 'OK') {
-        console.log(response);
         let token = response.data.token;
         localStorage.setItem('userLoginToken', token)
         localStorage.setItem('isAuth', true)
@@ -262,11 +265,11 @@ export const AllCasesInfo = () => dispatch => {
         dispatch(AllCases(response.data))
       }
     }).catch(e => {
-      if (e.response.status === 401) {
-        localStorage.clear();
-      }
+      // if (e.response.status === 401) {
+      //   localStorage.clear();
+      // }
       if (e.response && e.response.data) {
-        // infoAction(e.response.data.message, '/researcher-profile');
+        infoAction(e.response.data.message, '/researcher-profile');
       }
     }).finally(() => {
       dispatch(Loading(false))

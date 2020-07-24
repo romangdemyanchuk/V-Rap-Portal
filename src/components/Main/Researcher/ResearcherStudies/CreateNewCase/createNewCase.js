@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react'
 import userImg from "../../../../../images/user.svg";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Input, Button, Slider, InputNumber, Cascader, Upload, Form, TreeSelect, message } from 'antd'
 const { TreeNode } = TreeSelect;
 import WithAuthRedirect from '../../../../../hoc/hoc';
@@ -55,10 +55,11 @@ const CreateNewCase = () => {
   const uploadProps = {
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
   };
-  const successFillForm = () => {
+  const successFillForm = (props) => {
+    const {title, avgIncome, descr, location, parNum, age, headsets, professions} = props
     NewCaseInfo({
-      title: title, description: descr, location: location,
-      age: age, income: avgIncome, participant: parNum, headset: headsets, professions: professions
+      title, description: descr, location,
+      age, income: avgIncome, participant: parNum, headset: headsets, professions
     })(dispatch);
   }
 
@@ -209,7 +210,7 @@ const CreateNewCase = () => {
                     onChange={headsetsChange}
                   >
                     {headsetsVariants.map((item) =>
-                    <TreeNode value={item.value} title={item.label} />
+                    <TreeNode value={item.value} title={item.label} key={item.v} />
                     )}
 
                   </TreeSelect>
@@ -244,17 +245,17 @@ const CreateNewCase = () => {
 
               </div>
             </div>
-            <Form.Item
-              className="personal-stats__footer-btns"
-            >
-              {/*<Link to={'/researcher-studies'}>*/}
+            <Form.Item>
+              <div className="personal-stats__footer-btns">
+                {/*<Link to={'/researcher-studies'}>*/}
                 <Button type="primary" htmlType="submit" className="personal-stats__create-research-btn">
                   {isLoading ? <Loader /> : 'Create Research Study'}
                 </Button>
-              {/*</Link>*/}
-              {/*<Link to={'/researcher-profile'}>*/}
+                {/*</Link>*/}
+                {/*<Link to={'/researcher-profile'}>*/}
                 <Button>Close Page</Button>
-              {/*</Link>*/}
+                {/*</Link>*/}
+              </div>
             </Form.Item>
           </Form>
         </div>

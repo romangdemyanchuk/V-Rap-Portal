@@ -24,7 +24,7 @@ const ParticipantRegisterForm = ({ setState }) => {
     dispatch(Loading(true))
   }
 
-  return <>
+  return <div className="root-ParticipantRegister">
     <div className="participant-register__form-wrapper">
       <div className="participant-heading">
         V-RAP: Participant
@@ -74,7 +74,7 @@ const ParticipantRegisterForm = ({ setState }) => {
         </Form.Item>
       </Form>
     </div>
-  </>
+  </div>
 }
 
 export default ParticipantRegisterForm;

@@ -27,7 +27,7 @@ const ParticipantLoginForm = ({ setState }) => {
     dispatch(Loading(true))
   }
 
-  return <>
+  return <div className="root-ParticipantLogin">
     <EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}
       title={'Forgot your password?'}/>
     <div className="participant-login__heading">
@@ -92,7 +92,7 @@ const ParticipantLoginForm = ({ setState }) => {
         </span>
       </Form.Item>
     </Form>
-  </>
+  </div>
 }
 
 export default ParticipantLoginForm;
