@@ -10,11 +10,13 @@ import {
 } from '../../../../../modules/session/session-reducers'
 import Loader from '../../../../Loader/loader'
 import { useDispatch, useSelector } from 'react-redux'
+import Header from '../../header'
 const { TextArea } = Input;
 
 
 const EditCase = ({ id }) => {
   const allCaseStudies = useSelector(state => state.allCaseStudies)
+  let filteredCases = [];
 
   let dispatch = useDispatch()
   console.log('allCaseStudies', allCaseStudies);
@@ -90,14 +92,7 @@ const EditCase = ({ id }) => {
   };
   return <>
     <div className="root-EditCase">
-      <div className="personal-stats__tns-wrapper">
-        <Link to={'/researcher-profile'}>
-          <Button className="profile-btn">Profile</Button>
-        </Link>
-        <Link to={'/researcher-studies'}>
-          <Button className="research-btn active">Research Studies</Button>
-        </Link>
-      </div>
+      <Header />
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
           <div className="personal-stats__personal-heading">Create Research Studies</div>

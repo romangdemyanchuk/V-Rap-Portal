@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 /*eslint-disable*/
 
-const Header = () => {
-
+const Header = ({disableButtons}) => {
+  console.log('disableButtons', disableButtons);
   const logOut = () => {
-    localStorage.clear()
+    localStorage.clear();
+    if (typeof window !== 'undefined') {
+      window.location = '/'
+    }
   }
-
   return <div className='participant-profile__btns-wrapper'>
     <div>
         <Link to={'/participant-profile'}>
             <Button className='participant-profile__btn active'>Profile</Button>
         </Link>
         <Link to={'/participant-studies'}>
-            <Button className='research-btn' disabled=''>
+            <Button className='research-btn' disabled={disableButtons}>
                 Research Studies
             </Button>
         </Link>

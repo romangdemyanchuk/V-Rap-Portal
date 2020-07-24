@@ -12,7 +12,9 @@ export const infoAction = (error_info, redirect_to) => {
       icon: <SmileOutlined style={{ color: '#108ee9' }} />
     })
   }
-  
+
   openNotification()
-  return <Redirect to={redirect_to}/>
+  if (typeof window !== 'undefined') {
+    return window.location = `${redirect_to}`
+  }
 }

@@ -170,7 +170,11 @@ export const EditCaseInfo = data => dispatch => {
       //   dispatch(AllCases(response.data))
       // }
     }).finally(() => {
-      infoAction('You successfully change your study!', '/researcher-studies')
+      if (typeof window !== 'undefined') {
+        window.location = '/researcher-studies'
+      }
+    infoAction('You successfully change your study!', '/researcher-studies')
+
       // dispatch(Loading(false))
     })
   // dispatch(Loading(true))
@@ -202,6 +206,9 @@ export const ResearcherProfileInfo = (token) => dispatch => {
     }).catch(e => {
       // if (e.response.status === 401) {
       //   localStorage.clear();
+      //   if (typeof window !== 'undefined') {
+      //     window.location = '/'
+      //   }
       // }
     }).finally(() => {
       dispatch(Loading(false))
@@ -267,6 +274,9 @@ export const AllCasesInfo = () => dispatch => {
     }).catch(e => {
       // if (e.response.status === 401) {
       //   localStorage.clear();
+      //   if (typeof window !== 'undefined') {
+      //     window.location = '/'
+      //   }
       // }
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, '/researcher-profile');

@@ -41,58 +41,58 @@ const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
     RegisterRequest(values)(dispatch);
     dispatch(Loading(true))
   }
-  return (
-      <Modal
-        title="Create Researcher"
-        visible={modalOpen}
-        onOk={closeModal}
-        onCancel={closeModal}
+  return <div className="root-ResearcherCreate">
+    <Modal
+      title="Create Researcher"
+      visible={modalOpen}
+      onOk={closeModal}
+      onCancel={closeModal}
+    >
+      <Form onFinish={values => { handleSubmit(values) }}
+            name="normal_login"
+            className="login-form"
       >
-        <Form onFinish={values => { handleSubmit(values) }}
-              name="normal_login"
-              className="login-form"
-        >
-          <div className="root-Admin__item-wrapper res-create-login">
-            <Form.Item name="login"
-                       rules={[{ type: 'email', message: 'Please enter valid email: name@post.com' },
-                         { required: true, message: 'Enter researcher e-mail!' }]}>
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                type='email'
-                placeholder="E-mail"
-              />
-            </Form.Item>
-          </div>
-          <div className="root-Admin__item-wrapper">
-            <Form.Item
-              name="password"
-              rules={[{ min: 6, message: 'Password should contain at least 6 symbols' },
-                { required: true, message: 'Enter researcher password!' }]}>
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
-          </div>
-          <Form.Item>
-            <div className="research-create__changes-btns research-modal-btns">
-              <Button type="danger" className="research-create__cancel-btn"
-                      onClick={deleteClick}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="research-create__save-btn"
-                type="primary"
-                htmlType="submit"
-              >
-                {isLoading ? <Loader /> : 'Create'}
-              </Button>
-            </div>
+        <div className="root-Admin__item-wrapper res-create-login">
+          <Form.Item name="login"
+                     rules={[{ type: 'email', message: 'Please enter valid email: name@post.com' },
+                       { required: true, message: 'Enter researcher e-mail!' }]}>
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              type='email'
+              placeholder="E-mail"
+            />
           </Form.Item>
-        </Form>
-      </Modal>
-  );
+        </div>
+        <div className="root-Admin__item-wrapper">
+          <Form.Item
+            name="password"
+            rules={[{ min: 6, message: 'Password should contain at least 6 symbols' },
+              { required: true, message: 'Enter researcher password!' }]}>
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+        </div>
+        <Form.Item>
+          <div className="research-create__changes-btns research-modal-btns">
+            <Button type="danger" className="research-create__cancel-btn"
+                    onClick={deleteClick}
+            >
+              Cancel
+            </Button>
+            <Button
+              className="research-create__save-btn"
+              type="primary"
+              htmlType="submit"
+            >
+              {isLoading ? <Loader /> : 'Create'}
+            </Button>
+          </div>
+        </Form.Item>
+      </Form>
+    </Modal>
+  </div>
 };
 export default ResearcherCreate;

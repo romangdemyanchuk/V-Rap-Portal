@@ -1,6 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react'
-import { Link } from "react-router-dom";
+import React, { useEffect} from 'react'
 import { Input, Button, InputNumber, Cascader, Form, Select } from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
@@ -16,10 +15,7 @@ import Header from "./../header";
 const ParticipantProfile = () => {
 
   const partData = useSelector(state => state.partInfo)
-
-  console.log(partData, 'partData')
   const { name, age, location, income, headset } = partData
-  
 
   const isLoading = useSelector(state => state.isLoading)
   const dispatch = useDispatch()
@@ -45,7 +41,8 @@ const ParticipantProfile = () => {
   return <>
     {!partData.name ? <Loader /> :
       <div className="root-PartProfile">
-        <Header profile={'/participant-profile'} studies={'/participant-studies'}/>
+        <Header profile={'/participant-profile'} studies={'/participant-studies'}
+                disableButtons={!!(!partData.name || !partData.age || !partData.location || !partData.income || !partData.headset)}/>
         <div className="participant-profile__personal-info-block">
           <div className="participant-profile__wrapper">
             <div className="participant-profile__personal-heading">Profile Information</div>
@@ -120,6 +117,5 @@ const ParticipantProfile = () => {
 }
 
 const AuthRedirectComponent = WithAuthRedirect(ParticipantProfile)
-
 
 export default AuthRedirectComponent;

@@ -1,3 +1,6 @@
 .res-create-login {
     margin-top: 10px;
 }
+.root-PersonalStats .ant-form-horizontal {
+    align-items: flex-start !important;
+}
