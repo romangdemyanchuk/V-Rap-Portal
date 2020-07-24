@@ -9,7 +9,7 @@ import {
   EditUserInfoApi, UserInfoApi,
   AddCaseApi, DeleteCaseApi,
   AllCasesApi, EditCaseApi,
-  PartInfoApi, EditPartApi,
+  PartInfoApi, EditPartApi, ChangePasswordApi,
 } from '../../api'
 import {
   Register, Loading,
@@ -94,21 +94,7 @@ export default MainReducer
 
 
 
-export const RegisterRequest = data => dispatch => {
-  RegisterApi(data)
-    .then(response => {
-      if (response) {
-        dispatch(Register(response))
-      }
-      dispatch(Loading(false))
-    })
-    .catch(e => {
-      if (e.response) {
-        dispatch(Loading(false))
-      }
-    }
-    )
-}
+
 
 export const EditResearcherProfile = data => dispatch => {
   EditUserInfoApi(data)
@@ -118,11 +104,11 @@ export const EditResearcherProfile = data => dispatch => {
       }
     }).catch(e => {
       if (e.response && e.response.data) {
-        infoAction(e.response.data.message, '/researcher-profile');
+        // infoAction(e.response.data.message, '/researcher-profile');
       }
     }).finally(() => {
       dispatch(Loading(false))
-      infoAction('Your information is successfully updated!', '/researcher-profile')
+      // infoAction('Your information is successfully updated!', '/researcher-profile')
     })
   dispatch(Loading(true))
 }
@@ -205,9 +191,9 @@ export const ResearcherProfileInfo = () => dispatch => {
         dispatch(UserInfo({ area, school, name }))
       }
     }).catch(e => {
-      if (e.response.status === 401) {
-        localStorage.clear();
-      }
+      // if (e.response.status === 401) {
+      //   localStorage.clear();
+      // }
     }).finally(() => {
       dispatch(Loading(false))
     })
@@ -226,9 +212,12 @@ export const PartProfileInfo = () => dispatch => {
 }
 
 export const LoginRequest = data => dispatch => {
+  console.log(data)
   LoginApi(data)
     .then(response => {
+        console.log(response);
       if (response.statusText == 'OK') {
+        console.log(response);
         let token = response.data.token;
         localStorage.setItem('userLoginToken', token)
         localStorage.setItem('isAuth', true)
@@ -245,6 +234,23 @@ export const LoginRequest = data => dispatch => {
     })
 }
 
+export const RegisterRequest = data => dispatch => {
+  console.log('data', data);
+  RegisterApi(data)
+    .then(response => {
+      if (response) {
+        dispatch(Register(response))
+      }
+      dispatch(Loading(false))
+    })
+    .catch(e => {
+        if (e.response) {
+          dispatch(Loading(false))
+        }
+      }
+    )
+}
+
 export const AllCasesInfo = () => dispatch => {
   AllCasesApi()
     .then(response => {
@@ -257,7 +263,7 @@ export const AllCasesInfo = () => dispatch => {
         localStorage.clear();
       }
       if (e.response && e.response.data) {
-        infoAction(e.response.data.message, '/researcher-profile');
+        // infoAction(e.response.data.message, '/researcher-profile');
       }
     }).finally(() => {
       dispatch(Loading(false))
@@ -265,8 +271,8 @@ export const AllCasesInfo = () => dispatch => {
   dispatch(Loading(true))
 }
 
-export const ForgotPassword = () => dispatch => {
-  AllCasesApi()
+export const ChangePassword = (password) => dispatch => {
+  ChangePasswordApi(password)
     .then(response => {
       dispatch(Loading(true))
       if (response) {

@@ -22,7 +22,6 @@ const CreateNewCase = () => {
   const [parNum, setParNum] = useState(100);
   const [headsets, setHeadsets] = useState([]);
   const [professions, setProfessions] = useState([]);
-  // const [value, setValue] = useState('');
   let dispatch = useDispatch()
 
   const newCaseStudyInfo = useSelector(state => state.newCaseInfo)
@@ -106,6 +105,16 @@ const CreateNewCase = () => {
                     </Button>
                   </Upload>
                 </div>
+              </div>
+            </Form.Item>
+            <Form.Item
+            >
+              <div className="personal-stats__info-img">
+                <Upload {...props}>
+                  <Button className="file-upload-btn">
+                    Upload VR File
+                  </Button>
+                </Upload>
               </div>
             </Form.Item>
             <div className="personal-stats__blocks-wrapper">
@@ -238,14 +247,14 @@ const CreateNewCase = () => {
             <Form.Item
               className="personal-stats__footer-btns"
             >
-              <Link to={'/researcher-studies'}>
+              {/*<Link to={'/researcher-studies'}>*/}
                 <Button type="primary" htmlType="submit" className="personal-stats__create-research-btn">
                   {isLoading ? <Loader /> : 'Create Research Study'}
                 </Button>
-              </Link>
-              <Link to={'/researcher-profile'}>
+              {/*</Link>*/}
+              {/*<Link to={'/researcher-profile'}>*/}
                 <Button>Close Page</Button>
-              </Link>
+              {/*</Link>*/}
             </Form.Item>
           </Form>
         </div>

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,22 +8,26 @@ import { LoginRequest } from '../../../modules/session/session-reducers'
 import Loader from '../../Loader/loader'
 import { infoAction } from '../../../utils/notification'
 import "./researcherLoginForm.css"
+import EntryPasswordModal from '../ParticipantLogin/EntryPasswordModal'
 
 const ResearcherLogin = () => {
-
+  const [doubleEntryPasswordModal, setDoubleEntryPasswordModal] = useState(false);
   const dispatch = useDispatch()
   const isAuthCheck = useSelector(state => state.isAuth)
   const isLoading = useSelector(state => state.isLoading)
 
-  if (isAuthCheck)
-    return infoAction('Mission complete Researcher :)', '/researcher-profile')
+  // if (isAuthCheck)
+  //   return infoAction('Mission complete Researcher :)', '/researcher-profile')
 
   const handleSubmit = (values) => {
+    setDoubleEntryPasswordModal(true)
     LoginRequest(values)(dispatch);
     dispatch(Loading(true))
   }
 
   return <>
+    <EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}
+      title={'Change your password'}/>
     <div className="researcher-login__heading">
       V-RAP: Researcher
       </div>

@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest, } from '../../../modules/session/session-reducers'
 import { Loading } from '../../../modules/session/session-actions'
 import "./participantLoginForm.scss";
-import ForgotPasswordModal from './ForgotPasswordModal'
+import EntryPasswordModal from './EntryPasswordModal'
 
 const ParticipantLoginForm = ({ setState }) => {
-  const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
+  const [doubleEntryPasswordModal, setDoubleEntryPasswordModal] = useState(false);
   let dispatch = useDispatch()
 
   const isAuthCheck = useSelector(state => state.isAuth)
@@ -28,7 +28,8 @@ const ParticipantLoginForm = ({ setState }) => {
   }
 
   return <>
-    <ForgotPasswordModal forgotPasswordModal={forgotPasswordModal} setForgotPasswordModal={setForgotPasswordModal} />
+    <EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}
+      title={'Forgot your password?'}/>
     <div className="participant-login__heading">
       V-RAP: Participant
       </div>
@@ -73,7 +74,7 @@ const ParticipantLoginForm = ({ setState }) => {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
         <a className="login-form-forgot"
-          onClick={() => setForgotPasswordModal(true)}>
+          onClick={() => setDoubleEntryPasswordModal(true)}>
             Forgot password
           </a>
           </span>

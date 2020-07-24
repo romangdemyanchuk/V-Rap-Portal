@@ -1,10 +1,17 @@
 /* eslint-disable */
-import React, {useState} from "react";
-import { message, Button, Modal, Input } from 'antd'
+import React from "react";
+import { message, Button, Modal, Input, Form } from 'antd'
 import "antd/dist/antd.css";
 import "./researcherCreate.css";
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import Loader from '../../../../Loader/loader'
+import {RegisterRequest } from '../../../../../modules/session/session-reducers'
+import { Loading } from '../../../../../modules/session/session-actions'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
+  const isLoading = useSelector(state => state.isLoading)
+  const dispatch = useDispatch()
   const deleteClick = () => {
     setmodalOpen(false);
   }
@@ -28,35 +35,63 @@ const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
       }
     },
   };
+
+  const handleSubmit = (values) => {
+    console.log(values)
+    RegisterRequest(values)(dispatch);
+    dispatch(Loading(true))
+  }
   return (
       <Modal
-        title="Create Researcher Profile"
+        title="Create Researcher"
         visible={modalOpen}
         onOk={closeModal}
         onCancel={closeModal}
       >
-        <div className="research-create-block">
-          <div className="research-create__fields-wrapper">
-            <p>Name</p>
-            <Input placeholder="Type here.." />
+        <Form onFinish={values => { handleSubmit(values) }}
+              name="normal_login"
+              className="login-form"
+        >
+          <div className="root-Admin__item-wrapper res-create-login">
+            <Form.Item name="login"
+                       rules={[{ type: 'email', message: 'Please enter valid email: name@post.com' },
+                         { required: true, message: 'Enter researcher e-mail!' }]}>
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                type='email'
+                placeholder="E-mail"
+              />
+            </Form.Item>
           </div>
-          <div className="research-create__fields-wrapper">
-            <p>School/Institution Name</p>
-            <Input placeholder="Type here.." />
+          <div className="root-Admin__item-wrapper">
+            <Form.Item
+              name="password"
+              rules={[{ min: 6, message: 'Password should contain at least 6 symbols' },
+                { required: true, message: 'Enter researcher password!' }]}>
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
           </div>
-          <div className="research-create__fields-wrapper">
-            <p>Area of Research</p>
-            <Input placeholder="Type here.." />
-          </div>
-          <div className="research-create__changes-btns research-modal-btns">
-            <Button className="research-create__save-btn" type="primary">Create</Button>
-            <Button type="danger" className="research-create__cancel-btn"
-              onClick={deleteClick}
-            >
-              Cancel
-            </Button>
-          </div>
-        </div>
+          <Form.Item>
+            <div className="research-create__changes-btns research-modal-btns">
+              <Button type="danger" className="research-create__cancel-btn"
+                      onClick={deleteClick}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="research-create__save-btn"
+                type="primary"
+                htmlType="submit"
+              >
+                {isLoading ? <Loader /> : 'Create'}
+              </Button>
+            </div>
+          </Form.Item>
+        </Form>
       </Modal>
   );
 };

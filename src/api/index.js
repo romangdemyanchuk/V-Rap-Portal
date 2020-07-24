@@ -49,6 +49,11 @@ export const AllCasesApi = () => {
   return instance.get(`/api/case/cases`, { headers: { 'Authorization': token } })
 }
 
+export const ChangePasswordApi = (password) => {
+  console.log(password)
+  return instance.post(`/api/users/changepassword`, { password: password })
+}
+
 export const ChangingStatus = (id) => {
   return instanceWithToken().post(`/api/case/status`, { status: '3', id: id })
 }

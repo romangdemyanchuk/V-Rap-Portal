@@ -17,6 +17,7 @@ const ResearcherProfile = () => {
 
   const isLoading = useSelector(state => state.isLoading)
   let dispatch = useDispatch()
+  let buttonIsDisabled = true
 
   useEffect(() => {ResearcherProfileInfo()(dispatch)}, [])
 
@@ -30,17 +31,17 @@ const ResearcherProfile = () => {
   };
 
   const formIsValid = (props) => {
+    console.log('props', props)
     EditResearcherProfile({ ...props })(dispatch);
   }
 
   const logOut = () => {
     localStorage.clear();
   }
-
   return <>
-    {!userData.name ? <Loader /> :
+    {/*{!userData.name ? <Loader /> :*/}
     <div className="root-ResearcherProfile">
-        <Header profile={'researcher-profile'} studies={'researcher-studies'}/>
+        <Header profile={'researcher-profile'} studies={'researcher-studies'} disableButtons={!!(userData.name && userData.area && userData.school)}/>
       <div className="researcher-profile__personal-fields-wrapper">
         <div className="researcher-profile__personal-heading">Profile Information</div>
         <Form {...layout}name="control-hooks"
@@ -85,7 +86,7 @@ const ResearcherProfile = () => {
         </Form>
       </div>
       </div>
-    }
+    {/*}*/}
 </>
 }
 

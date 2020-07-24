@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 /*eslint-disable*/
 
-const Header = () => {
+const Header = ({disableButtons}) => {
+  console.log(disableButtons)
 
   const logOut = () => {
     localStorage.clear()
@@ -15,7 +16,7 @@ const Header = () => {
             <Button className='participant-profile__btn active'>Profile</Button>
         </Link>
         <Link to={'/researcher-studies'}>
-            <Button className='research-btn' disabled=''>
+            <Button className='research-btn' disabled={disableButtons}>
                 Research Studies
             </Button>
         </Link>

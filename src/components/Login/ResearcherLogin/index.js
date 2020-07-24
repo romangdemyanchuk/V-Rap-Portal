@@ -1,3 +1,3 @@
-import ResearcherLogin from './researcherLoginForm'
+import EntryPasswordModal from './researcherLoginForm'
 
-export default ResearcherLogin
+export default EntryPasswordModal
