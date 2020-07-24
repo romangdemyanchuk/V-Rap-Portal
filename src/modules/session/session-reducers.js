@@ -181,6 +181,7 @@ export const EditCaseInfo = data => dispatch => {
 }
 
 export const DeleteCaseInfo = id => dispatch => {
+  console.log(123, id)
   DeleteCaseApi(id)
     .then(response => {
       if (response) {

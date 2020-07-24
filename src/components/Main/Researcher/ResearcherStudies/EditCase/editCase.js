@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import userImg from '../../../../../images/user.svg'
 import { Link } from 'react-router-dom'
-import { Button, Cascader, Input, InputNumber, Slider, Upload } from 'antd'
+import { Button, Cascader, Input, InputNumber, Slider, TreeSelect, Upload } from 'antd'
 import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
 import {
   AllCasesInfo,
@@ -12,6 +12,7 @@ import Loader from '../../../../Loader/loader'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../../header'
 const { TextArea } = Input;
+const { TreeNode } = TreeSelect;
 
 
 const EditCase = ({ id }) => {
@@ -44,7 +45,7 @@ const EditCase = ({ id }) => {
   const [avgIncome, setAvgIncome] = useState(filteredCases.income);
   const [parNum, setParNum] = useState(filteredCases.participant);
   const [headsets, setHeadsets] = useState(filteredCases.headset);
-  const [listOfProfessions, setListOfProfessions] = useState(filteredCases.project);
+  const [professions, setProfessions] = useState(filteredCases.project);
 
   useEffect(() => {
     setTitle(filteredCases.title);
@@ -54,7 +55,7 @@ const EditCase = ({ id }) => {
     setAvgIncome(filteredCases.income);
     setParNum(filteredCases.participant);
     setHeadsets(filteredCases.headset);
-    setListOfProfessions(filteredCases.project);
+    setProfessions(filteredCases.project);
   }, [filteredCases.title, filteredCases.description, filteredCases.location,
   filteredCases.participant, filteredCases.headset, filteredCases.project])
 
@@ -66,7 +67,7 @@ const EditCase = ({ id }) => {
     setAvgIncome([10, 85])
     setParNum('')
     setHeadsets('')
-    setListOfProfessions('')
+    setProfessions('')
   }
   const ageRangeChange = (value) => {
     setAge(value);
@@ -84,8 +85,14 @@ const EditCase = ({ id }) => {
     setLocation(value);
   }
   const cascaderlistOfProfessionsChange = (value) => {
-    setListOfProfessions(value);
+    setProfessions(value);
   }
+  const headsetsChange = value => {
+    setHeadsets(value)
+  };
+  const locationChange = value => {
+    setLocation(value)
+  };
 
   const uploadProps = {
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
@@ -96,6 +103,7 @@ const EditCase = ({ id }) => {
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
           <div className="personal-stats__personal-heading">Create Research Studies</div>
+
           <div className="personal-stats__info-img">
             <img src={userImg} alt="userImg" />
             <div className="personal-stats__upload-btns">
@@ -132,9 +140,22 @@ const EditCase = ({ id }) => {
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Location</p>
-                <Cascader options={countryVariants} placeholder={filteredCases.location ? filteredCases.location : "--Location--"}
-                  onChange={cascaderLocationChange}
-                />
+                <TreeSelect
+                  showSearch
+                  style={{ width: '100%' }}
+                  value={location}
+                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                  placeholder={filteredCases.location ? filteredCases.location : "--Location--"}
+                  allowClear
+                  multiple
+                  treeDefaultExpandAll
+                  onChange={locationChange}
+                >
+                  {countryVariants.map((item) =>
+                    <TreeNode value={item.value} title={item.label} key={item.value} />
+                  )}
+
+                </TreeSelect>
               </div>
             </div>
             <div className="personal-stats__right-block">
@@ -162,16 +183,40 @@ const EditCase = ({ id }) => {
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Supported Headsets</p>
-                <Cascader options={headsetsVariants} placeholder={filteredCases.headset ? filteredCases.headset : "--Headsets--"}
+                <TreeSelect
+                  showSearch
+                  style={{ width: '100%' }}
+                  value={headsets}
+                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                  placeholder={filteredCases.headset ? filteredCases.headset : "--Headsets--"}
+                  allowClear
+                  multiple
+                  treeDefaultExpandAll
                   onChange={cascaderHeadsetsChange}
-                />
+                >
+                  {headsetsVariants.map((item) =>
+                    <TreeNode value={item.value} title={item.label} key={item.v} />
+                  )}
+
+                </TreeSelect>
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">List of Professions</p>
-                <Cascader options={professionsList} placeholder={filteredCases.project ? filteredCases.project : "--Professions--"}
+                <TreeSelect
+                  showSearch
+                  style={{ width: '100%' }}
+                  value={professions}
+                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                  placeholder={filteredCases.project ? filteredCases.project : "--Professions--"}
+                  allowClear
+                  multiple
+                  treeDefaultExpandAll
                   onChange={cascaderlistOfProfessionsChange}
-                  style={{}}
-                />
+                >
+                  {professionsList.map((item) =>
+                    <TreeNode value={item.value} title={item.label} />
+                  )}
+                </TreeSelect>
               </div>
             </div>
           </div>
@@ -179,7 +224,7 @@ const EditCase = ({ id }) => {
             <Button type="primary" className="personal-stats__create-research-btn"
               onClick={() => EditCaseInfo({
                 id: id, title: title, description: descr, location: location,
-                age: age, income: avgIncome, participant: parNum, headset: headsets, listOfProfessions: listOfProfessions
+                age: age, income: avgIncome, participant: parNum, headset: headsets, project: professions
               })(dispatch)}
             >
               {isLoading ? <Loader /> : 'Save Changes'}

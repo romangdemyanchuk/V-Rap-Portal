@@ -30,6 +30,9 @@ const CreateNewCase = () => {
   const headsetsChange = value => {
     setHeadsets(value)
   };
+  const locationChange = value => {
+    setLocation(value)
+  };
   const professionsChange = value => {
     setProfessions(value)
   };
@@ -148,12 +151,23 @@ const CreateNewCase = () => {
                   name="location"
                   rules={[{ required: true, message: 'Please choose location!' }]}
                 >
-                  <Cascader options={countryVariants} placeholder="--Countries--"
-                    onChange={cascaderLocationChange}
+                  <TreeSelect
+                    showSearch
+                    style={{ width: '100%' }}
                     value={location}
-                  />
-                </Form.Item>
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    placeholder="Please select"
+                    allowClear
+                    multiple
+                    treeDefaultExpandAll
+                    onChange={locationChange}
+                  >
+                    {countryVariants.map((item) =>
+                      <TreeNode value={item.value} title={item.label} key={item.value} />
+                    )}
 
+                  </TreeSelect>
+                </Form.Item>
               </div>
               <div className="personal-stats__right-block">
                 <Form.Item
@@ -214,10 +228,6 @@ const CreateNewCase = () => {
                     )}
 
                   </TreeSelect>
-                  {/*<Cascader options={headsetsVariants} placeholder="--Headsets--"*/}
-                  {/*  onChange={cascaderHeadsetsChange}*/}
-                  {/*  value={headsets}*/}
-                  {/*/>*/}
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
