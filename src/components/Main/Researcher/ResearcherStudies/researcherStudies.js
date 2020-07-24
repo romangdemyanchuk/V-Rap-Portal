@@ -14,6 +14,7 @@ const ResearcherStudies = () => {
   let dispatch = useDispatch()
 
   const allCaseStudies = useSelector(state => state.allCaseStudies)
+  console.log(allCaseStudies, 'allCaseStudies')
 
   const isLoading = useSelector(state => state.isLoading)
 

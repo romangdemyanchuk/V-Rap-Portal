@@ -15,6 +15,6 @@ export const infoAction = (error_info, redirect_to) => {
 
   openNotification()
   if (typeof window !== 'undefined') {
-    return window.location = `${redirect_to}`
+    window.location = `${redirect_to}`
   }
 }

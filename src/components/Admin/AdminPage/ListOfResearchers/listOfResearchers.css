@@ -30,3 +30,39 @@
 .researchers-profile-btn-wrapper {
     text-align: left;
 }
+
+
+.allResearchers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.allResearchers div{
+    width: 100%;
+        border: 1px solid ghostwhite;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        font-weight: bold;
+}
+
+.title-allResearchers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: gainsboro;
+    height: 50px;
+}
+
+.title-allResearchers div{
+    width: 100%;
+    border: 1px solid ghostwhite;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

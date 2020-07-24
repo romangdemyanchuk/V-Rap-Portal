@@ -1,17 +1,29 @@
 /* eslint-disable */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./listOfResearchers.css";
 import { Button, Table } from 'antd'
-import {useSelector } from 'react-redux'
+import {useSelector, useDispatch } from 'react-redux'
 import ResearcherChanges from './ResearcherChanges'
 import ResearcherCreate from './ResearcherCreate'
 import { researcherListColumns as list } from  '../../../../modules/session/data'
+import { allResearchers } from '../../../../modules/session/session-reducers';
+import { deleteResearcher } from '../../../../api';
 
 const ListOfResearchers = () => {
   const [modalOfCreateOpen, setmodalOfCreateOpen] = useState(false);
   const [modalsOpen, setmodalOpen] = useState(false);
   const { researcherListColumns } = list(setmodalOpen)
+  const allResearchersData = useSelector(state => state.listOfResearcher)
 
+console.log(allResearchersData, 'listOfResearchers')
+
+const dispatch = useDispatch()
+
+  useEffect(() => {
+    allResearchers()(dispatch)
+}, [])
+
+  
   const researchersList = useSelector(state => state.researchersList)
   return <div className="researchers-list">
         <ResearcherChanges modalOpen={modalsOpen} setmodalOpen={setmodalOpen}/>
@@ -24,7 +36,22 @@ const ListOfResearchers = () => {
         Create Researcher
       </Button>
         </div>
-          <Table columns={researcherListColumns} dataSource={researchersList}/>
+        <div className='title-allResearchers'>
+      <div>Name</div>
+      <div>School/Institution Name</div>
+      <div>Area of Research</div>
+      <div>Actions</div>
+    </div>
+    {allResearchersData.map(r =>
+      <div key={r._id} className='allResearchers'>
+      <div>{r.name}</div>
+        <div>{r.school}</div>
+        <div>{r.area}</div>
+        <div className='button-action'>
+          <button onClick={()=> deleteResearcher(r._id)}>Delete</button>
+        </div>
+      </div>
+      )}
       </div>
 }
 

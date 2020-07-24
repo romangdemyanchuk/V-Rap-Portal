@@ -1,1 +1,44 @@
 
+.caseStudies{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+
+.caseStudies div{
+    width: 100%;
+    border: 1px solid ghostwhite;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-weight: bold;
+}
+
+.title-caseStudies {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: gainsboro;
+    height: 50px;
+    
+}
+
+.title-caseStudies div{
+    width: 100%;
+    border: 1px solid ghostwhite;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-action button{
+    text-decoration: none;
+    color: #1890ff;
+    border: none;
+    background-color: white;
+    font-weight: bold;
+}

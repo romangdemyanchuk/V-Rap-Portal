@@ -65,3 +65,15 @@ export const EditCaseApi = (data) => {
 export const EditPartApi = (data) => {
   return instanceWithToken().post(`api/users/useredit`, data)
 }
+
+export const ChangingStatusAdmin = (id) => {
+  return instanceWithToken().post(`/api/case/status`, { status: '2', id: id })
+}
+
+export const getAllUsers = (token) => {
+  return instanceWithToken().get(`/api/users/users`, { headers: {token}})
+}
+
+export const deleteResearcher = (id) => {
+  return instanceWithToken().delete(`/api/users/delete`, { headers: {token}, data: { id: id }})
+}

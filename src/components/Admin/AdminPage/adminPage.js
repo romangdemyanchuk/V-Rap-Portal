@@ -5,7 +5,8 @@ import { Button } from 'antd'
 import "./adminPage.scss";
 
 const AdminPage = () => {
-  return <div className="admin-page">
+  return <>
+  <div className="admin-page">
             <div className="admin-page__text">
               <div className="admin-page__text-heading">
                 Admin Panel
@@ -36,6 +37,7 @@ const AdminPage = () => {
                 List of Admin Users
               </Button>
             </div>
-      </div>
+    </div>
+    </>
 }
 export default AdminPage

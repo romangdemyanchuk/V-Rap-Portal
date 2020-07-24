@@ -39,7 +39,7 @@ const ParticipantProfile = () => {
     },
   };
   return <>
-    {!partData.name ? <Loader /> :
+    {isLoading ? <Loader /> :
       <div className="root-PartProfile">
         <Header profile={'/participant-profile'} studies={'/participant-studies'}
                 disableButtons={!!(!partData.name || !partData.age || !partData.location || !partData.income || !partData.headset)}/>
@@ -68,7 +68,7 @@ const ParticipantProfile = () => {
                   label="Age"
                   rules={[{ required: true, message: 'Please input age!' }]}
                 >
-                  <InputNumber min={10} max={90} className="input-number" />
+                  <InputNumber min={10} max={100} className="input-number" />
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
@@ -83,7 +83,7 @@ const ParticipantProfile = () => {
                   label="Average Income(USD)"
                   rules={[{ required: true, message: 'Please input Income(USD)!' }]}
                 >
-                  <Input placeholder="Average Income" />
+                  <InputNumber placeholder="Average Income" max={10000000}/>
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"

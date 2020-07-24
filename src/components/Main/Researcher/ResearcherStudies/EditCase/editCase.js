@@ -153,12 +153,13 @@ const EditCase = ({ id }) => {
                 />
               </div>
               <div className="personal-stats__fields-wrapper">
-                <p>Required number of participant</p>
+                <p>Required number of participants</p>
                 <InputNumber min={1} max={300}
                   className="input-number"
                   onChange={parNumberChange}
                   value={parNum}
                 />
+                
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Supported Headsets</p>

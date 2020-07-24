@@ -9,7 +9,7 @@ import {
   EditUserInfoApi, UserInfoApi,
   AddCaseApi, DeleteCaseApi,
   AllCasesApi, EditCaseApi,
-  PartInfoApi, EditPartApi, ChangePasswordApi,
+  PartInfoApi, EditPartApi, ChangePasswordApi, getAllUsers,
 } from '../../api'
 import {
   Register, Loading,
@@ -20,12 +20,12 @@ import { infoAction } from '../../utils/notification'
 import { Redirect } from 'react-router-dom'
 import React from 'react'
 
-let { caseStudies, researchersList, caseStudiesColumns } = allData
+// let { caseStudies, researchersList, caseStudiesColumns } = allData
 
 const initialState = {
-  caseStudies,
-  researchersList,
-  caseStudiesColumns,
+  // caseStudies,
+  // researchersList,
+  // caseStudiesColumns,
   adminLoginData: [],
   adminRegisterData: '',
   loginError: '',
@@ -36,7 +36,8 @@ const initialState = {
   partInfo: {},
   statusNumber: null,
   researcherStudies: [],
-  allCaseStudies: []
+  allCaseStudies: [],
+  listOfResearcher: []
 }
 
 const MainReducer = (state = initialState, action) => {
@@ -46,6 +47,11 @@ const MainReducer = (state = initialState, action) => {
         ...state,
         adminLoginData: action.payload,
         isAuth: true
+      }
+      case ALL_RESEARCHERS:
+      return {
+        ...state,
+        listOfResearcher: action.payload,
       }
       case LOGOUT:
       return {
@@ -204,12 +210,12 @@ export const ResearcherProfileInfo = (token) => dispatch => {
         dispatch(UserInfo({ area, school, name }))
       }
     }).catch(e => {
-      // if (e.response.status === 401) {
-      //   localStorage.clear();
-      //   if (typeof window !== 'undefined') {
-      //     window.location = '/'
-      //   }
-      // }
+       if (e.response.status === 401) {
+         localStorage.clear();
+         if (typeof window !== 'undefined') {
+           window.location = '/'
+         }
+       }
     }).finally(() => {
       dispatch(Loading(false))
     })
@@ -222,7 +228,14 @@ export const PartProfileInfo = () => dispatch => {
         const { name, age, location, income, headset } = response.data;
         dispatch(PartInfo({ name, age, location, income, headset }))
       }
-    }).finally(() => {
+    }).catch(e => {
+      if (e.response.status === 401) {
+        localStorage.clear();
+        if (typeof window !== 'undefined') {
+          window.location = '/'
+        }
+      }
+   }).finally(() => {
       dispatch(Loading(false))
     })
 }
@@ -272,12 +285,12 @@ export const AllCasesInfo = () => dispatch => {
         dispatch(AllCases(response.data))
       }
     }).catch(e => {
-      // if (e.response.status === 401) {
-      //   localStorage.clear();
-      //   if (typeof window !== 'undefined') {
-      //     window.location = '/'
-      //   }
-      // }
+      if (e.response.status === 401) {
+        localStorage.clear();
+        if (typeof window !== 'undefined') {
+          window.location = '/'
+        }
+      }
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, '/researcher-profile');
       }
@@ -298,4 +311,20 @@ export const ChangePassword = (password) => dispatch => {
       dispatch(Loading(false))
     })
   dispatch(Loading(true))
+}
+
+const ALL_RESEARCHERS = 'ALL-RESEARCHERS'
+
+const allResearchersAC = (data) => ({type: ALL_RESEARCHERS, payload: data })
+
+
+export const allResearchers = () => dispatch => {
+  debugger
+  getAllUsers()
+    .then(response => {
+      
+      if (response) {
+        dispatch(allResearchersAC(response.data))
+      }
+    })
 }
