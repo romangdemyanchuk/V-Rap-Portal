@@ -5,15 +5,15 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Loader from '../../Loader/loader'
 import "./participantRegisterForm.css";
 import { useDispatch, useSelector } from 'react-redux'
-import { RegisterRequest } from '../../../modules/session/session-reducers'
+import { RegisterRequest } from '../../../modules/session/auth-reducer'
 import { Loading } from '../../../modules/session/session-actions'
 import { infoAction } from '../../../utils/notification'
 
 const ParticipantRegisterForm = ({ setState }) => {
   let dispatch = useDispatch()
 
-  const isAuthCheck = useSelector(state => state.isAuth)
-  const isLoading = useSelector(state => state.isLoading)
+  const isAuthCheck = useSelector(state => state.auth.isAuth)
+  const isLoading = useSelector(state => state.auth.isLoading)
 
   if (isAuthCheck) {
     return infoAction('Successfully registered, please log In :)', '/')

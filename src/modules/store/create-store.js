@@ -1,8 +1,16 @@
 /*eslint-disable*/
-import { applyMiddleware, createStore } from "redux"
+import { applyMiddleware, createStore, combineReducers } from "redux"
 import thunk from "redux-thunk"
-import MainReducer from "../session/session-reducers"
+import MainReducer from "../session/main-reducer"
+import AuthReducer from "../session/auth-reducer"
+import CasesReducer from "../session/cases-reducer"
 
-const store = createStore(MainReducer, applyMiddleware(thunk))
+const allReducers = combineReducers({
+    main: MainReducer,
+    auth: AuthReducer,
+    cases: CasesReducer
+})
+
+const store = createStore(allReducers, applyMiddleware(thunk))
 
 export default store

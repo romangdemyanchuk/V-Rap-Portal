@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import { Button, Skeleton } from "antd";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from 'react-redux'
-import { AllCasesInfo } from '../../../../modules/session/session-reducers'
+import { AllCasesInfo } from '../../../../modules/session/cases-reducer'
 import Case from './Case'
 import Header from "./../header";
 
@@ -13,15 +13,18 @@ const ResearcherStudies = () => {
 
   let dispatch = useDispatch()
 
-  const allCaseStudies = useSelector(state => state.allCaseStudies)
-  console.log(allCaseStudies, 'allCaseStudies')
-
+  const allCaseStudies = useSelector(state => state.cases.allCaseStudies)
   const isLoading = useSelector(state => state.isLoading)
 
   useEffect(() =>
     AllCasesInfo()(dispatch)
     , [])
 
+    const userData = useSelector(state => state.main.userInfo)
+  const { name, school, area } = userData
+  
+  if(!!(!name || !area || !school)) return <Redirect to='researcher-profile'/>
+  
   return (
     <div className="ResearcherStudies">
       <Header />

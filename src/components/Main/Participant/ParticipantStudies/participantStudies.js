@@ -6,13 +6,14 @@ import FileUpload from './FileUpload'
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { AllCasesInfo } from "../../../../modules/session/session-reducers";
+import { AllCasesInfo } from "../../../../modules/session/cases-reducer";
 import Header from "./../header";
+import { Redirect } from "react-router";
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
   const isLoading = useSelector(state => state.isLoading)
-  const allCaseStudies = useSelector(state => state.allCaseStudies)
+  const allCaseStudies = useSelector(state => state.cases.allCaseStudies)
   let caseStatusName = (status) => {
     if (status === 0) return <Tag color='green'>In progress</Tag>
     else if (status === 1) return <Tag color='gold'>Participant base is full</Tag>
@@ -25,6 +26,10 @@ const ParticipantStudies = () => {
     AllCasesInfo()(dispatch)
     , [])
 
+    const partData = useSelector(state => state.main.partInfo)
+    let { name, age, location, income, headset } = partData
+    if (!!(!name || !age || !location || !income || !headset)) return <Redirect to='participant-profile'/>
+  
   return (
     <div className="root-PartStudies">
       <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} />

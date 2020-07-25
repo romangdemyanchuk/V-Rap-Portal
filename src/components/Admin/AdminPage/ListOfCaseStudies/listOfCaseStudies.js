@@ -3,14 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { caseStudiesColumns as list } from  '../../../../modules/session/data'
 import "./listOfCaseStudies.css";
-import { AllCasesInfo } from '../../../../modules/session/session-reducers';
-import { Modal, Button } from 'antd';
+import { AllCasesInfo } from '../../../../modules/session/cases-reducer';
 import { ChangingStatusAdmin } from '../../../../api';
 
 const ListOfCaseStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
   const { caseStudiesColumns } = list(setmodalOpen)
-  const allCaseStudies = useSelector(state => state.allCaseStudies)
+  const allCaseStudies = useSelector(state => state.cases.allCaseStudies)
   const dispatch = useDispatch()
   console.log(allCaseStudies, 'allCaseStudies')
   

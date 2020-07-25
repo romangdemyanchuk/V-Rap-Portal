@@ -3,7 +3,7 @@ import React from "react";
 import "./";
 import { Button, Form, Input, Modal } from 'antd'
 import { LockOutlined } from '@ant-design/icons'
-import { ChangePassword} from '../../../../modules/session/session-reducers'
+import { ChangePassword} from '../../../../modules/session/auth-reducer'
 import { Loading } from '../../../../modules/session/session-actions'
 import { infoAction } from '../../../../utils/notification'
 import { useDispatch} from 'react-redux'

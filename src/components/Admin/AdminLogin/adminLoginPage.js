@@ -4,7 +4,7 @@ import Loader from '../../Loader/loader'
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from 'react-redux'
-import { LoginRequest } from '../../../modules/session/session-reducers'
+import { LoginRequest } from '../../../modules/session/auth-reducer'
 import { Loading } from '../../../modules/session/session-actions'
 import "./adminLoginPage.css";
 

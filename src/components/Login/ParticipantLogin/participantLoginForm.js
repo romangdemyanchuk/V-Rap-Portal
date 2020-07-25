@@ -6,7 +6,7 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { infoAction } from '../../../utils/notification'
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginRequest, } from '../../../modules/session/session-reducers'
+import { LoginRequest, } from '../../../modules/session/auth-reducer'
 import { Loading } from '../../../modules/session/session-actions'
 import "./participantLoginForm.scss";
 import EntryPasswordModal from './EntryPasswordModal'
@@ -15,8 +15,8 @@ const ParticipantLoginForm = ({ setState }) => {
   const [doubleEntryPasswordModal, setDoubleEntryPasswordModal] = useState(false);
   let dispatch = useDispatch()
 
-  const isAuthCheck = useSelector(state => state.isAuth)
-  const isLoading = useSelector(state => state.isLoading)
+  const isAuthCheck = useSelector(state => state.auth.isAuth)
+  const isLoading = useSelector(state => state.auth.isLoading)
 
   if (isAuthCheck) {
     return infoAction('Mission complete Participant :)', '/participant-profile')
@@ -71,7 +71,7 @@ const ParticipantLoginForm = ({ setState }) => {
       <Form.Item>
         <span className='rememberMe-antd'>
         <Form.Item name="remember" noStyle>
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox checked>Remember me</Checkbox>
         </Form.Item>
         <a className="login-form-forgot"
           onClick={() => setDoubleEntryPasswordModal(true)}>

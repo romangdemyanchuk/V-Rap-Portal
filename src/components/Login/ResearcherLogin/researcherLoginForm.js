@@ -4,17 +4,17 @@ import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { Loading } from '../../../modules/session/session-actions'
-import { LoginRequest } from '../../../modules/session/session-reducers'
+import { LoginRequest } from '../../../modules/session/auth-reducer'
 import Loader from '../../Loader/loader'
 import { infoAction } from '../../../utils/notification'
 import "./researcherLoginForm.css"
-import EntryPasswordModal from '../ParticipantLogin/EntryPasswordModal'
+
 
 const ResearcherLogin = () => {
   const [doubleEntryPasswordModal, setDoubleEntryPasswordModal] = useState(false);
   const dispatch = useDispatch()
-  const isAuthCheck = useSelector(state => state.isAuth)
-  const isLoading = useSelector(state => state.isLoading)
+  const isAuthCheck = useSelector(state => state.auth.isAuth)
+  const isLoading = useSelector(state => state.auth.isLoading)
 
   if (isAuthCheck)
     return infoAction('Mission complete Researcher :)', '/researcher-profile')

@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Input, Button, Form } from 'antd'
 import WithAuthRedirect from "../../../../hoc/hoc";
-import { EditResearcherProfile, ResearcherProfileInfo } from '../../../../modules/session/session-reducers'
+import { EditResearcherProfile, ResearcherProfileInfo } from '../../../../modules/session/main-reducer'
 import Loader from '../../../Loader/loader'
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,11 +11,11 @@ import Header from "./../header";
 
 const ResearcherProfile = () => {
 
-  const userData = useSelector(state => state.userInfo)
+  const userData = useSelector(state => state.main.userInfo)
 
   const { name, school, area } = userData
 
-  const isLoading = useSelector(state => state.isLoading)
+  const isLoading = useSelector(state => state.auth.isLoading)
   let dispatch = useDispatch()
 
   let token = localStorage.getItem('userLoginToken')
@@ -36,14 +36,10 @@ const ResearcherProfile = () => {
     EditResearcherProfile({ ...props })(dispatch);
   }
 
-  const logOut = () => {
-    localStorage.clear();
-  }
-
   return <>
     {isLoading ? <Loader /> :
     <div className="root-ResearcherProfile">
-        <Header profile={'researcher-profile'} studies={'researcher-studies'} disableButtons={!!(!userData.name || !userData.area || !userData.school)}/>
+        <Header profile={'researcher-profile'} studies={'researcher-studies'} disableButtons={!!(!name || !area || !school)}/>
       <div className="researcher-profile__personal-fields-wrapper">
         <div className="researcher-profile__personal-heading">Profile Information</div>
         <Form {...layout}name="control-hooks"

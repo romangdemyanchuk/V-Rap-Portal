@@ -2,7 +2,7 @@
 import React from "react";
 import "./deleteModal.css";
 import {Button, Modal} from "antd";
-import { DeleteCaseInfo } from '../../../../../../modules/session/session-reducers'
+import { DeleteCaseInfo } from '../../../../../../modules/session/cases-reducer'
 import { useDispatch } from 'react-redux'
 
 const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen, id }) => {

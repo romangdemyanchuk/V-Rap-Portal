@@ -1,13 +1,12 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import userImg from '../../../../../images/user.svg'
-import { Link } from 'react-router-dom'
-import { Button, Cascader, Input, InputNumber, Slider, TreeSelect, Upload } from 'antd'
+import { Button, Input, InputNumber, Slider, TreeSelect, Upload } from 'antd'
 import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
 import {
   AllCasesInfo,
   EditCaseInfo,
-} from '../../../../../modules/session/session-reducers'
+} from '../../../../../modules/session/cases-reducer'
 import Loader from '../../../../Loader/loader'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../../header'

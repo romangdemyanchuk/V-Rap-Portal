@@ -6,14 +6,14 @@ import {useSelector, useDispatch } from 'react-redux'
 import ResearcherChanges from './ResearcherChanges'
 import ResearcherCreate from './ResearcherCreate'
 import { researcherListColumns as list } from  '../../../../modules/session/data'
-import { allResearchers } from '../../../../modules/session/session-reducers';
+import { allResearchers } from '../../../../modules/session/main-reducer';
 import { deleteResearcher } from '../../../../api';
 
 const ListOfResearchers = () => {
   const [modalOfCreateOpen, setmodalOfCreateOpen] = useState(false);
   const [modalsOpen, setmodalOpen] = useState(false);
   const { researcherListColumns } = list(setmodalOpen)
-  const allResearchersData = useSelector(state => state.listOfResearcher)
+  const allResearchersData = useSelector(state => state.main.listOfResearcher)
 
 console.log(allResearchersData, 'listOfResearchers')
 

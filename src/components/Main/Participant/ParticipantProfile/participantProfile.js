@@ -1,24 +1,22 @@
 /* eslint-disable */
 import React, { useEffect} from 'react'
-import { Input, Button, InputNumber, Cascader, Form, Select, TreeSelect } from 'antd'
+import { Input, Button, InputNumber, Form, TreeSelect } from 'antd'
 const { TreeNode } = TreeSelect;
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
-import {
-  EditParticipantProfile,
-  PartProfileInfo,
-} from '../../../../modules/session/session-reducers'
+import {EditParticipantProfile,PartProfileInfo} from '../../../../modules/session/main-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../Loader/loader'
 import Header from "./../header";
 
 const ParticipantProfile = () => {
 
-  const partData = useSelector(state => state.partInfo)
+  const partData = useSelector(state => state.main.partInfo)
   let { name, age, location, income, headset } = partData
 
-  const isLoading = useSelector(state => state.isLoading)
+  const isLoading = useSelector(state => state.auth.isLoading)
+  console.log(isLoading, 'isLoading')
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -30,9 +28,6 @@ const ParticipantProfile = () => {
       ...props
     })(dispatch);
   }
-  const headsetsChange = value => {
-    headset = value
-  };
 
   const layout = {
     labelCol: {
@@ -41,12 +36,14 @@ const ParticipantProfile = () => {
     wrapperCol: {
       span: 16,
     },
-  };
+  }
+
+  
   return <>
     {isLoading ? <Loader /> :
       <div className="root-PartProfile">
         <Header profile={'/participant-profile'} studies={'/participant-studies'}
-                disableButtons={!!(!partData.name || !partData.age || !partData.location || !partData.income || !partData.headset)}/>
+                disableButtons={!!(!name || !age || !location || !income || !headset)}/>
         <div className="participant-profile__personal-info-block">
           <div className="participant-profile__wrapper">
             <div className="participant-profile__personal-heading">Profile Information</div>

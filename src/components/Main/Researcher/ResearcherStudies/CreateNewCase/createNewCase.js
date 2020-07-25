@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React, { useState } from 'react'
 import userImg from "../../../../../images/user.svg";
-import { Link, Redirect } from 'react-router-dom'
-import { Input, Button, Slider, InputNumber, Cascader, Upload, Form, TreeSelect, message } from 'antd'
+import { Input, Button, Slider, InputNumber,  Upload, Form, TreeSelect, message } from 'antd'
 const { TreeNode } = TreeSelect;
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
 import "./createNewCase.scss";
 import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
-import { NewCaseInfo } from '../../../../../modules/session/session-reducers'
+import { NewCaseInfo } from '../../../../../modules/session/cases-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../../Loader/loader'
 import Header from '../../header';

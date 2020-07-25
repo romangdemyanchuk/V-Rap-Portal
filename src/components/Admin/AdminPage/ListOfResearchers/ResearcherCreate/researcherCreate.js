@@ -5,36 +5,34 @@ import "antd/dist/antd.css";
 import "./researcherCreate.css";
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import Loader from '../../../../Loader/loader'
-import {RegisterRequest } from '../../../../../modules/session/session-reducers'
+import {RegisterRequest } from '../../../../../modules/session/auth-reducer'
 import { Loading } from '../../../../../modules/session/session-actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
   const isLoading = useSelector(state => state.isLoading)
   const dispatch = useDispatch()
-  const deleteClick = () => {
-    setmodalOpen(false);
-  }
+  
   const closeModal = () => {
     setmodalOpen(false);
   }
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        setmodalOpen(false);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+  // const props = {
+  //   name: "file",
+  //   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  //   headers: {
+  //     authorization: "authorization-text",
+  //   },
+  //   onChange(info) {
+  //     if (info.file.status !== "uploading") {
+  //       setmodalOpen(false);
+  //     }
+  //     if (info.file.status === "done") {
+  //       message.success(`${info.file.name} file uploaded successfully`);
+  //     } else if (info.file.status === "error") {
+  //       message.error(`${info.file.name} file upload failed.`);
+  //     }
+  //   },
+  // };
 
   const handleSubmit = (values) => {
     console.log(values)
@@ -78,7 +76,7 @@ const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
         <Form.Item>
           <div className="research-create__changes-btns research-modal-btns">
             <Button type="danger" className="research-create__cancel-btn"
-                    onClick={deleteClick}
+                    onClick={closeModal}
             >
               Cancel
             </Button>
@@ -86,6 +84,7 @@ const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
               className="research-create__save-btn"
               type="primary"
               htmlType="submit"
+              onClick={closeModal}
             >
               {isLoading ? <Loader /> : 'Create'}
             </Button>
