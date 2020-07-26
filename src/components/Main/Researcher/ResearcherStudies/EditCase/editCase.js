@@ -10,12 +10,13 @@ import {
 import Loader from '../../../../Loader/loader'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../../header'
+import { Link } from 'react-router-dom'
 const { TextArea } = Input;
 const { TreeNode } = TreeSelect;
 
 
 const EditCase = ({ id }) => {
-  const allCaseStudies = useSelector(state => state.allCaseStudies)
+  const allCaseStudies = useSelector(state => state.cases.allCaseStudies)
   let filteredCases = [];
 
   let dispatch = useDispatch()
@@ -229,9 +230,9 @@ const EditCase = ({ id }) => {
             >
               {isLoading ? <Loader /> : 'Save Changes'}
             </Button>
-            {/*<Link to={'/researcher-profile'}>*/}
+            <Link to={'/researcher-studies'}>
             <Button onClick={resetFieldsValue}>Cancel</Button>
-            {/*</Link>*/}
+            </Link>
           </div>
         </div>
       </div>

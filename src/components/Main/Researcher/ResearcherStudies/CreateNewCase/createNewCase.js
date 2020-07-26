@@ -261,9 +261,9 @@ const CreateNewCase = () => {
                   {isLoading ? <Loader /> : 'Create Research Study'}
                 </Button>
                 {/*</Link>*/}
-                {/*<Link to={'/researcher-profile'}>*/}
+                <Link to={'/researcher-profile'}>
                 <Button>Close Page</Button>
-                {/*</Link>*/}
+                </Link>
               </div>
             </Form.Item>
           </Form>

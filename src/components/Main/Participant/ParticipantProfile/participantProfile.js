@@ -1,22 +1,20 @@
 /* eslint-disable */
 import React, { useEffect} from 'react'
-import { Input, Button, InputNumber, Form, TreeSelect } from 'antd'
-const { TreeNode } = TreeSelect;
+import { Input, Button, InputNumber, Form, Select } from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
-import { countryVariants, headsetsVariants } from '../../../../modules/session/data'
+import { countryVariants, headsetsVariants, professionsList } from '../../../../modules/session/data'
 import {EditParticipantProfile,PartProfileInfo} from '../../../../modules/session/main-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../Loader/loader'
 import Header from "./../header";
 
 const ParticipantProfile = () => {
-
   const partData = useSelector(state => state.main.partInfo)
   let { name, age, location, income, headset } = partData
 
   const isLoading = useSelector(state => state.auth.isLoading)
-  console.log(isLoading, 'isLoading')
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -29,15 +27,7 @@ const ParticipantProfile = () => {
     })(dispatch);
   }
 
-  const layout = {
-    labelCol: {
-      span: 16,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  }
-
+  const layout = {labelCol: {span: 16},wrapperCol: {span: 16}}
   
   return <>
     {isLoading ? <Loader /> :
@@ -52,7 +42,7 @@ const ParticipantProfile = () => {
                 initialValues={{
                   'name': name,
                   'age': age,
-                  'location': location,
+                  'location': [location],
                   'income': income,
                   'headset': [headset]
                 }}
@@ -67,6 +57,7 @@ const ParticipantProfile = () => {
                 <Form.Item
                   name="age"
                   label="Age"
+                  placeholder='Age'
                   rules={[{ required: true, message: 'Please input age!' }]}
                 >
                   <InputNumber min={10} max={100} className="input-number" />
@@ -77,22 +68,15 @@ const ParticipantProfile = () => {
                   name="location"
                   rules={[{ required: true, message: 'Please choose location!' }]}
                 >
-                  <TreeSelect
-                    showSearch
-                    style={{ width: '100%' }}
-                    value={headset}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    placeholder="Please select"
-                    allowClear
-                    multiple
-                    treeDefaultExpandAll
-                    // onChange={headsetsChange}
-                  >
-                    {countryVariants.map((item) =>
-                      <TreeNode value={item.value} title={item.label} key={item.value} />
+                  <Select mode="multiple" placeholder="select location"optionLabelProp="label">
+                    {countryVariants.map(c => 
+                    <Select.Option value={c.value} label={c.label} key={c.value}>
+                      <div className="demo-option-label-item">
+                        {c.value}
+                      </div>
+                    </Select.Option>
                     )}
-
-                  </TreeSelect>
+                  </Select>
                 </Form.Item>
                 <Form.Item
                   name="income"
@@ -107,23 +91,35 @@ const ParticipantProfile = () => {
                   name="headset"
                   rules={[{ required: true, message: 'Please choose location!' }]}
                 >
-                  <TreeSelect
-                    showSearch
-                    style={{ width: '100%' }}
-                    value={headset}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    placeholder="Please select"
+                  <Select mode="multiple" placeholder="select location" optionLabelProp="label">
+                    {headsetsVariants.map(c => 
+                    <Select.Option value={c.value} label={c.label} key={c.value}>
+                      <div className="demo-option-label-item">
+                        {c.value}
+                      </div>
+                    </Select.Option>
+                    )}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  className="personal-stats__fields-wrapper"
+                  label="Profession"
+                  name="profession"
+                  rules={[{ required: true, message: 'Please choose location!' }]}
+                >
+                <Select
+                    placeholder="Please select Profession"
                     allowClear
                     multiple
                     treeDefaultExpandAll
-                    // onChange={headsetsChange}
                   >
-                    {headsetsVariants.map((item) =>
-                      <TreeNode value={item.value} title={item.label} key={item.value} />
+                    {professionsList.map(p =>
+                      <Select.Option value={p.value} title={p.label}>
+                        {p.value}
+                      </Select.Option>
                     )}
-
-                  </TreeSelect>
-                </Form.Item>
+                  </Select>
+                  </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
                 >

@@ -68,13 +68,7 @@ export const NewCaseInfo = data => dispatch => {
 
 export const EditCaseInfo = data => dispatch => {
   EditCaseApi(data)
-    .then(response => {
-      // dispatch(Loading(true))
-      // if (response) {
-      //   console.log('response', response);
-      //   dispatch(AllCases(response.data))
-      // }
-    }).finally(() => {
+    .finally(() => {
       if (typeof window !== 'undefined') {
         window.location = '/researcher-studies'
       }
@@ -113,7 +107,7 @@ export const AllCasesInfo = () => dispatch => {
         }
       }
       if (e.response && e.response.data) {
-        infoAction(e.response.data.message, '/researcher-profile');
+        infoAction(e.response.data.message, '/researcher-studies');
       }
     }).finally(() => {
       dispatch(Loading(false))

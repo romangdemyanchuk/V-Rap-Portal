@@ -49,8 +49,8 @@ export const LoginRequest = data => dispatch => {
       }
     })
     .catch(e => {
-      if (e.response && e.response.data) {
-        infoAction(e.response.data.message, '/participant-profile');
+      if (e.response.status == '404') {
+        infoAction(e.response.data.message, '');
       }
     }).finally(() => {
       dispatch(Loading(false))
@@ -63,6 +63,7 @@ export const RegisterRequest = data => dispatch => {
       if (response) {
         dispatch(Register(response))
       }
+      dispatch(Loading(false))
     }).catch(e => {
         if (e.response) {
       }

@@ -41,6 +41,7 @@ export const EditResearcherProfile = data => dispatch => {
     .then(response => {
       if (response) {
         dispatch(UserInfo(response))
+        infoAction('Your information is successfully updated!', '')
       }
     }).catch(e => {
       if (e.response && e.response.data) {
@@ -48,7 +49,7 @@ export const EditResearcherProfile = data => dispatch => {
       }
     }).finally(() => {
       dispatch(Loading(false))
-      infoAction('Your information is successfully updated!', '/researcher-profile')
+      
     })
   dispatch(Loading(true))
 }
@@ -57,11 +58,11 @@ export const EditParticipantProfile = data => dispatch => {
   EditPartApi(data)
     .then(response => {
       if (response) {
-        infoAction('You successfully change your profile!', '/participant-profile')
+        infoAction('Your information is successfully updated!', '')
         dispatch(PartInfo(response.data))
       }
     }).catch(e => {
-      if (e.response && e.response.data) {
+      if (e.response.data) {
         infoAction(e.response.data.message, '/participant-profile');
       }
     }).finally(() => {
