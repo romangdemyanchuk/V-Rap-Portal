@@ -77,3 +77,22 @@ export const getAllUsers = (token) => {
 export const deleteResearcher = (id) => {
   return instanceWithToken().delete(`/api/users/delete`, { headers: {token}, data: { id: id }})
 }
+
+const props = {
+  name: 'file',
+  action: 'https://varapan.herokuapp.com//api/users/results',
+  headers: {
+    authorization: token,
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      setSuccessModalIsOpen(true)
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
+

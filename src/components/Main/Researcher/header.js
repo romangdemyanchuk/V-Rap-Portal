@@ -13,7 +13,7 @@ const Header = ({disableButtons}) => {
   return <div className='participant-profile__btns-wrapper'>
     <div>
         <Link to={'/researcher-profile'}>
-            <Button className='participant-profile__btn active'>Profile</Button>
+            <Button className='participant-profile__btn'>Profile</Button>
         </Link>
         <Link to={'/researcher-studies'}>
             <Button className='research-btn' disabled={disableButtons}>

@@ -15,11 +15,14 @@ const FileUpload = ({modalOpen, setmodalOpen}) => {
   const closeModal = () => {
     setmodalOpen(false);
   }
+
+  let token = localStorage.getItem('userLoginToken')
+
   const props = {
     name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    action: 'https://varapan.herokuapp.com//api/users/results',
     headers: {
-      authorization: 'authorization-text',
+      authorization: token,
     },
     onChange(info) {
       if (info.file.status !== 'uploading') {

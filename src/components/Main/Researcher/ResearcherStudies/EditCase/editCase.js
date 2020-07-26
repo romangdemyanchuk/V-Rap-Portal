@@ -16,11 +16,12 @@ const { TreeNode } = TreeSelect;
 
 
 const EditCase = ({ id }) => {
+  console.log(id, 'id')
   const allCaseStudies = useSelector(state => state.cases.allCaseStudies)
   let filteredCases = [];
 
   let dispatch = useDispatch()
-  console.log('allCaseStudies', allCaseStudies);
+ 
   if (allCaseStudies) {
     filteredCases = allCaseStudies?.filter(item => {
       return item._id === id
@@ -48,6 +49,7 @@ const EditCase = ({ id }) => {
   const [professions, setProfessions] = useState(filteredCases.project);
 
   useEffect(() => {
+    AllCasesInfo()(dispatch)
     setTitle(filteredCases.title);
     setDescr(filteredCases.description);
     setLocation(filteredCases.location);
@@ -59,16 +61,6 @@ const EditCase = ({ id }) => {
   }, [filteredCases.title, filteredCases.description, filteredCases.location,
   filteredCases.participant, filteredCases.headset, filteredCases.project])
 
-  const resetFieldsValue = () => {
-    setTitle('')
-    setDescr('')
-    setLocation('')
-    setAge([10, 85])
-    setAvgIncome([10, 85])
-    setParNum('')
-    setHeadsets('')
-    setProfessions('')
-  }
   const ageRangeChange = (value) => {
     setAge(value);
   }
@@ -81,15 +73,9 @@ const EditCase = ({ id }) => {
   const cascaderHeadsetsChange = (value) => {
     setHeadsets(value);
   }
-  const cascaderLocationChange = (value) => {
-    setLocation(value);
-  }
   const cascaderlistOfProfessionsChange = (value) => {
     setProfessions(value);
   }
-  const headsetsChange = value => {
-    setHeadsets(value)
-  };
   const locationChange = value => {
     setLocation(value)
   };
@@ -102,7 +88,7 @@ const EditCase = ({ id }) => {
       <Header />
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
-          <div className="personal-stats__personal-heading">Create Research Studies</div>
+          <div className="personal-stats__personal-heading">Edit Research Studies</div>
 
           <div className="personal-stats__info-img">
             <img src={userImg} alt="userImg" />
@@ -168,7 +154,7 @@ const EditCase = ({ id }) => {
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p>Average Income</p>
-                <Slider range
+                <Slider range min={0} max={10000000}
                   onChange={avgRangeChange}
                   value={avgIncome}
                 />
@@ -196,7 +182,7 @@ const EditCase = ({ id }) => {
                   onChange={cascaderHeadsetsChange}
                 >
                   {headsetsVariants.map((item) =>
-                    <TreeNode value={item.value} title={item.label} key={item.v} />
+                    <TreeNode value={item.value} title={item.label} key={item.value} />
                   )}
 
                 </TreeSelect>
@@ -212,10 +198,10 @@ const EditCase = ({ id }) => {
                   allowClear
                   multiple
                   treeDefaultExpandAll
-                  onChange={cascaderlistOfProfessionsChange}
+                  onChange={setProfessions}
                 >
                   {professionsList.map((item) =>
-                    <TreeNode value={item.value} title={item.label} />
+                    <TreeNode value={item.value} title={item.label} key={item.value}/>
                   )}
                 </TreeSelect>
               </div>
@@ -231,7 +217,7 @@ const EditCase = ({ id }) => {
               {isLoading ? <Loader /> : 'Save Changes'}
             </Button>
             <Link to={'/researcher-studies'}>
-            <Button onClick={resetFieldsValue}>Cancel</Button>
+              <Button >Cancel</Button>
             </Link>
           </div>
         </div>

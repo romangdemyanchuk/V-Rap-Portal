@@ -65,7 +65,9 @@ export const RegisterRequest = data => dispatch => {
       }
       dispatch(Loading(false))
     }).catch(e => {
-        if (e.response) {
+      debugger
+      if (e.response.status > '400') {
+        infoAction(e.response.data.message, '');
       }
       dispatch(Loading(false))
     })

@@ -11,14 +11,13 @@ import DeleteModal from '../../../../Admin/AdminPage/ListOfResearchers/Researche
 
 
 const Case = ({ study }) => {
-  let dispatch = useDispatch()
+  
   let [isloading, setLoading] = useState(false)
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   const deleteClick = (id) => {
     setDeleteModalIsOpen(true);
   }
-
 
   let caseStatusName = (status) => {
     if (status === 0) return <Tag color='gold'>Pending</Tag>

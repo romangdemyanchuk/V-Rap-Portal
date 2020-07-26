@@ -11,6 +11,7 @@ import { NewCaseInfo } from '../../../../../modules/session/cases-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../../../Loader/loader'
 import Header from '../../header';
+import { Link } from 'react-router-dom';
 
 const CreateNewCase = () => {
   const [title, setTitle] = useState('');
@@ -23,8 +24,8 @@ const CreateNewCase = () => {
   const [professions, setProfessions] = useState([]);
   let dispatch = useDispatch()
 
-  const newCaseStudyInfo = useSelector(state => state.newCaseInfo)
-  const isLoading = useSelector(state => state.isLoading)
+  const newCaseStudyInfo = useSelector(state => state.cases.newCaseInfo)
+  const isLoading = useSelector(state => state.auth.isLoading)
 
   const headsetsChange = value => {
     setHeadsets(value)
@@ -128,10 +129,7 @@ const CreateNewCase = () => {
                   name="title"
                   rules={[{ required: true, message: 'Please input title!' }]}
                 >
-                  <Input placeholder="Title"
-                    onChange={e => setTitle(e.target.value)}
-                    value={title}
-                  />
+                  <Input placeholder="Title"/>
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
@@ -140,8 +138,6 @@ const CreateNewCase = () => {
                   rules={[{ required: true, message: 'Please input description!' }]}
                 >
                   <TextArea placeholder="Type here" rows={3} className="personal-stats-area"
-                    onChange={e => setDescr(e.target.value)}
-                    value={descr}
                   />
                 </Form.Item>
                 <Form.Item
@@ -159,7 +155,6 @@ const CreateNewCase = () => {
                     allowClear
                     multiple
                     treeDefaultExpandAll
-                    onChange={locationChange}
                   >
                     {countryVariants.map((item) =>
                       <TreeNode value={item.value} title={item.label} key={item.value} />
@@ -175,10 +170,7 @@ const CreateNewCase = () => {
                   name="age"
                   rules={[{ required: true, message: 'Please input range of age' }]}
                 >
-                  <Slider range
-                    onChange={ageRangeChange}
-                    defaultValue={age}
-                  />
+                  <Slider range min={0} max={100}/>
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
@@ -187,9 +179,7 @@ const CreateNewCase = () => {
                   rules={[{ required: true, message: 'Please input range of Average Income!' }]}
                 >
                   <Slider range
-                    max={10000000}
-                    onChange={avgRangeChange}
-                    defaultValue={avgIncome}
+                    min={0} max={10000000}
                   />
                 </Form.Item>
                 <Form.Item
@@ -201,8 +191,6 @@ const CreateNewCase = () => {
                   <InputNumber min={1} max={300}
                     defaultValue={100}
                     className="input-number"
-                    onChange={parNumberChange}
-                    value={parNum}
                   />
                 </Form.Item>
                 <Form.Item
@@ -220,7 +208,6 @@ const CreateNewCase = () => {
                     allowClear
                     multiple
                     treeDefaultExpandAll
-                    onChange={headsetsChange}
                   >
                     {headsetsVariants.map((item) =>
                     <TreeNode value={item.value} title={item.label} key={item.v} />
@@ -243,7 +230,6 @@ const CreateNewCase = () => {
                     allowClear
                     multiple
                     treeDefaultExpandAll
-                    onChange={professionsChange}
                   >
                     {professionsList.map((item) =>
                       <TreeNode value={item.value} title={item.label} />
