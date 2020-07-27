@@ -6,7 +6,6 @@ import { infoAction } from '../../utils/notification'
 
 const initialState = {
   loginError: '',
-  isLoading: false,
   newCaseInfo: {},
   statusNumber: null,
   researcherStudies: [],
@@ -44,7 +43,6 @@ export default CasesReducer
 
 
 export const NewCaseInfo = data => dispatch => {
-  console.log('data1', data)
   AddCaseApi(data)
     .then(response => {
       console.log('response', response)
@@ -52,28 +50,18 @@ export const NewCaseInfo = data => dispatch => {
       if (response) {
         dispatch(addCase(response.data))
         infoAction('You successfully create new study!', '/researcher-studies')
-
       }
     }).catch(e => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, '/researcher-studies');
       }
-    }).finally(() => {
-    if (typeof window !== 'undefined') {
-      window.location = '/researcher-studies'
-    }
     })
     dispatch(Loading(false))
 }
 
 export const EditCaseInfo = data => dispatch => {
   EditCaseApi(data)
-    .finally(() => {
-      if (typeof window !== 'undefined') {
-        window.location = '/researcher-studies'
-      }
     infoAction('You successfully change your study!', '/researcher-studies')
-    })
 }
 
 export const DeleteCaseInfo = id => dispatch => {
@@ -99,18 +87,18 @@ export const AllCasesInfo = () => dispatch => {
       if (response) {
         dispatch(AllCases(response.data))
       }
-    }).catch(e => {
-      if (e.response.status === 401) {
-        localStorage.clear();
-        if (typeof window !== 'undefined') {
-          window.location = '/'
-        }
-      }
-      if (e.response && e.response.data) {
-        infoAction(e.response.data.message, '/researcher-studies');
-      }
-    }).finally(() => {
       dispatch(Loading(false))
     })
-  dispatch(Loading(true))
+    // .catch(e => {
+    //   if (e.response.status === 401) {
+    //     localStorage.clear();
+    //     if (typeof window !== 'undefined') {
+    //       window.location = '/'
+    //     }
+    //   }
+    //   if (e.response.data) {
+    //     infoAction(e.response.data.message, '/researcher-studies');
+    //   }
+    // })
+    
 }

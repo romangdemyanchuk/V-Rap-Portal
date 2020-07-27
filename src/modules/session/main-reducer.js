@@ -119,7 +119,6 @@ const allResearchersAC = (data) => ({type: ALL_RESEARCHERS, payload: data })
 
 
 export const allResearchers = () => dispatch => {
-  debugger
   getAllUsers()
     .then(response => {
       

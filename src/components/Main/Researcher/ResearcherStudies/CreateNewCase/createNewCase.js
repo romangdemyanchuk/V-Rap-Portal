@@ -71,11 +71,13 @@ const CreateNewCase = () => {
     wrapperCol: { span: 16 },
   };
 
+  let token = localStorage.getItem('userLoginToken')
+
   const props = {
     name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    action: 'https://varapan.herokuapp.com/api/users/results',
     headers: {
-      authorization: 'authorization-text',
+      authorization: token,
     },
     onChange(info) {
       if (info.file.status === 'done') {
@@ -83,8 +85,8 @@ const CreateNewCase = () => {
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }
-    },
-  };
+    }
+  }
   return (
     <div className="root-PersonalStats">
       <Header />
@@ -186,9 +188,11 @@ const CreateNewCase = () => {
                   className="personal-stats__fields-wrapper"
                   label="Required number of participants"
                   name="parNum"
+                  
                   rules={[{ required: true, message: 'Please input number of participants!' }]}
                 >
                   <InputNumber min={1} max={300}
+                    placeholder='Number of participants'
                     defaultValue={100}
                     className="input-number"
                   />
@@ -221,7 +225,7 @@ const CreateNewCase = () => {
                   name="proffessions"
                   rules={[{ required: true, message: 'Please choose profession!' }]}
                 >
-                  <Select mode="multiple" placeholder="list of professions" optionLabelProp="label">
+                  <Select mode="multiple" placeholder="List of professions" optionLabelProp="label">
                     {professionsList.map(c => 
                     <Select.Option value={c.value} label={c.label} key={c.value}>
                       <div className="demo-option-label-item">
@@ -240,8 +244,8 @@ const CreateNewCase = () => {
                   {isLoading ? <Loader /> : 'Create Research Study'}
                 </Button>
                 {/*</Link>*/}
-                <Link to={'/researcher-profile'}>
-                <Button>Close Page</Button>
+                <Link to={'/researcher-studies'}>
+                <Button>Close</Button>
                 </Link>
               </div>
             </Form.Item>

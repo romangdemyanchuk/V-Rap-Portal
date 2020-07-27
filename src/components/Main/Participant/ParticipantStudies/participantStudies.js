@@ -9,10 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { AllCasesInfo } from "../../../../modules/session/cases-reducer";
 import Header from "./../header";
 import { Redirect } from "react-router";
+import Loader from '../../../Loader/loader'
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
-  const isLoading = useSelector(state => state.isLoading)
+  const isLoading = useSelector(state => state.auth.isLoading)
+  console.log(isLoading, 'isLoading')
   const allCaseStudies = useSelector(state => state.cases.allCaseStudies)
   let caseStatusName = (status) => {
     if (status === 0) return <Tag color='green'>In progress</Tag>
@@ -37,7 +39,7 @@ const ParticipantStudies = () => {
         <Header />
         <div className="participant-studies__personal-heading">Research Studies</div>
         <div className="ParticipantStudies-Cases">
-          {isLoading ? <Skeleton active /> : allCaseStudies.length === 0 ?
+          {allCaseStudies.length === 0 ?
             <h1 className="emptyCaseStudies"> You have not selected for any Research Studies </h1> :
             allCaseStudies.map(d =>
               <div className="participant-studies__wrapper" key={d._id}>

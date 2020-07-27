@@ -209,7 +209,7 @@ const EditCase = ({ id }) => {
               {isLoading ? <Loader /> : 'Save Changes'}
             </Button>
             <Link to={'/researcher-studies'}>
-              <Button >Cancel</Button>
+              <Button >Close</Button>
             </Link>
           </div>
         </div>
