@@ -33,7 +33,7 @@ const ParticipantProfile = () => {
     {isLoading ? <Loader /> :
       <div className="root-PartProfile">
         <Header profile={'/participant-profile'} studies={'/participant-studies'}
-                disableButtons={!!(!name || !age || !location || !income || !headset)}/>
+                disableButtons={(!name || !age || !location || !income || !headset)}/>
         <div className="participant-profile__personal-info-block">
           <div className="participant-profile__wrapper">
             <div className="participant-profile__personal-heading">Profile Information</div>

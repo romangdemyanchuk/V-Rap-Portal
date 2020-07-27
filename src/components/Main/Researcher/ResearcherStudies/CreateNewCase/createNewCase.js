@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react'
 import userImg from "../../../../../images/user.svg";
-import { Input, Button, Slider, InputNumber,  Upload, Form, TreeSelect, message } from 'antd'
+import { Input, Button, Slider, InputNumber,  Upload, Form, TreeSelect, message, Select } from 'antd'
 const { TreeNode } = TreeSelect;
 import WithAuthRedirect from '../../../../../hoc/hoc';
 const { TextArea } = Input;
@@ -221,23 +221,16 @@ const CreateNewCase = () => {
                   name="proffessions"
                   rules={[{ required: true, message: 'Please choose profession!' }]}
                 >
-                  <TreeSelect
-                    showSearch
-                    style={{ width: '100%' }}
-                    value={professions}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    placeholder="Please select"
-                    allowClear
-                    multiple
-                    treeDefaultExpandAll
-                  >
-                    {professionsList.map((item) =>
-                      <TreeNode value={item.value} title={item.label} />
+                  <Select mode="multiple" placeholder="list of professions" optionLabelProp="label">
+                    {professionsList.map(c => 
+                    <Select.Option value={c.value} label={c.label} key={c.value}>
+                      <div className="demo-option-label-item">
+                        {c.value}
+                      </div>
+                    </Select.Option>
                     )}
-
-                  </TreeSelect>
+                  </Select>
                 </Form.Item>
-
               </div>
             </div>
             <Form.Item>

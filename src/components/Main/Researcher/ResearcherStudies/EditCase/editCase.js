@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import userImg from '../../../../../images/user.svg'
-import { Button, Input, InputNumber, Slider, TreeSelect, Upload } from 'antd'
+import { Button, Input, InputNumber, Slider, TreeSelect, Upload, Select } from 'antd'
 import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
 import {
   AllCasesInfo,
@@ -38,7 +38,6 @@ const EditCase = ({ id }) => {
   filteredCases = filteredCases.length ? filteredCases[0] : []
   const isLoading = useSelector(state => state.isLoading)
 
-
   const [title, setTitle] = useState(filteredCases.title);
   const [descr, setDescr] = useState(filteredCases.description);
   const [location, setLocation] = useState(filteredCases.location);
@@ -73,7 +72,7 @@ const EditCase = ({ id }) => {
   const cascaderHeadsetsChange = (value) => {
     setHeadsets(value);
   }
-  const cascaderlistOfProfessionsChange = (value) => {
+  const listOfProfessionsChange = (value) => {
     setProfessions(value);
   }
   const locationChange = value => {
@@ -162,6 +161,7 @@ const EditCase = ({ id }) => {
               <div className="personal-stats__fields-wrapper">
                 <p>Required number of participants</p>
                 <InputNumber min={1} max={300}
+                placeholder='Number of participants'
                   className="input-number"
                   onChange={parNumberChange}
                   value={parNum}
@@ -170,40 +170,32 @@ const EditCase = ({ id }) => {
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">Supported Headsets</p>
-                <TreeSelect
-                  showSearch
-                  style={{ width: '100%' }}
-                  value={headsets}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  placeholder={filteredCases.headset ? filteredCases.headset : "--Headsets--"}
-                  allowClear
-                  multiple
-                  treeDefaultExpandAll
-                  onChange={cascaderHeadsetsChange}
-                >
-                  {headsetsVariants.map((item) =>
-                    <TreeNode value={item.value} title={item.label} key={item.value} />
-                  )}
-
-                </TreeSelect>
+            
+                  
+                  <Select mode="multiple" placeholder="Headsets" optionLabelProp="label" style={{ width: '100%' }}
+                    onChange={cascaderHeadsetsChange} value={headsets}>
+                    {professionsList.map(c => 
+                    <Select.Option value={c.value} label={c.label} key={c.value}>
+                      <div className="demo-option-label-item">
+                        {c.value}
+                      </div>
+                    </Select.Option>
+                    )}
+                  </Select>
+                
               </div>
               <div className="personal-stats__fields-wrapper">
                 <p className="before-dropdown">List of Professions</p>
-                <TreeSelect
-                  showSearch
-                  style={{ width: '100%' }}
-                  value={professions}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  placeholder={filteredCases.project ? filteredCases.project : "--Professions--"}
-                  allowClear
-                  multiple
-                  treeDefaultExpandAll
-                  onChange={setProfessions}
-                >
-                  {professionsList.map((item) =>
-                    <TreeNode value={item.value} title={item.label} key={item.value}/>
-                  )}
-                </TreeSelect>
+                <Select mode="multiple" placeholder="List of professions" optionLabelProp="label" style={{ width: '100%' }}
+                onChange={listOfProfessionsChange}>
+                    {professionsList.map(c => 
+                    <Select.Option value={c.value} label={c.label} key={c.value}>
+                      <div className="demo-option-label-item">
+                        {c.value}
+                      </div>
+                    </Select.Option>
+                    )}
+                  </Select>
               </div>
             </div>
           </div>

@@ -54,7 +54,7 @@ const ParticipantStudies = () => {
                     </div>
                     <div className="participant-studies__require">
                       Required Headset
-              </div>
+                    </div>
                     <div className="participant-studies__device">
                       {d.headset}
                     </div>
