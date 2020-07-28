@@ -1,3 +1,4 @@
-import AdminLoginForm from './adminLoginPage'
+/*eslint-disable*/
+import AdminLoginForm from "./adminLoginPage";
 
-export default AdminLoginForm
+export default AdminLoginForm;

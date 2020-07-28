@@ -1,3 +1,4 @@
-import DeleteModal from './deleteModal'
+/*eslint-disable*/
+import DeleteModal from "./deleteModal";
 
-export default DeleteModal
+export default DeleteModal;

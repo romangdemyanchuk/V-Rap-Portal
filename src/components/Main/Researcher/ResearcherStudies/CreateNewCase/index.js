@@ -1,3 +1,4 @@
-import PersonalStats from './createNewCase'
+/*eslint-disable*/
+import PersonalStats from "./createNewCase";
 
-export default PersonalStats
+export default PersonalStats;

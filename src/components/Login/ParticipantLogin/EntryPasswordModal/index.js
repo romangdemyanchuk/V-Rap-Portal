@@ -1,4 +1,4 @@
+/*eslint-disable*/
+import ForgotPasswordModal from "./entryPasswordModal";
 
-import ForgotPasswordModal from './entryPasswordModal'
-
-export default ForgotPasswordModal
+export default ForgotPasswordModal;

@@ -1,3 +1,4 @@
-import ListOfResearchers from './listOfResearchers'
+/*eslint-disable*/
+import ListOfResearchers from "./listOfResearchers";
 
-export default ListOfResearchers
+export default ListOfResearchers;

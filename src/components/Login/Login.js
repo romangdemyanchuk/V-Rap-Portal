@@ -1,19 +1,20 @@
 /* eslint-disable */
-import React, { useState } from 'react';
-import ParticipantLoginForm from './ParticipantLogin'
-import ParticipantRegisterForm from './ParticipantRegister'
-
+import React, { useState } from "react";
+import ParticipantLoginForm from "./ParticipantLogin";
+import ParticipantRegisterForm from "./ParticipantRegister";
 
 const MainLogin = () => {
-  let [state, setState] = useState(false)
+  let [state, setState] = useState(false);
 
-  return <>
-    {state
-      ?
-      <ParticipantRegisterForm setState={setState} />
-      :
-      <ParticipantLoginForm setState={setState}/>}
-  </>
-}
+  return (
+    <>
+      {state ? (
+        <ParticipantRegisterForm setState={setState} />
+      ) : (
+        <ParticipantLoginForm setState={setState} />
+      )}
+    </>
+  );
+};
 
-export default MainLogin
+export default MainLogin;

@@ -1,3 +1,4 @@
-import EntryPasswordModal from './researcherLoginForm'
+/*eslint-disable*/
+import EntryPasswordModal from "./researcherLoginForm";
 
-export default EntryPasswordModal
+export default EntryPasswordModal;

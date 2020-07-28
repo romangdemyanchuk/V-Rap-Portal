@@ -1,3 +1,4 @@
-import ResearcherProfile from './researcherProfile'
+/*eslint-disable*/
+import ResearcherProfile from "./researcherProfile";
 
-export default ResearcherProfile
+export default ResearcherProfile;

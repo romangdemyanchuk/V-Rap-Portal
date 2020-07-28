@@ -1,3 +1,4 @@
-import ResearcherChanges from './ResearchersEdit'
+/*eslint-disable*/
+import ResearcherChanges from "./ResearchersEdit";
 
-export default ResearcherChanges
+export default ResearcherChanges;

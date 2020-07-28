@@ -1,3 +1,4 @@
-import ParticipantProfile from './participantProfile'
+/*eslint-disable*/
+import ParticipantProfile from "./participantProfile";
 
-export default ParticipantProfile
+export default ParticipantProfile;

@@ -1,3 +1,4 @@
-import ResearcherCreate from './researcherCreate'
+/*eslint-disable*/
+import ResearcherCreate from "./researcherCreate";
 
-export default ResearcherCreate
+export default ResearcherCreate;

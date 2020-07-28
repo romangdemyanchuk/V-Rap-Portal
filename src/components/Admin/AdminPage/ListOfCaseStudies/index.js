@@ -1,3 +1,4 @@
-import ListOfCaseStudies from './listOfCaseStudies'
+/*eslint-disable*/
+import ListOfCaseStudies from "./listOfCaseStudies";
 
-export default ListOfCaseStudies
+export default ListOfCaseStudies;

@@ -1,19 +1,19 @@
 /* eslint-disable */
 import React from "react";
 import "./deleteModal.css";
-import {Button, Modal} from "antd";
-import { DeleteCaseInfo } from '../../../../../../modules/session/cases-reducer'
-import { useDispatch } from 'react-redux'
+import { Button, Modal } from "antd";
+import { DeleteCaseInfo } from "../../../../../../modules/session/cases-reducer";
+import { useDispatch } from "react-redux";
 
 const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen, id }) => {
-  let dispatch = useDispatch()
-  const  closeModal = () => {
+  let dispatch = useDispatch();
+  const closeModal = () => {
     setDeleteModalIsOpen(false);
-  }
+  };
   const deleteCase = () => {
     setDeleteModalIsOpen(false);
-    DeleteCaseInfo(id)(dispatch)
-  }
+    DeleteCaseInfo(id)(dispatch);
+  };
   return (
     <div className="delete-block">
       <Modal
@@ -23,12 +23,14 @@ const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen, id }) => {
         onCancel={closeModal}
         className="deleteModal"
       >
-      <div className="delete__btns">
-        <Button onClick={closeModal}>Cancel</Button>
-        <Button type="primary" onClick={deleteCase}>Ok</Button>
-      </div>
+        <div className="delete__btns">
+          <Button onClick={closeModal}>Cancel</Button>
+          <Button type="primary" onClick={deleteCase}>
+            Ok
+          </Button>
+        </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 export default DeleteModal;

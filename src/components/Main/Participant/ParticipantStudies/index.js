@@ -1,3 +1,4 @@
-import ParticipantStudies from './participantStudies'
+/*eslint-disable*/
+import ParticipantStudies from "./participantStudies";
 
-export default ParticipantStudies
+export default ParticipantStudies;

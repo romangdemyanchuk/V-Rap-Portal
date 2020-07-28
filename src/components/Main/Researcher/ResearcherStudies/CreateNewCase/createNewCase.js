@@ -1,125 +1,121 @@
 /* eslint-disable */
-import React, { useState } from 'react'
-import userImg from "../../../../../images/user.svg";
-import { Input, Button, Slider, InputNumber,  Upload, Form, TreeSelect, message, Select } from 'antd'
-const { TreeNode } = TreeSelect;
-import WithAuthRedirect from '../../../../../hoc/hoc';
+import React, { useState } from "react";
+import {
+  Input,
+  Button,
+  Slider,
+  InputNumber,
+  Upload,
+  Form,
+  TreeSelect,
+  message,
+  Select,
+} from "antd";
+import WithAuthRedirect from "../../../../../hoc/hoc";
 const { TextArea } = Input;
 import "./createNewCase.scss";
-import { countryVariants, headsetsVariants, professionsList } from '../../../../../modules/session/data'
-import { NewCaseInfo } from '../../../../../modules/session/cases-reducer'
-import { useDispatch, useSelector } from 'react-redux'
-import Loader from '../../../../Loader/loader'
-import Header from '../../header';
-import { Link } from 'react-router-dom';
+import {
+  countryVariants,
+  headsetsVariants,
+  professionsList,
+} from "../../../../../modules/session/data";
+import { NewCaseInfo } from "../../../../../modules/session/cases-reducer";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../../../Loader/loader";
+import Header from "../../header";
+import { Link } from "react-router-dom";
 
 const CreateNewCase = () => {
-  const [title, setTitle] = useState('');
-  const [descr, setDescr] = useState('');
-  const [location, setLocation] = useState('');
-  const [age, setAge] = useState([0, 0]);
-  const [avgIncome, setAvgIncome] = useState([0, 0]);
-  const [parNum, setParNum] = useState(100);
-  const [headsets, setHeadsets] = useState([]);
-  const [professions, setProfessions] = useState([]);
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
+  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [isStudiesBtnActive] = useState(true);
+  const isLoading = useSelector((state) => state.auth.isLoading);
 
-  const newCaseStudyInfo = useSelector(state => state.cases.newCaseInfo)
-  const isLoading = useSelector(state => state.auth.isLoading)
-
-  const headsetsChange = value => {
-    setHeadsets(value)
-  };
-  const locationChange = value => {
-    setLocation(value)
-  };
-  const professionsChange = value => {
-    setProfessions(value)
-  };
-  const ageRangeChange = (value) => {
-    setAge(value);
-  }
-  const avgRangeChange = (value) => {
-    setAvgIncome(value)
-  }
-  const parNumberChange = (value) => {
-    setParNum(value);
-  }
-  // const headsetsChange = (value) => {
-  //   setHeadsets(value);
-  // }
-  const cascaderLocationChange = (value) => {
-    setLocation(value);
-  }
-  const cascaderlistOfProfessionsChange = (value) => {
-    setListOfProfessions(value);
-  }
-
-  const uploadProps = {
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
-  };
   const successFillForm = (props) => {
-    const {title, avgIncome, descr, location, parNum, age, headsets, professions} = props
-    NewCaseInfo({
-      title, description: descr, location,
-      age, income: avgIncome, participant: parNum, headset: headsets, professions
-    })(dispatch);
-  }
+    const {
+      title,
+      income,
+      description,
+      location,
+      participant,
+      age,
+      headset,
+      profession,
+      avatarUrl
+    } = props;
+    NewCaseInfo(
+      {
+        title,
+        description,
+        location,
+        age,
+        income,
+        participant,
+        headset,
+        profession,
+        avatarUrl
+      },
+    )(dispatch);
+  };
 
   const layout = {
-    labelCol: { span: 16 },
+    labelCol: { span: 20 },
     wrapperCol: { span: 16 },
   };
 
-  let token = localStorage.getItem('userLoginToken')
+  let token = localStorage.getItem("userLoginToken");
 
   const props = {
-    name: 'file',
-    action: 'https://varapan.herokuapp.com/api/users/results',
+    name: "file",
+    action: "https://varapan.herokuapp.com/api/case/add",
     headers: {
       authorization: token,
     },
     onChange(info) {
-      if (info.file.status === 'done') {
+      console.log(info)
+      if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
+      } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
-    }
+    },
+  };
+  console.log(avatarUrl)
+  const fileSelected = event => {
+    setAvatarUrl(event.target.files[0])
   }
   return (
     <div className="root-PersonalStats">
-      <Header />
+      <Header isStudiesBtnActive={isStudiesBtnActive}/>
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
-          <div className="personal-stats__personal-heading">Create Research Studies</div>
-
+          <div className="personal-stats__personal-heading">
+            Create Research Studies
+          </div>
           <Form
             {...layout}
             name="basic"
             initialValues={{ remember: true }}
             onFinish={successFillForm}
           >
-            <Form.Item
-            >
+            <Form.Item name="avatarUrl">
               <div className="personal-stats__info-img">
-                <img src={userImg} alt="userImg" />
-                <div className="personal-stats__upload-btns">
-                  <Upload {...props}>
-                    <Button className="file-upload-btn" type="primary">
-                      Upload Image
-                    </Button>
-                  </Upload>
-                </div>
+                {/*<img src={userImg} alt="userImg" />*/}
+                {/*<div className="personal-stats__upload-btns">*/}
+                {/*  <Upload {...props}*/}
+                {/*  onChange={() => {}} onCustomRequest={() => {}}>*/}
+                {/*    <Button className="file-upload-btn" type="primary">*/}
+                {/*      Upload Image*/}
+                {/*    </Button>*/}
+                {/*  </Upload>*/}
+                {/*</div>*/}
+                <input type="file" onChange={fileSelected}/>
               </div>
             </Form.Item>
-            <Form.Item
-            >
+            <Form.Item>
               <div className="personal-stats__info-img">
                 <Upload {...props}>
-                  <Button className="file-upload-btn">
-                    Upload VR File
-                  </Button>
+                  <Button className="file-upload-btn">Upload VR File</Button>
                 </Upload>
               </div>
             </Form.Item>
@@ -129,40 +125,47 @@ const CreateNewCase = () => {
                   className="personal-stats__fields-wrapper"
                   label="Title"
                   name="title"
-                  rules={[{ required: true, message: 'Please input title!' }]}
+                  rules={[{ required: true, message: "Please input title!" }]}
                 >
-                  <Input placeholder="Title"/>
+                  <Input placeholder="Title" />
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
                   label="Description"
-                  name="descr"
-                  rules={[{ required: true, message: 'Please input description!' }]}
+                  name="description"
+                  rules={[
+                    { required: true, message: "Please input description!" },
+                  ]}
                 >
-                  <TextArea placeholder="Type here" rows={3} className="personal-stats-area"
+                  <TextArea
+                    placeholder="Type here"
+                    rows={3}
+                    className="personal-stats-area"
                   />
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
                   label="Location"
                   name="location"
-                  rules={[{ required: true, message: 'Please choose location!' }]}
+                  rules={[
+                    { required: true, message: "Please choose Location!" },
+                  ]}
                 >
-                  <TreeSelect
-                    showSearch
-                    style={{ width: '100%' }}
-                    value={location}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    placeholder="Please select"
-                    allowClear
-                    multiple
-                    treeDefaultExpandAll
+                  <Select
+                    mode="multiple"
+                    placeholder="List of countries"
+                    optionLabelProp="label"
                   >
-                    {countryVariants.map((item) =>
-                      <TreeNode value={item.value} title={item.label} key={item.value} />
-                    )}
-
-                  </TreeSelect>
+                    {countryVariants.map((c) => (
+                      <Select.Option
+                        value={c.value}
+                        label={c.label}
+                        key={c.value}
+                      >
+                        <div className="demo-option-label-item">{c.value}</div>
+                      </Select.Option>
+                    ))}
+                  </Select>
                 </Form.Item>
               </div>
               <div className="personal-stats__right-block">
@@ -170,29 +173,40 @@ const CreateNewCase = () => {
                   className="personal-stats__fields-wrapper"
                   label="Age"
                   name="age"
-                  rules={[{ required: true, message: 'Please input range of age' }]}
+                  rules={[
+                    { required: true, message: "Please input range of age" },
+                  ]}
                 >
-                  <Slider range min={0} max={100}/>
+                  <Slider range min={0} max={100} />
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
                   label="Average Income(USD)"
-                  name="avgIncome"
-                  rules={[{ required: true, message: 'Please input range of Average Income!' }]}
+                  name="income"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input range of Average Income!",
+                    },
+                  ]}
                 >
-                  <Slider range
-                    min={0} max={10000000}
-                  />
+                  <Slider range min={0} max={10000000} />
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
                   label="Required number of participants"
-                  name="parNum"
-                  
-                  rules={[{ required: true, message: 'Please input number of participants!' }]}
+                  name="participant"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input number of participants!",
+                    },
+                  ]}
                 >
-                  <InputNumber min={1} max={300}
-                    placeholder='Number of participants'
+                  <InputNumber
+                    min={1}
+                    max={300}
+                    placeholder="Number of participants"
                     defaultValue={100}
                     className="input-number"
                   />
@@ -200,52 +214,66 @@ const CreateNewCase = () => {
                 <Form.Item
                   className="personal-stats__fields-wrapper"
                   label="Supported headsets"
-                  name="headsets"
-                  rules={[{ required: true, message: 'Please choose headset!' }]}
+                  name="headset"
+                  rules={[
+                    { required: true, message: "Please choose headset!" },
+                  ]}
                 >
-                  <TreeSelect
-                    showSearch
-                    style={{ width: '100%' }}
-                    value={headsets}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    placeholder="Please select"
-                    allowClear
-                    multiple
-                    treeDefaultExpandAll
+                  <Select
+                    mode="multiple"
+                    placeholder="List of headsets"
+                    optionLabelProp="label"
                   >
-                    {headsetsVariants.map((item) =>
-                    <TreeNode value={item.value} title={item.label} key={item.v} />
-                    )}
-
-                  </TreeSelect>
+                    {headsetsVariants.map((c) => (
+                      <Select.Option
+                        value={c.value}
+                        label={c.label}
+                        key={c.value}
+                      >
+                        <div className="demo-option-label-item">{c.value}</div>
+                      </Select.Option>
+                    ))}
+                  </Select>
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
                   label="Proffessions"
-                  name="proffessions"
-                  rules={[{ required: true, message: 'Please choose profession!' }]}
+                  name="profession"
+                  rules={[
+                    { required: true, message: "Please choose proffessions!" },
+                  ]}
                 >
-                  <Select mode="multiple" placeholder="List of professions" optionLabelProp="label">
-                    {professionsList.map(c => 
-                    <Select.Option value={c.value} label={c.label} key={c.value}>
-                      <div className="demo-option-label-item">
-                        {c.value}
-                      </div>
-                    </Select.Option>
-                    )}
+                  <Select
+                    mode="multiple"
+                    placeholder="List of proffessions"
+                    optionLabelProp="label"
+                  >
+                    {professionsList.map((c) => (
+                      <Select.Option
+                        value={c.value}
+                        label={c.label}
+                        key={c.value}
+                      >
+                        <div className="demo-option-label-item">{c.value}</div>
+                      </Select.Option>
+                    ))}
                   </Select>
                 </Form.Item>
               </div>
             </div>
             <Form.Item>
-              <div className="personal-stats__footer-btns">
+              <div className="personal-stats__footer-btns create-case-btns">
                 {/*<Link to={'/researcher-studies'}>*/}
-                <Button type="primary" htmlType="submit" className="personal-stats__create-research-btn">
-                  {isLoading ? <Loader /> : 'Create Research Study'}
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="personal-stats__create-research-btn"
+                >
+                  {isLoading ? <Loader /> : "Create Research Study"}
                 </Button>
                 {/*</Link>*/}
-                <Link to={'/researcher-studies'}>
-                <Button>Close</Button>
+                <Link to={"/researcher-studies"}>
+                  <Button>Close</Button>
                 </Link>
               </div>
             </Form.Item>
@@ -256,6 +284,6 @@ const CreateNewCase = () => {
   );
 };
 
-const AuthRedirectComponent = WithAuthRedirect(CreateNewCase)
+const AuthRedirectComponent = WithAuthRedirect(CreateNewCase);
 
 export default AuthRedirectComponent;

@@ -1,3 +1,4 @@
-import participantLoginForm from './participantLoginForm'
+/*eslint-disable*/
+import participantLoginForm from "./participantLoginForm";
 
-export default participantLoginForm
+export default participantLoginForm;

@@ -1,3 +1,4 @@
-import ResearcherStudies from './researcherStudies'
+/*eslint-disable*/
+import ResearcherStudies from "./researcherStudies";
 
-export default ResearcherStudies
+export default ResearcherStudies;

@@ -1,3 +1,4 @@
-import SuccessUploadModal from './successUploadModal'
+/*eslint-disable*/
+import SuccessUploadModal from "./successUploadModal";
 
-export default SuccessUploadModal
+export default SuccessUploadModal;

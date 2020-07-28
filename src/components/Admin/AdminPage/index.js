@@ -1,3 +1,4 @@
-import AdminPage from './adminPage'
+/*eslint-disable*/
+import AdminPage from "./adminPage";
 
-export default AdminPage
+export default AdminPage;

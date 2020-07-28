@@ -1,3 +1,4 @@
-import FileUpload from './fileUpload'
+/*eslint-disable*/
+import FileUpload from "./fileUpload";
 
-export default FileUpload
+export default FileUpload;

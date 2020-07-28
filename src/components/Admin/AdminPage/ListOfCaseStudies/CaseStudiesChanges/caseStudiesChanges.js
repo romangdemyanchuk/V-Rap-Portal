@@ -1,20 +1,20 @@
 /* eslint-disable */
-import React, {useState} from "react";
-import { message, Button, Modal, Input } from 'antd'
+import React, { useState } from "react";
+import { message, Button, Modal, Input } from "antd";
 import "antd/dist/antd.css";
-import DeleteModal from '../../ListOfResearchers/ResearcherChanges/DeleteModal'
+import DeleteModal from "../../ListOfResearchers/ResearcherChanges/DeleteModal";
 import "./caseStudiesChanges.css";
 
-const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
+const CaseStudiesChanges = ({ modalOpen, setmodalOpen }) => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   const deleteClick = () => {
     setmodalOpen(false);
-    setDeleteModalIsOpen(true)
-  }
-  const  closeModal = () => {
+    setDeleteModalIsOpen(true);
+  };
+  const closeModal = () => {
     setmodalOpen(false);
-  }
+  };
   const props = {
     name: "file",
     action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
@@ -33,46 +33,53 @@ const CaseStudiesChanges = ({modalOpen, setmodalOpen}) => {
     },
   };
   return (
-      <div>
-        <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen}/>
-        <Modal
-          title="Admins Changes"
-          visible={modalOpen}
-          onOk={closeModal}
-          onCancel={closeModal}
-        >
-          <div className="case-studies-changes">
-            <div className="case-studies__fields-wrapper">
-              <p>Title</p>
-              <Input placeholder="Type here.." />
-            </div>
-            <div className="case-studies__fields-wrapper">
-              <p>Location</p>
-              <Input placeholder="Type here.." />
-            </div>
-            <div className="case-studies__fields-wrapper">
-              <p>Age</p>
-              <Input placeholder="Type here.." />
-            </div>
-            <div className="case-studies__fields-wrapper">
-              <p>Average Income</p>
-              <Input placeholder="Type here.." />
-            </div>
-            <div className="case-studies__fields-wrapper">
-              <p>Status</p>
-              <Input placeholder="Type here.." />
-            </div>
-            <div className="case-studies__changes-btns admin-modals-btns">
-              <Button className="save-btn" type="primary">Save</Button>
-              <Button type="danger" className="case-studies__cancel-btn"
-                      onClick={deleteClick}
-              >
-                Delete
-              </Button>
-            </div>
+    <div>
+      <DeleteModal
+        deleteModalIsOpen={deleteModalIsOpen}
+        setDeleteModalIsOpen={setDeleteModalIsOpen}
+      />
+      <Modal
+        title="Admins Changes"
+        visible={modalOpen}
+        onOk={closeModal}
+        onCancel={closeModal}
+      >
+        <div className="case-studies-changes">
+          <div className="case-studies__fields-wrapper">
+            <p>Title</p>
+            <Input placeholder="Type here.." />
           </div>
-        </Modal>
-      </div>
+          <div className="case-studies__fields-wrapper">
+            <p>Location</p>
+            <Input placeholder="Type here.." />
+          </div>
+          <div className="case-studies__fields-wrapper">
+            <p>Age</p>
+            <Input placeholder="Type here.." />
+          </div>
+          <div className="case-studies__fields-wrapper">
+            <p>Average Income</p>
+            <Input placeholder="Type here.." />
+          </div>
+          <div className="case-studies__fields-wrapper">
+            <p>Status</p>
+            <Input placeholder="Type here.." />
+          </div>
+          <div className="case-studies__changes-btns admin-modals-btns">
+            <Button className="save-btn" type="primary">
+              Save
+            </Button>
+            <Button
+              type="danger"
+              className="case-studies__cancel-btn"
+              onClick={deleteClick}
+            >
+              Delete
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
   );
 };
 export default CaseStudiesChanges;
