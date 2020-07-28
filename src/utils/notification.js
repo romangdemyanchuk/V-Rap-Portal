@@ -13,7 +13,7 @@ export const infoAction = (error_info, redirect_to) => {
   };
 
   openNotification();
-  // if (typeof window !== 'undefined' && redirect_to !== '') {
-  //   window.location = `${redirect_to}`
-  // }
+  if (typeof window !== 'undefined' && redirect_to !== '') {
+    window.location = `${redirect_to}`
+  }
 };
