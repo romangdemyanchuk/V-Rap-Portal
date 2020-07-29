@@ -106,16 +106,15 @@ const CreateNewCase = () => {
           >
             <Form.Item name="avatarUrl">
               <div className="personal-stats__info-img">
-                {/*<img src={userImg} alt="userImg" />*/}
-                {/*<div className="personal-stats__upload-btns">*/}
-                {/*  <Upload {...props}*/}
-                {/*  onChange={() => {}} onCustomRequest={() => {}}>*/}
-                {/*    <Button className="file-upload-btn" type="primary">*/}
-                {/*      Upload Image*/}
-                {/*    </Button>*/}
-                {/*  </Upload>*/}
-                {/*</div>*/}
-                <input type="file" onChange={fileSelected}/>
+                <div className="personal-stats__upload-btns">
+                  <Upload {...props}
+                  onChange={() => {}} onCustomRequest={() => {}}>
+                    <Button className="file-upload-btn" type="primary">
+                      Upload Image
+                    </Button>
+                  </Upload>
+                </div>
+                 <input type="file" onChange={fileSelected}/> 
               </div>
             </Form.Item>
             <Form.Item>
