@@ -18,8 +18,9 @@ import Header from "./../header";
 
 const ParticipantProfile = () => {
   const partData = useSelector((state) => state.main.partInfo);
+  console.log(partData)
   const [isProfileBtnActive] = useState(true);
-  let { name, age, location, income, headset } = partData;
+  let { name, age, location, income, headset, profession } = partData;
 
   const isLoading = useSelector((state) => state.auth.isLoading);
 
@@ -46,7 +47,7 @@ const ParticipantProfile = () => {
           <Header
             profile={"/participant-profile"}
             studies={"/participant-studies"}
-            disableButtons={!name || !age || !location || !income || !headset}
+            disableButtons={!name || !age || !location || !income || !headset || !profession}
             isProfileBtnActive={isProfileBtnActive}
           />
           <div className="participant-profile__personal-info-block">
@@ -64,6 +65,7 @@ const ParticipantProfile = () => {
                     location: [location],
                     income: income,
                     headset: [headset],
+                    profession: [profession]
                   }}
                   onFinish={formIsValid}
                 >
@@ -148,14 +150,13 @@ const ParticipantProfile = () => {
                     label="Profession"
                     name="profession"
                     rules={[
-                      { required: true, message: "Please choose location!" },
+                      { required: true, message: "Please choose profession!" },
                     ]}
                   >
                     <Select
-                      placeholder="Please select Profession"
-                      allowClear
-                      multiple
-                      treeDefaultExpandAll
+                      mode="multiple"
+                      placeholder="select profession"
+                      optionLabelProp="label"
                     >
                       {professionsList.map((p) => (
                         <Select.Option value={p.value} title={p.label}>

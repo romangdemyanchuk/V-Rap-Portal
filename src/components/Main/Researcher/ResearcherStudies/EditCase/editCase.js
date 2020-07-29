@@ -93,7 +93,7 @@ const EditCase = ({ id }) => {
                   id: id,
                   title: filteredCases.title,
                   description: filteredCases.description,
-                  location: filteredCases.description,
+                  location: filteredCases.location,
                   age: filteredCases.age,
                   income: filteredCases.income,
                   participant: filteredCases.participant,

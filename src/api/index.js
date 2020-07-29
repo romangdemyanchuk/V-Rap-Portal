@@ -37,17 +37,18 @@ export const UserInfoApi = (token) => {
 };
 
 export const PartInfoApi = () => {
-  return instanceWithToken().post(`api/users/user`, {});
+  return instanceWithToken(token).post(`api/users/user`, {});
 };
 
 export const AddCaseApi = (data) => {
-  const formData = new FormData();
-  formData.append("avatarUrl", data);
-  return instanceWithToken().post(`api/case/add`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  }
+  // const formData = new FormData();
+  // formData.append("avatarUrl", data);
+  return instanceWithToken().post(`api/case/add`, data
+  //   formData, {
+  //   headers: {
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  // }
   );
 };
 
@@ -96,6 +97,7 @@ export const getAllUsers = (token) => {
 };
 
 export const deleteResearcher = (id) => {
+  console.log(id)
   return instanceWithToken().delete(`/api/users/delete`, {
     headers: { token },
     data: { id: id },

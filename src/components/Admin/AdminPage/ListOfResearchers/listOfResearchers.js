@@ -1,13 +1,12 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import "./listOfResearchers.css";
-import { Button} from "antd";
+import { Button, Table } from 'antd'
 import { useSelector, useDispatch } from "react-redux";
-import ResearcherChanges from "./ResearcherChanges";
 import ResearcherCreate from "./ResearcherCreate";
 import { researcherListColumns as list } from "../../../../modules/session/data";
 import { allResearchers } from "../../../../modules/session/main-reducer";
-import { deleteResearcher } from "../../../../api";
+import DeleteModal from './ResearcherChanges/DeleteModal'
 
 const ListOfResearchers = () => {
   const [modalOfCreateOpen, setmodalOfCreateOpen] = useState(false);
@@ -24,10 +23,19 @@ const ListOfResearchers = () => {
   useEffect(() => {
     allResearchers()(dispatch);
   }, []);
-
+  // const data = allResearchersData.map((r) => (
+  //     <div key={r._id} className="allResearchers">
+  //       <div>{r.name}</div>
+  //       <div>{r.school}</div>
+  //       <div>{r.area}</div>
+  //       <div className="button-action">
+  //         <button onClick={() => deleteResearcher(r._id)}>Delete</button>
+  //       </div>
+  //     </div>
+  //   ))
   return (
     <div className="researchers-list">
-      <ResearcherChanges modalOpen={modalsOpen} setmodalOpen={setmodalOpen} />
+      <DeleteModal modalOpen={modalsOpen} setmodalOpen={setmodalOpen} />
       <ResearcherCreate
         modalOpen={modalOfCreateOpen}
         setmodalOpen={setmodalOfCreateOpen}
@@ -42,22 +50,14 @@ const ListOfResearchers = () => {
           Create Researcher
         </Button>
       </div>
-      <div className="title-allResearchers">
-        <div>Name</div>
-        <div>School/Institution Name</div>
-        <div>Area of Research</div>
-        <div>Actions</div>
-      </div>
-      {allResearchersData.map((r) => (
-        <div key={r._id} className="allResearchers">
-          <div>{r.name}</div>
-          <div>{r.school}</div>
-          <div>{r.area}</div>
-          <div className="button-action">
-            <button onClick={() => deleteResearcher(r._id)}>Delete</button>
-          </div>
-        </div>
-      ))}
+      {/*<div className="title-allResearchers">*/}
+      {/*  <div>Name</div>*/}
+      {/*  <div>School/Institution Name</div>*/}
+      {/*  <div>Area of Research</div>*/}
+      {/*  <div>Actions</div>*/}
+      {/*</div>*/}
+
+      <Table dataSource={allResearchersData} columns={researcherListColumns} />;
     </div>
   );
 };

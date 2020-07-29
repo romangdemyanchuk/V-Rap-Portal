@@ -7,7 +7,6 @@ import {
   InputNumber,
   Upload,
   Form,
-  TreeSelect,
   message,
   Select,
 } from "antd";
@@ -41,7 +40,7 @@ const CreateNewCase = () => {
       age,
       headset,
       profession,
-      avatarUrl
+      // avatarUrl
     } = props;
     NewCaseInfo(
       {
@@ -53,7 +52,7 @@ const CreateNewCase = () => {
         participant,
         headset,
         profession,
-        avatarUrl
+        // avatarUrl
       },
     )(dispatch);
   };

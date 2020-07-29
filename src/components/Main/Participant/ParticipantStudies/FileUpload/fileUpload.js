@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import {Modal} from "antd";
+import { Button, Modal} from 'antd'
 import AboutStudies from "./SuccessUploadModal";
 import "./fileUpload.scss";
 import "antd/dist/antd.css";
@@ -8,14 +8,13 @@ import {UploadResults } from '../../../../../api'
 
 const FileUpload = ({ modalOpen, setmodalOpen }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(null);
 
 
   const closeModal = () => {
     setmodalOpen(false);
   };
-  console.log(avatarUrl)
   const fileSelected = event => {
+    console.log(event.target.files[0])
     UploadResults(event.target.files[0])
     setSuccessModalIsOpen(true);
   }
