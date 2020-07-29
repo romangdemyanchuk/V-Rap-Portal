@@ -22,7 +22,7 @@ const FileUpload = ({ modalOpen, setmodalOpen }) => {
 const token = localStorage.getItem('userLoginToken')
   
 const props = {
-  name: 'files',
+  name: 'uploads',
   action: 'https://varapan.herokuapp.com/api/users/results',
   method: 'post',
   headers: {
@@ -57,10 +57,10 @@ const props = {
           desktop to receive your gift card
         </div>
         <Upload {...props}>
-    <Button>
-      <UploadOutlined /> Click to Upload
-    </Button>
-  </Upload>
+          <Button>
+            <UploadOutlined /> Click to Upload
+          </Button>
+        </Upload>
       </Modal>
     </div>
   );

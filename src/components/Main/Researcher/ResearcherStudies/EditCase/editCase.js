@@ -10,6 +10,7 @@ import {
   Select,
   Form,
   Skeleton,
+  message,
 } from "antd";
 import {
   countryVariants,
@@ -51,28 +52,45 @@ const EditCase = ({ id }) => {
     EditCaseInfo({ ...props, id: id })(dispatch);
   };
 
-  const uploadProps = {
-    action: "https://varapan.herokuapp.com/api/case/add",
-  };
   const layout = {
     labelCol: { span: 20 },
     wrapperCol: { span: 16 },
   };
 
-  // const props = {
-  //   name: 'file',
-  //   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  //   headers: {
-  //     authorization: 'authorization-text',
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status === 'done') {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === 'error') {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
+  const token = localStorage.getItem('userLoginToken')
+
+  const propsPhoto = {
+    name: 'avatarUrl',
+    action: 'https://varapan.herokuapp.com/api/case/add',
+    method: 'post',
+    headers: {
+      authorization: token,
+    },
+    onChange(info) {
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  }
+
+  const propsFiles = {
+    name: 'project',
+    action: 'https://varapan.herokuapp.com/api/case/add',
+    method: 'post',
+    headers: {
+      authorization: token,
+    },
+    onChange(info) {
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  }
+
   return (
     <>
       {isLoading ? (
@@ -106,7 +124,7 @@ const EditCase = ({ id }) => {
                   <div className="personal-stats__info-img">
                     <img src={userImg} alt="userImg" />
                     <div className="personal-stats__upload-btns">
-                      <Upload>
+                      <Upload {...propsPhoto}>
                         <Button className="file-upload-btn" type="primary">
                           Upload Image
                         </Button>
@@ -116,7 +134,7 @@ const EditCase = ({ id }) => {
                 </Form.Item>
                 <Form.Item>
                   <div className="personal-stats__info-img">
-                    <Upload {...uploadProps}>
+                    <Upload {...propsFiles}>
                       <Button className="file-upload-btn">
                         Upload VR File
                       </Button>

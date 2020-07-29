@@ -20,6 +20,7 @@ const ParticipantProfile = () => {
   const partData = useSelector(state => state.main.partInfo);
   const [isProfileBtnActive] = useState(true);
   let { name, age, location, income, headset, profession } = partData;
+  console.log(partData, 'profession')
 
   const isLoading = useSelector(state => state.auth.isLoading);
 
@@ -59,12 +60,12 @@ const ParticipantProfile = () => {
                   {...layout}
                   name="control-hooks"
                   initialValues={{
-                    name: name,
-                    age: age,
-                    location: location === '' ? undefined : location,
-                    income: income,
-                    headset: headset === '' ? undefined : headset,
-                    profession: profession === '' ? undefined : profession
+                    name,
+                    age,
+                    location: location ? [location] : undefined,
+                    income,
+                    headset: headset ? [headset] : undefined,
+                    profession: profession ? profession : undefined
                   }}
                   onFinish={formIsValid}
                 >
@@ -153,12 +154,10 @@ const ParticipantProfile = () => {
                   >
                     <Select
                       placeholder="Please select profession"
-                      allowClear
                       multiple
-                      treeDefaultExpandAll
                     >
-                      {professionsList.map((p) => (
-                        <Select.Option value={p.value} title={p.label}>
+                      {professionsList.map( p => (
+                        <Select.Option value={p.value} title={p.label} key={p.value}> 
                           {p.value}
                         </Select.Option>
                       ))}

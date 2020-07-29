@@ -105,18 +105,14 @@ export const AllCasesInfo = () => (dispatch) => {
     })
     .finally(() => {
       dispatch(Loading(false));
-    });
-  // .catch(e => {
-  //   if (e.response.status === 401) {
-  //     localStorage.clear();
-  //     if (typeof window !== 'undefined') {
-  //       window.location = '/'
-  //     }
-  //   }
-  //   if (e.response.data) {
-  //     infoAction(e.response.data.message, '/researcher-studies');
-  //   }
-  // })
+    }).catch(e => {
+    if (e.response.status >= 400) {
+      localStorage.clear();
+      if (typeof window !== 'undefined') {
+        window.location = '/'
+      }
+    }
+  })
 }
 const FILE_UPLOAD = 'FILE-UPLOAD'
 const isUploaded = () => ({type: FILE_UPLOAD })

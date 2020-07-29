@@ -36,7 +36,6 @@ const ResearcherProfile = () => {
   };
 
   const formIsValid = (props) => {
-    debugger
     EditResearcherProfile({ ...props })(dispatch);
   };
 

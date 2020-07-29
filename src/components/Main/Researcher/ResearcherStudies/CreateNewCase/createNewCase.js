@@ -67,8 +67,8 @@ const CreateNewCase = () => {
   let token = localStorage.getItem("userLoginToken");
   
 
-  const props = {
-    name: "project",
+  const propsPhoto = {
+    name: "avatarUrl",
     action: "https://varapan.herokuapp.com/api/case/add",
     method: "post",
     headers: {
@@ -84,8 +84,20 @@ const CreateNewCase = () => {
     },
   };
   
-  const fileSelected = event => {
-    setAvatarUrl(event.target.files[0])
+  const propsFiles = {
+    name: 'project',
+    action: 'https://varapan.herokuapp.com/api/case/add',
+    method: 'post',
+    headers: {
+      authorization: token,
+    },
+    onChange(info) {
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
   }
 
   return (
@@ -93,7 +105,6 @@ const CreateNewCase = () => {
       <Header isStudiesBtnActive={isStudiesBtnActive}/>
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
-          
           <div className="personal-stats__personal-heading">
             Create Research Studies
           </div>
@@ -107,19 +118,15 @@ const CreateNewCase = () => {
             <Form.Item name="avatarUrl">
               <div className="personal-stats__info-img">
                 <div className="personal-stats__upload-btns">
-                  <Upload {...props}
-                  onChange={() => {}} onCustomRequest={() => {}}>
-                    <Button className="file-upload-btn" type="primary">
-                      Upload Image
-                    </Button>
+                  <Upload {...propsPhoto}>
+                    <Button className="file-upload-btn" type="primary">Upload Image</Button>
                   </Upload>
                 </div>
-                 <input type="file" onChange={fileSelected}/> 
               </div>
             </Form.Item>
             <Form.Item>
               <div className="personal-stats__info-img">
-                <Upload {...props}>
+                <Upload {...propsFiles}>
                   <Button className="file-upload-btn">Upload VR File</Button>
                 </Upload>
               </div>

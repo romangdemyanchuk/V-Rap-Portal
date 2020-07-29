@@ -47,6 +47,20 @@ export const LoginRequest = (data) => (dispatch) => {
         dispatch(Login(response));
       }
     })
+    // if (response.data.type == 2 && window.location.pathname == '/participant-login') {
+    //   const token = response.data.token;
+    //   localStorage.setItem("userLoginToken", token);
+    //   localStorage.setItem("isAuth", true);
+    //   dispatch(Login(response));
+    //   infoAction("Successfully authorized participant!", "/participant-profile")
+    // }
+    // if (response.data.type == 1 && window.location.pathname == '/researcher-login') {
+    //   const token = response.data.token;
+    //   localStorage.setItem("userLoginToken", token);
+    //   localStorage.setItem("isAuth", true);
+    //   dispatch(Login(response));
+    //   infoAction("Successfully authorized researcher!", "/researcher-profile")
+    // }
     .catch((e) => {
       if (e.response.status >= '400') {
         infoAction(e.response.data.message, "");

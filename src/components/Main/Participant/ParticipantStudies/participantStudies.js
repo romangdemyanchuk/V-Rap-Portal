@@ -21,7 +21,7 @@ const ParticipantStudies = () => {
     if (status === 0) return <Tag color="green">In progress</Tag>;
     else if (status === 1)
       return <Tag color="gold">Participant base is full</Tag>;
-    else if (status === 2) return <Tag color="danger">Closed</Tag>;
+    else if (status === 2) return <Tag color="red">Closed</Tag>;
   };
 
   const dispatch = useDispatch();

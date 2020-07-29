@@ -65,7 +65,7 @@ export const EditParticipantProfile = (data) => (dispatch) => {
   EditPartApi(data)
     .then((response) => {
       if (response) {
-        infoAction("Your information is successfully updated!", "participant-profile");
+        infoAction("Your information is successfully updated!", "");
         dispatch(PartInfo(response.data));
       }
     })
@@ -81,7 +81,6 @@ export const EditParticipantProfile = (data) => (dispatch) => {
     .finally(() => {
       dispatch(Loading(false));
     });
-  dispatch(Loading(true));
 };
 
 export const ResearcherProfileInfo = (token) => (dispatch) => {
@@ -111,8 +110,7 @@ export const PartProfileInfo = () => (dispatch) => {
     .then((response) => {
       dispatch(Loading(true));
       if (response.data) {
-        const { name, age, location, income, headset } = response.data;
-        dispatch(PartInfo({ name, age, location, income, headset }));
+        dispatch(PartInfo({ ...response.data }));
       }
     })
     .catch((e) => {

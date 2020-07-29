@@ -43,7 +43,11 @@ const ResearcherStudies = () => {
           </div>
           <div className="ResearcherStudies-cases">
             {allCaseStudies.length === 0 ? (
-              <Skeleton active />
+                <span style={{
+                  fontSize: '24px', display: 'flex',
+                  justifyContent: 'center', alignItems: 'center',
+                  fontWeight: '400', marginTop: '50px'
+                }}>You didn't create any case studies yet.</span>
             ) : (
               allCaseStudies.map((study) => (
                 <Case study={study} key={study._id} />
