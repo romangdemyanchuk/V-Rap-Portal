@@ -47,32 +47,36 @@ export const EditResearcherProfile = (data) => (dispatch) => {
     .then((response) => {
       if (response) {
         dispatch(UserInfo(response));
-        infoAction("Your information is successfully updated!", "");
+        infoAction("Your information is successfully updated!", "/researcher-profile");
       }
     })
     .catch((e) => {
       if (e.response && e.response.data) {
-        infoAction(e.response.data.message, "/researcher-profile");
+        infoAction(e.response.data.message, "");
       }
     })
     .finally(() => {
       dispatch(Loading(false));
+
     });
-  dispatch(Loading(true));
 };
 
 export const EditParticipantProfile = (data) => (dispatch) => {
   EditPartApi(data)
     .then((response) => {
       if (response) {
-        console.log(response)
-        infoAction("Your information is successfully updated!", "");
+        infoAction("Your information is successfully updated!", "participant-profile");
         dispatch(PartInfo(response.data));
       }
     })
     .catch((e) => {
-      if (e.response.data) {
-      }
+      debugger
+        if (e.response.status === 401) {
+          localStorage.clear();
+          if (typeof window !== 'undefined') {
+            window.location = '/'
+          }
+        }
     })
     .finally(() => {
       dispatch(Loading(false));
@@ -90,12 +94,12 @@ export const ResearcherProfileInfo = (token) => (dispatch) => {
       }
     })
     .catch((e) => {
-      // if (e.response.status === 401) {
-      //   localStorage.clear();
-      //   if (typeof window !== 'undefined') {
-      //     window.location = '/'
-      //   }
-      // }
+      if (e.response.status === 401) {
+        localStorage.clear();
+        if (typeof window !== 'undefined') {
+          window.location = '/'
+        }
+      }
     })
     .finally(() => {
       dispatch(Loading(false));
@@ -107,9 +111,8 @@ export const PartProfileInfo = () => (dispatch) => {
     .then((response) => {
       dispatch(Loading(true));
       if (response.data) {
-        console.log(response.data)
-        const { name, age, location, income, headset, profession } = response.data;
-        dispatch(PartInfo({ name, age, location, income, headset, profession }));
+        const { name, age, location, income, headset } = response.data;
+        dispatch(PartInfo({ name, age, location, income, headset }));
       }
     })
     .catch((e) => {
@@ -130,10 +133,10 @@ const ALL_RESEARCHERS = "ALL-RESEARCHERS";
 
 const allResearchersAC = (data) => ({ type: ALL_RESEARCHERS, payload: data });
 
-export const allResearchers = () => (dispatch) => {
-  getAllUsers().then((response) => {
+export const allResearchers = () => dispatch => {
+  getAllUsers().then( response => {
     if (response) {
       dispatch(allResearchersAC(response.data));
     }
-  });
-};
+  })
+}

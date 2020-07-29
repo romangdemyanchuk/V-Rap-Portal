@@ -13,7 +13,9 @@ const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
   const [isStudiesBtnActive] = useState(true);
   const isLoading = useSelector((state) => state.auth.isLoading);
+  
   console.log(isLoading, "isLoading");
+
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   let caseStatusName = (status) => {
     if (status === 0) return <Tag color="green">In progress</Tag>;
@@ -45,8 +47,7 @@ const ParticipantStudies = () => {
             {allCaseStudies.length === 0 ? (
                 <Skeleton active />
               // <h1 className="emptyCaseStudies">
-              //   {" "}
-              //   You have not selected for any Research Studies{" "}
+              //   You have not selected for any Research Studies
               // </h1>
             ) : (
               allCaseStudies.map((d) => (

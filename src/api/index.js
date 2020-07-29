@@ -77,17 +77,6 @@ export const EditPartApi = (data) => {
   return instanceWithToken().post(`api/users/useredit`, data);
 };
 
-export const UploadResults = (file) => {
-  const formData = new FormData();
-  formData.append("avatarUrl", file);
-  return instanceWithToken().post(`/api/users/results`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
-};
-
 export const ChangingStatusAdmin = (id) => {
   return instanceWithToken().post(`/api/case/status`, { status: "2", id: id });
 };
@@ -102,4 +91,15 @@ export const deleteResearcher = (id) => {
     headers: { token },
     data: { id: id },
   });
+};
+
+export const UploadResults = (file) => {
+  const formData = new FormData();
+  formData.append("avatarUrl", file);
+  return instanceWithToken().post(`/api/users/results`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 };

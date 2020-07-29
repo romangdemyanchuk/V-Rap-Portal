@@ -17,16 +17,12 @@ const ParticipantLoginForm = ({ setState }) => {
   );
   let dispatch = useDispatch();
 
-  const isAuthCheck = useSelector((state) => state.auth.isAuth);
-  console.log('isAuthCheck', isAuthCheck)
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const isAuthCheck = useSelector(state => state.auth.isAuth)
+  const isLoading = useSelector(state => state.auth.isLoading)
 
-  if (isAuthCheck) {
-    return infoAction(
-      "Mission complete Participant :)",
-      "/participant-profile"
-    );
-  }
+  if (isAuthCheck) return infoAction("Mission complete Participant :)","/participant-profile")
+    
+  
 
   const handleSubmit = (values) => {
     LoginRequest(values)(dispatch);

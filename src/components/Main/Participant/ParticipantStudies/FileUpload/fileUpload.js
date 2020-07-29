@@ -4,19 +4,21 @@ import { Button, Modal} from 'antd'
 import AboutStudies from "./SuccessUploadModal";
 import "./fileUpload.scss";
 import "antd/dist/antd.css";
-import {UploadResults } from '../../../../../api'
+import { fileUploading } from "../../../../../modules/session/cases-reducer";
+import { useDispatch } from "react-redux";
+
+
 
 const FileUpload = ({ modalOpen, setmodalOpen }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
-
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
   const closeModal = () => {
     setmodalOpen(false);
-  };
+  }
+const dispatch = useDispatch()
   const fileSelected = event => {
-    console.log(event.target.files[0])
-    UploadResults(event.target.files[0])
-    setSuccessModalIsOpen(true);
+    fileUploading(event.target.files[0])(dispatch)
   }
   return (
     <div className="root-FileUpload">

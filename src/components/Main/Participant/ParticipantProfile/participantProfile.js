@@ -17,12 +17,11 @@ import Loader from "../../../Loader/loader";
 import Header from "./../header";
 
 const ParticipantProfile = () => {
-  const partData = useSelector((state) => state.main.partInfo);
-  console.log(partData)
+  const partData = useSelector(state => state.main.partInfo);
   const [isProfileBtnActive] = useState(true);
   let { name, age, location, income, headset, profession } = partData;
 
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const isLoading = useSelector(state => state.auth.isLoading);
 
   const dispatch = useDispatch();
 
@@ -47,7 +46,7 @@ const ParticipantProfile = () => {
           <Header
             profile={"/participant-profile"}
             studies={"/participant-studies"}
-            disableButtons={!name || !age || !location || !income || !headset || !profession}
+            disableButtons={!name || !age || !location || !income || !headset}
             isProfileBtnActive={isProfileBtnActive}
           />
           <div className="participant-profile__personal-info-block">
@@ -62,10 +61,10 @@ const ParticipantProfile = () => {
                   initialValues={{
                     name: name,
                     age: age,
-                    location: [location],
+                    location: location === '' ? undefined : location,
                     income: income,
-                    headset: [headset],
-                    profession: [profession]
+                    headset: headset === '' ? undefined : headset,
+                    profession: profession === '' ? undefined : profession
                   }}
                   onFinish={formIsValid}
                 >
@@ -79,10 +78,9 @@ const ParticipantProfile = () => {
                   <Form.Item
                     name="age"
                     label="Age"
-                    placeholder="Age"
                     rules={[{ required: true, message: "Please input age!" }]}
                   >
-                    <InputNumber min={10} max={100} className="input-number" />
+                    <InputNumber min={10} max={100} className="input-number" placeholder=" Please select age"/>
                   </Form.Item>
                   <Form.Item
                     className="personal-stats__fields-wrapper"
@@ -92,11 +90,11 @@ const ParticipantProfile = () => {
                       { required: true, message: "Please choose location!" },
                     ]}
                   >
-                    <Select
-                      mode="multiple"
-                      placeholder="select location"
-                      optionLabelProp="label"
-                    >
+                      <Select
+                        mode="multiple"
+                        placeholder="Please select location"
+                        optionLabelProp="label"
+                      >
                       {countryVariants.map((c) => (
                         <Select.Option
                           value={c.value}
@@ -117,7 +115,7 @@ const ParticipantProfile = () => {
                       { required: true, message: "Please input Income(USD)!" },
                     ]}
                   >
-                    <InputNumber placeholder="Average Income" max={10000000} />
+                    <InputNumber placeholder="Average income" max={500000} />
                   </Form.Item>
                   <Form.Item
                     className="personal-stats__fields-wrapper"
@@ -129,7 +127,7 @@ const ParticipantProfile = () => {
                   >
                     <Select
                       mode="multiple"
-                      placeholder="select location"
+                      placeholder="Please select headsets"
                       optionLabelProp="label"
                     >
                       {headsetsVariants.map((c) => (
@@ -154,9 +152,10 @@ const ParticipantProfile = () => {
                     ]}
                   >
                     <Select
-                      mode="multiple"
-                      placeholder="select profession"
-                      optionLabelProp="label"
+                      placeholder="Please select profession"
+                      allowClear
+                      multiple
+                      treeDefaultExpandAll
                     >
                       {professionsList.map((p) => (
                         <Select.Option value={p.value} title={p.label}>

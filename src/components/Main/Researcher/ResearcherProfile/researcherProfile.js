@@ -36,7 +36,7 @@ const ResearcherProfile = () => {
   };
 
   const formIsValid = (props) => {
-    console.log("props", props);
+    debugger
     EditResearcherProfile({ ...props })(dispatch);
   };
 
@@ -47,9 +47,7 @@ const ResearcherProfile = () => {
       ) : (
         <div className="root-ResearcherProfile">
           <Header
-            profile={"researcher-profile"}
-            studies={"researcher-studies"}
-            disableButtons={!!(!name || !area || !school)}
+            disableButtons={!name || !area || !school}
             isProfileBtnActive={isProfileBtnActive}
           />
           <div className="researcher-profile__personal-fields-wrapper">

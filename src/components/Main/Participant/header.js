@@ -24,7 +24,7 @@ const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive }) => {
         </Link>
         <Link to={"/participant-studies"}>
           <Button className={isStudiesBtnActive ? "research-btn active" : "research-btn"}
-                  // disabled={disableButtons}
+                  disabled={disableButtons}
           >
             Research Studies
           </Button>
