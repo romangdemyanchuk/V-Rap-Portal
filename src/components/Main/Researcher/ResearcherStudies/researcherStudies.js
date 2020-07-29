@@ -27,7 +27,9 @@ const ResearcherStudies = () => {
   return (
     <>
       {isLoading ? (
-        <Skeleton active />
+        <>
+          <Skeleton active className="studiesLoader" />
+        </>
       ) : (
         <div className="ResearcherStudies">
           <Header isStudiesBtnActive={isStudiesBtnActive}/>
@@ -43,11 +45,7 @@ const ResearcherStudies = () => {
           </div>
           <div className="ResearcherStudies-cases">
             {allCaseStudies.length === 0 ? (
-                <span style={{
-                  fontSize: '24px', display: 'flex',
-                  justifyContent: 'center', alignItems: 'center',
-                  fontWeight: '400', marginTop: '50px'
-                }}>You didn't create any case studies yet.</span>
+              <h1 className="emptyCaseStudies"> You have not created any research studies</h1>
             ) : (
               allCaseStudies.map((study) => (
                 <Case study={study} key={study._id} />

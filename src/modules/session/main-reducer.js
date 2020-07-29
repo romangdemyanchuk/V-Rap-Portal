@@ -62,8 +62,10 @@ export const EditResearcherProfile = (data) => (dispatch) => {
 };
 
 export const EditParticipantProfile = (data) => (dispatch) => {
+  console.log(data)
   EditPartApi(data)
     .then((response) => {
+      console.log(response.data)
       if (response) {
         infoAction("Your information is successfully updated!", "");
         dispatch(PartInfo(response.data));
