@@ -57,7 +57,7 @@ export const EditResearcherProfile = (data) => (dispatch) => {
     })
     .finally(() => {
       dispatch(Loading(false));
-      
+
     });
 };
 

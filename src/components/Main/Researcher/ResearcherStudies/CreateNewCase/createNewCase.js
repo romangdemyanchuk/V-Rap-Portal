@@ -42,7 +42,7 @@ const CreateNewCase = () => {
       age,
       headset,
       profession,
-      avatarUrl
+      // avatarUrl
     } = props;
     NewCaseInfo(
       {
@@ -54,7 +54,7 @@ const CreateNewCase = () => {
         participant,
         headset,
         profession,
-        avatarUrl
+        // avatarUrl
       },
     )(dispatch);
   };

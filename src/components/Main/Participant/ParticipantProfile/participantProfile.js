@@ -24,6 +24,7 @@ const ParticipantProfile = () => {
   const isLoading = useSelector(state => state.auth.isLoading);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     PartProfileInfo()(dispatch);
   }, []);
@@ -36,18 +37,20 @@ const ParticipantProfile = () => {
 
   const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
 
-  return <>
+  return (
+    <>
       {isLoading ? (
         <Skeleton active />
       ) : (
         <div className="root-PartProfile">
           <Header
+            profile={"/participant-profile"}
+            studies={"/participant-studies"}
             disableButtons={!name || !age || !location || !income || !headset}
             isProfileBtnActive={isProfileBtnActive}
           />
           <div className="participant-profile__personal-info-block">
-              <div className="participant-profile__wrapper">
-                
+            <div className="participant-profile__wrapper">
               <div className="participant-profile__personal-heading">
                 Profile Information
               </div>
@@ -145,7 +148,7 @@ const ParticipantProfile = () => {
                     label="Profession"
                     name="profession"
                     rules={[
-                      { required: true, message: "Please choose location!" },
+                      { required: true, message: "Please choose profession!" },
                     ]}
                   >
                     <Select
@@ -182,6 +185,7 @@ const ParticipantProfile = () => {
         </div>
       )}
     </>
+  );
 };
 
 const AuthRedirectComponent = WithAuthRedirect(ParticipantProfile);

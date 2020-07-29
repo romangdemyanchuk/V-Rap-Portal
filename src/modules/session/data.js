@@ -1,5 +1,7 @@
 /*eslint-disable*/
 import React from "react";
+import { ChangingStatusAdmin, deleteResearcher } from '../../api'
+import { status } from '../../components/Admin/AdminPage/ListOfCaseStudies/listOfCaseStudies'
 
 export const allData = {
   caseStudies: [
@@ -106,12 +108,14 @@ export const caseStudiesColumns = (modalsOpen) => ({
       title: "VR File",
       dataIndex: "vr_file",
       key: "vr_file",
-      render: (text) => <a onClick={() => modalsOpen(true)}>{text}</a>,
+      render: () => <a onClick={() => modalsOpen(true)}>Download</a>,
     },
     {
       title: "Created at",
       dataIndex: "created",
       key: "created",
+      render: () => <span>not implemented yet</span>,
+
     },
     {
       title: "Location",
@@ -122,27 +126,30 @@ export const caseStudiesColumns = (modalsOpen) => ({
       title: "Age",
       key: "age",
       dataIndex: "age",
+      render: (text,record) => <span>{record.age[0]} - {record.age[1]}</span>
     },
     {
       title: "Average Income",
-      key: "average",
-      dataIndex: "average",
+      key: "income",
+      dataIndex: "income",
+      render: (text,record) => <span>{record.income[0]} - {record.income[1]}</span>
     },
     {
       title: "Status",
       key: "status",
       dataIndex: "status",
+      render: (text,record) => <span>{status(record.status)}</span>,
     },
     {
       title: "Participated",
-      key: "participated",
-      dataIndex: "participated",
+      key: "participant",
+      dataIndex: "participant",
     },
     {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
-      render: (text) => <a onClick={() => modalsOpen(true)}>{text}</a>,
+      render: (text, record) => <a onClick={() => ChangingStatusAdmin(record._id)}>Accept Case Study</a>,
     },
   ],
 });
@@ -156,20 +163,19 @@ export const researcherListColumns = (modalsOpen) => ({
     },
     {
       title: "School/Institution Name",
-      dataIndex: "school_name",
-      key: "age",
+      dataIndex: "school",
+      key: "school",
     },
     {
       title: "Area of Research",
       dataIndex: "area",
-      key: "address",
+      key: "area",
     },
     {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
-
-      render: (text) => <a onClick={() => modalsOpen(true)}>{text}</a>,
+      render: (text,record) => <a onClick={() => deleteResearcher(record._id)}>Delete</a>,
     },
   ],
 });
