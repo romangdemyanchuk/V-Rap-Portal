@@ -95,17 +95,15 @@ export const DeleteCaseInfo = id => dispatch => {
 };
 
 export const AllCasesInfo = () => (dispatch) => {
+  dispatch(Loading(true));
   AllCasesApi()
     .then((response) => {
-      dispatch(Loading(true));
+      dispatch(Loading(false));
       if (response) {
         console.log(response);
         dispatch(AllCases(response.data));
       }
     })
-    .finally(() => {
-      dispatch(Loading(false));
-    });
   // .catch(e => {
   //   if (e.response.status === 401) {
   //     localStorage.clear();

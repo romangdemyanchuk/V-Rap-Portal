@@ -23,16 +23,6 @@ const ListOfResearchers = () => {
   useEffect(() => {
     allResearchers()(dispatch);
   }, []);
-  // const data = allResearchersData.map((r) => (
-  //     <div key={r._id} className="allResearchers">
-  //       <div>{r.name}</div>
-  //       <div>{r.school}</div>
-  //       <div>{r.area}</div>
-  //       <div className="button-action">
-  //         <button onClick={() => deleteResearcher(r._id)}>Delete</button>
-  //       </div>
-  //     </div>
-  //   ))
   return (
     <div className="researchers-list">
       <DeleteModal modalOpen={modalsOpen} setmodalOpen={setmodalOpen} />
@@ -50,12 +40,6 @@ const ListOfResearchers = () => {
           Create Researcher
         </Button>
       </div>
-      {/*<div className="title-allResearchers">*/}
-      {/*  <div>Name</div>*/}
-      {/*  <div>School/Institution Name</div>*/}
-      {/*  <div>Area of Research</div>*/}
-      {/*  <div>Actions</div>*/}
-      {/*</div>*/}
 
       <Table dataSource={allResearchersData} columns={researcherListColumns} />;
     </div>

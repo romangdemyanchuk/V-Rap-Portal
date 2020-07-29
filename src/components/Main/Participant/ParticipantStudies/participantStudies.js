@@ -13,7 +13,7 @@ const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
   const [isStudiesBtnActive] = useState(true);
   const isLoading = useSelector((state) => state.auth.isLoading);
-  
+
   console.log(isLoading, "isLoading");
 
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
@@ -45,10 +45,7 @@ const ParticipantStudies = () => {
           </div>
           <div className="ParticipantStudies-Cases">
             {allCaseStudies.length === 0 ? (
-                <Skeleton active />
-              // <h1 className="emptyCaseStudies">
-              //   You have not selected for any Research Studies
-              // </h1>
+              <h1 className="emptyCaseStudies">You have not selected for any Research Studies</h1>
             ) : (
               allCaseStudies.map((d) => (
                 <div className="participant-studies__wrapper" key={d._id}>

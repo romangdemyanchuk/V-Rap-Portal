@@ -18,6 +18,7 @@ import Header from "./../header";
 
 const ParticipantProfile = () => {
   const partData = useSelector(state => state.main.partInfo);
+  console.log('partData', partData);
   const [isProfileBtnActive] = useState(true);
   let { name, age, location, income, headset, profession } = partData;
 
@@ -46,7 +47,7 @@ const ParticipantProfile = () => {
           <Header
             profile={"/participant-profile"}
             studies={"/participant-studies"}
-            disableButtons={!name || !age || !location || !income || !headset}
+            disableButtons={!name || !age || !location || !income || !headset || !profession}
             isProfileBtnActive={isProfileBtnActive}
           />
           <div className="participant-profile__personal-info-block">
@@ -148,18 +149,23 @@ const ParticipantProfile = () => {
                     label="Profession"
                     name="profession"
                     rules={[
-                      { required: true, message: "Please choose profession!" },
+                      { required: true, message: "Please choose location!" },
                     ]}
                   >
                     <Select
+                      mode="multiple"
                       placeholder="Please select profession"
-                      allowClear
-                      multiple
-                      treeDefaultExpandAll
+                      optionLabelProp="label"
                     >
                       {professionsList.map((p) => (
-                        <Select.Option value={p.value} title={p.label}>
-                          {p.value}
+                        <Select.Option
+                          value={p.value}
+                          label={p.label}
+                          key={p.value}
+                        >
+                          <div className="demo-option-label-item">
+                            {p.value}
+                          </div>
                         </Select.Option>
                       ))}
                     </Select>

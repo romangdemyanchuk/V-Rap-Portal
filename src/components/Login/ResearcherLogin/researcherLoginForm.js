@@ -18,8 +18,9 @@ const ResearcherLogin = () => {
   console.log('isAuthCheck', isAuthCheck);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
-  if (isAuthCheck)
+  if (isAuthCheck) {
     return infoAction("Mission complete Researcher :)", "/researcher-profile");
+  }
 
   const handleSubmit = (values) => {
     // setDoubleEntryPasswordModal(true)
