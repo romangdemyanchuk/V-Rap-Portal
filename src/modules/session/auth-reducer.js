@@ -72,12 +72,15 @@ export const LoginRequest = (data) => (dispatch) => {
 };
 
 export const RegisterRequest = (data) => (dispatch) => {
+  debugger
   RegisterApi(data)
     .then((response) => {
-      if (response) {
-        dispatch(Register(response));
-      }
+      dispatch(Register(response));
       dispatch(Loading(false));
+      if (response.statusText === 'Created') {
+        infoAction('Account have been successfully created', "")
+      }
+      
     })
     .catch((e) => {
       if (e.response.status > "400") {

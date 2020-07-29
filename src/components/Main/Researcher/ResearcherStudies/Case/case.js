@@ -37,13 +37,13 @@ const Case = ({ study }) => {
               Edit
             </Button>
           </Link>
-          {/* <Button
+          <Button
             type="danger"
             className="upload-btn"
             onClick={() => deleteClick(study._id)}
           >
             {isloading ? <Loader /> : "Delete"}
-          </Button> */}
+          </Button>
         </div>
       );
     else if (study.status === 1)

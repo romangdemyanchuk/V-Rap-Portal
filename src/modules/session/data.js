@@ -3,100 +3,7 @@ import React from "react";
 import { ChangingStatusAdmin, deleteResearcher } from '../../api'
 import { status } from '../../components/Admin/AdminPage/ListOfCaseStudies/listOfCaseStudies'
 
-export const allData = {
-  caseStudies: [
-    {
-      key: "1",
-      title: "Case Study 1",
-      vr_file: "Download",
-      created: "21th of June, 2020",
-      location: "USA, Canada",
-      age: "35-60",
-      average: "All",
-      status: "Pending",
-      participated: "0/200",
-      actions: "Edit/Delete",
-    },
-    {
-      key: "2",
-      title: "Case Study 2",
-      vr_file: "Download",
-      created: "21th of June, 2020",
-      location: "USA, Canada",
-      age: "21-30",
-      average: "All",
-      status: "In progress",
-      participated: "15/100",
-      actions: "Edit/Results",
-    },
-    {
-      key: "3",
-      title: "Case Study 3",
-      vr_file: "Download",
-      created: "21th of June, 2020",
-      location: "USA, Canada",
-      age: "18-21",
-      average: ">35,000",
-      status: "To be revised",
-      participated: "0/50",
-      actions: "Edit",
-    },
-    {
-      key: "4",
-      title: "Case Study 4",
-      vr_file: "Download",
-      created: "21th of June, 2020",
-      location: "USA, Canada",
-      age: "30-40",
-      average: ">45,000",
-      status: "Pending",
-      participated: "0/50",
-      actions: "Edit",
-    },
-    {
-      key: "5",
-      title: "Case Study 5",
-      vr_file: "Download",
-      created: "21th of June, 2020",
-      location: "USA, Canada",
-      age: "30-40",
-      average: "30,000-90,000",
-      status: "Completed",
-      participated: "100/100",
-      actions: "Edit",
-    },
-  ],
-  researchersList: [
-    {
-      key: "1",
-      name: "Ada Lovelace",
-      school_name: "MIT",
-      area: "Area Name",
-      actions: "Edit/Delete",
-    },
-    {
-      key: "2",
-      name: "Grace Hopper",
-      school_name: "MIT",
-      area: "Area Name",
-      actions: "Edit/Delete",
-    },
-    {
-      key: "3",
-      name: "Margaret Hamilton",
-      school_name: "UofT",
-      area: "Area Name",
-      actions: "Edit/Delete",
-    },
-    {
-      key: "4",
-      name: "Joan Clarke",
-      school_name: "UofT",
-      area: "UofT",
-      actions: "Edit/Delete",
-    },
-  ],
-};
+
 export const caseStudiesColumns = (modalsOpen) => ({
   caseStudiesColumns: [
     {
@@ -115,12 +22,12 @@ export const caseStudiesColumns = (modalsOpen) => ({
       dataIndex: "created",
       key: "created",
       render: () => <span>not implemented yet</span>,
-
     },
     {
       title: "Location",
       key: "location",
       dataIndex: "location",
+      render: (text,record) => <span>{record.location[0]} - {record.location[1]}</span>
     },
     {
       title: "Age",

@@ -16,7 +16,7 @@ export const status = (status) => {
 const ListOfCaseStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
   const { caseStudiesColumns } = list(setmodalOpen);
-  const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
+  const allCaseStudies = useSelector(state => state.cases.allCaseStudies);
   const dispatch = useDispatch();
   console.log(allCaseStudies, "allCaseStudies");
 
