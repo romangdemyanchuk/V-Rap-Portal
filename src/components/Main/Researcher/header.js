@@ -25,7 +25,7 @@ const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive }) => {
             Research Studies
           </Button>
         </Link>
-      </div>;
+      </div>
       <div className="log-out-btn">
         <Button onClick={logOut}>Log out</Button>
       </div>

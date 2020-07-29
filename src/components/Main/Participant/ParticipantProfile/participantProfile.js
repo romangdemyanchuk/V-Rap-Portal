@@ -34,7 +34,7 @@ const ParticipantProfile = () => {
     })(dispatch);
   };
 
-  const layout = { labelCol: { span: 16 }, wrapperCol: { span: 16 } };
+  const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
 
   return <>
       {isLoading ? (
