@@ -48,9 +48,9 @@ export const LoginRequest = (data) => (dispatch) => {
       }
     })
     .catch((e) => {
-      // if (e.response.status == "404") {
-      //   infoAction(e.response.data.message, "");
-      // }
+      if (e.response.status >= '400') {
+        infoAction(e.response.data.message, "");
+      }
     })
     .finally(() => {
       dispatch(Loading(false));
