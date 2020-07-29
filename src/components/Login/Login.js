@@ -6,15 +6,13 @@ import ParticipantRegisterForm from "./ParticipantRegister";
 const MainLogin = () => {
   let [state, setState] = useState(false);
 
-  return (
-    <>
-      {state ? (
+  return <>
+      {state ? 
         <ParticipantRegisterForm setState={setState} />
-      ) : (
+       : 
         <ParticipantLoginForm setState={setState} />
-      )}
+      }
     </>
-  );
-};
+}
 
 export default MainLogin;

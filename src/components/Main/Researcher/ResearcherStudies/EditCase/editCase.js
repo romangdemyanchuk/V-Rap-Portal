@@ -160,12 +160,6 @@ const EditCase = ({ id }) => {
                       className="personal-stats__fields-wrapper"
                       label="Location"
                       name="location"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input location!",
-                        },
-                      ]}
                     >
                       <Select
                         mode="multiple"
@@ -212,7 +206,7 @@ const EditCase = ({ id }) => {
                         },
                       ]}
                     >
-                      <Slider range min={0} max={10000000} />
+                      <Slider range min={0} max={500000} />
                     </Form.Item>
                     <Form.Item
                       className="personal-stats__fields-wrapper"
@@ -236,12 +230,6 @@ const EditCase = ({ id }) => {
                       className="personal-stats__fields-wrapper"
                       label="Supported headsets"
                       name="headset"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input supportes headsets!",
-                        },
-                      ]}
                     >
                       <Select
                         mode="multiple"
@@ -266,12 +254,6 @@ const EditCase = ({ id }) => {
                       className="personal-stats__fields-wrapper"
                       label="Professions"
                       name="profession"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input professions!",
-                        },
-                      ]}
                     >
                       <Select
                         mode="multiple"
@@ -304,7 +286,7 @@ const EditCase = ({ id }) => {
                       {isLoading ? <Loader /> : "Save Changes"}
                     </Button>
                     <Link to={"/researcher-studies"}>
-                      <Button>Cancel</Button>
+                      <Button>Close</Button>
                     </Link>
                   </div>
                 </Form.Item>

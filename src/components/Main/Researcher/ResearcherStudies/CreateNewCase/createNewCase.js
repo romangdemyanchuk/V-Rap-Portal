@@ -7,12 +7,10 @@ import {
   InputNumber,
   Upload,
   Form,
-  TreeSelect,
   message,
   Select,
 } from "antd";
 import WithAuthRedirect from "../../../../../hoc/hoc";
-const { TextArea } = Input;
 import "./createNewCase.scss";
 import {
   countryVariants,
@@ -24,14 +22,17 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../../Loader/loader";
 import Header from "../../header";
 import { Link } from "react-router-dom";
+import userPng from '../../../../../images/user.svg'
 
 const CreateNewCase = () => {
+  const { TextArea } = Input;
   let dispatch = useDispatch();
-  const [avatarUrl, setAvatarUrl] = useState(null);
+
   const [isStudiesBtnActive] = useState(true);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const successFillForm = (props) => {
+    debugger
     const {
       title,
       income,
@@ -64,10 +65,12 @@ const CreateNewCase = () => {
   };
 
   let token = localStorage.getItem("userLoginToken");
+  
 
   const props = {
-    name: "file",
+    name: "project",
     action: "https://varapan.herokuapp.com/api/case/add",
+    method: "post",
     headers: {
       authorization: token,
     },
@@ -80,18 +83,21 @@ const CreateNewCase = () => {
       }
     },
   };
-  console.log(avatarUrl)
+  
   const fileSelected = event => {
     setAvatarUrl(event.target.files[0])
   }
+
   return (
     <div className="root-PersonalStats">
       <Header isStudiesBtnActive={isStudiesBtnActive}/>
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
+          
           <div className="personal-stats__personal-heading">
             Create Research Studies
           </div>
+          <div className='case-study-image'><img src={userPng} alt='case-study-png'/></div>
           <Form
             {...layout}
             name="basic"
@@ -147,9 +153,6 @@ const CreateNewCase = () => {
                   className="personal-stats__fields-wrapper"
                   label="Location"
                   name="location"
-                  rules={[
-                    { required: true, message: "Please choose Location!" },
-                  ]}
                 >
                   <Select
                     mode="multiple"
@@ -190,7 +193,7 @@ const CreateNewCase = () => {
                     },
                   ]}
                 >
-                  <Slider range min={0} max={10000000} />
+                  <Slider range min={0} max={500000} />
                 </Form.Item>
                 <Form.Item
                   className="personal-stats__fields-wrapper"
@@ -207,7 +210,6 @@ const CreateNewCase = () => {
                     min={1}
                     max={300}
                     placeholder="Number of participants"
-                    defaultValue={100}
                     className="input-number"
                   />
                 </Form.Item>
@@ -215,9 +217,6 @@ const CreateNewCase = () => {
                   className="personal-stats__fields-wrapper"
                   label="Supported headsets"
                   name="headset"
-                  rules={[
-                    { required: true, message: "Please choose headset!" },
-                  ]}
                 >
                   <Select
                     mode="multiple"
@@ -239,9 +238,6 @@ const CreateNewCase = () => {
                   className="personal-stats__fields-wrapper"
                   label="Proffessions"
                   name="profession"
-                  rules={[
-                    { required: true, message: "Please choose proffessions!" },
-                  ]}
                 >
                   <Select
                     mode="multiple"
@@ -263,7 +259,6 @@ const CreateNewCase = () => {
             </div>
             <Form.Item>
               <div className="personal-stats__footer-btns create-case-btns">
-                {/*<Link to={'/researcher-studies'}>*/}
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -271,7 +266,6 @@ const CreateNewCase = () => {
                 >
                   {isLoading ? <Loader /> : "Create Research Study"}
                 </Button>
-                {/*</Link>*/}
                 <Link to={"/researcher-studies"}>
                   <Button>Close</Button>
                 </Link>

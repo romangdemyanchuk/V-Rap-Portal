@@ -5,7 +5,7 @@ import {
   CHANGE_STATUS,
   ALL_CASES,
 } from "./session-constants";
-import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi } from "../../api";
+import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi, UploadResults } from "../../api";
 import { Loading, addCase, deleteCase, AllCases } from "./session-actions";
 import { infoAction } from "../../utils/notification";
 
@@ -16,6 +16,7 @@ const initialState = {
   researcherStudies: [],
   allCaseStudies: [],
   listOfResearcher: [],
+  isUploaded: false
 };
 
 const CasesReducer = (state = initialState, action) => {
@@ -40,6 +41,11 @@ const CasesReducer = (state = initialState, action) => {
         ...state,
         allCaseStudies: action.payload,
       };
+      case FILE_UPLOAD:
+        return {
+          ...state,
+          isUploaded: true,
+        };
     default:
       return state;
   }
@@ -65,11 +71,13 @@ export const NewCaseInfo = (data) => (dispatch) => {
   dispatch(Loading(false));
 };
 
-export const EditCaseInfo = (data, id) => (dispatch) => {
-  EditCaseApi(data);
-  infoAction("You successfully change your study!", "/researcher-studies");
-};
-export const DeleteCaseInfo = (id) => (dispatch) => {
+export const EditCaseInfo = data => () => {
+ EditCaseApi(data);
+  infoAction("You successfully change your study!", "");
+}
+
+export const DeleteCaseInfo = id => dispatch => {
+
   DeleteCaseApi(id)
     .then((response) => {
       if (response) {
@@ -78,11 +86,11 @@ export const DeleteCaseInfo = (id) => (dispatch) => {
     })
     .catch((e) => {
       if (e.response && e.response.data) {
-        infoAction(e.response.data.message, "/researcher-studies");
+        infoAction(e.response.data.message, "");
       }
     })
     .finally(() => {
-      infoAction("Case study was successfully deleted!", "/researcher-studies");
+      infoAction("Case study was successfully deleted!", "");
     });
 };
 
@@ -109,4 +117,23 @@ export const AllCasesInfo = () => (dispatch) => {
   //     infoAction(e.response.data.message, '/researcher-studies');
   //   }
   // })
+}
+const FILE_UPLOAD = 'FILE-UPLOAD'
+const isUploaded = () => ({type: FILE_UPLOAD })
+
+export const fileUploading = file => dispatch => {
+  UploadResults(file)
+    .then( response => {
+      if (response) {
+        alert('asdsad')
+      }
+      dispatch(isUploaded(true))
+    })
+    // .catch(e => {
+    // })
+    .finally(e => {
+      if (e.response) {
+        alert('asd')
+      }
+    })
 };
