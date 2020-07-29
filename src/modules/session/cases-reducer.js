@@ -5,7 +5,7 @@ import {
   CHANGE_STATUS,
   ALL_CASES,
 } from "./session-constants";
-import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi, UploadResults } from "../../api";
+import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi } from "../../api";
 import { Loading, addCase, deleteCase, AllCases } from "./session-actions";
 import { infoAction } from "../../utils/notification";
 
@@ -41,11 +41,6 @@ const CasesReducer = (state = initialState, action) => {
         ...state,
         allCaseStudies: action.payload,
       };
-      case FILE_UPLOAD:
-        return {
-          ...state,
-          isUploaded: true,
-        };
     default:
       return state;
   }
@@ -100,7 +95,6 @@ export const AllCasesInfo = () => (dispatch) => {
     .then((response) => {
       dispatch(Loading(false));
       if (response) {
-        console.log(response);
         dispatch(AllCases(response.data));
       }
     })
@@ -115,22 +109,4 @@ export const AllCasesInfo = () => (dispatch) => {
     }
   })
 }
-const FILE_UPLOAD = 'FILE-UPLOAD'
-const isUploaded = () => ({type: FILE_UPLOAD })
 
-export const fileUploading = file => dispatch => {
-  UploadResults(file)
-    .then( response => {
-      if (response) {
-        alert('asdsad')
-      }
-      dispatch(isUploaded(true))
-    })
-    // .catch(e => {
-    // })
-    .finally(e => {
-      if (e.response) {
-        alert('asd')
-      }
-    })
-};

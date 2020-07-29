@@ -15,12 +15,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../Loader/loader";
 import Header from "./../header";
+import { Redirect } from 'react-router';
 
 const ParticipantProfile = () => {
   const partData = useSelector(state => state.main.partInfo);
   console.log('partData', partData);
   const [isProfileBtnActive] = useState(true);
-  let { name, age, location, income, headset, profession } = partData;
+  let { name, age, location, income, headset, profession, type } = partData;
   console.log(partData, 'profession')
 
   const isLoading = useSelector(state => state.auth.isLoading);
@@ -39,8 +40,9 @@ const ParticipantProfile = () => {
 
   const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
 
-  return (
-    <>
+if (!type) return <Skeleton active />
+
+  return <>
       {isLoading ? (
         <Skeleton active />
       ) : (
@@ -186,7 +188,6 @@ const ParticipantProfile = () => {
         </div>
       )}
     </>
-  );
 };
 
 const AuthRedirectComponent = WithAuthRedirect(ParticipantProfile);

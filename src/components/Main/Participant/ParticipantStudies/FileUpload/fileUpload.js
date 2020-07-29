@@ -8,7 +8,7 @@ import "antd/dist/antd.css";
 import { fileUploading } from "../../../../../modules/session/cases-reducer";
 import { useDispatch } from "react-redux";
 
-const FileUpload = ({ modalOpen, setmodalOpen }) => {
+const FileUpload = ({ modalOpen, setmodalOpen, caseId }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -25,6 +25,7 @@ const props = {
   name: 'uploads',
   action: 'https://varapan.herokuapp.com/api/users/results',
   method: 'post',
+  data: (caseId) => caseId,
   headers: {
     authorization: token,
   },

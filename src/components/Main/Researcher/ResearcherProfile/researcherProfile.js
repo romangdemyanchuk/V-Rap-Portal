@@ -14,8 +14,7 @@ import Header from "./../header";
 const ResearcherProfile = () => {
   const userData = useSelector((state) => state.main.userInfo);
   const [isProfileBtnActive] = useState(true);
-
-  const { name, school, area } = userData;
+  const { name, school, area, type } = userData;
 
   const isLoading = useSelector((state) => state.auth.isLoading);
   let dispatch = useDispatch();
@@ -39,11 +38,9 @@ const ResearcherProfile = () => {
     EditResearcherProfile({ ...props })(dispatch);
   };
 
-  return (
-    <>
-      {isLoading ? (
-        <Skeleton active />
-      ) : (
+  if(!type) return <Skeleton active />
+
+  return <>
         <div className="root-ResearcherProfile">
           <Header
             disableButtons={!name || !area || !school}
@@ -109,10 +106,8 @@ const ResearcherProfile = () => {
             </Form>
           </div>
         </div>
-      )}
-    </>
-  );
-};
+</>
+}
 
 const AuthRedirectComponent = WithAuthRedirect(ResearcherProfile);
 

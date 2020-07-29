@@ -38,7 +38,6 @@ const ParticipantStudies = () => {
         <Skeleton active />
       ) : (
         <div className="root-PartStudies">
-          <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} />
           <Header isStudiesBtnActive={isStudiesBtnActive}/>
           <div className="participant-studies__personal-heading">
             Research Studies
@@ -49,6 +48,7 @@ const ParticipantStudies = () => {
             ) : (
               allCaseStudies.map((d) => (
                 <div className="participant-studies__wrapper" key={d._id}>
+                  <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} caseId={d._id}/>
                   <div className="participant-studies__info-wrapper">
                     <div className="participant-studies__img">
                       <img src={userImg} alt="userImg" />

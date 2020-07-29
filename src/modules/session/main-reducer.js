@@ -90,8 +90,7 @@ export const ResearcherProfileInfo = (token) => (dispatch) => {
     .then((response) => {
       dispatch(Loading(true));
       if (response.data) {
-        const { area, name, school } = response.data;
-        dispatch(UserInfo({ area, school, name }));
+        dispatch(UserInfo({ ...response.data }));
       }
     })
     .catch((e) => {
@@ -116,12 +115,12 @@ export const PartProfileInfo = () => (dispatch) => {
       }
     })
     .catch((e) => {
-      // if (e.response.status === 401) {
-      //   localStorage.clear();
-      //   if (typeof window !== 'undefined') {
-      //     window.location = '/'
-      //   }
-      // }
+      if (e.response.status === 401) {
+        localStorage.clear();
+        if (typeof window !== 'undefined') {
+          window.location = '/'
+        }
+      }
     })
     .finally(() => {
       dispatch(Loading(false));

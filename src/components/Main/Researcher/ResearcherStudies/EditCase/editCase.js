@@ -40,16 +40,19 @@ const EditCase = ({ id }) => {
       return item._id === id;
     });
   }
-  console.log(filteredCases);
+  
   filteredCases = filteredCases.length ? filteredCases[0] : [];
-
+  
+  // const avatarUrl = window.atob(filteredCases.avatarUrl)
+  // console.log(avatarUrl, 'filteredCases')
   useEffect(() => {
     AllCasesInfo()(dispatch);
   }, []);
 
   const successFillForm = (props) => {
+    debugger
     console.log(props);
-    EditCaseInfo({ ...props, id: id })(dispatch);
+    EditCaseInfo({ ...props, id })(dispatch);
   };
 
   const layout = {
@@ -58,11 +61,13 @@ const EditCase = ({ id }) => {
   };
 
   const token = localStorage.getItem('userLoginToken')
+  
 
   const propsPhoto = {
     name: 'avatarUrl',
-    action: 'https://varapan.herokuapp.com/api/case/add',
+    action: 'https://varapan.herokuapp.com/api/case/edit',
     method: 'post',
+    data: {'id': id},
     headers: {
       authorization: token,
     },
@@ -77,8 +82,9 @@ const EditCase = ({ id }) => {
 
   const propsFiles = {
     name: 'project',
-    action: 'https://varapan.herokuapp.com/api/case/add',
+    action: 'https://varapan.herokuapp.com/api/case/edit',
     method: 'post',
+    data: {'id': id},
     headers: {
       authorization: token,
     },
