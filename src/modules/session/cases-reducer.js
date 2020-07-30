@@ -58,13 +58,13 @@ export const NewCaseInfo = (data) => (dispatch) => {
         infoAction("You successfully create new study!", "");
       }
     })
-    .catch((e) => {
+    .catch( e => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, "/researcher-studies");
       }
-    });
-  dispatch(Loading(false));
-};
+      dispatch(Loading(false));
+    })
+}
 
 export const EditCaseInfo = data => () => {
  EditCaseApi(data);

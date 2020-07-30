@@ -23,34 +23,30 @@ import {
 } from "../../../../../modules/session/cases-reducer";
 import Loader from "../../../../Loader/loader";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../../header";
+
 import { Link } from "react-router-dom";
 const { TextArea } = Input;
 
 const EditCase = ({ id }) => {
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
-  const [isStudiesBtnActive] = useState(true);
+  
   const isLoading = useSelector((state) => state.auth.isLoading);
-  let filteredCases = [];
-
+  const [filteredCases, setFilteredCases] = useState({})
+  
   let dispatch = useDispatch();
 
-  if (allCaseStudies) {
-    filteredCases = allCaseStudies?.filter((item) => {
-      return item._id === id;
-    });
-  }
+  useEffect(() => {
+    debugger
+    const filtredData = allCaseStudies?.filter(item => item._id === id)
+    
+    setFilteredCases(filtredData.length ? filtredData[0] : {})
+  }, [allCaseStudies])
   
-  filteredCases = filteredCases.length ? filteredCases[0] : [];
-  
-  // const avatarUrl = window.atob(filteredCases.avatarUrl)
-  // console.log(avatarUrl, 'filteredCases')
   useEffect(() => {
     AllCasesInfo()(dispatch);
   }, []);
 
   const successFillForm = (props) => {
-    debugger
     console.log(props);
     EditCaseInfo({ ...props, id })(dispatch);
   };
@@ -97,13 +93,12 @@ const EditCase = ({ id }) => {
     },
   }
 
-  return (
-    <>
-      {isLoading ? (
+  return <>
+      {!filteredCases.title ? 
         <Skeleton active />
-      ) : (
+       : 
         <div className="root-EditCase">
-          <Header isStudiesBtnActive={isStudiesBtnActive}/>
+         
           <div className="personal-stats__wrapper">
             <div className="personal-stats__block">
               <div className="personal-stats__personal-heading">
@@ -114,7 +109,6 @@ const EditCase = ({ id }) => {
                 name="basic"
                 initialValues={{
                   remember: true,
-                  id: id,
                   title: filteredCases.title,
                   description: filteredCases.description,
                   location: filteredCases.location,
@@ -318,9 +312,8 @@ const EditCase = ({ id }) => {
             </div>
           </div>
         </div>
-      )}
+      }
     </>
-  );
 };
 
 export default EditCase;

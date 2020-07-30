@@ -80,18 +80,37 @@ export const deleteResearcher = (id) => {
   });
 };
 
-export const AddCaseApi = (data) => {
-  debugger
-  const formData = new FormData()
+
+function formDataDecoding(formData, filesIgnore = []) {
+  let data = new FormData();
+
+  let files = filesIgnore;
+
+  Object.entries(formData).forEach(([key, value]) => {
+    if (typeof value === 'object' && !files.includes(key)) {
+      data.append(key, JSON.stringify(value) || null);
+    } else if (files.includes(key)) {
+      data.append(key, value[0] || null);
+    } else {
+      data.append(key, value || null);
+    }
+  })
+
+  return data;
+}
+
+export const AddCaseApi = data => {
+  const formData = formDataDecoding(data)
+  // formDataDecoding(formData)
 
   const selectedFile = document.getElementById('basic_avatarUrl').files[0];
   const selectedFileVr = document.getElementById('basic_inputVrFile').files[0];
   formData.append('avatarUrl', selectedFile)
   formData.append('project', selectedFileVr)
   
-  for(const key in data){ // змінити 
-    formData.append(key, data[key])
-  }
+  // for(const key in data){ // змінити 
+  //   formData.append(key, data[key])
+  // }
 
   return instanceWithToken().post(`api/case/add`, formData ,
   );
