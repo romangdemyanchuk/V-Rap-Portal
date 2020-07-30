@@ -72,7 +72,6 @@ export const LoginRequest = (data) => (dispatch) => {
 };
 
 export const RegisterRequest = (data) => (dispatch) => {
-  debugger
   RegisterApi(data)
     .then((response) => {
       dispatch(Register(response));
@@ -98,4 +97,25 @@ export const ChangePassword = (password) => (dispatch) => {
     }
   });
   dispatch(Loading(false));
+};
+
+
+//admin
+//researcher register
+export const ResearcherRegister = data => dispatch => {
+  RegisterApi(data)
+    .then( response => {
+      dispatch(Register(response));
+      dispatch(Loading(false));
+      if (response.statusText === 'Created') {
+        infoAction('Account have been successfully created', "")
+      }
+      
+    })
+    .catch((e) => {
+      if (e.response.status > "400") {
+        infoAction(e.response.data.message, "");
+      }
+      dispatch(Loading(false));
+    });
 };

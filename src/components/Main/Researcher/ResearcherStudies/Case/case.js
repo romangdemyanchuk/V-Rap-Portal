@@ -2,10 +2,7 @@
 import React, { useState } from "react";
 import userImg from "../../../../../images/user.svg";
 import { Button, Tag } from "antd";
-import { ChangingStatus } from "../../../../../api";
-import { DeleteCaseInfo } from "../../../../../modules/session/main-reducer";
 import Loader from "../../../../Loader/loader";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DeleteModal from "../../../../Admin/AdminPage/ListOfResearchers/ResearcherChanges/DeleteModal";
 import './case.css'
@@ -102,9 +99,9 @@ const Case = ({ study }) => {
         id={study._id}
       />
       <div key={study._id} className="researcher-studies__study-wrapper">
-        <div className="researcher-studies__info-wrapper">
+        <div className="researcher-studies__info-wrapper" style={{minHeight: 150}}>
           <div className="researcher-studies__study-info-img">
-            <img src={userImg} alt="userImg" />
+            <img src={study.avatarUrl ? study.avatarUrl : userImg} style={{width: 120, height: 120, borderRadius: '50%'}} alt="userImg" />
           </div>
           <div className="study">
             <div className="researcher-studies__heading">{study.title}</div>

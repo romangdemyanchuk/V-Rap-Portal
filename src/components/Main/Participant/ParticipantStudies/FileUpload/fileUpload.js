@@ -25,7 +25,7 @@ const props = {
   name: 'uploads',
   action: 'https://varapan.herokuapp.com/api/users/results',
   method: 'post',
-  data: (caseId) => caseId,
+  data: { id: caseId} ,
   headers: {
     authorization: token,
   },

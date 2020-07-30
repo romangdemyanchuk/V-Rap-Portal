@@ -27,10 +27,14 @@ const ParticipantStudies = () => {
   const dispatch = useDispatch();
 
   useEffect(() => AllCasesInfo()(dispatch), []);
-
+  const [selectedCaseStudiesId, setSelectedCaseStudiesId] = useState()
   const partData = useSelector((state) => state.main.partInfo);
   let { name, age, location, income, headset } = partData;
   // if (!name || !age || !location || !income || !headset) return <Redirect to='participant-profile'/>
+
+  const setCaseStudiesId = (id) => {
+    setSelectedCaseStudiesId(id)
+  }
 
   return (
     <>
@@ -39,6 +43,7 @@ const ParticipantStudies = () => {
       ) : (
         <div className="root-PartStudies">
           <Header isStudiesBtnActive={isStudiesBtnActive}/>
+          <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} caseId={selectedCaseStudiesId}/>
           <div className="participant-studies__personal-heading">
             Research Studies
           </div>
@@ -47,8 +52,7 @@ const ParticipantStudies = () => {
               <h1 className="emptyCaseStudies">You have not selected for any Research Studies</h1>
             ) : (
               allCaseStudies.map((d) => (
-                <div className="participant-studies__wrapper" key={d._id}>
-                  <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} caseId={d._id}/>
+                <div className="participant-studies__wrapper" key={d._id} onClick={() => setCaseStudiesId(d._id)}>
                   <div className="participant-studies__info-wrapper">
                     <div className="participant-studies__img">
                       <img src={userImg} alt="userImg" />

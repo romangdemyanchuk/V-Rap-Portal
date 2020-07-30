@@ -39,11 +39,6 @@ export const PartInfoApi = () => {
   return instanceWithToken(token).post(`api/users/user`, {});
 };
 
-export const AddCaseApi = (data) => {
-  return instanceWithToken().post(`api/case/add`, data
-  );
-};
-
 export const DeleteCaseApi = (id) => {
   return instanceWithToken().delete(`api/case/delete`, { data: { id: id } });
 };
@@ -83,4 +78,21 @@ export const deleteResearcher = (id) => {
     headers: { token },
     data: { id: id },
   });
+};
+
+export const AddCaseApi = (data) => {
+  debugger
+  const formData = new FormData()
+
+  const selectedFile = document.getElementById('basic_avatarUrl').files[0];
+  const selectedFileVr = document.getElementById('basic_inputVrFile').files[0];
+  formData.append('avatarUrl', selectedFile)
+  formData.append('project', selectedFileVr)
+  
+  for(const key in data){ // змінити 
+    formData.append(key, data[key])
+  }
+
+  return instanceWithToken().post(`api/case/add`, formData ,
+  );
 };

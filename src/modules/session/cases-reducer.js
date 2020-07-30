@@ -55,7 +55,7 @@ export const NewCaseInfo = (data) => (dispatch) => {
       dispatch(Loading(true));
       if (response) {
         dispatch(addCase(response.data));
-        infoAction("You successfully create new study!", "/researcher-studies");
+        infoAction("You successfully create new study!", "");
       }
     })
     .catch((e) => {
@@ -100,13 +100,14 @@ export const AllCasesInfo = () => (dispatch) => {
     })
     .finally(() => {
       dispatch(Loading(false));
-    }).catch(e => {
-    if (e.response.status >= 400) {
-      localStorage.clear();
-      if (typeof window !== 'undefined') {
-        window.location = '/'
-      }
-    }
-  })
+    })
+  //   .catch(e => {
+  //   if (e.response.status >= 400) {
+  //     localStorage.clear();
+  //     if (typeof window !== 'undefined') {
+  //       window.location = '/'
+  //     }
+  //   }
+  // })
 }
 
