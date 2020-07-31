@@ -62,7 +62,7 @@ export const LoginRequest = (data) => (dispatch) => {
     //   infoAction("Successfully authorized researcher!", "/researcher-profile")
     // }
     .catch((e) => {
-      if (e.response.status >= '400') {
+      if (e.response.status) {
         infoAction(e.response.data.message, "");
       }
     })
@@ -82,7 +82,7 @@ export const RegisterRequest = (data) => (dispatch) => {
       
     })
     .catch((e) => {
-      if (e.response.status > "400") {
+      if (e.response.status) {
         infoAction(e.response.data.message, "");
       }
       dispatch(Loading(false));
@@ -113,7 +113,7 @@ export const ResearcherRegister = data => dispatch => {
       
     })
     .catch((e) => {
-      if (e.response.status > "400") {
+      if (e.response.status) {
         infoAction(e.response.data.message, "");
       }
       dispatch(Loading(false));

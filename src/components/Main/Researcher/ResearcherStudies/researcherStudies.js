@@ -5,7 +5,7 @@ import { Link} from "react-router-dom";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCasesInfo } from "../../../../modules/session/cases-reducer";
+import { FiltredCases } from "../../../../modules/session/cases-reducer";
 import Case from "./Case/case";
 import Header from "./../header";
 
@@ -13,10 +13,10 @@ const ResearcherStudies = () => {
   let dispatch = useDispatch();
   const [isStudiesBtnActive] = useState(true);
 
-  const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
+  const allCaseStudies = useSelector((state) => state.cases.filtredCases);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
-  useEffect(() => AllCasesInfo()(dispatch), []);
+  useEffect(() => FiltredCases()(dispatch), []);
 
   const userData = useSelector((state) => state.main.userInfo);
   const { name, school, area } = userData;

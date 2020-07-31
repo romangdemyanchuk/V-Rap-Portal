@@ -65,9 +65,9 @@ if (!type) return <Skeleton active />
                   initialValues={{
                     name,
                     age,
-                    location: location ? [location] : undefined,
+                    location: location ? location : undefined,
                     income,
-                    headset: headset ? [headset] : undefined,
+                    headset: headset ? headset : undefined,
                     profession: profession ? profession : undefined
                   }}
                   onFinish={formIsValid}

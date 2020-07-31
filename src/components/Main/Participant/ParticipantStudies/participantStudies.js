@@ -6,8 +6,9 @@ import FileUpload from "./FileUpload";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { AllCasesInfo } from "../../../../modules/session/cases-reducer";
+import { FiltredCases } from "../../../../modules/session/cases-reducer";
 import Header from "./../header";
+import {DownloadCaseStudy} from '../../../../api/index'
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
@@ -16,7 +17,7 @@ const ParticipantStudies = () => {
 
   console.log(isLoading, "isLoading");
 
-  const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
+  const allCaseStudies = useSelector((state) => state.cases.filtredCases);
   let caseStatusName = (status) => {
     if (status === 0) return <Tag color="green">In progress</Tag>;
     else if (status === 1)
@@ -26,7 +27,7 @@ const ParticipantStudies = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => AllCasesInfo()(dispatch), []);
+  useEffect(() => FiltredCases()(dispatch), []);
   const [selectedCaseStudiesId, setSelectedCaseStudiesId] = useState()
   const partData = useSelector((state) => state.main.partInfo);
   let { name, age, location, income, headset } = partData;
@@ -55,7 +56,7 @@ const ParticipantStudies = () => {
                 <div className="participant-studies__wrapper" key={d._id} onClick={() => setCaseStudiesId(d._id)}>
                   <div className="participant-studies__info-wrapper">
                     <div className="participant-studies__img">
-                      <img src={userImg} alt="userImg" />
+                      <img src={d.avatarUrl ? d.avatarUrl : userImg} style={{width: 120, height: 120, borderRadius: '50%'}} alt="userImg" alt="userImg" />
                     </div>
                     <div className="participant-studies__study">
                       <div className="participant-studies__heading">
@@ -76,7 +77,10 @@ const ParticipantStudies = () => {
                     </div>
                   </div>
                   <div className="participant-studies__load-btns">
-                    <Button type="primary">Download Research Study</Button>
+                    <Button type="primary" onClick={() => DownloadCaseStudy(d._id)}
+                    >
+                      Download Research Study
+                    </Button>
                     <Button
                       type="primary"
                       className="participant-studies__upload-btn"

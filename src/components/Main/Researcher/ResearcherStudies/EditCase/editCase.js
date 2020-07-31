@@ -1,28 +1,26 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
-import userImg from "../../../../../images/user.svg";
+import React, { useEffect, useState } from "react"
 import {
   Button,
   Input,
   InputNumber,
   Slider,
-  Upload,
   Select,
   Form,
-  Skeleton,
-  message,
-} from "antd";
+  Skeleton
+} from "antd"
 import {
   countryVariants,
   headsetsVariants,
   professionsList,
-} from "../../../../../modules/session/data";
+} from "../../../../../modules/session/data"
 import {
   AllCasesInfo,
   EditCaseInfo,
-} from "../../../../../modules/session/cases-reducer";
-import Loader from "../../../../Loader/loader";
-import { useDispatch, useSelector } from "react-redux";
+} from "../../../../../modules/session/cases-reducer"
+import Loader from "../../../../Loader/loader"
+import { useDispatch, useSelector } from "react-redux"
+import userPng from '../../../../../images/user.svg'
 
 import { Link } from "react-router-dom";
 const { TextArea } = Input;
@@ -36,7 +34,6 @@ const EditCase = ({ id }) => {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    debugger
     const filtredData = allCaseStudies?.filter(item => item._id === id)
     
     setFilteredCases(filtredData.length ? filtredData[0] : {})
@@ -47,7 +44,6 @@ const EditCase = ({ id }) => {
   }, []);
 
   const successFillForm = (props) => {
-    console.log(props);
     EditCaseInfo({ ...props, id })(dispatch);
   };
 
@@ -55,43 +51,6 @@ const EditCase = ({ id }) => {
     labelCol: { span: 20 },
     wrapperCol: { span: 16 },
   };
-
-  const token = localStorage.getItem('userLoginToken')
-  
-
-  const propsPhoto = {
-    name: 'avatarUrl',
-    action: 'https://varapan.herokuapp.com/api/case/edit',
-    method: 'post',
-    data: {'id': id},
-    headers: {
-      authorization: token,
-    },
-    onChange(info) {
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  }
-
-  const propsFiles = {
-    name: 'project',
-    action: 'https://varapan.herokuapp.com/api/case/edit',
-    method: 'post',
-    data: {'id': id},
-    headers: {
-      authorization: token,
-    },
-    onChange(info) {
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  }
 
   return <>
       {!filteredCases.title ? 
@@ -104,6 +63,7 @@ const EditCase = ({ id }) => {
               <div className="personal-stats__personal-heading">
                 Edit Research Studies
               </div>
+              <div className='case-study-image'><img src={filteredCases.avatarUrl ? filteredCases.avatarUrl : userImg} style={{width: 200, height: 200, borderRadius: '50%'}} alt="userImg" /></div>
               <Form
                 {...layout}
                 name="basic"
@@ -120,27 +80,12 @@ const EditCase = ({ id }) => {
                 }}
                 onFinish={successFillForm}
               >
-                <Form.Item>
-                  <div className="personal-stats__info-img">
-                    <img src={userImg} alt="userImg" />
-                    <div className="personal-stats__upload-btns">
-                      <Upload {...propsPhoto}>
-                        <Button className="file-upload-btn" type="primary">
-                          Upload Image
-                        </Button>
-                      </Upload>
-                    </div>
-                  </div>
-                </Form.Item>
-                <Form.Item>
-                  <div className="personal-stats__info-img">
-                    <Upload {...propsFiles}>
-                      <Button className="file-upload-btn">
-                        Upload VR File
-                      </Button>
-                    </Upload>
-                  </div>
-                </Form.Item>
+                <Form.Item name="avatarUrl">
+              <Input type="file" id="input" multiple />
+            </Form.Item>
+            <Form.Item name="inputVrFile">
+             <Input type="file" id="input-vr" multiple />
+            </Form.Item>
 
                 <div className="personal-stats__blocks-wrapper">
                   <div className="personal-stats__left-block">

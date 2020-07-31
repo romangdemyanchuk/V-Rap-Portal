@@ -44,7 +44,11 @@ export const DeleteCaseApi = (id) => {
 };
 
 export const AllCasesApi = () => {
-  return instance.get(`/api/case/cases`, { headers: { Authorization: token } });
+  return instanceWithToken().get(`/api/case/cases`);
+}
+
+export const FiltredCaseApi = () => {
+  return instanceWithToken().get(`/api/users/cases`);
 };
 
 export const ChangePasswordApi = (password) => {
@@ -81,37 +85,27 @@ export const deleteResearcher = (id) => {
 };
 
 
-function formDataDecoding(formData, filesIgnore = []) {
-  let data = new FormData();
-
-  let files = filesIgnore;
-
-  Object.entries(formData).forEach(([key, value]) => {
-    if (typeof value === 'object' && !files.includes(key)) {
-      data.append(key, JSON.stringify(value) || null);
-    } else if (files.includes(key)) {
-      data.append(key, value[0] || null);
-    } else {
-      data.append(key, value || null);
-    }
-  })
-
-  return data;
+export const AddCaseApi = (data) => {
+  return instanceWithToken().post(`api/case/add`, data ,
+  )
+  
 }
 
-export const AddCaseApi = data => {
-  const formData = formDataDecoding(data)
-  // formDataDecoding(formData)
+export const AddCaseFiles = (id) => {
+  debugger
+  const formData = new FormData()
 
   const selectedFile = document.getElementById('basic_avatarUrl').files[0];
   const selectedFileVr = document.getElementById('basic_inputVrFile').files[0];
   formData.append('avatarUrl', selectedFile)
   formData.append('project', selectedFileVr)
-  
-  // for(const key in data){ // змінити 
-  //   formData.append(key, data[key])
-  // }
+  formData.append('id', id)
 
-  return instanceWithToken().post(`api/case/add`, formData ,
-  );
+  return instanceWithToken().post(`/api/case/upload`, formData ,
+  )
+}
+
+// downloadCaseStudy
+export const DownloadCaseStudy = (id) => {
+  return instanceWithToken().post(`/api/case/download`, {id});
 };
