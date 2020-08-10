@@ -2,14 +2,14 @@
 import * as axios from "axios";
 
 
-const baseURL = "https://varapan.herokuapp.com/";
+const baseURL = "https://test-for-roman.herokuapp.com/";
+
 
 const instance = axios.create({
   baseURL,
 });
 
-let token = localStorage.getItem("userLoginToken");
-console.log(token);
+const token = localStorage.getItem("userLoginToken");
 
 const instanceWithToken = () =>
   axios.create({
@@ -40,24 +40,16 @@ export const PartInfoApi = () => {
   return instanceWithToken(token).post(`api/users/user`, {});
 };
 
-export const AddCaseApi = (data) => {
-  // const formData = new FormData();
-  // formData.append("avatarUrl", data);
-  return instanceWithToken().post(`api/case/add`, data
-  //   formData, {
-  //   headers: {
-  //     "Content-Type": "multipart/form-data",
-  //   },
-  // }
-  );
-};
-
 export const DeleteCaseApi = (id) => {
   return instanceWithToken().delete(`api/case/delete`, { data: { id: id } });
 };
 
 export const AllCasesApi = () => {
-  return instance.get(`/api/case/cases`, { headers: { Authorization: token } });
+  return instanceWithToken().get(`/api/case/cases`);
+}
+
+export const FiltredCaseApi = () => {
+  return instanceWithToken().get(`/api/users/cases`);
 };
 
 export const ChangePasswordApi = (password) => {
@@ -93,13 +85,27 @@ export const deleteResearcher = (id) => {
   });
 };
 
-export const UploadResults = (file) => {
-  const formData = new FormData();
-  formData.append("avatarUrl", file);
-  return instanceWithToken().post(`/api/users/results`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
+
+export const AddCaseApi = (data) => {
+  return instanceWithToken().post(`api/case/add`, data ,
+  )
+
+}
+
+export const AddCaseFiles = (id) => {
+  const formData = new FormData()
+
+  const selectedFile = document.getElementById('basic_avatarUrl').files[0];
+  const selectedFileVr = document.getElementById('basic_inputVrFile').files[0];
+  formData.append('avatarUrl', selectedFile)
+  formData.append('project', selectedFileVr)
+  formData.append('id', id)
+
+  return instanceWithToken().post(`/api/case/upload`, formData ,
+  )
+}
+
+// downloadCaseStudy
+export const DownloadCaseStudy = (id) => {
+  return instanceWithToken().post(`/api/case/download`, {id});
 };

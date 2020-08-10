@@ -10,34 +10,16 @@ import { Loading } from "../../../../../modules/session/session-actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const dispatch = useDispatch();
 
   const closeModal = () => {
     setmodalOpen(false);
   };
-  // const props = {
-  //   name: "file",
-  //   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  //   headers: {
-  //     authorization: "authorization-text",
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status !== "uploading") {
-  //       setmodalOpen(false);
-  //     }
-  //     if (info.file.status === "done") {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === "error") {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
 
   const handleSubmit = (values) => {
     console.log(values);
     RegisterRequest(values)(dispatch);
-    dispatch(Loading(true));
   };
   return (
     <div className="root-ResearcherCreate">

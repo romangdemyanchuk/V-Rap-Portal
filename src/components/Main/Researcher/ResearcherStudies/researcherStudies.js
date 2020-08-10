@@ -5,7 +5,7 @@ import { Link} from "react-router-dom";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCasesInfo } from "../../../../modules/session/cases-reducer";
+import { AllCasesInfo, FiltredCases } from '../../../../modules/session/cases-reducer'
 import Case from "./Case/case";
 import Header from "./../header";
 
@@ -15,7 +15,6 @@ const ResearcherStudies = () => {
 
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   const isLoading = useSelector((state) => state.auth.isLoading);
-  console.log("isLoading", isLoading);
 
   useEffect(() => AllCasesInfo()(dispatch), []);
 
@@ -24,12 +23,9 @@ const ResearcherStudies = () => {
 
   // if(!name || !area || !school) return <Redirect to='researcher-profile'/>
 
-  return (
-    <>
+  return <>
       {isLoading ? (
-        <>
           <Skeleton active className="studiesLoader" />
-        </>
       ) : (
         <div className="ResearcherStudies">
           <Header isStudiesBtnActive={isStudiesBtnActive}/>
@@ -55,7 +51,6 @@ const ResearcherStudies = () => {
         </div>
       )}
     </>
-  );
 };
 
 const AuthRedirectComponent = WithAuthRedirect(ResearcherStudies);

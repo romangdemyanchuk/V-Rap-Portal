@@ -5,7 +5,7 @@ import {
   CHANGE_STATUS,
   ALL_CASES,
 } from "./session-constants";
-import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi, UploadResults } from "../../api";
+import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi, AddCaseFiles, FiltredCaseApi } from "../../api";
 import { Loading, addCase, deleteCase, AllCases } from "./session-actions";
 import { infoAction } from "../../utils/notification";
 
@@ -16,7 +16,8 @@ const initialState = {
   researcherStudies: [],
   allCaseStudies: [],
   listOfResearcher: [],
-  isUploaded: false
+  isUploaded: false,
+  filtredCases: []
 };
 
 const CasesReducer = (state = initialState, action) => {
@@ -41,43 +42,63 @@ const CasesReducer = (state = initialState, action) => {
         ...state,
         allCaseStudies: action.payload,
       };
-      case FILE_UPLOAD:
-        return {
-          ...state,
-          isUploaded: true,
-        };
+    case FILTRED_CASES:
+      return {
+        ...state,
+        filtredCases: action.payload,
+      };
     default:
       return state;
   }
 };
 export default CasesReducer;
 
-export const NewCaseInfo = (data) => (dispatch) => {
-  console.log(data)
+export const NewCaseInfo = data => dispatch => {
   AddCaseApi(data)
-    .then((response) => {
-      console.log("response", response);
+    .then( response => {
       dispatch(Loading(true));
-      if (response) {
+      if (response.data) {
         dispatch(addCase(response.data));
-        infoAction("You successfully create new study!", "/researcher-studies");
+        infoAction("You successfully create new study!", "");
       }
+      if (response.data._id){
+        AddCaseFiles(response.data._id)
+      }
+      dispatch(Loading(false));
     })
-    .catch((e) => {
+    .catch( e => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, "/researcher-studies");
       }
-    });
-  dispatch(Loading(false));
-};
+      dispatch(Loading(false));
+    })
+}
 
-export const EditCaseInfo = data => () => {
- EditCaseApi(data);
-  infoAction("You successfully change your study!", "");
+export const EditCaseInfo = data => dispatch => {
+  dispatch(Loading(true));
+   EditCaseApi(data)
+   .then( response => {
+     dispatch(Loading(false));
+    if (response.data) {
+      dispatch(addCase(response.data));
+      infoAction("You successfully changes your study!", "");
+    }
+    if (response.data._id){
+      AddCaseFiles(response.data._id)
+    }
+
+
+  })
+.catch( e => {
+  if (e.response && e.response.data) {
+    infoAction(e.response.data.message, "/researcher-studies");
+  }
+  dispatch(Loading(false));
+})
+  // infoAction("You successfully change your study!", "");
 }
 
 export const DeleteCaseInfo = id => dispatch => {
-
   DeleteCaseApi(id)
     .then((response) => {
       if (response) {
@@ -94,44 +115,38 @@ export const DeleteCaseInfo = id => dispatch => {
     });
 };
 
-export const AllCasesInfo = () => (dispatch) => {
+export const AllCasesInfo = () => dispatch => {
   dispatch(Loading(true));
   AllCasesApi()
     .then((response) => {
       dispatch(Loading(false));
       if (response) {
-        console.log(response);
         dispatch(AllCases(response.data));
       }
+    }).catch( e => {
+      if (e.response.status === 401) {
+        localStorage.clear()
+        infoAction(e.response.data.message, "/");
+      }
+      if (e.response.data) {
+        infoAction(e.response.data.message, "/researcher-studies");
+      }
     })
-  // .catch(e => {
-  //   if (e.response.status === 401) {
-  //     localStorage.clear();
-  //     if (typeof window !== 'undefined') {
-  //       window.location = '/'
-  //     }
-  //   }
-  //   if (e.response.data) {
-  //     infoAction(e.response.data.message, '/researcher-studies');
-  //   }
-  // })
+    .finally(() => {
+      dispatch(Loading(false));
+    })
 }
-const FILE_UPLOAD = 'FILE-UPLOAD'
-const isUploaded = () => ({type: FILE_UPLOAD })
+export const FILTRED_CASES = "FILTRED-CASES"
+export const filtredCasesData = (payload) => ({type: FILTRED_CASES, payload})
 
-export const fileUploading = file => dispatch => {
-  UploadResults(file)
+export const FiltredCases = () => dispatch => {
+  dispatch(Loading(true));
+  FiltredCaseApi()
     .then( response => {
-      if (response) {
-        alert('asdsad')
-      }
-      dispatch(isUploaded(true))
+      dispatch(Loading(false))
+      dispatch(filtredCasesData(response.data))
     })
-    // .catch(e => {
-    // })
-    .finally(e => {
-      if (e.response) {
-        alert('asd')
-      }
+    .finally(() => {
+      dispatch(Loading(false));
     })
-};
+}

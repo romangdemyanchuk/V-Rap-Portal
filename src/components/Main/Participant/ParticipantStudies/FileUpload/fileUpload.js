@@ -1,25 +1,46 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Button, Modal} from 'antd'
+import { Upload, message, Button, Modal } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import AboutStudies from "./SuccessUploadModal";
 import "./fileUpload.scss";
 import "antd/dist/antd.css";
 import { fileUploading } from "../../../../../modules/session/cases-reducer";
 import { useDispatch } from "react-redux";
 
-
-
-const FileUpload = ({ modalOpen, setmodalOpen }) => {
+const FileUpload = ({ modalOpen, setmodalOpen, caseId }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(null);
 
   const closeModal = () => {
     setmodalOpen(false);
   }
-const dispatch = useDispatch()
-  const fileSelected = event => {
-    fileUploading(event.target.files[0])(dispatch)
-  }
+// const dispatch = useDispatch()
+//   const fileSelected = event => {
+//     fileUploading(event.target.files[0])(dispatch)
+//   }
+
+const token = localStorage.getItem('userLoginToken')
+
+const props = {
+  name: 'uploads',
+  action: 'https://test-for-roman.herokuapp.com/api/users/results',
+  method: 'post',
+  data: { id: caseId} ,
+  headers: {
+    authorization: token,
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
+
   return (
     <div className="root-FileUpload">
       <AboutStudies
@@ -36,7 +57,11 @@ const dispatch = useDispatch()
           Upload the exported files from the simulation that are located on your
           desktop to receive your gift card
         </div>
-        <input type="file" onChange={fileSelected}/>
+        <Upload {...props}>
+          <Button>
+            <UploadOutlined /> Click to Upload
+          </Button>
+        </Upload>
       </Modal>
     </div>
   );

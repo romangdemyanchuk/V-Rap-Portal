@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import userPng from '../../../../../images/user.svg'
 
 const CreateNewCase = () => {
+
   const { TextArea } = Input;
   let dispatch = useDispatch();
 
@@ -32,7 +33,6 @@ const CreateNewCase = () => {
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const successFillForm = (props) => {
-    debugger
     const {
       title,
       income,
@@ -42,20 +42,8 @@ const CreateNewCase = () => {
       age,
       headset,
       profession,
-      // avatarUrl
     } = props;
-    NewCaseInfo(
-      {
-        title,
-        description,
-        location,
-        age,
-        income,
-        participant,
-        headset,
-        profession,
-        // avatarUrl
-      },
+    NewCaseInfo({title,description,location,age,income,participant,headset,profession},
     )(dispatch);
   };
 
@@ -67,33 +55,11 @@ const CreateNewCase = () => {
   let token = localStorage.getItem("userLoginToken");
   
 
-  const props = {
-    name: "project",
-    action: "https://varapan.herokuapp.com/api/case/add",
-    method: "post",
-    headers: {
-      authorization: token,
-    },
-    onChange(info) {
-      console.log(info)
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
-  
-  const fileSelected = event => {
-    setAvatarUrl(event.target.files[0])
-  }
-
   return (
     <div className="root-PersonalStats">
       <Header isStudiesBtnActive={isStudiesBtnActive}/>
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
-          
           <div className="personal-stats__personal-heading">
             Create Research Studies
           </div>
@@ -105,25 +71,10 @@ const CreateNewCase = () => {
             onFinish={successFillForm}
           >
             <Form.Item name="avatarUrl">
-              <div className="personal-stats__info-img">
-                {/*<img src={userImg} alt="userImg" />*/}
-                {/*<div className="personal-stats__upload-btns">*/}
-                {/*  <Upload {...props}*/}
-                {/*  onChange={() => {}} onCustomRequest={() => {}}>*/}
-                {/*    <Button className="file-upload-btn" type="primary">*/}
-                {/*      Upload Image*/}
-                {/*    </Button>*/}
-                {/*  </Upload>*/}
-                {/*</div>*/}
-                <input type="file" onChange={fileSelected}/>
-              </div>
+              <Input type="file" id="input" multiple />
             </Form.Item>
-            <Form.Item>
-              <div className="personal-stats__info-img">
-                <Upload {...props}>
-                  <Button className="file-upload-btn">Upload VR File</Button>
-                </Upload>
-              </div>
+            <Form.Item name="inputVrFile">
+             <Input type="file" id="input-vr" multiple />
             </Form.Item>
             <div className="personal-stats__blocks-wrapper">
               <div className="personal-stats__left-block">

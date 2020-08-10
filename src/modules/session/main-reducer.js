@@ -65,14 +65,13 @@ export const EditParticipantProfile = (data) => (dispatch) => {
   console.log(data)
   EditPartApi(data)
     .then((response) => {
-      console.log(response.data)
       if (response) {
-        infoAction("Your information is successfully updated!", "participant-profile");
         dispatch(PartInfo(response.data));
+        infoAction("Your information is successfully updated!", "");
+
       }
     })
     .catch((e) => {
-      debugger
         if (e.response.status === 401) {
           localStorage.clear();
           if (typeof window !== 'undefined') {
@@ -83,7 +82,6 @@ export const EditParticipantProfile = (data) => (dispatch) => {
     .finally(() => {
       dispatch(Loading(false));
     });
-  dispatch(Loading(true));
 };
 
 export const ResearcherProfileInfo = (token) => (dispatch) => {
@@ -91,8 +89,7 @@ export const ResearcherProfileInfo = (token) => (dispatch) => {
     .then((response) => {
       dispatch(Loading(true));
       if (response.data) {
-        const { area, name, school } = response.data;
-        dispatch(UserInfo({ area, school, name }));
+        dispatch(UserInfo({ ...response.data }));
       }
     })
     .catch((e) => {
@@ -113,18 +110,16 @@ export const PartProfileInfo = () => (dispatch) => {
     .then((response) => {
       dispatch(Loading(true));
       if (response.data) {
-        console.log('response.data', response.data)
-        const { name, age, location, income, headset, profession } = response.data;
-        dispatch(PartInfo({ name, age, location, income, headset, profession }));
+        dispatch(PartInfo({ ...response.data }));
       }
     })
     .catch((e) => {
-      // if (e.response.status === 401) {
-      //   localStorage.clear();
-      //   if (typeof window !== 'undefined') {
-      //     window.location = '/'
-      //   }
-      // }
+      if (e.response.status === 401) {
+        localStorage.clear();
+        if (typeof window !== 'undefined') {
+          window.location = '/'
+        }
+      }
     })
     .finally(() => {
       dispatch(Loading(false));

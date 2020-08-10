@@ -1,83 +1,68 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
-import userImg from "../../../../../images/user.svg";
+import React, { useEffect, useState } from "react"
 import {
   Button,
   Input,
   InputNumber,
   Slider,
-  Upload,
   Select,
   Form,
-  Skeleton,
-} from "antd";
+  Skeleton
+} from "antd"
 import {
   countryVariants,
   headsetsVariants,
   professionsList,
-} from "../../../../../modules/session/data";
+} from "../../../../../modules/session/data"
 import {
   AllCasesInfo,
   EditCaseInfo,
-} from "../../../../../modules/session/cases-reducer";
-import Loader from "../../../../Loader/loader";
-import { useDispatch, useSelector } from "react-redux";
-import Header from "../../header";
+} from "../../../../../modules/session/cases-reducer"
+import Loader from "../../../../Loader/loader"
+import { useDispatch, useSelector } from "react-redux"
+import userPng from '../../../../../images/user.svg'
+
 import { Link } from "react-router-dom";
+import Header from '../../header'
 const { TextArea } = Input;
 
 const EditCase = ({ id }) => {
-  const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   const [isStudiesBtnActive] = useState(true);
+  const [loadingBtn, setLoadingBtn] = useState(false);
+  const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
+  console.log('loadingBtn', loadingBtn);
+
   const isLoading = useSelector((state) => state.auth.isLoading);
-  let filteredCases = [];
+  const [filteredCases, setFilteredCases] = useState({})
 
   let dispatch = useDispatch();
 
-  if (allCaseStudies) {
-    filteredCases = allCaseStudies?.filter((item) => {
-      return item._id === id;
-    });
-  }
-  console.log(filteredCases);
-  filteredCases = filteredCases.length ? filteredCases[0] : [];
+  useEffect(() => {
+    const filtredData = allCaseStudies?.filter(item => item._id === id)
+
+    setFilteredCases(filtredData.length ? filtredData[0] : {})
+  }, [allCaseStudies])
 
   useEffect(() => {
     AllCasesInfo()(dispatch);
   }, []);
 
   const successFillForm = (props) => {
-    console.log(props);
-    EditCaseInfo({ ...props, id: id })(dispatch);
+    setLoadingBtn(true)
+    EditCaseInfo({ ...props, id })(dispatch);
+
+    setLoadingBtn(false)
   };
 
-  const uploadProps = {
-    action: "https://varapan.herokuapp.com/api/case/add",
-  };
   const layout = {
     labelCol: { span: 20 },
     wrapperCol: { span: 16 },
   };
 
-  // const props = {
-  //   name: 'file',
-  //   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  //   headers: {
-  //     authorization: 'authorization-text',
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status === 'done') {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === 'error') {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
-  return (
-    <>
-      {isLoading ? (
+  return <>
+      {!filteredCases.title ?
         <Skeleton active />
-      ) : (
+       :
         <div className="root-EditCase">
           <Header isStudiesBtnActive={isStudiesBtnActive}/>
           <div className="personal-stats__wrapper">
@@ -85,12 +70,12 @@ const EditCase = ({ id }) => {
               <div className="personal-stats__personal-heading">
                 Edit Research Studies
               </div>
+              <div className='case-study-image'><img src={filteredCases.avatarUrl ? filteredCases.avatarUrl : userImg} style={{width: 200, height: 200, borderRadius: '50%'}} alt="userImg" /></div>
               <Form
                 {...layout}
                 name="basic"
                 initialValues={{
                   remember: true,
-                  id: id,
                   title: filteredCases.title,
                   description: filteredCases.description,
                   location: filteredCases.location,
@@ -102,27 +87,12 @@ const EditCase = ({ id }) => {
                 }}
                 onFinish={successFillForm}
               >
-                <Form.Item>
-                  <div className="personal-stats__info-img">
-                    <img src={userImg} alt="userImg" />
-                    <div className="personal-stats__upload-btns">
-                      <Upload>
-                        <Button className="file-upload-btn" type="primary">
-                          Upload Image
-                        </Button>
-                      </Upload>
-                    </div>
-                  </div>
-                </Form.Item>
-                <Form.Item>
-                  <div className="personal-stats__info-img">
-                    <Upload {...uploadProps}>
-                      <Button className="file-upload-btn">
-                        Upload VR File
-                      </Button>
-                    </Upload>
-                  </div>
-                </Form.Item>
+                <Form.Item name="avatarUrl">
+              <Input type="file" id="input" multiple />
+            </Form.Item>
+            <Form.Item name="inputVrFile">
+             <Input type="file" id="input-vr" multiple />
+            </Form.Item>
 
                 <div className="personal-stats__blocks-wrapper">
                   <div className="personal-stats__left-block">
@@ -283,7 +253,7 @@ const EditCase = ({ id }) => {
                       className="personal-stats__create-research-btn"
                       htmlType="submit"
                     >
-                      {isLoading ? <Loader /> : "Save Changes"}
+                      {loadingBtn ? <Loader /> : "Save Changes"}
                     </Button>
                     <Link to={"/researcher-studies"}>
                       <Button>Close</Button>
@@ -294,9 +264,8 @@ const EditCase = ({ id }) => {
             </div>
           </div>
         </div>
-      )}
+      }
     </>
-  );
 };
 
 export default EditCase;

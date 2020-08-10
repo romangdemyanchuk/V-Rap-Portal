@@ -15,12 +15,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../Loader/loader";
 import Header from "./../header";
+import { Redirect } from 'react-router';
 
 const ParticipantProfile = () => {
   const partData = useSelector(state => state.main.partInfo);
   console.log('partData', partData);
   const [isProfileBtnActive] = useState(true);
-  let { name, age, location, income, headset, profession } = partData;
+  let { name, age, location, income, headset, profession, type } = partData;
+  console.log(partData, 'profession')
 
   const isLoading = useSelector(state => state.auth.isLoading);
 
@@ -38,8 +40,9 @@ const ParticipantProfile = () => {
 
   const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
 
-  return (
-    <>
+if (!type) return <Skeleton active />
+
+  return <>
       {isLoading ? (
         <Skeleton active />
       ) : (
@@ -60,12 +63,12 @@ const ParticipantProfile = () => {
                   {...layout}
                   name="control-hooks"
                   initialValues={{
-                    name: name,
-                    age: age,
-                    location: location === '' ? undefined : location,
-                    income: income,
-                    headset: headset === '' ? undefined : headset,
-                    profession: profession === '' ? undefined : profession
+                    name,
+                    age,
+                    location: location ? location : undefined,
+                    income,
+                    headset: headset ? headset : undefined,
+                    profession: profession ? profession : undefined
                   }}
                   onFinish={formIsValid}
                 >
@@ -155,17 +158,11 @@ const ParticipantProfile = () => {
                     <Select
                       mode="multiple"
                       placeholder="Please select profession"
-                      optionLabelProp="label"
+                      multiple
                     >
-                      {professionsList.map((p) => (
-                        <Select.Option
-                          value={p.value}
-                          label={p.label}
-                          key={p.value}
-                        >
-                          <div className="demo-option-label-item">
-                            {p.value}
-                          </div>
+                      {professionsList.map( p => (
+                        <Select.Option value={p.value} title={p.label} key={p.value}>
+                          {p.value}
                         </Select.Option>
                       ))}
                     </Select>
@@ -191,7 +188,6 @@ const ParticipantProfile = () => {
         </div>
       )}
     </>
-  );
 };
 
 const AuthRedirectComponent = WithAuthRedirect(ParticipantProfile);
