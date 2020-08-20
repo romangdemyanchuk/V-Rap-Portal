@@ -1,18 +1,34 @@
 /* eslint-disable */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import "./adminPage.scss";
-import { useSelector } from 'react-redux'
-import { AllCasesInfo } from '../../../modules/session/cases-reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { AllCasesInfo, PendingCasesCount } from '../../../modules/session/cases-reducer'
 
 // useEffect(() => {
 //   AllCasesInfo()(dispatch);
 // }, [allCaseStudies.status]);
 
+// e/
+
 const AdminPage = () => {
   const countOfPendingCases = useSelector((state) => state.cases.pendingCasesCount);
+  const [filteredCases, setFilteredCases] = useState([])
+  const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
+  const dispatch = useDispatch();
   console.log('countOfPendingCases', countOfPendingCases)
+
+  useEffect(() => {
+    AllCasesInfo()(dispatch);
+  }, []);
+
+  useEffect(() => {
+    const filteredInfo = allCaseStudies?.filter(item => item.status === 0)
+    setFilteredCases(filteredInfo ? filteredInfo: {})
+    PendingCasesCount(filteredInfo.length)(dispatch)
+  }, [allCaseStudies])
+
   return (
     <>
       <div className="admin-page">

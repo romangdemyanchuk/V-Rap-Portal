@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import "./pendingCase.css";
 import { AllCasesInfo, PendingCasesCount } from '../../../../modules/session/cases-reducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Skeleton, Table } from 'antd'
-import { caseStudiesColumns as list, caseStudiesColumns } from '../../../../modules/session/data'
+import { Button, Table } from 'antd'
+import { caseStudiesColumns as list } from '../../../../modules/session/data'
 import CaseStudiesChanges from '../ListOfCaseStudies/CaseStudiesChanges'
 import { Link } from 'react-router-dom'
 
@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom'
 
 
 const PendingCase = () => {
-  // let filteredCases = [];
   const [filteredCases, setFilteredCases] = useState([])
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [caseId, setCaseId] = useState(null);
@@ -34,10 +33,10 @@ const PendingCase = () => {
     PendingCasesCount(filtredInfo.length)(dispatch)
   }, [allCaseStudies])
   return (
-    <>
-      {isLoading ? (
-        <Skeleton active className="tableLoader" />
-      ) : (
+    // <>
+    //   {isLoading ? (
+    //     <Skeleton active className="tableLoader" />
+    //   ) : (
     <div>
       {
         caseId &&
@@ -54,8 +53,8 @@ const PendingCase = () => {
       </div>
      <Table rowKey={'_id'} dataSource={filteredCases} columns={caseStudiesColumns}/>
     </div>
-      )}
-    </>
+    //   )}
+    // </>
   )
 };
 

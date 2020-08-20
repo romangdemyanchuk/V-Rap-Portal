@@ -3,19 +3,18 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {  caseStudiesColumns as list } from '../../../../modules/session/data'
 import "./listOfCaseStudies.css";
-import { AllCasesInfo, EditCaseInfo, ResultOfCase } from '../../../../modules/session/cases-reducer'
+import { AllCasesInfo, ResultOfCase } from '../../../../modules/session/cases-reducer'
 import CaseStudiesChanges from '../ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges'
-import { Button, Skeleton, Table } from 'antd'
-import { outPutBtn } from '../../../../utils/output'
+import { Button, Table } from 'antd'
 import DeleteModal from '../ListOfResearchers/ResearcherChanges/DeleteModal'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 
 export const status = (status) => {
-  if (status == 0) return <div>Pending</div>;
-  else if (status == 1) return <div>Rejected</div>;
-  else if (status == 2) return <div>In Progress</div>;
-  else if (status == 3) return <div>Closed</div>;
+  if (status === 0) return <div>Pending</div>;
+  else if (status === 1) return <div>Rejected</div>;
+  else if (status === 2) return <div>In Progress</div>;
+  else if (status === 3) return <div>Closed</div>;
 };
 
 export const ViewResultCase = () => {
@@ -60,10 +59,10 @@ const ListOfCaseStudies = () => {
   //   }
   // }
   return (
-    <>
-      {isLoading ? (
-        <Skeleton active className="tableLoader" />
-      ) : (
+    // <>
+    //   {isLoading ? (
+    //     <Skeleton active className="tableLoader" />
+    //   ) : (
     <div className="main-page-wrapper">
       {
         status === 0 &&
@@ -86,8 +85,8 @@ const ListOfCaseStudies = () => {
       </div>
       <Table rowKey={'_id'} dataSource={allCaseStudies} columns={caseStudiesColumns}/>
     </div>
-      )}
-    </>
+    //   )}
+    // </>
   );
 };
 export default ListOfCaseStudies;
