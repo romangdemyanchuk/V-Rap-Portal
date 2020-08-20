@@ -1,12 +1,12 @@
 /* eslint-disable */
-import { USER_INFO, PART_INFO } from "./session-constants";
+import { USER_INFO, PART_INFO, DISABLE_BUTTONS, ALL_USERS, ALL_RESEARCHERS } from "./session-constants";
 import {
   EditUserInfoApi,
   UserInfoApi,
   PartInfoApi,
   EditPartApi,
-  getAllUsers,
-} from "../../api";
+  getAllUsers, getResearchers,
+} from '../../api'
 import { UserInfo, PartInfo, Loading } from "./session-actions";
 import { infoAction } from "../../utils/notification";
 
@@ -17,6 +17,8 @@ const initialState = {
   userInfo: {},
   partInfo: {},
   listOfResearcher: [],
+  listOfAdmins: [],
+  isDisableButtons:true
 };
 
 const MainReducer = (state = initialState, action) => {
@@ -31,24 +33,36 @@ const MainReducer = (state = initialState, action) => {
         ...state,
         partInfo: action.payload,
       };
+    case ALL_USERS:
+      return {
+        ...state,
+        listOfAdmins: action.payload,
+      };
     case ALL_RESEARCHERS:
       return {
         ...state,
         listOfResearcher: action.payload,
       };
+    case DISABLE_BUTTONS:
+      return {
+        ...state,
+        isDisableButtons: action.payload,
+      };
+
     default:
       return state;
   }
 };
 export default MainReducer;
 
-export const EditResearcherProfile = (data) => (dispatch) => {
+export const EditResearcherProfile = (data, callback) => (dispatch) => {
+  // dispatch(Loading(true));
   EditUserInfoApi(data)
     .then((response) => {
-      if (response) {
-        dispatch(UserInfo(response));
-        infoAction("Your information is successfully updated!", "/researcher-profile");
-      }
+      // dispatch(Loading(false));
+      dispatch(UserInfo(response));
+      infoAction("Your information is successfully updated!", "");
+      callback(false)(dispatch)
     })
     .catch((e) => {
       if (e.response && e.response.data) {
@@ -57,47 +71,44 @@ export const EditResearcherProfile = (data) => (dispatch) => {
     })
     .finally(() => {
       dispatch(Loading(false));
-
     });
 };
 
-export const EditParticipantProfile = (data) => (dispatch) => {
-  console.log(data)
+export const EditParticipantProfile = (data, callback) => (dispatch) => {
+  // dispatch(Loading(true));
   EditPartApi(data)
     .then((response) => {
-      if (response) {
-        dispatch(PartInfo(response.data));
-        infoAction("Your information is successfully updated!", "");
-
-      }
+      // dispatch(Loading(false));
+      dispatch(PartInfo(response.data));
+      infoAction("Your information is successfully updated!", "participant-profile");
+      callback(false)(dispatch)
     })
     .catch((e) => {
-        if (e.response.status === 401) {
-          localStorage.clear();
-          if (typeof window !== 'undefined') {
-            window.location = '/'
-          }
-        }
+      if (e.response && e.response.data) {
+        infoAction(e.response.data.message, "");
+      }
     })
     .finally(() => {
       dispatch(Loading(false));
     });
 };
 
-export const ResearcherProfileInfo = (token) => (dispatch) => {
-  UserInfoApi(token)
+export const UsersInfo = () => (dispatch) => {
+  dispatch(Loading(false));
+  UserInfoApi()
     .then((response) => {
       dispatch(Loading(true));
       if (response.data) {
-        dispatch(UserInfo({ ...response.data }));
+        const { area, name, school } = response.data;
+        dispatch(UserInfo({ area, school, name }));
       }
     })
     .catch((e) => {
       if (e.response.status === 401) {
         localStorage.clear();
-        if (typeof window !== 'undefined') {
-          window.location = '/'
-        }
+        // if (typeof window !== 'undefined') {
+        //   window.location = '/'
+        // }
       }
     })
     .finally(() => {
@@ -106,35 +117,54 @@ export const ResearcherProfileInfo = (token) => (dispatch) => {
 };
 
 export const PartProfileInfo = () => (dispatch) => {
+  dispatch(Loading(false));
   PartInfoApi()
     .then((response) => {
       dispatch(Loading(true));
       if (response.data) {
-        dispatch(PartInfo({ ...response.data }));
+        const { name, age, location, income, headset, profession } = response.data;
+        dispatch(PartInfo({ name, age, location, income, headset, profession }));
       }
     })
     .catch((e) => {
-      if (e.response.status === 401) {
-        localStorage.clear();
-        if (typeof window !== 'undefined') {
-          window.location = '/'
-        }
-      }
+      // if (e.response.status === 401) {
+      //   localStorage.clear();
+      //   if (typeof window !== 'undefined') {
+      //     window.location = '/'
+      //   }
+      // }
     })
     .finally(() => {
       dispatch(Loading(false));
     });
 };
 
-//Admin
-const ALL_RESEARCHERS = "ALL-RESEARCHERS";
+const allUsersAC = (data) => ({ type: ALL_USERS, payload: data });
 
+export const allUsers = () => dispatch => {
+  dispatch(Loading(true));
+  getAllUsers().then( response => {
+    dispatch(Loading(false));
+    if (response) {
+      dispatch(allUsersAC(response.data));
+    }
+  })
+}
 const allResearchersAC = (data) => ({ type: ALL_RESEARCHERS, payload: data });
 
-export const allResearchers = () => dispatch => {
-  getAllUsers().then( response => {
+export const researcherUsers = () => dispatch => {
+  dispatch(Loading(true));
+  getResearchers().then( response => {
+    dispatch(Loading(false));
     if (response) {
       dispatch(allResearchersAC(response.data));
     }
   })
+  dispatch(Loading(false));
+}
+
+const isButtonDisabledAC = (value) => ({ type: DISABLE_BUTTONS, payload: value });
+
+export const ChangeIsButtonDisabled = (value) => dispatch => {
+      dispatch(isButtonDisabledAC(value));
 }

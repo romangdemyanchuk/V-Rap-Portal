@@ -1,22 +1,9 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import {
-  Input,
-  Button,
-  Slider,
-  InputNumber,
-  Upload,
-  Form,
-  message,
-  Select,
-} from "antd";
+import {  Input,  Button,  Slider,  InputNumber,  Upload,  Form,  message,  Select,} from "antd";
 import WithAuthRedirect from "../../../../../hoc/hoc";
 import "./createNewCase.scss";
-import {
-  countryVariants,
-  headsetsVariants,
-  professionsList,
-} from "../../../../../modules/session/data";
+import {  countryVariants,  headsetsVariants,  professionsList,} from "../../../../../modules/session/data";
 import { NewCaseInfo } from "../../../../../modules/session/cases-reducer";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../../Loader/loader";
@@ -25,7 +12,6 @@ import { Link } from "react-router-dom";
 import userPng from '../../../../../images/user.svg'
 
 const CreateNewCase = () => {
-
   const { TextArea } = Input;
   let dispatch = useDispatch();
 
@@ -33,38 +19,31 @@ const CreateNewCase = () => {
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const successFillForm = (props) => {
-    const {
-      title,
-      income,
-      description,
-      location,
-      participant,
-      age,
-      headset,
-      profession,
-    } = props;
-    NewCaseInfo({title,description,location,age,income,participant,headset,profession},
+
+    const {title, income, description, location, participant,
+      age, headset, profession} = props;
+    NewCaseInfo(
+      {title, description, location, age, income, participant,
+        headset, profession},
     )(dispatch);
   };
-
   const layout = {
     labelCol: { span: 20 },
     wrapperCol: { span: 16 },
   };
 
-  let token = localStorage.getItem("userLoginToken");
-  
-
   return (
-    <div className="root-PersonalStats">
+    <div className="root-PersonalStats" >
       <Header isStudiesBtnActive={isStudiesBtnActive}/>
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
+
           <div className="personal-stats__personal-heading">
             Create Research Studies
           </div>
           <div className='case-study-image'><img src={userPng} alt='case-study-png'/></div>
           <Form
+            // action="javascript: void(null)"
             {...layout}
             name="basic"
             initialValues={{ remember: true }}
@@ -74,7 +53,7 @@ const CreateNewCase = () => {
               <Input type="file" id="input" multiple />
             </Form.Item>
             <Form.Item name="inputVrFile">
-             <Input type="file" id="input-vr" multiple />
+              <Input type="file" id="input-vr" multiple />
             </Form.Item>
             <div className="personal-stats__blocks-wrapper">
               <div className="personal-stats__left-block">
@@ -210,13 +189,15 @@ const CreateNewCase = () => {
             </div>
             <Form.Item>
               <div className="personal-stats__footer-btns create-case-btns">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="personal-stats__create-research-btn"
-                >
-                  {isLoading ? <Loader /> : "Create Research Study"}
-                </Button>
+                {/*<Link to={'/researcher-studies'}>*/}
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="personal-stats__create-research-btn"
+                  >
+                    {isLoading ? <Loader /> : "Create Research Study"}
+                  </Button>
+                {/*</Link>*/}
                 <Link to={"/researcher-studies"}>
                   <Button>Close</Button>
                 </Link>

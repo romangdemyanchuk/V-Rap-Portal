@@ -2,6 +2,7 @@
 import React from "react";
 import { notification } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
+import { Redirect } from 'react-router'
 
 export const infoAction = (error_info, redirect_to) => {
   const openNotification = () => {
@@ -13,7 +14,8 @@ export const infoAction = (error_info, redirect_to) => {
   };
 
   openNotification();
-  if (typeof window !== 'undefined' && redirect_to !== '') {
-    window.location = `${redirect_to}`
-  }
+  return <Redirect to={redirect_to} />
+  // if (typeof window !== 'undefined' && redirect_to !== '') {
+  //   window.location = `${redirect_to}`
+  // }
 };

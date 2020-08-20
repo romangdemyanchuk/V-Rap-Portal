@@ -1,46 +1,26 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Upload, message, Button, Modal } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Button, Input, Modal } from 'antd'
 import AboutStudies from "./SuccessUploadModal";
 import "./fileUpload.scss";
 import "antd/dist/antd.css";
-import { fileUploading } from "../../../../../modules/session/cases-reducer";
+import {UploadResults} from '../../../../../api/index'
 import { useDispatch } from "react-redux";
 
-const FileUpload = ({ modalOpen, setmodalOpen, caseId }) => {
+
+
+const FileUpload = ({ modalOpen, setmodalOpen }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
   const closeModal = () => {
     setmodalOpen(false);
   }
-// const dispatch = useDispatch()
-//   const fileSelected = event => {
-//     fileUploading(event.target.files[0])(dispatch)
-//   }
-
-const token = localStorage.getItem('userLoginToken')
-
-const props = {
-  name: 'uploads',
-  action: 'https://test-for-roman.herokuapp.com/api/users/results',
-  method: 'post',
-  data: { id: caseId} ,
-  headers: {
-    authorization: token,
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-
+const dispatch = useDispatch();
+  const fileSelected = event => {
+    console.log(event.target);
+    UploadResults(event.target.files[0])(dispatch)
+  }
   return (
     <div className="root-FileUpload">
       <AboutStudies
@@ -57,11 +37,8 @@ const props = {
           Upload the exported files from the simulation that are located on your
           desktop to receive your gift card
         </div>
-        <Upload {...props}>
-          <Button>
-            <UploadOutlined /> Click to Upload
-          </Button>
-        </Upload>
+        <Input type="file" id="uploads" multiple onChange={fileSelected}/>
+        {/*<input type="file" />*/}
       </Modal>
     </div>
   );

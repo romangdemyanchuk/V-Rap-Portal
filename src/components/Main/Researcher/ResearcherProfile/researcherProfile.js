@@ -4,26 +4,36 @@ import { Input, Button, Form, Skeleton } from "antd";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import {
   EditResearcherProfile,
-  ResearcherProfileInfo,
+  UsersInfo,
+  ChangeIsButtonDisabled
 } from "../../../../modules/session/main-reducer";
 import Loader from "../../../Loader/loader";
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from "react-redux";
+import changeIsButtonDisabled from "../../../../modules/session/main-reducer"
 import Header from "./../header";
 
 const ResearcherProfile = () => {
-  const userData = useSelector((state) => state.main.userInfo);
+  const { name, school, area }  = useSelector((state) => state.main.userInfo);
+  const disableButtons = useSelector((state) => state.main.isDisableButtons);
+  // const [loadingBtn, setLoadingBtn] = useState(false);
+  // console.log('loadingBtn', loadingBtn)
   const [isProfileBtnActive] = useState(true);
-  const { name, school, area, type } = userData;
+
 
   const isLoading = useSelector((state) => state.auth.isLoading);
+  // console.log(isLoading)
   let dispatch = useDispatch();
 
-  let token = localStorage.getItem("userLoginToken");
-
   useEffect(() => {
-    ResearcherProfileInfo(token)(dispatch);
+    UsersInfo()(dispatch);
   }, []);
+
+  useEffect(() =>{
+    if (name && school && area) {
+      ChangeIsButtonDisabled(false)(dispatch)
+    }
+  }, [name, school, area, disableButtons])
 
   const layout = {
     labelCol: {
@@ -33,17 +43,21 @@ const ResearcherProfile = () => {
       span: 16,
     },
   };
-
   const formIsValid = (props) => {
-    EditResearcherProfile({ ...props })(dispatch);
+    // setLoadingBtn(true)
+    EditResearcherProfile({ ...props }, ChangeIsButtonDisabled)(dispatch);
+    // setLoadingBtn(false)
   };
 
-  if(!type) return <Skeleton active />
 
-  return <>
+  return (
+    <>
+      {isLoading ? (
+        <Skeleton active />
+      ) : (
         <div className="root-ResearcherProfile">
           <Header
-            disableButtons={!name || !area || !school}
+            disableButtons={disableButtons}
             isProfileBtnActive={isProfileBtnActive}
           />
           <div className="researcher-profile__personal-fields-wrapper">
@@ -106,8 +120,10 @@ const ResearcherProfile = () => {
             </Form>
           </div>
         </div>
-</>
-}
+      )}
+    </>
+  );
+};
 
 const AuthRedirectComponent = WithAuthRedirect(ResearcherProfile);
 

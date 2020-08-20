@@ -1,88 +1,192 @@
 /*eslint-disable*/
 import React from "react";
-import { ChangingStatusAdmin, deleteResearcher } from '../../api'
+import { CaseDownload, ChangingStatusAdmin, deleteResearcher } from '../../api'
 import { status } from '../../components/Admin/AdminPage/ListOfCaseStudies/listOfCaseStudies'
+import ListOfResearchers from '../../components/Admin/AdminPage/ListOfResearchers/listOfResearchers'
+import CaseStudiesChanges from "../../components/Admin/AdminPage/ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges"
+import { DeleteResearcher, DownloadCase, EditResearcher } from './cases-reducer'
+import { useDispatch } from 'react-redux'
+import store from '../store/create-store'
+import { USER_INFO } from './session-constants'
+import { Link } from 'react-router-dom'
+const {dispatch} = store
 
 
-export const caseStudiesColumns = (modalsOpen) => ({
+export const statusOfCase = (status) => {
+  switch (status) {
+    case 0:
+      return  'Edit Case';
+    case 1:
+      return  'Edit Case';
+    case 2:
+      return  'View Results';
+    case 3:
+      return  'Delete';
+  }
+}
+export const caseStudiesResults = [
+  {
+    title: "Title",
+    dataIndex: "title",
+    key: "title",
+  },
+  // {
+  //   title: "Description",
+  //   dataIndex: "description",
+  //   key: "description",
+  // },
+  {
+    title: "Location",
+    dataIndex: "location",
+    key: "location",
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    key: "age",
+    render: (text,record) => <span>{record.age[0]} - {record.age[1] || '---'}</span>
+  },
+  {
+    title: "Income",
+    dataIndex: "income",
+    key: "income",
+    render: (text,record) => <span>{record.income[0]} - {record.income[1] || '---'}</span>
+  },
+  // {
+  //   title: "Headset",
+  //   dataIndex: "headset",
+  //   key: "headset",
+  // },
+  // {
+  //   title: "Profession",
+  //   dataIndex: "profession",
+  //   key: "profession",
+  // },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    render: (text,record) => <span>{status(record.status)}</span>,
+  },
+  // {
+  //   title: "Participant",
+  //   dataIndex: "participant",
+  //   key: "participant",
+  // },
+]
+
+export const caseStudiesColumns = (setCaseId, setStatus) => ({
   caseStudiesColumns: [
     {
       title: "Title",
       dataIndex: "title",
       key: "title",
+      render: (text,record) => <span>{record.title ? record.title : '---'}</span>,
     },
     {
       title: "VR File",
       dataIndex: "vr_file",
       key: "vr_file",
-      render: () => <a onClick={() => modalsOpen(true)}>Download</a>,
+      render: (text,record) =>
+      <a onClick={() =>
+        CaseDownload(record)}>
+        Download
+      </a>,
     },
     {
       title: "Created at",
-      dataIndex: "created",
-      key: "created",
-      render: () => <span>not implemented yet</span>,
+      dataIndex: "data",
+      key: "data",
+      render: (text,record) => <span>{record.data}</span>,
+
     },
     {
       title: "Location",
       key: "location",
       dataIndex: "location",
-      render: (text,record) => <span>{record.location[0]} - {record.location[1]}</span>
+      render: (text,record) => <span>{record.location || '---'}</span>,
     },
     {
       title: "Age",
       key: "age",
       dataIndex: "age",
-      render: (text,record) => <span>{record.age[0]} - {record.age[1]}</span>
+      render: (text,record) => <span>{record.age[0]}  {record.age[1] || '---'}</span>
     },
     {
       title: "Average Income",
       key: "income",
       dataIndex: "income",
-      render: (text,record) => <span>{record.income[0]} - {record.income[1]}</span>
+      render: (text,record) => <span>{record.income[0]}  {record.income[1] || '---'}</span>
     },
     {
       title: "Status",
       key: "status",
       dataIndex: "status",
-      render: (text,record) => <span>{status(record.status)}</span>,
+      render: (text,record) => <span>{status(record.status) || '---'}</span>,
     },
     {
       title: "Participated",
       key: "participant",
       dataIndex: "participant",
+      render: (text,record) => <span>{'---'}</span>
     },
     {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
-      render: (text, record) => <a onClick={() => ChangingStatusAdmin(record._id)}>Accept Case Study</a>,
+      render: (text,record) => <a
+        onClick={() => {
+        setCaseId(record._id)
+        setStatus(record.status)
+      }
+      } > {
+        // <Link to={`/case-results/${record._id}`}>
+          statusOfCase(record.status)
+        // </Link>
+
+      }
+
+      </a>
     },
   ],
 });
 
-export const researcherListColumns = (modalsOpen) => ({
+export const researcherListColumns = (modalsOpen, setCaseId) => ({
   researcherListColumns: [
+    {
+      title: "E-mail",
+      dataIndex: "login",
+      key: "login",
+      render: (text,record) => <span>{record.login || '---'}</span>
+    },
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      render: (text,record) => <span>{record.name || '---'}</span>
     },
     {
       title: "School/Institution Name",
       dataIndex: "school",
       key: "school",
+      render: (text,record) => <span>{record.school || '---'}</span>
     },
     {
       title: "Area of Research",
       dataIndex: "area",
       key: "area",
+      render: (text,record) => <span>{record.area || '---'}</span>
     },
     {
       title: "Actions",
       key: "actions",
       dataIndex: "actions",
-      render: (text,record) => <a onClick={() => deleteResearcher(record._id)}>Delete</a>,
+      render: (text,record) => <a onClick={() => {
+        modalsOpen(true)
+        setCaseId(record._id)
+      }
+      } >Delete</a>,
+
     },
   ],
 });

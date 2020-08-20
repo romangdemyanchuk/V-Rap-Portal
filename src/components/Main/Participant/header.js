@@ -8,9 +8,9 @@ import "./header.css";
 const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive }) => {
   const logOut = () => {
     localStorage.clear();
-    if (typeof window !== "undefined") {
-      window.location = "/";
-    }
+    // if (typeof window !== "undefined") {
+    //   window.location = "/";
+    // }
   };
   return (
     <div className="participant-profile__btns-wrapper">

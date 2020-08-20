@@ -1,10 +1,18 @@
 /* eslint-disable */
-import React from "react";
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import "./adminPage.scss";
+import { useSelector } from 'react-redux'
+import { AllCasesInfo } from '../../../modules/session/cases-reducer'
+
+// useEffect(() => {
+//   AllCasesInfo()(dispatch);
+// }, [allCaseStudies.status]);
 
 const AdminPage = () => {
+  const countOfPendingCases = useSelector((state) => state.cases.pendingCasesCount);
+  console.log('countOfPendingCases', countOfPendingCases)
   return (
     <>
       <div className="admin-page">
@@ -25,16 +33,20 @@ const AdminPage = () => {
               All Case Studies
             </Button>
           </Link>
-          <Button
-            type="button"
-            className="main-block-btn pending btn btn-light"
-          >
-            Pending Case Studies
-            <div className="case-studies-count">3</div>
-          </Button>
-          <Button type="button" className="main-block-btn btn btn-light">
-            List of Admin Users
-          </Button>
+          <Link to={"/pending-case"}>
+            <Button
+              type="button"
+              className="main-block-btn pending btn btn-light"
+            >
+              Pending Case Studies
+              <div className="case-studies-count">{countOfPendingCases}</div>
+            </Button>
+          </Link>
+          <Link to={'/admin-users'}>
+            <Button type="button" className="main-block-btn btn btn-light">
+              List of Admin Users
+            </Button>
+          </Link>
         </div>
       </div>
     </>

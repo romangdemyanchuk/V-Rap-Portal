@@ -9,22 +9,22 @@ import {
   professionsList,
 } from "../../../../modules/session/data";
 import {
-  EditParticipantProfile,
+  ChangeIsButtonDisabled,
+  EditParticipantProfile, EditResearcherProfile,
   PartProfileInfo,
-} from "../../../../modules/session/main-reducer";
+} from '../../../../modules/session/main-reducer'
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../Loader/loader";
 import Header from "./../header";
-import { Redirect } from 'react-router';
 
 const ParticipantProfile = () => {
   const partData = useSelector(state => state.main.partInfo);
-  console.log('partData', partData);
+  const disableButtons = useSelector((state) => state.main.isDisableButtons);
   const [isProfileBtnActive] = useState(true);
-  let { name, age, location, income, headset, profession, type } = partData;
-  console.log(partData, 'profession')
+  let { name, age, location, income, headset, profession, type  } = partData;
 
   const isLoading = useSelector(state => state.auth.isLoading);
+  console.log(isLoading)
 
   const dispatch = useDispatch();
 
@@ -32,17 +32,22 @@ const ParticipantProfile = () => {
     PartProfileInfo()(dispatch);
   }, []);
 
+  useEffect(() =>{
+    if (name && age && location && income && headset && profession) {
+      ChangeIsButtonDisabled(false)(dispatch)
+    }
+  }, [name, age, location, income, headset, profession, type])
+
   const formIsValid = (props) => {
-    EditParticipantProfile({
-      ...props,
-    })(dispatch);
+    EditParticipantProfile({...props }, ChangeIsButtonDisabled)(dispatch);
   };
 
   const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
 
-if (!type) return <Skeleton active />
+  // if (!type) return <Skeleton active />
 
-  return <>
+  return (
+    <>
       {isLoading ? (
         <Skeleton active />
       ) : (
@@ -50,7 +55,7 @@ if (!type) return <Skeleton active />
           <Header
             profile={"/participant-profile"}
             studies={"/participant-studies"}
-            disableButtons={!name || !age || !location || !income || !headset || !profession}
+            disableButtons={disableButtons}
             isProfileBtnActive={isProfileBtnActive}
           />
           <div className="participant-profile__personal-info-block">
@@ -63,12 +68,12 @@ if (!type) return <Skeleton active />
                   {...layout}
                   name="control-hooks"
                   initialValues={{
-                    name,
-                    age,
-                    location: location ? location : undefined,
-                    income,
-                    headset: headset ? headset : undefined,
-                    profession: profession ? profession : undefined
+                    name: name,
+                    age: age,
+                    location: location  ? [location] : undefined,
+                    income: income,
+                    headset: headset  ? [headset] : undefined,
+                    profession: profession  ? profession : undefined
                   }}
                   onFinish={formIsValid}
                 >
@@ -158,11 +163,17 @@ if (!type) return <Skeleton active />
                     <Select
                       mode="multiple"
                       placeholder="Please select profession"
-                      multiple
+                      optionLabelProp="label"
                     >
-                      {professionsList.map( p => (
-                        <Select.Option value={p.value} title={p.label} key={p.value}>
-                          {p.value}
+                      {professionsList.map(p => (
+                        <Select.Option
+                          value={p.value}
+                          label={p.label}
+                          key={p.value}
+                        >
+                          <div className="demo-option-label-item">
+                            {p.value}
+                          </div>
                         </Select.Option>
                       ))}
                     </Select>
@@ -188,6 +199,7 @@ if (!type) return <Skeleton active />
         </div>
       )}
     </>
+  );
 };
 
 const AuthRedirectComponent = WithAuthRedirect(ParticipantProfile);

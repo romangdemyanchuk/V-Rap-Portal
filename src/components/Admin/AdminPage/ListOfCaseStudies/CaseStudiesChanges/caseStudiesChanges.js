@@ -1,85 +1,164 @@
 /* eslint-disable */
-import React, { useState } from "react";
-import { message, Button, Modal, Input } from "antd";
+import React, { useEffect, useState } from 'react'
+import { message, Button, Modal, Input, Form, Select, Slider, Skeleton } from 'antd'
 import "antd/dist/antd.css";
 import DeleteModal from "../../ListOfResearchers/ResearcherChanges/DeleteModal";
+import {outPutBtn} from '../../../../../utils/output'
 import "./caseStudiesChanges.css";
+import { Link } from 'react-router-dom'
+import store from '../../../../../modules/store/create-store'
+import { AllCasesInfo, DeleteCaseInfo, EditCaseInfo } from '../../../../../modules/session/cases-reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { countryVariants } from '../../../../../modules/session/data'
+import { DeleteCaseApi } from '../../../../../api'
+import { Redirect } from 'react-router'
+import Loader from '../../../../Loader/loader'
 
-const CaseStudiesChanges = ({ modalOpen, setmodalOpen }) => {
-  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
-  const deleteClick = () => {
-    setmodalOpen(false);
-    setDeleteModalIsOpen(true);
-  };
+
+const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
+  // console.log(123, modalOpen)
+  const [filteredCases, setFilteredCases] = useState({})
+  const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
+  let dispatch = useDispatch();
+  useEffect(() => {
+    const filtredInfo = allCaseStudies?.find(item => item._id === id)
+    setFilteredCases(filtredInfo ? filtredInfo: {})
+  }, [id])
+
+  useEffect(() => {
+    AllCasesInfo()(dispatch);
+  }, []);
   const closeModal = () => {
-    setmodalOpen(false);
+    // setmodalOpen(false)
+    setFilteredCases({})
   };
-  const props = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        setmodalOpen(false);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
+  const layout = {
+    labelCol: { span: 20 },
+    wrapperCol: { span: 16 },
+  };
+  const successFillForm = (props) => {
+    EditCaseInfo({ ...props, id })(dispatch);
+    // setmodalOpen(false)
+    setFilteredCases({})
   };
   return (
-    <div>
-      <DeleteModal
-        deleteModalIsOpen={deleteModalIsOpen}
-        setDeleteModalIsOpen={setDeleteModalIsOpen}
-      />
-      <Modal
-        title="Admins Changes"
-        visible={modalOpen}
-        onOk={closeModal}
-        onCancel={closeModal}
-      >
-        <div className="case-studies-changes">
-          <div className="case-studies__fields-wrapper">
-            <p>Title</p>
-            <Input placeholder="Type here.." />
-          </div>
-          <div className="case-studies__fields-wrapper">
-            <p>Location</p>
-            <Input placeholder="Type here.." />
-          </div>
-          <div className="case-studies__fields-wrapper">
-            <p>Age</p>
-            <Input placeholder="Type here.." />
-          </div>
-          <div className="case-studies__fields-wrapper">
-            <p>Average Income</p>
-            <Input placeholder="Type here.." />
-          </div>
-          <div className="case-studies__fields-wrapper">
-            <p>Status</p>
-            <Input placeholder="Type here.." />
-          </div>
-          <div className="case-studies__changes-btns admin-modals-btns">
-            <Button className="save-btn" type="primary">
-              Save
-            </Button>
-            <Button
-              type="danger"
-              className="case-studies__cancel-btn"
-              onClick={deleteClick}
+    <>
+      {filteredCases.title && (
+        <Modal
+          title="Admins Changes"
+          visible={modalOpen}
+          onOk={closeModal}
+          onCancel={closeModal}
+        >
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{
+              remember: true,
+              title: filteredCases.title,
+              location: filteredCases.location,
+              age: filteredCases.age,
+              income: filteredCases.income,
+              participant: filteredCases.status
+            }}
+            onFinish={successFillForm}
+          >
+            <Form.Item
+              className="personal-stats__fields-wrapper"
+              label="Title"
+              name="title"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input title!",
+                },
+              ]}
             >
-              Delete
-            </Button>
-          </div>
-        </div>
-      </Modal>
-    </div>
+              <Input placeholder="Title"/>
+            </Form.Item>
+            <Form.Item
+              className="personal-stats__fields-wrapper"
+              label="Location"
+              name="location"
+            >
+              <Select
+                mode="multiple"
+                placeholder="Location"
+                optionLabelProp="label"
+                style={{ width: "100%" }}
+              >
+                {countryVariants.map((c) => (
+                  <Select.Option
+                    value={c.value}
+                    label={c.label}
+                    key={c.value}
+                  >
+                    <div className="demo-option-label-item">
+                      {c.value}
+                    </div>
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item
+              className="personal-stats__fields-wrapper"
+              label="Age"
+              name="age"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input range of age",
+                },
+              ]}
+            >
+              <Slider range/>
+            </Form.Item>
+            <Form.Item
+              className="personal-stats__fields-wrapper"
+              label="Average Income(USD)"
+              name="income"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input range of Average Income!",
+                },
+              ]}
+            >
+              <Slider range min={0} max={500000}/>
+            </Form.Item>
+            <Form.Item
+              className="personal-stats__fields-wrapper"
+              label="Status"
+              name="status"
+            >
+              <Input placeholder="Status"/>
+            </Form.Item>
+            <Form.Item>
+              <div className="case-studies-changes">
+                <div className="case-studies__changes-btns admin-modals-btns">
+                  <Button
+                    type="danger"
+                    className="case-studies__cancel-btn"
+                    onClick={closeModal}
+                  >
+                    Cancel
+                  </Button>
+                  <Button className="save-btn"
+                          type="primary"
+                          htmlType="submit"
+                  >
+                    Save
+                  </Button>
+                </div>
+              </div>
+            </Form.Item>
+          </Form>
+        </Modal>
+        )
+      }
+    </>
+
   );
 };
 export default CaseStudiesChanges;

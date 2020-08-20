@@ -15,8 +15,11 @@ const ParticipantRegisterForm = ({ setState }) => {
   const isAuthCheck = useSelector((state) => state.auth.isAuth);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
+
+  if (isAuthCheck) return infoAction("You successfully register and login :)",
+    "/participant-profile")
   if (isAuthCheck) {
-    return infoAction("Successfully registered, please log In :)", "/");
+    // return infoAction("Successfully registered, please log In :)", "/");
   }
 
   const handleSubmit = (values) => {
