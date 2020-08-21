@@ -16,8 +16,6 @@ const ParticipantStudies = () => {
   const [isStudiesBtnActive] = useState(true);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
-  console.log(isLoading, "isLoading");
-
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   console.log('allCaseStudies', allCaseStudies);
   let caseStatusName = (status) => {
@@ -41,7 +39,7 @@ const ParticipantStudies = () => {
         <Skeleton active />
       ) : (
         <div className="root-PartStudies">
-          <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen} />
+          <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
           <Header isStudiesBtnActive={isStudiesBtnActive}/>
           <div className="participant-studies__personal-heading">
             Research Studies

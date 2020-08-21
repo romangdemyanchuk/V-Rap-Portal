@@ -17,7 +17,7 @@ import Loader from '../../../../Loader/loader'
 
 
 const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
-  // console.log(123, modalOpen)
+  console.log(123, modalOpen)
   const [filteredCases, setFilteredCases] = useState({})
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   let dispatch = useDispatch();
@@ -30,7 +30,7 @@ const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
     AllCasesInfo()(dispatch);
   }, []);
   const closeModal = () => {
-    // setmodalOpen(false)
+    setmodalOpen(false)
     setFilteredCases({})
   };
   const layout = {
@@ -39,7 +39,7 @@ const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
   };
   const successFillForm = (props) => {
     EditCaseInfo({ ...props, id })(dispatch);
-    // setmodalOpen(false)
+    setmodalOpen(false)
     setFilteredCases({})
   };
   return (

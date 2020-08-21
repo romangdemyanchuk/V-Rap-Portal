@@ -5,7 +5,7 @@ import "antd/dist/antd.css";
 import "./researcherCreate.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Loader from "../../../../Loader/loader";
-import { RegisterRequest } from "../../../../../modules/session/auth-reducer";
+import { RegisterByAdmin, RegisterRequest } from '../../../../../modules/session/auth-reducer'
 import { Loading } from "../../../../../modules/session/session-actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +19,7 @@ const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
 
   const handleSubmit = (values) => {
     console.log(values);
-    RegisterRequest(values)(dispatch);
+    RegisterByAdmin(values)(dispatch);
   };
   return (
     <div className="root-ResearcherCreate">

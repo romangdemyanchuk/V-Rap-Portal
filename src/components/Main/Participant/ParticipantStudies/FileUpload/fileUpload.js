@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 
 const FileUpload = ({ modalOpen, setmodalOpen }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [fileInfo, setFileInfo] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   const closeModal = () => {
@@ -18,9 +19,14 @@ const FileUpload = ({ modalOpen, setmodalOpen }) => {
   }
 const dispatch = useDispatch();
   const fileSelected = event => {
-    console.log(event.target);
-    UploadResults(event.target.files[0])(dispatch)
+    debugger
+    setFileInfo(event.target.files[0]);
   }
+  const fileSend = () => {
+    console.log(fileInfo)
+    UploadResults(fileInfo)(dispatch)
+  }
+
   return (
     <div className="root-FileUpload">
       <AboutStudies
@@ -38,6 +44,7 @@ const dispatch = useDispatch();
           desktop to receive your gift card
         </div>
         <Input type="file" id="uploads" multiple onChange={fileSelected}/>
+        <Button onClick={fileSend} disabled={!fileInfo && true}>Upload</Button>
         {/*<input type="file" />*/}
       </Modal>
     </div>

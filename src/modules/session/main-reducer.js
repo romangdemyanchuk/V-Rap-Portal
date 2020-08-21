@@ -145,7 +145,7 @@ export const allUsers = () => dispatch => {
   dispatch(Loading(true));
   getAllUsers().then( response => {
     dispatch(Loading(false));
-    if (response) {
+    if (response.data) {
       dispatch(allUsersAC(response.data));
     }
   })
@@ -154,9 +154,10 @@ const allResearchersAC = (data) => ({ type: ALL_RESEARCHERS, payload: data });
 
 export const researcherUsers = () => dispatch => {
   dispatch(Loading(true));
-  getResearchers().then( response => {
+  getResearchers()
+    .then( response => {
     dispatch(Loading(false));
-    if (response) {
+    if (response.data) {
       dispatch(allResearchersAC(response.data));
     }
   })

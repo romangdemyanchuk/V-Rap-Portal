@@ -21,8 +21,6 @@ const PendingCase = () => {
   const isLoading = useSelector((state) => state.auth.isLoading);
   const dispatch = useDispatch();
 
-  console.log('isLoading', isLoading)
-
   useEffect(() => {
     AllCasesInfo()(dispatch);
   }, [allCaseStudies.status]);
@@ -32,6 +30,14 @@ const PendingCase = () => {
     setFilteredCases(filtredInfo ? filtredInfo: {})
     PendingCasesCount(filtredInfo.length)(dispatch)
   }, [allCaseStudies])
+
+
+  const modalIsOpen = () => {
+    setEditModalIsOpen(true)
+    return editModalIsOpen
+
+  }
+  console.log('editModalIsOpen', editModalIsOpen)
   return (
     // <>
     //   {isLoading ? (

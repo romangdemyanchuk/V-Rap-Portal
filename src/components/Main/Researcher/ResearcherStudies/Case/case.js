@@ -60,7 +60,16 @@ const Case = ({ study }) => {
     else if (study.status === 2)
       return (
         <div className="research-study-btns">
-          <Button className="status-btn">View Results</Button>
+
+          <Link to={{
+            pathname: `/case-results/${study._id}`,
+            propsSearch:'case'
+          }}>
+            <Button className="status-btn">
+              View Results
+            </Button>
+          </ Link>
+
           <Button
             type="danger"
             className="upload-btn"

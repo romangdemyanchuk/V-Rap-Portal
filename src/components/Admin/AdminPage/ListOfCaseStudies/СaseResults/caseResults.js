@@ -16,7 +16,7 @@ const CaseResults = (props) => {
       return item._id === id;
     });
   }
-  console.log(filteredCases)
+  console.log(props)
 
   return (
     <div className="main-page-wrapper">
@@ -27,7 +27,7 @@ const CaseResults = (props) => {
         >
           Case Study
         </div>
-        <Link to={'/all-studies-list'}>
+        <Link to={props.location.propsSearch === "case" ? '/researcher-studies' : '/all-studies-list'}>
           <Button>Back</Button>
         </Link>
       </div>

@@ -7,8 +7,8 @@ import {
   DELETE_CASE,
   USER_INFO,
   PART_INFO,
-  ALL_CASES,
-} from "./session-constants";
+  ALL_CASES, ALL_RESEARCHERS,
+} from './session-constants'
 
 export const Login = (data) => ({ type: LOGIN, payload: data });
 export const Register = (data) => ({ type: REGISTER, payload: data });

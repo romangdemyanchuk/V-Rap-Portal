@@ -282,7 +282,7 @@ export const DownloadCase = (data) => dispatch => {
       }
     })
     .finally(() => {
-      infoAction("User was successfully deleted!", "");
+      infoAction("Download was successfull!", "");
     });
 };
 

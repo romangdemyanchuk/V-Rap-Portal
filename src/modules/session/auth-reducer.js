@@ -84,6 +84,21 @@ export const RegisterRequest = (data) => (dispatch) => {
       dispatch(Loading(false));
     });
 };
+export const RegisterByAdmin = (data) => (dispatch) => {
+  RegisterApi(data)
+    .then((response) => {
+      if (response) {
+        dispatch(Register(response));
+      }
+      dispatch(Loading(false));
+    })
+    .catch((e) => {
+      if (e.response.status > "400") {
+        infoAction(e.response.data.message, "");
+      }
+      dispatch(Loading(false));
+    });
+};
 
 export const ChangePassword = (password) => (dispatch) => {
   ChangePasswordApi(password).then((response) => {

@@ -56,28 +56,28 @@ export const AddCaseFiles = (id) => {
   formData.append('avatarUrl', selectedFile)
   formData.append('project', selectedFileVr)
   formData.append('id', id)
-
-  return instanceWithToken().post(`/api/case/upload`, formData)
+  return instanceWithToken().post(`api/case/upload`, formData)
 }
 
 export const DeleteCaseApi = (id) => {
   return instanceWithToken().delete(`api/case/delete`, { data: { id: id } });
 };
 export const DeleteResearcherUser = (id) => {
+  console.log(id)
   return instanceWithToken().delete(`api/users/delete`, { data: { id: id } });
 };
 
 export const AllCasesApi = () => {
-  return instance.get(`/api/case/cases`, { headers: { Authorization: token } });
+  return instance.get(`api/case/cases`, { headers: { Authorization: token } });
 };
 
 export const ChangePasswordApi = (password) => {
   console.log(password);
-  return instance.post(`/api/users/changepassword`, { password: password });
+  return instance.post(`api/users/changepassword`, { password: password });
 };
 
 export const ChangingStatus = (id) => {
-  return instanceWithToken().post(`/api/case/status`, { status: "3", id: id });
+  return instanceWithToken().post(`api/case/status`, { status: "2", id: id });
 };
 
 export const EditCaseApi = (data) => {
@@ -86,38 +86,40 @@ export const EditCaseApi = (data) => {
 };
 
 export const FiltredCaseApi = () => {
-  return instanceWithToken().get(`/api/users/cases`);
+  return instanceWithToken().get(`api/users/cases`);
 };
 
 
 export const ChangingStatusAdmin = (id) => {
-  return instanceWithToken().post(`/api/case/status`, { status: "2", id: id });
+  return instanceWithToken().post(`api/case/status`, { status: "2", id: id });
 };
 
 export const getAllUsers = () => {
-  return instanceWithToken().get(`/api/users/users`);
+  return instanceWithToken().get(`api/users/users`);
 };
 
 export const getResearchers = () => {
-  return instanceWithToken().get(`/api/users/researchers`);
+  return instanceWithToken().get(`api/users/researchers`);
 };
 
 export const DownloadCaseStudy = (id) => {
-  return instanceWithToken().post(`/api/case/download`, { id });
+  return instanceWithToken().post(`api/case/download`, { id });
 }
 
 
 export const CaseResult = () => {
-  return instanceWithToken().post(`/api/case/result`);
+  return instanceWithToken().post(`api/case/result`);
 };
 
 export const CaseDownload = (data) => {
-  return instanceWithToken().post(`/api/case/download`, {data});
+  return instanceWithToken().post(`api/case/download`, {data});
 };
 
 export const UploadResults = (file) => {
+  console.log(file)
   const formData = new FormData();
-  formData.append("uploads", file);
-  return instanceWithToken().post(`/api/users/results`, formData);
+  const selectedFile = document.getElementById('uploads').files[0];
+  formData.append("uploads", selectedFile);
+  return instanceWithToken().post(`api/users/results`, formData);
 };
 

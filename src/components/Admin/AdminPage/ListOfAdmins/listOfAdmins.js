@@ -31,14 +31,11 @@ const ListOfAdmins = () => {
     <div className="researchers-list">
       <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId}/>
       <div className="researcher-btns-wrapper">
-        <div className="researchers-list__btn-wrapper">
-          <Button
-            style={{ marginBottom: "20px" }}
-            type="button"
-            className="researchers-profile-btn"
-          >
-            Create Researcher
-          </Button>
+        <div
+          className="case-studies-heading"
+          style={{ marginBottom: "20px", fontWeight: "bold", fontSize: "20px" }}
+        >
+          Admins
         </div>
         <Link to={'/admin-portal'}>
           <Button>Output</Button>

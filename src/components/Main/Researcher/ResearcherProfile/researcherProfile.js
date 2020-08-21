@@ -14,7 +14,8 @@ import changeIsButtonDisabled from "../../../../modules/session/main-reducer"
 import Header from "./../header";
 
 const ResearcherProfile = () => {
-  const { name, school, area }  = useSelector((state) => state.main.userInfo);
+  const userInfo  = useSelector((state) => state.main.userInfo);
+  const { name, school, area } = userInfo
   const disableButtons = useSelector((state) => state.main.isDisableButtons);
   // const [loadingBtn, setLoadingBtn] = useState(false);
   // console.log('loadingBtn', loadingBtn)
@@ -48,7 +49,10 @@ const ResearcherProfile = () => {
     EditResearcherProfile({ ...props }, ChangeIsButtonDisabled)(dispatch);
     // setLoadingBtn(false)
   };
+  const cancelChanges = () => {
+    userInfo.name, userInfo.school, userInfo.area
 
+  }
 
   return (
     <>
@@ -112,7 +116,8 @@ const ResearcherProfile = () => {
                   >
                     {isLoading ? <Loader /> : "Save changes"}
                   </Button>
-                  <Button className="researcher-profile__cancel-btn">
+                  <Button className="researcher-profile__cancel-btn"
+                    onClick={cancelChanges}>
                     Cancel
                   </Button>
                 </div>
