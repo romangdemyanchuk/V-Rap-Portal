@@ -11,7 +11,7 @@ const SuccessUploadModal = ({ successModalIsOpen, setSuccessModalIsOpen }) => {
   };
   return (
     <Modal
-      title="Upload results for Research Study 1"
+      title="Upload results for Case"
       visible={successModalIsOpen}
       onOk={closeModal}
       onCancel={closeModal}

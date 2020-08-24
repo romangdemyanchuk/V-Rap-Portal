@@ -2,18 +2,16 @@
 import React from "react";
 import "./deleteModal.css";
 import { Button, Modal } from "antd";
-import { DeleteCaseInfo, DeleteUser } from '../../../../../../modules/session/cases-reducer'
+import { DeleteUser } from '../../../../../../modules/session/cases-reducer'
 import { useDispatch } from "react-redux";
 
 const DeleteModal = ({ deleteModalIsOpen, setDeleteModalIsOpen, id }) => {
   let dispatch = useDispatch();
   const closeModal = () => {
     setDeleteModalIsOpen(false);
-    // deleteModalIsOpen=false
   };
   const deleteCase = () => {
     setDeleteModalIsOpen(false);
-    // deleteModalIsOpen=false
     DeleteUser(id)(dispatch);
   };
   return (

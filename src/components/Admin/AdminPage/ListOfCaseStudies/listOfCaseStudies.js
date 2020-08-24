@@ -26,54 +26,31 @@ const ListOfCaseStudies = () => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [status, setStatus] = useState(null);
-  const { caseStudiesColumns } = list(setCaseId, setStatus);
-  const editCaseInfo = useSelector((state) => state.cases.editResearcherInfo);
+  const { caseStudiesColumns } = list(setCaseId, setStatus, setDeleteModalIsOpen, setEditModalIsOpen);
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
-  const isLoading = useSelector((state) => state.auth.isLoading);
-  console.log('status', status);
   const dispatch = useDispatch();
-  // console.log(allCaseStudies, "allCaseStudies");
 
   useEffect(() => {
     AllCasesInfo()(dispatch);
   }, [allCaseStudies.status]);
-
-  // const caseStatus = () => {
-  //   switch (status) {
-  //     case 0:
-  //         setEditModalIsOpen(true)
-  //         setDeleteModalIsOpen(false)
-  //         break
-  //     case 1:
-  //         setEditModalIsOpen(true)
-  //         setDeleteModalIsOpen(false)
-  //         break
-  //     case 2:
-  //       return ViewResultCase
-  //     case 3:
-  //        setDeleteModalIsOpen(true)
-  //        setEditModalIsOpen(false)
-  //         break
-  //     default:
-  //       return undefined
-  //   }
-  // }
   return (
-    // <>
-    //   {isLoading ? (
-    //     <Skeleton active className="tableLoader" />
-    //   ) : (
     <div className="main-page-wrapper">
       {
-        status === 0 &&
-        <CaseStudiesChanges modalOpen={true} setmodalOpen={setEditModalIsOpen} id={caseId}/>
+        (status === 0 && status !== null) &&
+        <CaseStudiesChanges editModalIsOpen={editModalIsOpen} setEditModalIsOpen={setEditModalIsOpen} id={caseId} setCaseId={setCaseId}/>
       }
-      {status === 1 &&
-      <CaseStudiesChanges modalOpen={true} setmodalOpen={setEditModalIsOpen} id={caseId}/>}
-      {status === 2 &&
-       <Redirect to={`/case-results/${caseId}`} />}
-      {status === 3 &&
-      <DeleteModal deleteModalIsOpen={true} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId} />}
+      {
+        status === 1 &&
+      <CaseStudiesChanges editModalIsOpen={editModalIsOpen} setEditModalIsOpen={setEditModalIsOpen} id={caseId} setCaseId={setCaseId}/>
+      }
+      {
+        status === 2 &&
+       <Redirect to={`/case-results/${caseId}`} />
+      }
+      {
+        status === 3 &&
+      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId} />
+      }
       <div style={{display:'flex', justifyContent: 'space-between'}}>
         <div
           className="case-studies-heading"
@@ -85,8 +62,6 @@ const ListOfCaseStudies = () => {
       </div>
       <Table rowKey={'_id'} dataSource={allCaseStudies} columns={caseStudiesColumns}/>
     </div>
-    //   )}
-    // </>
   );
 };
 export default ListOfCaseStudies;

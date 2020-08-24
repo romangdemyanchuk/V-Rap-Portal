@@ -1,12 +1,12 @@
 /* eslint-disable */
-import { LOGIN, REGISTER, LOADING } from "./session-constants";
-import { RegisterApi, LoginApi, ChangePasswordApi } from "../../api";
-import { Register, Loading, Login, AllCases } from "./session-actions";
+import { LOGIN, REGISTER, LOADING, REGISTER_BY_ADMIN } from "./session-constants";
+import { RegisterApi, LoginApi, ChangePasswordApi, UploadResults } from '../../api'
+import { Register, Loading, Login, AllCases, RegisterInAdmin } from "./session-actions";
 import { infoAction } from "../../utils/notification";
 
 const initialState = {
   adminLoginData: [],
-  adminRegisterData: "",
+  adminRegisterData: [],
   loginError: "",
   isAuth: localStorage.getItem("isAuth"),
   isLoading: false,
@@ -22,6 +22,11 @@ const AuthReducer = (state = initialState, action) => {
         isAuth: true,
       };
     case REGISTER:
+      return {
+        ...state,
+        registerData: action.payload,
+      };
+    case REGISTER_BY_ADMIN:
       return {
         ...state,
         adminRegisterData: action.payload,
@@ -47,14 +52,19 @@ export const LoginRequest = (data) => (dispatch) => {
         dispatch(Login(response));
       }
     })
-    .catch((e) => {
-      // if (e.response.status == "404") {
-      //   infoAction(e.response.data.message, "");
-      // }
-    })
     .finally(() => {
       dispatch(Loading(false));
     });
+};
+
+export const UploadResultFile = (file, setUploadModalOpen, setSuccessModalIsOpen) => () => {
+  UploadResults(file)
+    .then((response) => {
+      if (response.statusText === "Created") {
+        setSuccessModalIsOpen(true)
+        setUploadModalOpen(false)
+      }
+    })
 };
 
 export const RegisterRequest = (data) => (dispatch) => {
@@ -66,7 +76,7 @@ export const RegisterRequest = (data) => (dispatch) => {
       if(response.request.statusText === "Created") {
         LoginApi(data)
           .then((response) => {
-            if (response.statusText == "OK") {
+            if (response.statusText === "OK") {
               let token = response.data.token;
               localStorage.setItem("userLoginToken", token);
               localStorage.setItem("isAuth", true);
@@ -88,7 +98,7 @@ export const RegisterByAdmin = (data) => (dispatch) => {
   RegisterApi(data)
     .then((response) => {
       if (response) {
-        dispatch(Register(response));
+        dispatch(RegisterInAdmin(response));
       }
       dispatch(Loading(false));
     })

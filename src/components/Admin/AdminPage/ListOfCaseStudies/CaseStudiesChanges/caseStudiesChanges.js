@@ -2,25 +2,18 @@
 import React, { useEffect, useState } from 'react'
 import { message, Button, Modal, Input, Form, Select, Slider, Skeleton } from 'antd'
 import "antd/dist/antd.css";
-import DeleteModal from "../../ListOfResearchers/ResearcherChanges/DeleteModal";
-import {outPutBtn} from '../../../../../utils/output'
 import "./caseStudiesChanges.css";
-import { Link } from 'react-router-dom'
-import store from '../../../../../modules/store/create-store'
 import { AllCasesInfo, DeleteCaseInfo, EditCaseInfo } from '../../../../../modules/session/cases-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { countryVariants } from '../../../../../modules/session/data'
-import { DeleteCaseApi } from '../../../../../api'
-import { Redirect } from 'react-router'
-import Loader from '../../../../Loader/loader'
 
 
 
-const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
-  console.log(123, modalOpen)
+const CaseStudiesChanges = ({ editModalIsOpen, setEditModalIsOpen, id, setCaseId }) => {
   const [filteredCases, setFilteredCases] = useState({})
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   let dispatch = useDispatch();
+
   useEffect(() => {
     const filtredInfo = allCaseStudies?.find(item => item._id === id)
     setFilteredCases(filtredInfo ? filtredInfo: {})
@@ -29,17 +22,19 @@ const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
   useEffect(() => {
     AllCasesInfo()(dispatch);
   }, []);
+
   const closeModal = () => {
-    setmodalOpen(false)
+    setEditModalIsOpen(false)
     setFilteredCases({})
+    setCaseId(null)
   };
+
   const layout = {
     labelCol: { span: 20 },
     wrapperCol: { span: 16 },
   };
   const successFillForm = (props) => {
     EditCaseInfo({ ...props, id })(dispatch);
-    setmodalOpen(false)
     setFilteredCases({})
   };
   return (
@@ -47,7 +42,7 @@ const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
       {filteredCases.title && (
         <Modal
           title="Admins Changes"
-          visible={modalOpen}
+          visible={editModalIsOpen}
           onOk={closeModal}
           onCancel={closeModal}
         >
@@ -127,13 +122,13 @@ const CaseStudiesChanges = ({ modalOpen, setmodalOpen, id }) => {
             >
               <Slider range min={0} max={500000}/>
             </Form.Item>
-            <Form.Item
-              className="personal-stats__fields-wrapper"
-              label="Status"
-              name="status"
-            >
-              <Input placeholder="Status"/>
-            </Form.Item>
+            {/*<Form.Item*/}
+            {/*  className="personal-stats__fields-wrapper"*/}
+            {/*  label="Status"*/}
+            {/*  name="status"*/}
+            {/*>*/}
+            {/*  <Input placeholder="Status"/>*/}
+            {/*</Form.Item>*/}
             <Form.Item>
               <div className="case-studies-changes">
                 <div className="case-studies__changes-btns admin-modals-btns">

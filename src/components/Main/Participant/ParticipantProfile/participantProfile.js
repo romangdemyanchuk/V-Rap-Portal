@@ -10,7 +10,7 @@ import {
 } from "../../../../modules/session/data";
 import {
   ChangeIsButtonDisabled,
-  EditParticipantProfile, EditResearcherProfile,
+  EditParticipantProfile,
   PartProfileInfo,
 } from '../../../../modules/session/main-reducer'
 import { useDispatch, useSelector } from "react-redux";
@@ -24,7 +24,6 @@ const ParticipantProfile = () => {
   let { name, age, location, income, headset, profession, type  } = partData;
 
   const isLoading = useSelector(state => state.auth.isLoading);
-  console.log(isLoading)
 
   const dispatch = useDispatch();
 

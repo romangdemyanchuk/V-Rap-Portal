@@ -10,12 +10,8 @@ import { infoAction } from "../../../utils/notification";
 import "./researcherLoginForm.css";
 
 const ResearcherLogin = () => {
-  const [doubleEntryPasswordModal, setDoubleEntryPasswordModal] = useState(
-    false
-  );
   const dispatch = useDispatch();
   const isAuthCheck = useSelector((state) => state.auth.isAuth);
-  console.log('isAuthCheck', isAuthCheck);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   if (isAuthCheck) {

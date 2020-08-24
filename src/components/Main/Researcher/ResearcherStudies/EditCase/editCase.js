@@ -13,7 +13,6 @@ const { TextArea } = Input;
 
 const EditCase = ({ id }) => {
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
-  const newCaseInfo = useSelector((state) => state.cases.newCaseInfo);
 
   const isLoading = useSelector((state) => state.auth.isLoading);
   const [filteredCases, setFilteredCases] = useState({})
@@ -32,13 +31,7 @@ const EditCase = ({ id }) => {
 
   const successFillForm = (props) => {
     EditCaseInfo({ ...props, id })(dispatch);
-    AllCasesInfo()(dispatch);
-    // AllCasesInfo()(dispatch);
-    // const filtredData = allCaseStudies?.filter(item => item._id === id)
-    //
-    // setFilteredCases(filtredData.length ? filtredData[0] : {})
   };
-  console.log('filteredCases', filteredCases);
   const layout = {
     labelCol: { span: 20 },
     wrapperCol: { span: 16 },

@@ -5,13 +5,12 @@ import { Button, Skeleton, Table } from 'antd'
 import { useSelector, useDispatch } from "react-redux";
 import ResearcherCreate from "./ResearcherCreate";
 import { researcherListColumns as list } from "../../../../modules/session/data";
-import { allUsers, researcherUsers } from '../../../../modules/session/main-reducer'
+import { researcherUsers } from '../../../../modules/session/main-reducer'
 import DeleteModal from './ResearcherChanges/DeleteModal'
-import ListOfCaseStudies from '../ListOfCaseStudies'
 import { Link } from 'react-router-dom'
 
 
-const ListOfResearchers = (id) => {
+const ListOfResearchers = () => {
   const [caseId, setCaseId] = useState(null);
   const [modalOpen, setmodalOpen] = useState(false);
   const { researcherListColumns } = list(setmodalOpen, setCaseId);
@@ -20,11 +19,6 @@ const ListOfResearchers = (id) => {
   const allResearchersData = useSelector(
     (state) => state.main.listOfResearcher
   );
-  // const idOfResearcher = useSelector((state) => state.cases.idOfDeleteResearcherId);
-  // if (idOfResearcher !== null) {
-  //   setmodalOpen(true)
-  // }
-  // console.log('idOfResearcher', idOfResearcher);
 
   const dispatch = useDispatch();
 

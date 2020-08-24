@@ -14,18 +14,13 @@ import {
   DeleteCaseApi,
   AllCasesApi,
   EditCaseApi,
-  UploadResults,
   AddCaseFiles,
   FiltredCaseApi,
-  DeleteResearcherUser, getAllUsers, CaseResult, CaseDownload
+  DeleteResearcherUser, CaseResult, CaseDownload
 } from '../../api'
-import { Loading, addCase, deleteCase, AllCases, allResearchersAC, UserInfo } from './session-actions'
+import { Loading, addCase, deleteCase, AllCases, allResearchersAC } from './session-actions'
 import { infoAction } from "../../utils/notification";
-import { Redirect } from 'react-router'
-// import {history} from 'history';
 import React from 'react'
-import CaseStudies from '../../components/Main/Researcher/ResearcherStudies'
-import { Route } from 'react-router-dom'
 
 const initialState = {
   loginError: "",
@@ -41,7 +36,6 @@ const initialState = {
   caseResults: {},
   caseDownloadInfo: {},
   pendingCasesCount: 1
-
 };
 
 const CasesReducer = (state = initialState, action) => {
@@ -66,11 +60,6 @@ const CasesReducer = (state = initialState, action) => {
         ...state,
         allCaseStudies: action.payload,
       };
-      // case FILE_UPLOAD:
-      //   return {
-      //     ...state,
-      //     isUploaded: true,
-      //   };
     case FILTRED_CASES:
       return {
         ...state,
@@ -87,7 +76,6 @@ const CasesReducer = (state = initialState, action) => {
         editResearcherInfo: action.payload,
       };
     case CASE_RESULT:
-      console.log('action.payload', action.payload)
       return {
         ...state,
         caseResults: action.payload,
@@ -107,7 +95,6 @@ const CasesReducer = (state = initialState, action) => {
   }
 };
 export default CasesReducer;
-
 
 export const FILTRED_CASES = "FILTRED-CASES"
 export const filtredCasesData = (payload) => ({type: FILTRED_CASES, payload})
@@ -129,25 +116,12 @@ export const NewCaseInfo = (data) => dispatch => {
       dispatch(Loading(true));
       if (response.data) {
         dispatch(addCase(response.data))
-          // .finally(() => {
-          //   console.log(123)
-        props.history.push('/researcher-studies');
-          //   return <Redirect to={"/researcher-studies"} />
-          // })
-        infoAction("You successfully create new study!", "/researcher-studies");
-        // infoAction("", "");
-        props.history.push('/researcher-studies');
-        // AllCasesInfo()(dispatch)
-        // return <Redirect to={"/researcher-studies"} />
       }
       if (response.data._id){
         AddCaseFiles(response.data._id)
       }
-
       dispatch(Loading(false));
-
     })
-
     .catch( e => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, "/researcher-studies");
@@ -159,17 +133,19 @@ export const NewCaseInfo = (data) => dispatch => {
 export const EditCaseInfo = data => dispatch => {
   EditCaseApi(data)
     .then( response => {
-      AllCasesInfo()(dispatch);
-      // setTimeout(function () {
         if (response.data) {
           dispatch(addCase(response.data));
           infoAction("You successfully changes your study!", "");
         }
-      // }, 6000);
 
       if (response.data._id){
         AddCaseFiles(response.data._id)
       }
+    })
+    .then(() => {
+      AllCasesInfo()(dispatch);
+    })
+    .then(() => {
       dispatch(Loading(false));
     })
     .catch( e => {
@@ -178,7 +154,6 @@ export const EditCaseInfo = data => dispatch => {
       }
       dispatch(Loading(false));
     })
-  // infoAction("You successfully change your study!", "");
 }
 
 export const DeleteCaseInfo = id => dispatch => {
@@ -202,7 +177,6 @@ export const DeleteCaseInfo = id => dispatch => {
 export const DeleteUser = id => dispatch => {
   DeleteResearcherUser(id)
     .then((response) => {
-      console.log(response)
       if (response) {
         dispatch(allResearchersAC(response.data));
       }
@@ -226,36 +200,13 @@ export const AllCasesInfo = () => (dispatch) => {
         dispatch(AllCases(response.data));
       }
     })
-  // .catch(e => {
-  //   if (e.response.status === 401) {
-  //     localStorage.clear();
-  //     if (typeof window !== 'undefined') {
-  //       window.location = '/'
-  //     }
-  //   }
-  //   if (e.response.data) {
-  //     infoAction(e.response.data.message, '/researcher-studies');
-  //   }
-  // })
 }
 
-export const deleteResearcherByAdmin = (payload) => ({type: DELETE_RESEARCHER, payload})
-
-
-export const DeleteResearcher = (id) => dispatch => {
-      dispatch(deleteResearcherByAdmin(id))
-}
-
-
-export const editResearcherInAdmin = (payload) => ({type: EDIT_RESEARCHER, payload})
-
-
-export const EditResearcher = (id, isEditResearcher) => dispatch => {
-  dispatch(editResearcherInAdmin([id, isEditResearcher]))
-}
-
-
-
+export const ViewCaseResults = () => dispatch => {
+  CaseResult()
+    .then((response) => {
+    })
+};
 const CASE_RESULT = 'CASE_RESULT'
 const caseResult = () => ({type: CASE_RESULT })
 
@@ -271,7 +222,6 @@ export const ResultOfCase = () => dispatch => {
 export const DownloadCase = (data) => dispatch => {
   CaseDownload(data)
     .then((response) => {
-      console.log(response)
       if (response) {
         dispatch(allResearchersAC(response.data));
       }

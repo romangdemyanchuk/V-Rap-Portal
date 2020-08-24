@@ -9,7 +9,6 @@ const instance = axios.create({
 });
 
 let token = localStorage.getItem("userLoginToken");
-console.log(token);
 
 const instanceWithToken = () =>
   axios.create({
@@ -52,7 +51,6 @@ export const AddCaseFiles = (id) => {
   const formData = new FormData()
   const selectedFile = document.getElementById('basic_avatarUrl').files[0];
   const selectedFileVr = document.getElementById('basic_inputVrFile').files[0];
-  console.log(selectedFile, selectedFileVr)
   formData.append('avatarUrl', selectedFile)
   formData.append('project', selectedFileVr)
   formData.append('id', id)
@@ -63,7 +61,6 @@ export const DeleteCaseApi = (id) => {
   return instanceWithToken().delete(`api/case/delete`, { data: { id: id } });
 };
 export const DeleteResearcherUser = (id) => {
-  console.log(id)
   return instanceWithToken().delete(`api/users/delete`, { data: { id: id } });
 };
 
@@ -72,7 +69,6 @@ export const AllCasesApi = () => {
 };
 
 export const ChangePasswordApi = (password) => {
-  console.log(password);
   return instance.post(`api/users/changepassword`, { password: password });
 };
 
@@ -81,7 +77,6 @@ export const ChangingStatus = (id) => {
 };
 
 export const EditCaseApi = (data) => {
-  console.log('EditCaseApi', data)
   return instanceWithToken().post(`api/case/edit`, data);
 };
 
@@ -115,8 +110,9 @@ export const CaseDownload = (data) => {
   return instanceWithToken().post(`api/case/download`, {data});
 };
 
-export const UploadResults = (file) => {
-  console.log(file)
+
+
+export const UploadResults = () => {
   const formData = new FormData();
   const selectedFile = document.getElementById('uploads').files[0];
   formData.append("uploads", selectedFile);

@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
   const isLoading = useSelector((state) => state.auth.isLoading);
+  const adminRegisterData = useSelector((state) => state.auth.adminRegisterData);
+
   const dispatch = useDispatch();
 
   const closeModal = () => {
@@ -18,7 +20,6 @@ const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
     RegisterByAdmin(values)(dispatch);
   };
   return (

@@ -6,7 +6,7 @@ import FileUpload from "./FileUpload";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { AllCasesInfo, FiltredCases } from '../../../../modules/session/cases-reducer'
+import { AllCasesInfo } from '../../../../modules/session/cases-reducer'
 import Header from "./../header";
 import { DownloadCaseStudy } from '../../../../api'
 import {UploadResults} from "../../../../api/index"
@@ -17,7 +17,6 @@ const ParticipantStudies = () => {
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
-  console.log('allCaseStudies', allCaseStudies);
   let caseStatusName = (status) => {
     if (status === 0) return <Tag color="green">In progress</Tag>;
     else if (status === 1)
@@ -54,7 +53,6 @@ const ParticipantStudies = () => {
                     <div className="participant-studies__img">
                       <img src={d.avatarUrl ? d.avatarUrl : userImg}
                            style={{width: 150, height: 150, borderRadius:'50%'}} alt="userImg" />
-                        {/*<img src={userImg} alt="userImg" />*/}
                     </div>
                     <div className="participant-studies__study">
                       <div className="participant-studies__heading">

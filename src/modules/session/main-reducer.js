@@ -140,7 +140,6 @@ export const PartProfileInfo = () => (dispatch) => {
 };
 
 const allUsersAC = (data) => ({ type: ALL_USERS, payload: data });
-
 export const allUsers = () => dispatch => {
   dispatch(Loading(true));
   getAllUsers().then( response => {

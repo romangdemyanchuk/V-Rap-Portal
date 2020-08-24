@@ -10,20 +10,21 @@ import {
 import Loader from "../../../Loader/loader";
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from "react-redux";
-import changeIsButtonDisabled from "../../../../modules/session/main-reducer"
 import Header from "./../header";
 
 const ResearcherProfile = () => {
-  const userInfo  = useSelector((state) => state.main.userInfo);
-  const { name, school, area } = userInfo
+  const { name, school, area }  = useSelector((state) => state.main.userInfo);
+  const [form] = Form.useForm();
   const disableButtons = useSelector((state) => state.main.isDisableButtons);
-  // const [loadingBtn, setLoadingBtn] = useState(false);
-  // console.log('loadingBtn', loadingBtn)
   const [isProfileBtnActive] = useState(true);
-
+  let formInitialValues = {
+    name: name,
+    school: school,
+    area: area,
+  }
+  form.setFieldsValue(formInitialValues)
 
   const isLoading = useSelector((state) => state.auth.isLoading);
-  // console.log(isLoading)
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,15 +46,8 @@ const ResearcherProfile = () => {
     },
   };
   const formIsValid = (props) => {
-    // setLoadingBtn(true)
     EditResearcherProfile({ ...props }, ChangeIsButtonDisabled)(dispatch);
-    // setLoadingBtn(false)
   };
-  const cancelChanges = () => {
-    userInfo.name, userInfo.school, userInfo.area
-
-  }
-
   return (
     <>
       {isLoading ? (
@@ -70,13 +64,10 @@ const ResearcherProfile = () => {
             </div>
             <Form
               {...layout}
+              form={form}
               name="control-hooks"
               onFinish={formIsValid}
-              initialValues={{
-                name: name,
-                school: school,
-                area: area,
-              }}
+              initialValues={formInitialValues}
             >
               <Form.Item
                 name="name"
@@ -117,7 +108,7 @@ const ResearcherProfile = () => {
                     {isLoading ? <Loader /> : "Save changes"}
                   </Button>
                   <Button className="researcher-profile__cancel-btn"
-                    onClick={cancelChanges}>
+                    onClick={e => form.resetFields()}>
                     Cancel
                   </Button>
                 </div>

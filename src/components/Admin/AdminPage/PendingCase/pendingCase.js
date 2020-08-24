@@ -16,7 +16,7 @@ const PendingCase = () => {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [caseId, setCaseId] = useState(null);
   const [status, setStatus] = useState(null);
-  const { caseStudiesColumns } = list(setCaseId, setStatus);
+  const { caseStudiesColumns } = list(setCaseId, setStatus, setEditModalIsOpen, setEditModalIsOpen);
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   const isLoading = useSelector((state) => state.auth.isLoading);
   const dispatch = useDispatch();
@@ -35,14 +35,8 @@ const PendingCase = () => {
   const modalIsOpen = () => {
     setEditModalIsOpen(true)
     return editModalIsOpen
-
   }
-  console.log('editModalIsOpen', editModalIsOpen)
   return (
-    // <>
-    //   {isLoading ? (
-    //     <Skeleton active className="tableLoader" />
-    //   ) : (
     <div>
       {
         caseId &&
@@ -59,8 +53,6 @@ const PendingCase = () => {
       </div>
      <Table rowKey={'_id'} dataSource={filteredCases} columns={caseStudiesColumns}/>
     </div>
-    //   )}
-    // </>
   )
 };
 

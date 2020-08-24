@@ -1,15 +1,8 @@
 /*eslint-disable*/
 import React from "react";
-import { CaseDownload, ChangingStatusAdmin, deleteResearcher } from '../../api'
+import { CaseDownload } from '../../api'
 import { status } from '../../components/Admin/AdminPage/ListOfCaseStudies/listOfCaseStudies'
-import ListOfResearchers from '../../components/Admin/AdminPage/ListOfResearchers/listOfResearchers'
-import CaseStudiesChanges from "../../components/Admin/AdminPage/ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges"
-import { DeleteResearcher, DownloadCase, EditResearcher } from './cases-reducer'
-import { useDispatch } from 'react-redux'
 import store from '../store/create-store'
-import { USER_INFO } from './session-constants'
-import { Link } from 'react-router-dom'
-const {dispatch} = store
 
 
 export const statusOfCase = (status) => {
@@ -30,11 +23,6 @@ export const caseStudiesResults = [
     dataIndex: "title",
     key: "title",
   },
-  // {
-  //   title: "Description",
-  //   dataIndex: "description",
-  //   key: "description",
-  // },
   {
     title: "Location",
     dataIndex: "location",
@@ -52,30 +40,28 @@ export const caseStudiesResults = [
     key: "income",
     render: (text,record) => <span>{record.income[0]} - {record.income[1] || '---'}</span>
   },
-  // {
-  //   title: "Headset",
-  //   dataIndex: "headset",
-  //   key: "headset",
-  // },
-  // {
-  //   title: "Profession",
-  //   dataIndex: "profession",
-  //   key: "profession",
-  // },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
     render: (text,record) => <span>{status(record.status)}</span>,
-  },
-  // {
-  //   title: "Participant",
-  //   dataIndex: "participant",
-  //   key: "participant",
-  // },
+  }
 ]
 
-export const caseStudiesColumns = (setCaseId, setStatus) => ({
+const applyAction = (status, setDeleteModalIsOpen, setEditModalIsOpen ) => {
+  switch (status) {
+
+    case 0:
+      return  setEditModalIsOpen(true)
+    case 1:
+      return  setEditModalIsOpen(true)
+    case 2:
+      return  {}
+    case 3:
+      return  setDeleteModalIsOpen(true)
+  }
+}
+export const caseStudiesColumns = (setCaseId, setStatus, setDeleteModalIsOpen, setEditModalIsOpen) => ({
   caseStudiesColumns: [
     {
       title: "Title",
@@ -138,14 +124,12 @@ export const caseStudiesColumns = (setCaseId, setStatus) => ({
         onClick={() => {
         setCaseId(record._id)
         setStatus(record.status)
+          applyAction(record.status, setDeleteModalIsOpen, setEditModalIsOpen)
       }
-      } > {
-        // <Link to={`/case-results/${record._id}`}>
+      } >
+        {
           statusOfCase(record.status)
-        // </Link>
-
-      }
-
+        }
       </a>
     },
   ],
