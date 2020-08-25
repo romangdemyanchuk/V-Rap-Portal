@@ -1,13 +1,15 @@
 /*eslint-disable*/
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom'
 import { Button } from "antd";
 import "./header.css";
 
 
 const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive }) => {
+  const history = useHistory();
   const logOut = () => {
     localStorage.clear();
+    history.push('/');
     // if (typeof window !== "undefined") {
     //   window.location = "/";
     // }

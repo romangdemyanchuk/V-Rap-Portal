@@ -73,7 +73,7 @@ export const ChangePasswordApi = (password) => {
 };
 
 export const ChangingStatus = (id) => {
-  return instanceWithToken().post(`api/case/status`, { status: "2", id: id });
+  return instanceWithToken().post(`api/case/status`, { status: 3, id: id });
 };
 
 export const EditCaseApi = (data) => {

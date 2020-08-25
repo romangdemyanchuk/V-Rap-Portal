@@ -8,23 +8,23 @@ import { NewCaseInfo } from "../../../../../modules/session/cases-reducer";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../../Loader/loader";
 import Header from "../../header";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom'
 import userPng from '../../../../../images/user.svg'
 
 const CreateNewCase = () => {
   const { TextArea } = Input;
   let dispatch = useDispatch();
+  const history = useHistory();
 
   const [isStudiesBtnActive] = useState(true);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const successFillForm = (props) => {
-
     const {title, income, description, location, participant,
       age, headset, profession} = props;
     NewCaseInfo(
       {title, description, location, age, income, participant,
-        headset, profession},
+        headset, profession, history},
     )(dispatch);
   };
   const layout = {

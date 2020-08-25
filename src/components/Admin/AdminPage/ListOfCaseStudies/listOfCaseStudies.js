@@ -8,7 +8,8 @@ import CaseStudiesChanges from '../ListOfCaseStudies/CaseStudiesChanges/caseStud
 import { Button, Table } from 'antd'
 import DeleteModal from '../ListOfResearchers/ResearcherChanges/DeleteModal'
 import { Link } from 'react-router-dom'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
+import DeleteCaseModal from './DeleteCaseModal'
 
 export const status = (status) => {
   if (status === 0) return <div>Pending</div>;
@@ -49,7 +50,7 @@ const ListOfCaseStudies = () => {
       }
       {
         status === 3 &&
-      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId} />
+      <DeleteCaseModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId} />
       }
       <div style={{display:'flex', justifyContent: 'space-between'}}>
         <div

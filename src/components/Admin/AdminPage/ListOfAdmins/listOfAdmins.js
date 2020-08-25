@@ -7,10 +7,14 @@ import { Button, Skeleton, Table } from 'antd'
 import { researcherListColumns as list } from '../../../../modules/session/data'
 import { Link } from 'react-router-dom'
 import DeleteModal from '../ListOfResearchers/ResearcherChanges/DeleteModal'
+import DeleteUserModal from '../ListOfResearchers/ResearcherChanges/DeleteModal'
+import ResearcherCreate from '../ListOfResearchers/ResearcherCreate'
+import AdminCreate from './AdminCreate'
 
 const ListOfAdmins = () => {
   const userData = useSelector(  (state) => state.main.listOfAdmins);
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [modalOfCreateOpen, setmodalOfCreateOpen] = useState(false);
   const [caseId, setCaseId] = useState(null);
   const { researcherListColumns } = list(setDeleteModalIsOpen, setCaseId);
   const isLoading = useSelector((state) => state.auth.isLoading);
@@ -26,19 +30,33 @@ const ListOfAdmins = () => {
         <Skeleton active className="tableLoader" />
       ) : (
     <div className="researchers-list">
-      <DeleteModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId}/>
+      <DeleteUserModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId}/>
       <div className="researcher-btns-wrapper">
-        <div
-          className="case-studies-heading"
-          style={{ marginBottom: "20px", fontWeight: "bold", fontSize: "20px" }}
-        >
-          Admins
+        <div className="admin-info-wrapper">
+          <div
+            className="case-studies-heading"
+            style={{ marginBottom: "20px", fontWeight: "bold", fontSize: "20px" }}
+          >
+            Admins
+          </div>
+          <Button
+            style={{ marginBottom: "20px" }}
+            type="button"
+            className="researchers-profile-btn"
+            onClick={() => setmodalOfCreateOpen(true)}
+          >
+            Create Admin
+          </Button>
         </div>
         <Link to={'/admin-portal'}>
           <Button>Output</Button>
         </Link>
       </div>
-  <Table rowKey={'_id'} dataSource={userData} columns={researcherListColumns} />
+      <AdminCreate
+        modalOpen={modalOfCreateOpen}
+        setmodalOpen={setmodalOfCreateOpen}
+      />
+    <Table rowKey={'_id'} dataSource={userData} columns={researcherListColumns} />
     </div>
       )}
     </>

@@ -4,7 +4,7 @@ import "./pendingCase.css";
 import { AllCasesInfo, PendingCasesCount } from '../../../../modules/session/cases-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Table } from 'antd'
-import { caseStudiesColumns as list } from '../../../../modules/session/data'
+import { pendingCaseColumns as list } from '../../../../modules/session/data'
 import CaseStudiesChanges from '../ListOfCaseStudies/CaseStudiesChanges'
 import { Link } from 'react-router-dom'
 
@@ -15,8 +15,7 @@ const PendingCase = () => {
   const [filteredCases, setFilteredCases] = useState([])
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [caseId, setCaseId] = useState(null);
-  const [status, setStatus] = useState(null);
-  const { caseStudiesColumns } = list(setCaseId, setStatus, setEditModalIsOpen, setEditModalIsOpen);
+  const { pendingCaseColumns } = list(setCaseId, setEditModalIsOpen);
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   const isLoading = useSelector((state) => state.auth.isLoading);
   const dispatch = useDispatch();
@@ -40,7 +39,8 @@ const PendingCase = () => {
     <div>
       {
         caseId &&
-        <CaseStudiesChanges modalOpen={true} setmodalOpen={setEditModalIsOpen} id={caseId}/>
+        <CaseStudiesChanges editModalIsOpen={editModalIsOpen} setEditModalIsOpen={setEditModalIsOpen} id={caseId}
+                            setCaseId={setCaseId}/>
       }
       <div className="pending-case-wrapper">
         <div
@@ -51,7 +51,7 @@ const PendingCase = () => {
         </div>
         <Link to={'admin-portal'}><Button>Output</Button></Link>
       </div>
-     <Table rowKey={'_id'} dataSource={filteredCases} columns={caseStudiesColumns}/>
+     <Table rowKey={'_id'} dataSource={filteredCases} columns={pendingCaseColumns}/>
     </div>
   )
 };

@@ -32,7 +32,7 @@ export const caseStudiesResults = [
     title: "Age",
     dataIndex: "age",
     key: "age",
-    render: (text,record) => <span>{record.age[0]} - {record.age[1] || '---'}</span>
+    render: (text,record) => <span>{record.age[0]} - {record.age[1] }</span>
   },
   {
     title: "Income",
@@ -96,13 +96,13 @@ export const caseStudiesColumns = (setCaseId, setStatus, setDeleteModalIsOpen, s
       title: "Age",
       key: "age",
       dataIndex: "age",
-      render: (text,record) => <span>{record.age[0]}  {record.age[1] || '---'}</span>
+      render: (text,record) => <span>{record.age[0]} - {record.age[1] || '---'}</span>
     },
     {
       title: "Average Income",
       key: "income",
       dataIndex: "income",
-      render: (text,record) => <span>{record.income[0]}  {record.income[1] || '---'}</span>
+      render: (text,record) => <span>{record.income[0]} - {record.income[1] || '---'}</span>
     },
     {
       title: "Status",
@@ -127,6 +127,79 @@ export const caseStudiesColumns = (setCaseId, setStatus, setDeleteModalIsOpen, s
           applyAction(record.status, setDeleteModalIsOpen, setEditModalIsOpen)
       }
       } >
+        {
+          statusOfCase(record.status)
+        }
+      </a>
+    },
+  ],
+});
+
+export const pendingCaseColumns = (setCaseId, setEditModalIsOpen) => ({
+  pendingCaseColumns: [
+    {
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
+      render: (text,record) => <span>{record.title ? record.title : '---'}</span>,
+    },
+    {
+      title: "VR File",
+      dataIndex: "vr_file",
+      key: "vr_file",
+      render: (text,record) =>
+        <a onClick={() =>
+          CaseDownload(record)}>
+          Download
+        </a>,
+    },
+    {
+      title: "Created at",
+      dataIndex: "data",
+      key: "data",
+      render: (text,record) => <span>{record.data}</span>,
+
+    },
+    {
+      title: "Location",
+      key: "location",
+      dataIndex: "location",
+      render: (text,record) => <span>{record.location || '---'}</span>,
+    },
+    {
+      title: "Age",
+      key: "age",
+      dataIndex: "age",
+      render: (text,record) => <span>{record.age[0]} - {record.age[1] || '---'}</span>
+    },
+    {
+      title: "Average Income",
+      key: "income",
+      dataIndex: "income",
+      render: (text,record) => <span>{record.income[0]} - {record.income[1] || '---'}</span>
+    },
+    {
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+      render: (text,record) => <span>{status(record.status) || '---'}</span>,
+    },
+    {
+      title: "Participated",
+      key: "participant",
+      dataIndex: "participant",
+      render: (text,record) => <span>{'---'}</span>
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      dataIndex: "actions",
+      render: (text,record) => <a
+        onClick={() => {
+          setCaseId(record._id)
+          setEditModalIsOpen(true)
+        }
+        } >
         {
           statusOfCase(record.status)
         }

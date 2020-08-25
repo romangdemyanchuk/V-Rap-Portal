@@ -22,9 +22,7 @@ const dispatch = useDispatch();
   }
   const fileSend = () => {
     UploadResultFile(fileInfo,setmodalOpen, setSuccessModalIsOpen)(dispatch)
-
   }
-
   return (
     <div className="root-FileUpload">
       <AboutStudies

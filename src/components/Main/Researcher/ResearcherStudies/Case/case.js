@@ -8,6 +8,7 @@ import Loader from "../../../../Loader/loader";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DeleteModal from "../../../../Admin/AdminPage/ListOfResearchers/ResearcherChanges/DeleteModal";
+import DeleteCaseModal from '../../../../Admin/AdminPage/ListOfCaseStudies/DeleteCaseModal'
 
 const Case = ({ study }) => {
   let [isloading, setLoading] = useState(false);
@@ -104,7 +105,7 @@ const Case = ({ study }) => {
 
   return (
     <div className="Root-Case">
-      <DeleteModal
+      <DeleteCaseModal
         deleteModalIsOpen={deleteModalIsOpen}
         setDeleteModalIsOpen={setDeleteModalIsOpen}
         id={study._id}

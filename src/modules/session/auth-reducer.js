@@ -3,6 +3,7 @@ import { LOGIN, REGISTER, LOADING, REGISTER_BY_ADMIN } from "./session-constants
 import { RegisterApi, LoginApi, ChangePasswordApi, UploadResults } from '../../api'
 import { Register, Loading, Login, AllCases, RegisterInAdmin } from "./session-actions";
 import { infoAction } from "../../utils/notification";
+import { allUsers } from './main-reducer'
 
 const initialState = {
   adminLoginData: [],
@@ -97,6 +98,7 @@ export const RegisterRequest = (data) => (dispatch) => {
 export const RegisterByAdmin = (data) => (dispatch) => {
   RegisterApi(data)
     .then((response) => {
+      allUsers()(dispatch);
       if (response) {
         dispatch(RegisterInAdmin(response));
       }

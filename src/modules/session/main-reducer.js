@@ -64,6 +64,9 @@ export const EditResearcherProfile = (data, callback) => (dispatch) => {
       infoAction("Your information is successfully updated!", "");
       callback(false)(dispatch)
     })
+    .then(() => {
+      UsersInfo()(dispatch);
+    })
     .catch((e) => {
       if (e.response && e.response.data) {
         infoAction(e.response.data.message, "");

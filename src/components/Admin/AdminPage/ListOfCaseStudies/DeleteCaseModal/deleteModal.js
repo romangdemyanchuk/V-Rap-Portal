@@ -2,17 +2,17 @@
 import React from "react";
 import "./deleteModal.css";
 import { Button, Modal } from "antd";
-import { DeleteUser } from '../../../../../../modules/session/cases-reducer'
 import { useDispatch } from "react-redux";
+import { DeleteCaseInfo } from '../../../../../modules/session/cases-reducer'
 
-const DeleteUserModal = ({ deleteModalIsOpen, setDeleteModalIsOpen, id }) => {
+const DeleteCaseModal = ({ deleteModalIsOpen, setDeleteModalIsOpen, id }) => {
   let dispatch = useDispatch();
   const closeModal = () => {
     setDeleteModalIsOpen(false);
   };
   const deleteCase = () => {
     setDeleteModalIsOpen(false);
-    DeleteUser(id)(dispatch);
+    DeleteCaseInfo(id)(dispatch);
   };
   return (
     <div className="delete-block">
@@ -33,4 +33,4 @@ const DeleteUserModal = ({ deleteModalIsOpen, setDeleteModalIsOpen, id }) => {
     </div>
   );
 };
-export default DeleteUserModal;
+export default DeleteCaseModal;

@@ -1,16 +1,18 @@
 
 /* eslint-disable */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom'
 import { Button } from "antd";
 /*eslint-disable*/
 
 const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive }) => {
+  const history = useHistory();
   const logOut = () => {
     localStorage.clear();
-    // if (typeof window !== "undefined") {
-    //   window.location = "/";
-    // }
+    history.push('/');
+    if (typeof window !== "undefined") {
+      window.location = "/";
+    }
   };
   return (
     <div className="participant-profile__btns-wrapper">

@@ -1,3 +1,6 @@
-body .container .main-page-wrapper {
-    padding: 0;
+.admin-info-wrapper {
+    display: flex;
+}
+.case-studies-heading {
+    margin-right: 15px;
 }

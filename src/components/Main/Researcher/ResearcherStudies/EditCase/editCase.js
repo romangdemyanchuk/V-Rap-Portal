@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import userImg from '../../../../../images/user.svg'
 import Header from '../../header'
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom'
 const { TextArea } = Input;
 
 const EditCase = ({ id }) => {
@@ -18,6 +18,7 @@ const EditCase = ({ id }) => {
   const [filteredCases, setFilteredCases] = useState({})
 
   let dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     const filtredData = allCaseStudies?.filter(item => item._id === id)
@@ -30,7 +31,7 @@ const EditCase = ({ id }) => {
   }, []);
 
   const successFillForm = (props) => {
-    EditCaseInfo({ ...props, id })(dispatch);
+    EditCaseInfo({ ...props, id, history })(dispatch);
   };
   const layout = {
     labelCol: { span: 20 },

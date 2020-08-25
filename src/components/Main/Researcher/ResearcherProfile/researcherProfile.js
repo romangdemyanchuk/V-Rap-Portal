@@ -18,7 +18,7 @@ const ResearcherProfile = () => {
   const disableButtons = useSelector((state) => state.main.isDisableButtons);
   const [isProfileBtnActive] = useState(true);
   let formInitialValues = {
-    name: name,
+    name: name ,
     school: school,
     area: area,
   }
@@ -45,9 +45,20 @@ const ResearcherProfile = () => {
       span: 16,
     },
   };
+  const onReset = () => {
+    console.log('reset form')
+    // formInitialValues = {
+    //   name: 'qwe' ,
+    //   school: '',
+    //   area: '',
+    // }
+    form.setFieldsValue({name: '', school: '', area: ''})
+  };
+
   const formIsValid = (props) => {
     EditResearcherProfile({ ...props }, ChangeIsButtonDisabled)(dispatch);
   };
+  console.log(school)
   return (
     <>
       {isLoading ? (
@@ -108,7 +119,7 @@ const ResearcherProfile = () => {
                     {isLoading ? <Loader /> : "Save changes"}
                   </Button>
                   <Button className="researcher-profile__cancel-btn"
-                    onClick={e => form.resetFields()}>
+                    onClick={onReset}>
                     Cancel
                   </Button>
                 </div>

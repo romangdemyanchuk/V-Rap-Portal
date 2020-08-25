@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 import {Button} from 'antd'
 
 export const outPutBtn = (redirect_to) => {

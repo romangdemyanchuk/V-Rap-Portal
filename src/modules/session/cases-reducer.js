@@ -21,7 +21,7 @@ import {
 import { Loading, addCase, deleteCase, AllCases, allResearchersAC } from './session-actions'
 import { infoAction } from "../../utils/notification";
 import React from 'react'
-
+import { allUsers } from './main-reducer'
 const initialState = {
   loginError: "",
   newCaseInfo: {},
@@ -110,7 +110,9 @@ export const FiltredCases = () => dispatch => {
     })
 }
 
+
 export const NewCaseInfo = (data) => dispatch => {
+  const history = data.history
   AddCaseApi(data)
     .then( response => {
       dispatch(Loading(true));
@@ -121,6 +123,8 @@ export const NewCaseInfo = (data) => dispatch => {
         AddCaseFiles(response.data._id)
       }
       dispatch(Loading(false));
+      infoAction('You successfully create new case!', "/researcher-studies");
+      history.push('/researcher-studies');
     })
     .catch( e => {
       if (e.response && e.response.data) {
@@ -131,21 +135,27 @@ export const NewCaseInfo = (data) => dispatch => {
 }
 
 export const EditCaseInfo = data => dispatch => {
+  const history = data.history;
   EditCaseApi(data)
     .then( response => {
+      console.log(0)
+      AllCasesInfo()(dispatch);
         if (response.data) {
           dispatch(addCase(response.data));
-          infoAction("You successfully changes your study!", "");
+          infoAction("You successfully changes your study!", "/researcher-studies");
         }
 
       if (response.data._id){
         AddCaseFiles(response.data._id)
       }
+      history.push('/researcher-studies');
     })
     .then(() => {
+      console.log(1)
       AllCasesInfo()(dispatch);
     })
     .then(() => {
+      console.log(2)
       dispatch(Loading(false));
     })
     .catch( e => {
@@ -177,6 +187,7 @@ export const DeleteCaseInfo = id => dispatch => {
 export const DeleteUser = id => dispatch => {
   DeleteResearcherUser(id)
     .then((response) => {
+      allUsers()(dispatch);
       if (response) {
         dispatch(allResearchersAC(response.data));
       }
