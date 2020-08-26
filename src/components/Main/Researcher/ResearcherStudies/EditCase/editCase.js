@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from "react"
 import { Button, Input,  InputNumber,  Slider,  Select,  Form,  Skeleton } from "antd"
 import { countryVariants,  headsetsVariants,  professionsList } from "../../../../../modules/session/data"
-import { AllCasesInfo,  EditCaseInfo } from "../../../../../modules/session/cases-reducer"
+import { AllCasesInfo, EditCaseInfo, FileUpload } from '../../../../../modules/session/cases-reducer'
 import Loader from "../../../../Loader/loader"
 import { useDispatch, useSelector } from "react-redux"
 import userImg from '../../../../../images/user.svg'
 import Header from '../../header'
 
 import { Link, useHistory } from 'react-router-dom'
+import { AddCaseFiles } from '../../../../../api'
 const { TextArea } = Input;
 
 const EditCase = ({ id }) => {
@@ -16,6 +17,7 @@ const EditCase = ({ id }) => {
 
   const isLoading = useSelector((state) => state.auth.isLoading);
   const [filteredCases, setFilteredCases] = useState({})
+  const [avatar, setAvatar] = useState(null)
 
   let dispatch = useDispatch();
   const history = useHistory();
@@ -38,6 +40,10 @@ const EditCase = ({ id }) => {
     wrapperCol: { span: 16 },
   };
   const [isStudiesBtnActive] = useState(true);
+  const loadFile = (e) => {
+    let output = document.getElementById('output');
+    output.src = URL.createObjectURL(e.target.files[0]);
+  };
 
   return <>
     {!filteredCases.title ?
@@ -51,10 +57,10 @@ const EditCase = ({ id }) => {
               Edit Research Studies
             </div>
             <div className='case-study-image'>
-              <img src={filteredCases.avatarUrl || userImg}
-                   style={{width: 200, height: 200, borderRadius: '50%'}}
-                   alt="userImg"
-              />
+              {/*<img src={filteredCases.avatarUrl || userImg}*/}
+              {/*     style={{width: 200, height: 200, borderRadius: '50%'}}*/}
+              {/*     alt="userImg"*/}
+              {/*/>*/}
             </div>
             <Form
               {...layout}
@@ -73,7 +79,13 @@ const EditCase = ({ id }) => {
               onFinish={successFillForm}
             >
               <Form.Item name="avatarUrl">
-                <Input type="file" id="input" multiple name="tesr" />
+                <img id="output" src={filteredCases.avatarUrl || userImg}
+                     style={{width: 200, height: 200, borderRadius: '50%'}}
+                     alt="userImg"/>
+                <input type="file" id="basic_avatarUrl"
+                       accept="image/*"
+                       onChange={(e) => loadFile(e)}/>
+                {/*<Input type="file" id="input" multiple />*/}
               </Form.Item>
               <Form.Item name="inputVrFile">
                 <Input type="file" id="input-vr" multiple />

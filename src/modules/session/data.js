@@ -114,7 +114,7 @@ export const caseStudiesColumns = (setCaseId, setStatus, setDeleteModalIsOpen, s
       title: "Participated",
       key: "participant",
       dataIndex: "participant",
-      render: (text,record) => <span>{'---'}</span>
+      render: (text,record) => <span>{record.participant ||'---'}</span>
     },
     {
       title: "Actions",
@@ -124,7 +124,7 @@ export const caseStudiesColumns = (setCaseId, setStatus, setDeleteModalIsOpen, s
         onClick={() => {
         setCaseId(record._id)
         setStatus(record.status)
-          applyAction(record.status, setDeleteModalIsOpen, setEditModalIsOpen)
+        applyAction(record.status, setDeleteModalIsOpen, setEditModalIsOpen)
       }
       } >
         {
@@ -188,7 +188,7 @@ export const pendingCaseColumns = (setCaseId, setEditModalIsOpen) => ({
       title: "Participated",
       key: "participant",
       dataIndex: "participant",
-      render: (text,record) => <span>{'---'}</span>
+      render: (text,record) => <span>{record.participant || '---'}</span>
     },
     {
       title: "Actions",

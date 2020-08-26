@@ -15,9 +15,5 @@ export const infoAction = (error_info, redirect_to) => {
   };
 
   openNotification();
-  console.log('redirect_to', redirect_to)
   return <Redirect to={redirect_to} />
-  // if (typeof window !== 'undefined' && redirect_to !== '') {
-  //   window.location = `${redirect_to}`
-  // }
 };

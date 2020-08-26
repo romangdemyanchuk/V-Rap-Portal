@@ -10,6 +10,7 @@ import Loader from "../../../../Loader/loader";
 import Header from "../../header";
 import { Link, useHistory } from 'react-router-dom'
 import userPng from '../../../../../images/user.svg'
+import userImg from '../../../../../images/user.svg'
 
 const CreateNewCase = () => {
   const { TextArea } = Input;
@@ -32,6 +33,11 @@ const CreateNewCase = () => {
     wrapperCol: { span: 16 },
   };
 
+  const loadFile = (e) => {
+    let output = document.getElementById('output');
+    output.src = URL.createObjectURL(e.target.files[0]);
+  };
+
   return (
     <div className="root-PersonalStats" >
       <Header isStudiesBtnActive={isStudiesBtnActive}/>
@@ -41,7 +47,7 @@ const CreateNewCase = () => {
           <div className="personal-stats__personal-heading">
             Create Research Studies
           </div>
-          <div className='case-study-image'><img src={userPng} alt='case-study-png'/></div>
+          {/*<div className='case-study-image'><img src={userPng} alt='case-study-png'/></div>*/}
           <Form
             // action="javascript: void(null)"
             {...layout}
@@ -50,7 +56,13 @@ const CreateNewCase = () => {
             onFinish={successFillForm}
           >
             <Form.Item name="avatarUrl">
-              <Input type="file" id="input" multiple />
+              <img id="output" src={ userImg}
+                   style={{width: 200, height: 200, borderRadius: '50%'}}
+                   alt="userImg"/>
+              <input type="file" id="basic_avatarUrl"
+                     accept="image/*"
+                     onChange={(e) => loadFile(e)}/>
+              {/*<Input type="file" id="input" multiple />*/}
             </Form.Item>
             <Form.Item name="inputVrFile">
               <Input type="file" id="input-vr" multiple />

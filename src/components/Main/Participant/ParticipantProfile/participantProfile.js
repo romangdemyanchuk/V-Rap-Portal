@@ -16,19 +16,33 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../Loader/loader";
 import Header from "./../header";
+import { infoAction } from '../../../../utils/notification'
+import { useHistory } from 'react-router-dom'
 
 const ParticipantProfile = () => {
+  const [form] = Form.useForm();
   const partData = useSelector(state => state.main.partInfo);
   const disableButtons = useSelector((state) => state.main.isDisableButtons);
+  const isAuthCheck = useSelector(state => state.auth.isAuth)
+  const history = useHistory();
   const [isProfileBtnActive] = useState(true);
   let { name, age, location, income, headset, profession, type  } = partData;
+  let formInitialValues = {
+    name: name,
+    age: age,
+    location: location  ? [location] : undefined,
+    income: income,
+    headset: headset  ? [headset] : undefined,
+    profession: profession  ? profession : undefined
+  }
+  form.setFieldsValue(formInitialValues)
 
   const isLoading = useSelector(state => state.auth.isLoading);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    PartProfileInfo()(dispatch);
+    PartProfileInfo(history)(dispatch);
   }, []);
 
   useEffect(() =>{
@@ -43,13 +57,18 @@ const ParticipantProfile = () => {
 
   const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
 
-  // if (!type) return <Skeleton active />
+  const onReset = () => {
+    console.log(123)
+    form.setFieldsValue({name: '', age: '', location: [], income: '', headset: [], profession: [], })
+  };
+  console.log(isAuthCheck)
+    if (!isAuthCheck) return infoAction("YOY :)","/")
 
   return (
     <>
       {isLoading ? (
         <Skeleton active />
-      ) : (
+      ) : isAuthCheck && (
         <div className="root-PartProfile">
           <Header
             profile={"/participant-profile"}
@@ -65,15 +84,9 @@ const ParticipantProfile = () => {
               <div className="participant-profile__fields">
                 <Form
                   {...layout}
+                  form={form}
                   name="control-hooks"
-                  initialValues={{
-                    name: name,
-                    age: age,
-                    location: location  ? [location] : undefined,
-                    income: income,
-                    headset: headset  ? [headset] : undefined,
-                    profession: profession  ? profession : undefined
-                  }}
+                  initialValues={formInitialValues}
                   onFinish={formIsValid}
                 >
                   <Form.Item
@@ -186,7 +199,8 @@ const ParticipantProfile = () => {
                       >
                         {isLoading ? <Loader /> : "Save changes"}
                       </Button>
-                      <Button className="participant-profile__cancel-btn">
+                      <Button className="participant-profile__cancel-btn"
+                      onClick={onReset}>
                         Cancel
                       </Button>
                     </div>

@@ -18,9 +18,6 @@ const ParticipantRegisterForm = ({ setState }) => {
 
   if (isAuthCheck) return infoAction("You successfully register and login :)",
     "/participant-profile")
-  if (isAuthCheck) {
-    // return infoAction("Successfully registered, please log In :)", "/");
-  }
 
   const handleSubmit = (values) => {
     RegisterRequest(values)(dispatch);

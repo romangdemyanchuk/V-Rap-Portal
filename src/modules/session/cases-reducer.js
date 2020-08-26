@@ -134,24 +134,31 @@ export const NewCaseInfo = (data) => dispatch => {
     })
 }
 
+export const FileUpload = (data) => () => {
+  console.log(data)
+  const history = data.history
+  AddCaseFiles(data.id)
+    .then( () => {
+      AllCasesApi()
+      // history.push('/researcher-studies');
+    })
+
+}
+
 export const EditCaseInfo = data => dispatch => {
   const history = data.history;
   EditCaseApi(data)
     .then( response => {
-      console.log(0)
-      AllCasesInfo()(dispatch);
         if (response.data) {
           dispatch(addCase(response.data));
           infoAction("You successfully changes your study!", "/researcher-studies");
         }
-
       if (response.data._id){
         AddCaseFiles(response.data._id)
       }
       history.push('/researcher-studies');
     })
     .then(() => {
-      console.log(1)
       AllCasesInfo()(dispatch);
     })
     .then(() => {

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { LOGIN, REGISTER, LOADING, REGISTER_BY_ADMIN } from "./session-constants";
-import { RegisterApi, LoginApi, ChangePasswordApi, UploadResults } from '../../api'
+import { RegisterApi, LoginApi, ChangePasswordApi, UploadResults, AddUser } from '../../api'
 import { Register, Loading, Login, AllCases, RegisterInAdmin } from "./session-actions";
 import { infoAction } from "../../utils/notification";
 import { allUsers } from './main-reducer'
@@ -65,6 +65,13 @@ export const UploadResultFile = (file, setUploadModalOpen, setSuccessModalIsOpen
         setSuccessModalIsOpen(true)
         setUploadModalOpen(false)
       }
+    })
+};
+
+export const AddAdmin = (data) => () => {
+  AddUser(data)
+    .then((response) => {
+      console.log('res', response)
     })
 };
 

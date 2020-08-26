@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Skeleton, Table } from 'antd'
 import { researcherListColumns as list } from '../../../../modules/session/data'
 import { Link } from 'react-router-dom'
-import DeleteModal from '../ListOfResearchers/ResearcherChanges/DeleteModal'
 import DeleteUserModal from '../ListOfResearchers/ResearcherChanges/DeleteModal'
-import ResearcherCreate from '../ListOfResearchers/ResearcherCreate'
 import AdminCreate from './AdminCreate'
 
 const ListOfAdmins = () => {

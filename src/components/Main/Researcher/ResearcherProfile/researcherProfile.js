@@ -46,19 +46,12 @@ const ResearcherProfile = () => {
     },
   };
   const onReset = () => {
-    console.log('reset form')
-    // formInitialValues = {
-    //   name: 'qwe' ,
-    //   school: '',
-    //   area: '',
-    // }
     form.setFieldsValue({name: '', school: '', area: ''})
   };
 
   const formIsValid = (props) => {
     EditResearcherProfile({ ...props }, ChangeIsButtonDisabled)(dispatch);
   };
-  console.log(school)
   return (
     <>
       {isLoading ? (

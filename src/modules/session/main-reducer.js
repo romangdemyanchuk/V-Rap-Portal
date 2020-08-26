@@ -1,12 +1,6 @@
 /* eslint-disable */
 import { USER_INFO, PART_INFO, DISABLE_BUTTONS, ALL_USERS, ALL_RESEARCHERS } from "./session-constants";
-import {
-  EditUserInfoApi,
-  UserInfoApi,
-  PartInfoApi,
-  EditPartApi,
-  getAllUsers, getResearchers,
-} from '../../api'
+import { EditUserInfoApi, UserInfoApi, PartInfoApi, EditPartApi, getAllUsers, getResearchers,} from '../../api'
 import { UserInfo, PartInfo, Loading } from "./session-actions";
 import { infoAction } from "../../utils/notification";
 
@@ -48,7 +42,6 @@ const MainReducer = (state = initialState, action) => {
         ...state,
         isDisableButtons: action.payload,
       };
-
     default:
       return state;
   }
@@ -56,10 +49,8 @@ const MainReducer = (state = initialState, action) => {
 export default MainReducer;
 
 export const EditResearcherProfile = (data, callback) => (dispatch) => {
-  // dispatch(Loading(true));
   EditUserInfoApi(data)
     .then((response) => {
-      // dispatch(Loading(false));
       dispatch(UserInfo(response));
       infoAction("Your information is successfully updated!", "");
       callback(false)(dispatch)
@@ -78,13 +69,14 @@ export const EditResearcherProfile = (data, callback) => (dispatch) => {
 };
 
 export const EditParticipantProfile = (data, callback) => (dispatch) => {
-  // dispatch(Loading(true));
   EditPartApi(data)
     .then((response) => {
-      // dispatch(Loading(false));
       dispatch(PartInfo(response.data));
       infoAction("Your information is successfully updated!", "participant-profile");
       callback(false)(dispatch)
+    })
+    .then(() => {
+      PartProfileInfo()(dispatch);
     })
     .catch((e) => {
       if (e.response && e.response.data) {
@@ -109,9 +101,6 @@ export const UsersInfo = () => (dispatch) => {
     .catch((e) => {
       if (e.response.status === 401) {
         localStorage.clear();
-        // if (typeof window !== 'undefined') {
-        //   window.location = '/'
-        // }
       }
     })
     .finally(() => {
@@ -119,7 +108,7 @@ export const UsersInfo = () => (dispatch) => {
     });
 };
 
-export const PartProfileInfo = () => (dispatch) => {
+export const PartProfileInfo = (history) => (dispatch) => {
   dispatch(Loading(false));
   PartInfoApi()
     .then((response) => {
@@ -130,12 +119,14 @@ export const PartProfileInfo = () => (dispatch) => {
       }
     })
     .catch((e) => {
-      // if (e.response.status === 401) {
-      //   localStorage.clear();
-      //   if (typeof window !== 'undefined') {
-      //     window.location = '/'
-      //   }
-      // }
+      if (e.response.status === 401) {
+        history.push('/participant-profile');
+        console.log('qwe')
+        // localStorage.clear();
+        if (typeof window !== 'undefined') {
+          window.location = '/participant-profile'
+        }
+      }
     })
     .finally(() => {
       dispatch(Loading(false));
