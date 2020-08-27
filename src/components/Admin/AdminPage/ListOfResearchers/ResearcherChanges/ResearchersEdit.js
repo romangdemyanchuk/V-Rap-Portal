@@ -1,13 +1,12 @@
 /* eslint-disable */
 import React from "react";
-import { message, Button, Modal, Input } from "antd";
+import { Button, Modal, Input } from "antd";
 import "./ResearchersEdit.css";
 import "antd/dist/antd.css";
 
 const ResearcherChanges = ({ modalOpen, setmodalOpen }) => {
   const deleteClick = () => {
     setmodalOpen(false);
-    setDeleteModalIsOpen(true);
   };
   const closeModal = () => {
     setmodalOpen(false);

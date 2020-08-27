@@ -3,15 +3,10 @@ import React, { useState } from "react";
 import userImg from "../../../../../images/user.svg";
 import { Button, Tag } from "antd";
 import { ChangingStatus } from "../../../../../api";
-import { DeleteCaseInfo } from "../../../../../modules/session/main-reducer";
-import Loader from "../../../../Loader/loader";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import DeleteModal from "../../../../Admin/AdminPage/ListOfResearchers/ResearcherChanges/DeleteModal";
 import DeleteCaseModal from '../../../../Admin/AdminPage/ListOfCaseStudies/DeleteCaseModal'
 
 const Case = ({ study }) => {
-  let [isloading, setLoading] = useState(false);
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   const deleteClick = () => {
@@ -42,7 +37,7 @@ const Case = ({ study }) => {
             className="upload-btn"
             onClick={() => deleteClick(study._id)}
           >
-            {isloading ? <Loader /> : "Delete"}
+            Delete
           </Button>
         </div>
       );
@@ -54,7 +49,7 @@ const Case = ({ study }) => {
             className="upload-btn"
             onClick={() => deleteClick(study._id)}
           >
-            {isloading ? <Loader /> : "Delete"}
+            Delete
           </Button>
         </div>
       );
@@ -85,7 +80,7 @@ const Case = ({ study }) => {
             className="upload-btn"
             onClick={() => deleteClick(study._id)}
           >
-            {isloading ? <Loader /> : "Delete"}
+            Delete
           </Button>
         </div>
       );
@@ -97,7 +92,7 @@ const Case = ({ study }) => {
             className="upload-btn"
             onClick={() => deleteClick(study._id)}
           >
-            {isloading ? <Loader /> : "Delete"}
+            Delete
           </Button>
         </div>
       );

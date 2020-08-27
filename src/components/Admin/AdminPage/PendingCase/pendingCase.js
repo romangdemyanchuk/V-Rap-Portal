@@ -8,16 +8,12 @@ import { pendingCaseColumns as list } from '../../../../modules/session/data'
 import CaseStudiesChanges from '../ListOfCaseStudies/CaseStudiesChanges'
 import { Link } from 'react-router-dom'
 
-
-
-
 const PendingCase = () => {
   const [filteredCases, setFilteredCases] = useState([])
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [caseId, setCaseId] = useState(null);
   const { pendingCaseColumns } = list(setCaseId, setEditModalIsOpen);
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
-  const isLoading = useSelector((state) => state.auth.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,17 +26,16 @@ const PendingCase = () => {
     PendingCasesCount(filtredInfo.length)(dispatch)
   }, [allCaseStudies])
 
-
-  const modalIsOpen = () => {
-    setEditModalIsOpen(true)
-    return editModalIsOpen
-  }
   return (
-    <div>
+    <>
       {
         caseId &&
-        <CaseStudiesChanges editModalIsOpen={editModalIsOpen} setEditModalIsOpen={setEditModalIsOpen} id={caseId}
-                            setCaseId={setCaseId}/>
+        <CaseStudiesChanges
+          editModalIsOpen={editModalIsOpen}
+          setEditModalIsOpen={setEditModalIsOpen}
+          id={caseId}
+          setCaseId={setCaseId}
+        />
       }
       <div className="pending-case-wrapper">
         <div
@@ -52,7 +47,7 @@ const PendingCase = () => {
         <Link to={'admin-portal'}><Button>Output</Button></Link>
       </div>
      <Table rowKey={'_id'} dataSource={filteredCases} columns={pendingCaseColumns}/>
-    </div>
+    </>
   )
 };
 

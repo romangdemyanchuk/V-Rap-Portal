@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { Route, Router } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Main from "./components/Main";
 import CaseStudies from "./components/Main/Researcher/ResearcherStudies";
 import ParticipantProfile from "./components/Main/Participant/ParticipantProfile";
@@ -15,22 +15,13 @@ import ListOfResearchers from "./components/Admin/AdminPage/ListOfResearchers";
 import MainLogin from "./components/Login/Login";
 import "./styles/index.styl";
 import EditCase from "./components/Main/Researcher/ResearcherStudies/EditCase";
-import {createBrowserHistory} from 'history'
-import { NoMatch } from './utils/noMatch'
 import { Switch } from 'react-router'
 import CaseResults from './components/Admin/AdminPage/ListOfCaseStudies/СaseResults/caseResults'
 import PendingCase from './components/Admin/AdminPage/PendingCase'
 import ListOfAdmins from './components/Admin/AdminPage/ListOfAdmins'
-
-// const hist = createBrowserHistory()
-// if(window.Cypress){
-//   window.tgHistory = hist
-// }
-
 const App = () => {
   return (
     <div className="root-App">
-    {/*<Router className="root-App" history={hist}>*/}
       <Switch>
         <Route path="/" component={Main} exact />
         <Route path="/participant-login" component={MainLogin} />
@@ -56,7 +47,6 @@ const App = () => {
           }}
         />
       </Switch>
-    {/*</Router>*/}
     </div>
   );
 };

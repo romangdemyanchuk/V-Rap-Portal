@@ -3,19 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Input, Button, InputNumber, Form, Select, Skeleton } from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
-import {
-  countryVariants,
-  headsetsVariants,
-  professionsList,
-} from "../../../../modules/session/data";
-import {
-  ChangeIsButtonDisabled,
-  EditParticipantProfile,
-  PartProfileInfo,
-} from '../../../../modules/session/main-reducer'
+import { countryVariants, headsetsVariants, professionsList} from "../../../../modules/session/data";
+import { ChangeIsButtonDisabled, EditParticipantProfile, PartProfileInfo}
+from '../../../../modules/session/main-reducer'
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../Loader/loader";
-import Header from "./../header";
+import Header from "./../../Researcher/header";
 import { infoAction } from '../../../../utils/notification'
 import { useHistory } from 'react-router-dom'
 
@@ -58,11 +51,10 @@ const ParticipantProfile = () => {
   const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
 
   const onReset = () => {
-    console.log(123)
     form.setFieldsValue({name: '', age: '', location: [], income: '', headset: [], profession: [], })
   };
-  console.log(isAuthCheck)
-    if (!isAuthCheck) return infoAction("YOY :)","/")
+    if (!isAuthCheck)
+      return infoAction("YOY :)","/")
 
   return (
     <>
@@ -75,6 +67,7 @@ const ParticipantProfile = () => {
             studies={"/participant-studies"}
             disableButtons={disableButtons}
             isProfileBtnActive={isProfileBtnActive}
+            type={0}
           />
           <div className="participant-profile__personal-info-block">
             <div className="participant-profile__wrapper">

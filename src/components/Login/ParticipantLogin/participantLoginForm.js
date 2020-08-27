@@ -12,17 +12,14 @@ import "./participantLoginForm.scss";
 import EntryPasswordModal from "./EntryPasswordModal";
 
 const ParticipantLoginForm = ({ setState }) => {
-  const [doubleEntryPasswordModal, setDoubleEntryPasswordModal] = useState(
-    false
-  );
+  const [doubleEntryPasswordModal, setDoubleEntryPasswordModal] = useState(false);
   let dispatch = useDispatch();
 
   const isAuthCheck = useSelector(state => state.auth.isAuth)
   const isLoading = useSelector(state => state.auth.isLoading)
 
-  if (isAuthCheck) return infoAction("Mission complete Participant :)","/participant-profile")
-    
-  
+  if (isAuthCheck)
+    return infoAction("Mission complete Participant :)","/participant-profile")
 
   const handleSubmit = (values) => {
     LoginRequest(values)(dispatch);

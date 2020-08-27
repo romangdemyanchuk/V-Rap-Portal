@@ -2,7 +2,6 @@
 import React from "react";
 import { CaseDownload } from '../../api'
 import { status } from '../../components/Admin/AdminPage/ListOfCaseStudies/listOfCaseStudies'
-import store from '../store/create-store'
 
 
 export const statusOfCase = (status) => {

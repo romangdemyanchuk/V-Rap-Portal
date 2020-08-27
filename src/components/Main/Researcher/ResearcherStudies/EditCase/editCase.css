@@ -4,3 +4,6 @@
     z-index: 10;
     background: lightgrey;
 }
+.root-EditCase input#basic_avatarUrl {
+    margin-top: 20px;
+}

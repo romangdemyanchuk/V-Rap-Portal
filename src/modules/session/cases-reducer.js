@@ -1,35 +1,28 @@
 /* eslint-disable */
 import {
-  ADD_CASE,
-  DELETE_CASE,
-  CHANGE_STATUS,
-  ALL_CASES,
-  DELETE_RESEARCHER,
-  EDIT_RESEARCHER,
-  DOWNLOAD_CASE,
-  PENDING_CASES_COUNT
-} from "./session-constants";
+  ADD_CASE, DELETE_CASE, CHANGE_STATUS, ALL_CASES, DELETE_RESEARCHER, EDIT_RESEARCHER,
+  DOWNLOAD_CASE, PENDING_CASES_COUNT, CASE_RESULT, FILTRED_CASES
+} from './session-constants'
+import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi, AddCaseFiles, FiltredCaseApi,
+  DeleteResearcherUser, CaseResult, CaseDownload } from '../../api'
 import {
-  AddCaseApi,
-  DeleteCaseApi,
-  AllCasesApi,
-  EditCaseApi,
-  AddCaseFiles,
-  FiltredCaseApi,
-  DeleteResearcherUser, CaseResult, CaseDownload
-} from '../../api'
-import { Loading, addCase, deleteCase, AllCases, allResearchersAC } from './session-actions'
+  Loading,
+  addCase,
+  deleteCase,
+  AllCases,
+  allResearchersAC,
+  filtredCasesData,
+  pendingCasesCount
+} from './session-actions'
 import { infoAction } from "../../utils/notification";
 import React from 'react'
 import { allUsers } from './main-reducer'
 const initialState = {
-  loginError: "",
   newCaseInfo: {},
   statusNumber: null,
   researcherStudies: [],
   allCaseStudies: [],
   listOfResearcher: [],
-  isUploaded: false,
   filtredCases: [],
   editResearcherInfo: [],
   idOfDeleteResearcherId: null,
@@ -96,8 +89,6 @@ const CasesReducer = (state = initialState, action) => {
 };
 export default CasesReducer;
 
-export const FILTRED_CASES = "FILTRED-CASES"
-export const filtredCasesData = (payload) => ({type: FILTRED_CASES, payload})
 export const FiltredCases = () => dispatch => {
   dispatch(Loading(true));
   FiltredCaseApi()
@@ -109,7 +100,6 @@ export const FiltredCases = () => dispatch => {
       dispatch(Loading(false));
     })
 }
-
 
 export const NewCaseInfo = (data) => dispatch => {
   const history = data.history
@@ -133,9 +123,7 @@ export const NewCaseInfo = (data) => dispatch => {
       dispatch(Loading(false));
     })
 }
-
 export const FileUpload = (data) => () => {
-  console.log(data)
   const history = data.history
   AddCaseFiles(data.id)
     .then( () => {
@@ -162,7 +150,6 @@ export const EditCaseInfo = data => dispatch => {
       AllCasesInfo()(dispatch);
     })
     .then(() => {
-      console.log(2)
       dispatch(Loading(false));
     })
     .catch( e => {
@@ -219,13 +206,6 @@ export const AllCasesInfo = () => (dispatch) => {
       }
     })
 }
-
-export const ViewCaseResults = () => dispatch => {
-  CaseResult()
-    .then((response) => {
-    })
-};
-const CASE_RESULT = 'CASE_RESULT'
 const caseResult = () => ({type: CASE_RESULT })
 
 export const ResultOfCase = () => dispatch => {
@@ -254,7 +234,6 @@ export const DownloadCase = (data) => dispatch => {
     });
 };
 
-export const pendingCasesCount = (payload) => ({type: PENDING_CASES_COUNT, payload})
 export const PendingCasesCount = (value) => dispatch => {
   dispatch(pendingCasesCount(value))
 }

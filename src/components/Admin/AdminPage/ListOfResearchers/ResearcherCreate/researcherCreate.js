@@ -5,14 +5,11 @@ import "antd/dist/antd.css";
 import "./researcherCreate.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Loader from "../../../../Loader/loader";
-import { RegisterByAdmin, RegisterRequest } from '../../../../../modules/session/auth-reducer'
-import { Loading } from "../../../../../modules/session/session-actions";
+import { RegisterByAdmin } from '../../../../../modules/session/auth-reducer'
 import { useDispatch, useSelector } from "react-redux";
 
 const ResearcherCreate = ({ modalOpen, setmodalOpen }) => {
   const isLoading = useSelector((state) => state.auth.isLoading);
-  const adminRegisterData = useSelector((state) => state.auth.adminRegisterData);
-
   const dispatch = useDispatch();
 
   const closeModal = () => {

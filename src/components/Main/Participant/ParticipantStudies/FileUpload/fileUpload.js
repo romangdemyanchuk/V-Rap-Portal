@@ -7,8 +7,6 @@ import "antd/dist/antd.css";
 import { useDispatch } from "react-redux";
 import { UploadResultFile } from '../../../../../modules/session/auth-reducer'
 
-
-
 const FileUpload = ({ modalOpen, setmodalOpen }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [fileInfo, setFileInfo] = useState(null);
@@ -41,7 +39,6 @@ const dispatch = useDispatch();
         </div>
         <Input type="file" id="uploads" multiple onChange={fileSelected}/>
         <Button onClick={fileSend} disabled={!fileInfo && true}>Upload</Button>
-        {/*<input type="file" />*/}
       </Modal>
     </div>
   );

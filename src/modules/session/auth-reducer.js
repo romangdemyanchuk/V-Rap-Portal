@@ -46,7 +46,7 @@ export default AuthReducer;
 export const LoginRequest = (data) => (dispatch) => {
   LoginApi(data)
     .then((response) => {
-      if (response.statusText == "OK") {
+      if (response.statusText === "OK") {
         let token = response.data.token;
         localStorage.setItem("userLoginToken", token);
         localStorage.setItem("isAuth", true);
@@ -70,9 +70,6 @@ export const UploadResultFile = (file, setUploadModalOpen, setSuccessModalIsOpen
 
 export const AddAdmin = (data) => () => {
   AddUser(data)
-    .then((response) => {
-      console.log('res', response)
-    })
 };
 
 export const RegisterRequest = (data) => (dispatch) => {
@@ -111,12 +108,9 @@ export const RegisterByAdmin = (data) => (dispatch) => {
       }
       dispatch(Loading(false));
     })
-    .catch((e) => {
-      if (e.response.status > "400") {
-        infoAction(e.response.data.message, "");
-      }
-      dispatch(Loading(false));
-    });
+    .then(() => {
+      AddAdmin({data})(dispatch)
+    })
 };
 
 export const ChangePassword = (password) => (dispatch) => {

@@ -2,11 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Button, Form, Skeleton } from "antd";
 import WithAuthRedirect from "../../../../hoc/hoc";
-import {
-  EditResearcherProfile,
-  UsersInfo,
-  ChangeIsButtonDisabled
-} from "../../../../modules/session/main-reducer";
+import { EditResearcherProfile, UsersInfo, ChangeIsButtonDisabled}
+from "../../../../modules/session/main-reducer";
 import Loader from "../../../Loader/loader";
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,6 +58,7 @@ const ResearcherProfile = () => {
           <Header
             disableButtons={disableButtons}
             isProfileBtnActive={isProfileBtnActive}
+            type={1}
           />
           <div className="researcher-profile__personal-fields-wrapper">
             <div className="researcher-profile__personal-heading">

@@ -6,7 +6,6 @@ import "./listOfCaseStudies.css";
 import { AllCasesInfo, ResultOfCase } from '../../../../modules/session/cases-reducer'
 import CaseStudiesChanges from '../ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges'
 import { Button, Table } from 'antd'
-import DeleteModal from '../ListOfResearchers/ResearcherChanges/DeleteModal'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import DeleteCaseModal from './DeleteCaseModal'
@@ -38,11 +37,21 @@ const ListOfCaseStudies = () => {
     <div className="main-page-wrapper">
       {
         (status === 0 && status !== null) &&
-        <CaseStudiesChanges editModalIsOpen={editModalIsOpen} setEditModalIsOpen={setEditModalIsOpen} id={caseId} setCaseId={setCaseId}/>
+        <CaseStudiesChanges
+          editModalIsOpen={editModalIsOpen}
+          setEditModalIsOpen={setEditModalIsOpen}
+          id={caseId}
+          setCaseId={setCaseId}
+        />
       }
       {
         status === 1 &&
-      <CaseStudiesChanges editModalIsOpen={editModalIsOpen} setEditModalIsOpen={setEditModalIsOpen} id={caseId} setCaseId={setCaseId}/>
+      <CaseStudiesChanges
+        editModalIsOpen={editModalIsOpen}
+        setEditModalIsOpen={setEditModalIsOpen}
+        id={caseId}
+        setCaseId={setCaseId}
+      />
       }
       {
         status === 2 &&
@@ -50,7 +59,10 @@ const ListOfCaseStudies = () => {
       }
       {
         status === 3 &&
-      <DeleteCaseModal deleteModalIsOpen={deleteModalIsOpen} setDeleteModalIsOpen={setDeleteModalIsOpen} id={caseId} />
+      <DeleteCaseModal
+        deleteModalIsOpen={deleteModalIsOpen}
+        setDeleteModalIsOpen={setDeleteModalIsOpen}
+        id={caseId} />
       }
       <div style={{display:'flex', justifyContent: 'space-between'}}>
         <div

@@ -16,6 +16,8 @@ export const DOWNLOAD_CASE = "DOWNLOAD_CASE";
 export const PENDING_CASES_COUNT = "PENDING_CASES_COUNT";
 export const ALL_USERS = "ALL_USERS";
 export const REGISTER_BY_ADMIN = "REGISTER_BY_ADMIN";
+export const FILTRED_CASES = "FILTRED-CASES"
+export const CASE_RESULT = 'CASE_RESULT'
 
 
 

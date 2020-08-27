@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import {  Input,  Button,  Slider,  InputNumber,  Upload,  Form,  message,  Select,} from "antd";
+import {  Input,  Button,  Slider,  InputNumber,  Form,  Select,} from "antd";
 import WithAuthRedirect from "../../../../../hoc/hoc";
 import "./createNewCase.scss";
 import {  countryVariants,  headsetsVariants,  professionsList,} from "../../../../../modules/session/data";
@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../../Loader/loader";
 import Header from "../../header";
 import { Link, useHistory } from 'react-router-dom'
-import userPng from '../../../../../images/user.svg'
 import userImg from '../../../../../images/user.svg'
 
 const CreateNewCase = () => {
@@ -40,16 +39,14 @@ const CreateNewCase = () => {
 
   return (
     <div className="root-PersonalStats" >
-      <Header isStudiesBtnActive={isStudiesBtnActive}/>
+      <Header isStudiesBtnActive={isStudiesBtnActive} type={1}/>
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
 
           <div className="personal-stats__personal-heading">
             Create Research Studies
           </div>
-          {/*<div className='case-study-image'><img src={userPng} alt='case-study-png'/></div>*/}
           <Form
-            // action="javascript: void(null)"
             {...layout}
             name="basic"
             initialValues={{ remember: true }}
@@ -201,15 +198,13 @@ const CreateNewCase = () => {
             </div>
             <Form.Item>
               <div className="personal-stats__footer-btns create-case-btns">
-                {/*<Link to={'/researcher-studies'}>*/}
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="personal-stats__create-research-btn"
-                  >
-                    {isLoading ? <Loader /> : "Create Research Study"}
-                  </Button>
-                {/*</Link>*/}
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="personal-stats__create-research-btn"
+                >
+                  {isLoading ? <Loader /> : "Create Research Study"}
+                </Button>
                 <Link to={"/researcher-studies"}>
                   <Button>Close</Button>
                 </Link>

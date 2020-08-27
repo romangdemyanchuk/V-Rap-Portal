@@ -1,29 +1,21 @@
 /* eslint-disable */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import "./caseResults.css";
 import { Button, Table } from 'antd'
 import { caseStudiesResults } from '../../../../../modules/session/data'
 import { Link } from 'react-router-dom'
-import { ViewCaseResults } from '../../../../../modules/session/cases-reducer'
 
 const CaseResults = (props) => {
   let filteredCases = [];
   let id = props.match.params.id;
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
 
-  const dispatch = useDispatch();
-
   if (allCaseStudies) {
     filteredCases = allCaseStudies?.filter((item) => {
       return item._id === id;
     });
   }
-
-  useEffect(() => {
-    ViewCaseResults()(dispatch);
-  }, []);
-
   return (
     <div className="main-page-wrapper">
       <div className="case-result">

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React from "react";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,15 +19,12 @@ const ResearcherLogin = () => {
   }
 
   const handleSubmit = (values) => {
-    // setDoubleEntryPasswordModal(true)
     LoginRequest(values)(dispatch);
     dispatch(Loading(true));
   };
 
   return (
     <div className="root-ResearcherLogin">
-      {/*<EntryPasswordModal doubleEntryPasswordModal={doubleEntryPasswordModal} setDoubleEntryPasswordModal={setDoubleEntryPasswordModal}*/}
-      {/*  title={'Change your password'}/>*/}
       <div className="researcher-login__heading">V-RAP: Researcher</div>
       <Form
         onFinish={(values) => {

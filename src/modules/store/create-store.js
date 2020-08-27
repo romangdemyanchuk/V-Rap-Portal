@@ -10,12 +10,5 @@ const allReducers = combineReducers({
   auth: AuthReducer,
   cases: CasesReducer,
 });
-
 const store = createStore(allReducers, applyMiddleware(thunk));
-
-// export default createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-//   applyMiddleware(thunk))
-//
-// export default createStore(combineReducers(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()), applyMiddleware(thunk))
-
 export default store;

@@ -5,7 +5,7 @@ import { Link} from "react-router-dom";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import "./researcherStudies.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCasesInfo, FiltredCases } from '../../../../modules/session/cases-reducer'
+import { AllCasesInfo } from '../../../../modules/session/cases-reducer'
 import Case from "./Case/case";
 import Header from "./../header";
 
@@ -28,7 +28,7 @@ const ResearcherStudies = () => {
           <Skeleton active className="studiesLoader" />
       ) : (
         <div className="ResearcherStudies">
-          <Header isStudiesBtnActive={isStudiesBtnActive}/>
+          <Header isStudiesBtnActive={isStudiesBtnActive} type={1}/>
           <div className="researcher-profile__header-wrapper">
             <div className="researcher-studies__personal-heading">
               Research Studies

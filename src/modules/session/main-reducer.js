@@ -1,13 +1,10 @@
 /* eslint-disable */
 import { USER_INFO, PART_INFO, DISABLE_BUTTONS, ALL_USERS, ALL_RESEARCHERS } from "./session-constants";
 import { EditUserInfoApi, UserInfoApi, PartInfoApi, EditPartApi, getAllUsers, getResearchers,} from '../../api'
-import { UserInfo, PartInfo, Loading } from "./session-actions";
+import { UserInfo, PartInfo, Loading, isButtonDisabledAC } from './session-actions'
 import { infoAction } from "../../utils/notification";
 
 const initialState = {
-  adminLoginData: [],
-  adminRegisterData: "",
-  loginError: "",
   userInfo: {},
   partInfo: {},
   listOfResearcher: [],
@@ -100,7 +97,7 @@ export const UsersInfo = () => (dispatch) => {
     })
     .catch((e) => {
       if (e.response.status === 401) {
-        localStorage.clear();
+        // localStorage.clear();
       }
     })
     .finally(() => {
@@ -121,11 +118,7 @@ export const PartProfileInfo = (history) => (dispatch) => {
     .catch((e) => {
       if (e.response.status === 401) {
         history.push('/participant-profile');
-        console.log('qwe')
         // localStorage.clear();
-        if (typeof window !== 'undefined') {
-          window.location = '/participant-profile'
-        }
       }
     })
     .finally(() => {
@@ -156,8 +149,6 @@ export const researcherUsers = () => dispatch => {
   })
   dispatch(Loading(false));
 }
-
-const isButtonDisabledAC = (value) => ({ type: DISABLE_BUTTONS, payload: value });
 
 export const ChangeIsButtonDisabled = (value) => dispatch => {
       dispatch(isButtonDisabledAC(value));

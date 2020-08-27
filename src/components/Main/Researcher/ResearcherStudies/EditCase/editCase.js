@@ -2,14 +2,12 @@
 import React, { useEffect, useState } from "react"
 import { Button, Input,  InputNumber,  Slider,  Select,  Form,  Skeleton } from "antd"
 import { countryVariants,  headsetsVariants,  professionsList } from "../../../../../modules/session/data"
-import { AllCasesInfo, EditCaseInfo, FileUpload } from '../../../../../modules/session/cases-reducer'
+import { AllCasesInfo, EditCaseInfo } from '../../../../../modules/session/cases-reducer'
 import Loader from "../../../../Loader/loader"
 import { useDispatch, useSelector } from "react-redux"
 import userImg from '../../../../../images/user.svg'
 import Header from '../../header'
-
 import { Link, useHistory } from 'react-router-dom'
-import { AddCaseFiles } from '../../../../../api'
 const { TextArea } = Input;
 
 const EditCase = ({ id }) => {
@@ -17,14 +15,12 @@ const EditCase = ({ id }) => {
 
   const isLoading = useSelector((state) => state.auth.isLoading);
   const [filteredCases, setFilteredCases] = useState({})
-  const [avatar, setAvatar] = useState(null)
 
   let dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     const filtredData = allCaseStudies?.filter(item => item._id === id)
-
     setFilteredCases(filtredData.length ? filtredData[0] : {})
   }, [allCaseStudies])
 
@@ -50,17 +46,11 @@ const EditCase = ({ id }) => {
       <Skeleton active />
       :
       <div className="root-EditCase">
-        <Header isStudiesBtnActive={isStudiesBtnActive}/>
+        <Header isStudiesBtnActive={isStudiesBtnActive} type={1}/>
         <div className="personal-stats__wrapper">
           <div className="personal-stats__block">
             <div className="personal-stats__personal-heading">
               Edit Research Studies
-            </div>
-            <div className='case-study-image'>
-              {/*<img src={filteredCases.avatarUrl || userImg}*/}
-              {/*     style={{width: 200, height: 200, borderRadius: '50%'}}*/}
-              {/*     alt="userImg"*/}
-              {/*/>*/}
             </div>
             <Form
               {...layout}
@@ -83,6 +73,7 @@ const EditCase = ({ id }) => {
                      style={{width: 200, height: 200, borderRadius: '50%'}}
                      alt="userImg"/>
                 <input type="file" id="basic_avatarUrl"
+                       className="avatarUrl-input"
                        accept="image/*"
                        onChange={(e) => loadFile(e)}/>
                 {/*<Input type="file" id="input" multiple />*/}

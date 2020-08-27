@@ -1,26 +1,22 @@
-
 /* eslint-disable */
 import React from "react";
 import { Link, useHistory } from 'react-router-dom'
 import { Button } from "antd";
 /*eslint-disable*/
 
-const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive }) => {
+const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive, type }) => {
   const history = useHistory();
   const logOut = () => {
-    localStorage.clear();
+    // localStorage.clear();
     history.push('/');
-    if (typeof window !== "undefined") {
-      window.location = "/";
-    }
   };
   return (
     <div className="participant-profile__btns-wrapper">
       <div>
-        <Link to={"/researcher-profile"}>
+        <Link to={type === 0 ? "/participant-profile" : "/researcher-profile"}>
           <Button className={isProfileBtnActive ? "participant-profile__btn active" : "participant-profile__btn" }>Profile</Button>
         </Link>
-        <Link to={'/researcher-studies'}>
+        <Link to={type === 0 ? "/participant-studies" :'/researcher-studies'}>
           <Button className={isStudiesBtnActive ? "research-btn active" : "research-btn"}
                   disabled={disableButtons}
           >

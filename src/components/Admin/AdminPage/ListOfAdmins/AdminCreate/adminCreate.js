@@ -5,14 +5,12 @@ import "antd/dist/antd.css";
 import "./adminCreate.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Loader from "../../../../Loader/loader";
-import { AddAdmin, RegisterByAdmin, RegisterRequest } from '../../../../../modules/session/auth-reducer'
-import { Loading } from "../../../../../modules/session/session-actions";
+import { AddAdmin } from '../../../../../modules/session/auth-reducer'
 import { useDispatch, useSelector } from "react-redux";
 
 const AdminCreate = ({ modalOpen, setmodalOpen }) => {
 
   const isLoading = useSelector((state) => state.auth.isLoading);
-  const adminRegisterData = useSelector((state) => state.auth.adminRegisterData);
 
   const dispatch = useDispatch();
 
@@ -22,7 +20,6 @@ const AdminCreate = ({ modalOpen, setmodalOpen }) => {
 
   const handleSubmit = (values) => {
     AddAdmin({values})(dispatch)
-    // RegisterByAdmin(values)(dispatch);
   };
   return (
     <div className="root-ResearcherCreate">

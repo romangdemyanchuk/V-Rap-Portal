@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import "./adminPage.scss";
@@ -8,7 +8,6 @@ import { AllCasesInfo, PendingCasesCount } from '../../../modules/session/cases-
 
 const AdminPage = () => {
   const countOfPendingCases = useSelector((state) => state.cases.pendingCasesCount);
-  const [filteredCases, setFilteredCases] = useState([])
   const allCaseStudies = useSelector((state) => state.cases.allCaseStudies);
   const dispatch = useDispatch();
 
@@ -18,7 +17,6 @@ const AdminPage = () => {
 
   useEffect(() => {
     const filteredInfo = allCaseStudies?.filter(item => item.status === 0)
-    setFilteredCases(filteredInfo ? filteredInfo: {})
     PendingCasesCount(filteredInfo.length)(dispatch)
   }, [allCaseStudies])
 

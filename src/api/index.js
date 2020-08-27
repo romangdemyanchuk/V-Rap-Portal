@@ -21,7 +21,8 @@ export const RegisterApi = (regData) => {
 };
 
 export const AddUser = (data) => {
-  return instance.post(`/api/users/adduser`, { type: 0 });
+  const {login, password} = data.values;
+  return instance.post(`/api/users/adduser`, { type: 0, login: login, password: password});
 };
 
 export const LoginApi = (loginData) => {
@@ -52,7 +53,6 @@ export const AddCaseFiles = (id) => {
   const formData = new FormData()
   const selectedFile = document.getElementById('basic_avatarUrl').files[0];
   const selectedFileVr = document.getElementById('basic_inputVrFile').files[0];
-  console.log(selectedFile, selectedFileVr);
   formData.append('avatarUrl', selectedFile)
   formData.append('project', selectedFileVr)
   formData.append('id', id)

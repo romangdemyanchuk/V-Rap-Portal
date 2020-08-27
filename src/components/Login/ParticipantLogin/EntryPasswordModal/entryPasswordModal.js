@@ -4,7 +4,6 @@ import "./";
 import { Button, Form, Input, Modal } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import { ChangePassword } from "../../../../modules/session/auth-reducer";
-import { Loading } from "../../../../modules/session/session-actions";
 import { infoAction } from "../../../../utils/notification";
 import { useDispatch } from "react-redux";
 
@@ -25,7 +24,6 @@ const EntryPasswordModal = ({
   const handleSubmit = (values) => {
     if (values.password1 === values.password2) {
       ChangePassword(values.password1)(dispatch);
-      dispatch(Loading(true));
     } else {
       infoAction("Password do not match!", "/researcher-login");
       setDoubleEntryPasswordModal(false);

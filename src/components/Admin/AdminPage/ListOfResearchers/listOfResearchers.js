@@ -46,7 +46,11 @@ const ListOfResearchers = () => {
           <Button>Output</Button>
         </Link>
       </div>
-      <DeleteModal deleteModalIsOpen={modalOpen} setDeleteModalIsOpen={setmodalOpen} id={caseId} />
+      <DeleteModal
+        deleteModalIsOpen={modalOpen}
+        setDeleteModalIsOpen={setmodalOpen}
+        id={caseId}
+      />
       <ResearcherCreate
         modalOpen={modalOfCreateOpen}
         setmodalOpen={setmodalOfCreateOpen}

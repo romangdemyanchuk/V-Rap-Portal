@@ -7,9 +7,8 @@ import WithAuthRedirect from "../../../../hoc/hoc";
 import "./participantStudies.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { AllCasesInfo } from '../../../../modules/session/cases-reducer'
-import Header from "./../header";
+import Header from "./../../Researcher/header";
 import { DownloadCaseStudy } from '../../../../api'
-import {UploadResults} from "../../../../api/index"
 
 const ParticipantStudies = () => {
   const [modalOpen, setmodalOpen] = useState(false);
@@ -39,7 +38,7 @@ const ParticipantStudies = () => {
       ) : (
         <div className="root-PartStudies">
           <FileUpload modalOpen={modalOpen} setmodalOpen={setmodalOpen}/>
-          <Header isStudiesBtnActive={isStudiesBtnActive}/>
+          <Header isStudiesBtnActive={isStudiesBtnActive} type={0}/>
           <div className="participant-studies__personal-heading">
             Research Studies
           </div>

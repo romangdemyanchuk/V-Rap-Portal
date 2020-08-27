@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
-import { message, Button, Modal, Input, Form, Select, Slider, Skeleton } from 'antd'
+import { Button, Modal, Input, Form, Select, Slider } from 'antd'
 import "antd/dist/antd.css";
 import "./caseStudiesChanges.css";
-import { AllCasesInfo, DeleteCaseInfo, EditCaseInfo } from '../../../../../modules/session/cases-reducer'
+import { AllCasesInfo, EditCaseInfo } from '../../../../../modules/session/cases-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { countryVariants } from '../../../../../modules/session/data'
 
@@ -122,13 +122,6 @@ const CaseStudiesChanges = ({ editModalIsOpen, setEditModalIsOpen, id, setCaseId
             >
               <Slider range min={0} max={500000}/>
             </Form.Item>
-            {/*<Form.Item*/}
-            {/*  className="personal-stats__fields-wrapper"*/}
-            {/*  label="Status"*/}
-            {/*  name="status"*/}
-            {/*>*/}
-            {/*  <Input placeholder="Status"/>*/}
-            {/*</Form.Item>*/}
             <Form.Item>
               <div className="case-studies-changes">
                 <div className="case-studies__changes-btns admin-modals-btns">
