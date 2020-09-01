@@ -12,9 +12,10 @@ const instanceWithToken = () =>
   axios.create({
     baseURL,
     headers: {
-      Authorization: token,
+      Authorization: localStorage.getItem("userLoginToken"),
     },
   });
+console.log('TOKEN', token)
 
 export const RegisterApi = (regData) => {
   return instance.post(`api/auth/register`, regData);
@@ -68,7 +69,9 @@ export const DeleteResearcherUser = (id) => {
 };
 
 export const AllCasesApi = () => {
-  return instance.get(`api/case/cases`, { headers: { Authorization: token } });
+  return instance.get(`api/case/cases`, { headers: {
+    Authorization: localStorage.getItem("userLoginToken")
+  } });
 };
 
 export const ChangePasswordApi = (password) => {

@@ -87,6 +87,9 @@ export const EditParticipantProfile = (data, callback) => (dispatch) => {
 
 export const UsersInfo = () => (dispatch) => {
   dispatch(Loading(false));
+  const isAuth = localStorage.getItem('userLoginToken')
+  console.log('isAuth', isAuth)
+  if (isAuth !== null) {
   UserInfoApi()
     .then((response) => {
       dispatch(Loading(true));
@@ -103,27 +106,41 @@ export const UsersInfo = () => (dispatch) => {
     .finally(() => {
       dispatch(Loading(false));
     });
+  }
 };
 
 export const PartProfileInfo = (history) => (dispatch) => {
   dispatch(Loading(false));
-  PartInfoApi()
-    .then((response) => {
-      dispatch(Loading(true));
-      if (response.data) {
-        const { name, age, location, income, headset, profession } = response.data;
-        dispatch(PartInfo({ name, age, location, income, headset, profession }));
-      }
-    })
-    .catch((e) => {
-      if (e.response.status === 401) {
-        history.push('/participant-profile');
-        // localStorage.clear();
-      }
-    })
-    .finally(() => {
-      dispatch(Loading(false));
-    });
+  const isAuth = localStorage.getItem('isAuth')
+  const userLoginToken = localStorage.getItem('userLoginToken')
+  console.log('isAuth', isAuth, userLoginToken)
+  // debugger
+  if (isAuth) {
+    PartInfoApi()
+      .then((response) => {
+        dispatch(Loading(true));
+        if (response.data) {
+          const { name, age, location, income, headset, profession } = response.data;
+          dispatch(PartInfo({ name, age, location, income, headset, profession }));
+        }
+      })
+      // .then(() => {
+      //   PartProfileInfo()(dispatch)
+      // })
+      .catch((e) => {
+        // debugger
+        console.log('ERROR')
+        if (e.response.status === 401) {
+
+          // history.push('/participant-profile');
+
+          // localStorage.clear();
+        }
+      })
+      .finally(() => {
+        dispatch(Loading(false));
+      });
+  }
 };
 
 const allUsersAC = (data) => ({ type: ALL_USERS, payload: data });

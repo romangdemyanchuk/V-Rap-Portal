@@ -5,8 +5,20 @@ import { Button, Tag } from "antd";
 import { ChangingStatus } from "../../../../../api";
 import { Link } from "react-router-dom";
 import DeleteCaseModal from '../../../../Admin/AdminPage/ListOfCaseStudies/DeleteCaseModal'
+import styled from "styled-components";
+
+
+const StyledResearchStudyBtns = styled.section`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const StyledRootCase = styled.section`
+  overflow: hidden;
+`;
 
 const Case = ({ study }) => {
+
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   const deleteClick = () => {
@@ -23,7 +35,7 @@ const Case = ({ study }) => {
   let caseButtonsShown = (study) => {
     if (study.status === 0)
       return (
-        <div className="research-study-btns">
+        <StyledResearchStudyBtns className="research-study-btns">
           <Link to={`/edit-case/${study._id}`}>
             <Button
               style={{ backgroundColor: "#0E4BEF", color: "white" }}
@@ -39,7 +51,7 @@ const Case = ({ study }) => {
           >
             Delete
           </Button>
-        </div>
+        </StyledResearchStudyBtns>
       );
     else if (study.status === 1)
       return (
@@ -99,7 +111,7 @@ const Case = ({ study }) => {
   };
 
   return (
-    <div className="Root-Case">
+    <StyledRootCase>
       <DeleteCaseModal
         deleteModalIsOpen={deleteModalIsOpen}
         setDeleteModalIsOpen={setDeleteModalIsOpen}
@@ -129,7 +141,7 @@ const Case = ({ study }) => {
         </div>
         {caseButtonsShown(study)}
       </div>
-    </div>
+    </StyledRootCase>
   );
 };
 

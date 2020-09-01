@@ -19,8 +19,10 @@ import { Switch } from 'react-router'
 import CaseResults from './components/Admin/AdminPage/ListOfCaseStudies/СaseResults/caseResults'
 import PendingCase from './components/Admin/AdminPage/PendingCase'
 import ListOfAdmins from './components/Admin/AdminPage/ListOfAdmins'
+import { NoMatch } from './utils/noMatch'
 const App = () => {
   return (
+    <>
     <div className="root-App">
       <Switch>
         <Route path="/" component={Main} exact />
@@ -48,6 +50,7 @@ const App = () => {
         />
       </Switch>
     </div>
+    </>
   );
 };
 

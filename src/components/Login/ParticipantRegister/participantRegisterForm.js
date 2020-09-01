@@ -8,19 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { RegisterRequest } from "../../../modules/session/auth-reducer";
 import { Loading } from "../../../modules/session/session-actions";
 import { infoAction } from "../../../utils/notification";
+import { useHistory } from 'react-router-dom'
 
 const ParticipantRegisterForm = ({ setState }) => {
   let dispatch = useDispatch();
+  const history = useHistory();
 
   const isAuthCheck = useSelector((state) => state.auth.isAuth);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
 
-  if (isAuthCheck)
-    return infoAction("You successfully register and login :)","/participant-profile")
+  // if (isAuthCheck)
+  //   return infoAction("You successfully register and login :)","/participant-profile")
 
   const handleSubmit = (values) => {
-    RegisterRequest(values)(dispatch);
+    RegisterRequest(values, history)(dispatch);
     dispatch(Loading(true));
   };
 

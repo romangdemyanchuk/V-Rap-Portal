@@ -42,7 +42,6 @@ const CreateNewCase = () => {
       <Header isStudiesBtnActive={isStudiesBtnActive} type={1}/>
       <div className="personal-stats__wrapper">
         <div className="personal-stats__block">
-
           <div className="personal-stats__personal-heading">
             Create Research Studies
           </div>
@@ -59,7 +58,6 @@ const CreateNewCase = () => {
               <input type="file" id="basic_avatarUrl"
                      accept="image/*"
                      onChange={(e) => loadFile(e)}/>
-              {/*<Input type="file" id="input" multiple />*/}
             </Form.Item>
             <Form.Item name="inputVrFile">
               <Input type="file" id="input-vr" multiple />

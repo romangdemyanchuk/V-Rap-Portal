@@ -1,14 +1,14 @@
-.Root-Case {
-    overflow: hidden;
-}
+/*.Root-Case {*/
+/*    overflow: hidden;*/
+/*}*/
 
-.case-buttons{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+/*.case-buttons{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between;*/
+/*}*/
 
-.researcher-studies__btns{
-    display: flex;
-    justify-content: flex-end;
-}
+/*.researcher-studies__btns{*/
+/*    display: flex;*/
+/*    justify-content: flex-end;*/
+/*}*/

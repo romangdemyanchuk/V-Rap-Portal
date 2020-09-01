@@ -72,7 +72,7 @@ export const AddAdmin = (data) => () => {
   AddUser(data)
 };
 
-export const RegisterRequest = (data) => (dispatch) => {
+export const RegisterRequest = (data, history) => (dispatch) => {
   RegisterApi(data)
     .then((response) => {
       if (response) {
@@ -82,10 +82,13 @@ export const RegisterRequest = (data) => (dispatch) => {
         LoginApi(data)
           .then((response) => {
             if (response.statusText === "OK") {
+              // debugger
               let token = response.data.token;
               localStorage.setItem("userLoginToken", token);
               localStorage.setItem("isAuth", true);
               dispatch(Login(response));
+              history.push('/participant-profile')
+              return infoAction("You successfully register and login :)","/participant-profile")
             }
           })
       }
@@ -93,7 +96,7 @@ export const RegisterRequest = (data) => (dispatch) => {
 
     })
     .catch((e) => {
-      if (e.response.status > "400") {
+      if (e.response.status) {
         infoAction(e.response.data.message, "");
       }
       dispatch(Loading(false));

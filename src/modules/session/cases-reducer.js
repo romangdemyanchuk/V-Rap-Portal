@@ -1,19 +1,12 @@
 /* eslint-disable */
 import {
   ADD_CASE, DELETE_CASE, CHANGE_STATUS, ALL_CASES, DELETE_RESEARCHER, EDIT_RESEARCHER,
-  DOWNLOAD_CASE, PENDING_CASES_COUNT, CASE_RESULT, FILTRED_CASES
+  DOWNLOAD_CASE, PENDING_CASES_COUNT, CASE_RESULT, FILTERED_CASES
 } from './session-constants'
 import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi, AddCaseFiles, FiltredCaseApi,
   DeleteResearcherUser, CaseResult, CaseDownload } from '../../api'
-import {
-  Loading,
-  addCase,
-  deleteCase,
-  AllCases,
-  allResearchersAC,
-  filtredCasesData,
-  pendingCasesCount
-} from './session-actions'
+import { Loading, addCase, deleteCase, AllCases, allResearchersAC, filteredCasesData,
+  pendingCasesCount } from './session-actions'
 import { infoAction } from "../../utils/notification";
 import React from 'react'
 import { allUsers } from './main-reducer'
@@ -53,7 +46,7 @@ const CasesReducer = (state = initialState, action) => {
         ...state,
         allCaseStudies: action.payload,
       };
-    case FILTRED_CASES:
+    case FILTERED_CASES:
       return {
         ...state,
         filtredCases: action.payload,
@@ -94,7 +87,7 @@ export const FiltredCases = () => dispatch => {
   FiltredCaseApi()
     .then( response => {
       dispatch(Loading(false))
-      dispatch(filtredCasesData(response.data))
+      dispatch(filteredCasesData(response.data))
     })
     .finally(() => {
       dispatch(Loading(false));
@@ -123,16 +116,6 @@ export const NewCaseInfo = (data) => dispatch => {
       dispatch(Loading(false));
     })
 }
-export const FileUpload = (data) => () => {
-  const history = data.history
-  AddCaseFiles(data.id)
-    .then( () => {
-      AllCasesApi()
-      // history.push('/researcher-studies');
-    })
-
-}
-
 export const EditCaseInfo = data => dispatch => {
   const history = data.history;
   EditCaseApi(data)
@@ -164,9 +147,7 @@ export const DeleteCaseInfo = id => dispatch => {
   DeleteCaseApi(id)
     .then((response) => {
       AllCasesInfo()(dispatch);
-      if (response) {
-        dispatch(deleteCase(response));
-      }
+       dispatch(deleteCase(response));
     })
     .catch((e) => {
       if (e.response && e.response.data) {
@@ -182,7 +163,7 @@ export const DeleteUser = id => dispatch => {
   DeleteResearcherUser(id)
     .then((response) => {
       allUsers()(dispatch);
-      if (response) {
+      if (response.data) {
         dispatch(allResearchersAC(response.data));
       }
     })
@@ -201,7 +182,7 @@ export const AllCasesInfo = () => (dispatch) => {
   AllCasesApi()
     .then((response) => {
       dispatch(Loading(false));
-      if (response) {
+      if (response.data) {
         dispatch(AllCases(response.data));
       }
     })
@@ -220,7 +201,7 @@ export const ResultOfCase = () => dispatch => {
 export const DownloadCase = (data) => dispatch => {
   CaseDownload(data)
     .then((response) => {
-      if (response) {
+      if (response.data) {
         dispatch(allResearchersAC(response.data));
       }
     })
@@ -230,7 +211,7 @@ export const DownloadCase = (data) => dispatch => {
       }
     })
     .finally(() => {
-      infoAction("Download was successfull!", "");
+      infoAction("Download was successful!", "");
     });
 };
 
