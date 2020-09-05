@@ -76,7 +76,6 @@ const EditCase = ({ id }) => {
                        className="avatarUrl-input"
                        accept="image/*"
                        onChange={(e) => loadFile(e)}/>
-                {/*<Input type="file" id="input" multiple />*/}
               </Form.Item>
               <Form.Item name="inputVrFile">
                 <Input type="file" id="input-vr" multiple />

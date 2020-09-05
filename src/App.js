@@ -19,7 +19,6 @@ import { Switch } from 'react-router'
 import CaseResults from './components/Admin/AdminPage/ListOfCaseStudies/СaseResults/caseResults'
 import PendingCase from './components/Admin/AdminPage/PendingCase'
 import ListOfAdmins from './components/Admin/AdminPage/ListOfAdmins'
-import { NoMatch } from './utils/noMatch'
 const App = () => {
   return (
     <>
@@ -40,7 +39,6 @@ const App = () => {
         <Route path="/case-results/:id" component={CaseResults} />
         <Route path="/pending-case" component={PendingCase} />
         <Route path="/admin-users" component={ListOfAdmins} />
-        {/*<Route  component={NoMatch}  />*/}
         <Route
           path="/edit-case/:id"
           render={({ match }) => {

@@ -23,11 +23,14 @@ const AdminPage = () => {
   return (
     <>
       <div className="admin-page">
-        <div className="admin-page__text">
-          <div className="admin-page__text-heading">Admin Panel</div>
-          <div className="admin-page__user-name">
-            User: First Name Last Name
+        <div className="admin-page__text-wrapper">
+          <div className="admin-page__text">
+            <div className="admin-page__text-heading">Admin Panel</div>
+            <div className="admin-page__user-name">
+              User: First Name Last Name
+            </div>
           </div>
+          <Link to={'/'}><Button className="out-of-admin">Back to main page</Button></Link>
         </div>
         <div className="admin-page-btns">
           <Link to={"/researchers-list"}>

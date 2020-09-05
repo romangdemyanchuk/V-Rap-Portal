@@ -75,14 +75,11 @@ export const AddAdmin = (data) => () => {
 export const RegisterRequest = (data, history) => (dispatch) => {
   RegisterApi(data)
     .then((response) => {
-      if (response) {
-        dispatch(Register(response));
-      }
+      dispatch(Register(response));
       if(response.request.statusText === "Created") {
         LoginApi(data)
           .then((response) => {
             if (response.statusText === "OK") {
-              // debugger
               let token = response.data.token;
               localStorage.setItem("userLoginToken", token);
               localStorage.setItem("isAuth", true);
@@ -93,7 +90,6 @@ export const RegisterRequest = (data, history) => (dispatch) => {
           })
       }
       dispatch(Loading(false));
-
     })
     .catch((e) => {
       if (e.response.status) {
@@ -106,10 +102,8 @@ export const RegisterByAdmin = (data) => (dispatch) => {
   RegisterApi(data)
     .then((response) => {
       allUsers()(dispatch);
-      if (response) {
         dispatch(RegisterInAdmin(response));
-      }
-      dispatch(Loading(false));
+        dispatch(Loading(false));
     })
     .then(() => {
       AddAdmin({data})(dispatch)
@@ -119,7 +113,7 @@ export const RegisterByAdmin = (data) => (dispatch) => {
 export const ChangePassword = (password) => (dispatch) => {
   ChangePasswordApi(password).then((response) => {
     dispatch(Loading(true));
-    if (response) {
+    if (response.data) {
       dispatch(AllCases(response.data));
     }
   });

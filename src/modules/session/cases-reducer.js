@@ -4,7 +4,7 @@ import {
   DOWNLOAD_CASE, PENDING_CASES_COUNT, CASE_RESULT, FILTERED_CASES
 } from './session-constants'
 import { AddCaseApi, DeleteCaseApi, AllCasesApi, EditCaseApi, AddCaseFiles, FiltredCaseApi,
-  DeleteResearcherUser, CaseResult, CaseDownload } from '../../api'
+  DeleteResearcherUser, CaseResult } from '../../api'
 import { Loading, addCase, deleteCase, AllCases, allResearchersAC, filteredCasesData,
   pendingCasesCount } from './session-actions'
 import { infoAction } from "../../utils/notification";
@@ -196,23 +196,6 @@ export const ResultOfCase = () => dispatch => {
         dispatch(caseResult(response.data))
       }
     })
-};
-
-export const DownloadCase = (data) => dispatch => {
-  CaseDownload(data)
-    .then((response) => {
-      if (response.data) {
-        dispatch(allResearchersAC(response.data));
-      }
-    })
-    .catch((e) => {
-      if (e.response && e.response.data) {
-        infoAction(e.response.data.message, "");
-      }
-    })
-    .finally(() => {
-      infoAction("Download was successful!", "");
-    });
 };
 
 export const PendingCasesCount = (value) => dispatch => {

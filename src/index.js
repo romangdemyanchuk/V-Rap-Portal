@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import store from "./modules/store/create-store";
 import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
-import StoreContext from './components/StoreContext'
 
 ReactDOM.render(
   <BrowserRouter>

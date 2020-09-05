@@ -12,13 +12,10 @@ const StyledResearchStudyBtns = styled.section`
   display: flex;
   justify-content: flex-end;
 `;
-
 const StyledRootCase = styled.section`
   overflow: hidden;
 `;
-
 const Case = ({ study }) => {
-
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   const deleteClick = () => {

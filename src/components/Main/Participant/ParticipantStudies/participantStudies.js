@@ -26,11 +26,6 @@ const ParticipantStudies = () => {
   const dispatch = useDispatch();
 
   useEffect(() => AllCasesInfo()(dispatch), []);
-
-  const partData = useSelector((state) => state.main.partInfo);
-  let { name, age, location, income, headset } = partData;
-  // if (!name || !age || !location || !income || !headset) return <Redirect to='participant-profile'/>
-
   return (
     <>
       {isLoading ? (

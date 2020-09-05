@@ -1,16 +1,78 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react'
-import { Input, Button, InputNumber, Form, Select, Skeleton } from 'antd'
+import { Form, Skeleton } from 'antd'
 import "./participantProfile.scss";
 import WithAuthRedirect from "../../../../hoc/hoc";
 import { countryVariants, headsetsVariants, professionsList} from "../../../../modules/session/data";
 import { ChangeIsButtonDisabled, EditParticipantProfile, PartProfileInfo}
 from '../../../../modules/session/main-reducer'
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../../Loader/loader";
 import Header from "./../../Researcher/header";
 import { infoAction } from '../../../../utils/notification'
 import { useHistory } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
+import 'react-widgets/dist/css/react-widgets.css'
+import { multiHeadset, multiLocation, multiProfession, required } from '../../../../utils/validators'
+import { Input, InputSelectHeadset, InputSelectLocation, InputSelectProfession } from '../../../../utils/formControls'
+
+const ParticipantProfileForm = (props) => {
+  const countryList = [];
+  { countryVariants.map((c) => (
+    countryList.push(c.value)
+  ))}
+  const headsetList = [];
+  { headsetsVariants.map((h) => (
+    headsetList.push(h.value)
+  ))}
+  const professionList = [];
+  { professionsList.map((p) => (
+    professionList.push(p.value)
+  ))}
+
+  return (
+    <form className="participant-profile-form"
+          onSubmit={props.handleSubmit}>
+      <div>
+        <div><label>name</label></div>
+        <Field placeholder='name' name="name" component={Input} validate={ required }/>
+      </div>
+      <div>
+        <div><label>age</label></div>
+          <Field placeholder='age' name="age" component={Input} validate={ required } type="number"/>
+      </div>
+      <div>
+        <div><label>location</label></div>
+        <Field placeholder='location'
+               name="location" validate={ [multiLocation, required] }
+               component={InputSelectLocation}
+               data={countryList}/>
+      </div>
+      <div>
+        <div><label>income</label></div>
+        <Field placeholder='income' name="income" validate={ required } component={Input} type="number"/>
+      </div>
+      <div>
+        <div><label>headset</label></div>
+        <Field placeholder='headset'
+               name="headset" validate={ [multiHeadset, required] }
+               component={InputSelectHeadset}
+               data={headsetList}/>
+      </div>
+      <div>
+        <div><label>profession</label></div>
+        <Field placeholder='profession'
+               name="profession" validate={ [multiProfession, required] }
+               component={InputSelectProfession}
+               data={professionList}/>
+      </div>
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
+  )
+}
+
+const ParticipantProfileReduxForm = reduxForm ({ form: 'participant-profile'})(ParticipantProfileForm)
 
 const ParticipantProfile = () => {
   const [form] = Form.useForm();
@@ -23,9 +85,9 @@ const ParticipantProfile = () => {
   let formInitialValues = {
     name: name,
     age: age,
-    location: location  ? [location] : undefined,
+    location: location  ? location : undefined,
     income: income,
-    headset: headset  ? [headset] : undefined,
+    headset: headset  ? headset : undefined,
     profession: profession  ? profession : undefined
   }
   form.setFieldsValue(formInitialValues)
@@ -43,18 +105,13 @@ const ParticipantProfile = () => {
       ChangeIsButtonDisabled(false)(dispatch)
     }
   }, [name, age, location, income, headset, profession, type])
-
-  const formIsValid = (props) => {
-    EditParticipantProfile({...props }, ChangeIsButtonDisabled)(dispatch);
-  };
-
-  const layout = { labelCol: { span: 20 }, wrapperCol: { span: 16 } };
-
-  const onReset = () => {
-    form.setFieldsValue({name: '', age: '', location: [], income: '', headset: [], profession: [], })
-  };
     if (!isAuthCheck)
       return infoAction("YOY :)","/")
+
+  const onSubmit = (formData) => {
+    console.log('FORM', formData)
+    EditParticipantProfile({...formData }, ChangeIsButtonDisabled)(dispatch);
+  }
 
   return (
     <>
@@ -75,131 +132,8 @@ const ParticipantProfile = () => {
                 Profile Information
               </div>
               <div className="participant-profile__fields">
-                <Form
-                  {...layout}
-                  form={form}
-                  name="control-hooks"
-                  initialValues={formInitialValues}
-                  onFinish={formIsValid}
-                >
-                  <Form.Item
-                    name="name"
-                    label="Name"
-                    rules={[{ required: true, message: "Please input name!" }]}
-                  >
-                    <Input placeholder="Type here.." />
-                  </Form.Item>
-                  <Form.Item
-                    name="age"
-                    label="Age"
-                    rules={[{ required: true, message: "Please input age!" }]}
-                  >
-                    <InputNumber min={10} max={100} className="input-number" placeholder=" Please select age"/>
-                  </Form.Item>
-                  <Form.Item
-                    className="personal-stats__fields-wrapper"
-                    label="Location"
-                    name="location"
-                    rules={[
-                      { required: true, message: "Please choose location!" },
-                    ]}
-                  >
-                      <Select
-                        mode="multiple"
-                        placeholder="Please select location"
-                        optionLabelProp="label"
-                      >
-                      {countryVariants.map((c) => (
-                        <Select.Option
-                          value={c.value}
-                          label={c.label}
-                          key={c.value}
-                        >
-                          <div className="demo-option-label-item">
-                            {c.value}
-                          </div>
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                  <Form.Item
-                    name="income"
-                    label="Average Income(USD)"
-                    rules={[
-                      { required: true, message: "Please input Income(USD)!" },
-                    ]}
-                  >
-                    <InputNumber placeholder="Average income" max={500000} />
-                  </Form.Item>
-                  <Form.Item
-                    className="personal-stats__fields-wrapper"
-                    label="Main VR Headset"
-                    name="headset"
-                    rules={[
-                      { required: true, message: "Please choose location!" },
-                    ]}
-                  >
-                    <Select
-                      mode="multiple"
-                      placeholder="Please select headsets"
-                      optionLabelProp="label"
-                    >
-                      {headsetsVariants.map((c) => (
-                        <Select.Option
-                          value={c.value}
-                          label={c.label}
-                          key={c.value}
-                        >
-                          <div className="demo-option-label-item">
-                            {c.value}
-                          </div>
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                  <Form.Item
-                    className="personal-stats__fields-wrapper"
-                    label="Profession"
-                    name="profession"
-                    rules={[
-                      { required: true, message: "Please choose location!" },
-                    ]}
-                  >
-                    <Select
-                      mode="multiple"
-                      placeholder="Please select profession"
-                      optionLabelProp="label"
-                    >
-                      {professionsList.map(p => (
-                        <Select.Option
-                          value={p.value}
-                          label={p.label}
-                          key={p.value}
-                        >
-                          <div className="demo-option-label-item">
-                            {p.value}
-                          </div>
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                  <Form.Item className="personal-stats__fields-wrapper">
-                    <div className="participant-profile__changes-btns">
-                      <Button
-                        className="participant-profile__save-btn"
-                        type="primary"
-                        htmlType="submit"
-                      >
-                        {isLoading ? <Loader /> : "Save changes"}
-                      </Button>
-                      <Button className="participant-profile__cancel-btn"
-                      onClick={onReset}>
-                        Cancel
-                      </Button>
-                    </div>
-                  </Form.Item>
-                </Form>
               </div>
+              <ParticipantProfileReduxForm initialValues={formInitialValues} onSubmit={onSubmit}/>
             </div>
           </div>
         </div>

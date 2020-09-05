@@ -88,7 +88,6 @@ export const EditParticipantProfile = (data, callback) => (dispatch) => {
 export const UsersInfo = () => (dispatch) => {
   dispatch(Loading(false));
   const isAuth = localStorage.getItem('userLoginToken')
-  console.log('isAuth', isAuth)
   if (isAuth !== null) {
   UserInfoApi()
     .then((response) => {
@@ -100,7 +99,6 @@ export const UsersInfo = () => (dispatch) => {
     })
     .catch((e) => {
       if (e.response.status === 401) {
-        // localStorage.clear();
       }
     })
     .finally(() => {
@@ -109,7 +107,7 @@ export const UsersInfo = () => (dispatch) => {
   }
 };
 
-export const PartProfileInfo = (history) => (dispatch) => {
+export const PartProfileInfo = () => (dispatch) => {
   dispatch(Loading(false));
   const isAuth = localStorage.getItem('isAuth')
   const userLoginToken = localStorage.getItem('userLoginToken')
@@ -122,19 +120,6 @@ export const PartProfileInfo = (history) => (dispatch) => {
         if (response.data) {
           const { name, age, location, income, headset, profession } = response.data;
           dispatch(PartInfo({ name, age, location, income, headset, profession }));
-        }
-      })
-      // .then(() => {
-      //   PartProfileInfo()(dispatch)
-      // })
-      .catch((e) => {
-        // debugger
-        console.log('ERROR')
-        if (e.response.status === 401) {
-
-          // history.push('/participant-profile');
-
-          // localStorage.clear();
         }
       })
       .finally(() => {

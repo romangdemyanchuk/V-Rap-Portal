@@ -1,31 +1,42 @@
 /* eslint-disable */
 import React from "react";
-import { Form, Input, Button } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import Loader from "../../Loader/loader";
+import { Button } from "antd";
 import "./participantRegisterForm.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { RegisterRequest } from "../../../modules/session/auth-reducer";
-import { Loading } from "../../../modules/session/session-actions";
-import { infoAction } from "../../../utils/notification";
 import { useHistory } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
+import { Input } from '../../../utils/formControls'
+import { email, password, required } from '../../../utils/validators'
+
+const LoginForm = (props) => {
+  return (
+    <form className="login-form" onSubmit={props.handleSubmit}>
+      <div>
+        <Field placeholder={'login'} name={"login"} component={Input}
+          validate={ [email, required] }/>
+      </div>
+      <div>
+        <Field placeholder={'password'} name={"password"} component={Input}
+          validate={[password, required]}
+               type="password"/>
+      </div>
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
+  )
+}
+
+const LoginReduxForm = reduxForm ({ form: 'login'})(LoginForm)
 
 const ParticipantRegisterForm = ({ setState }) => {
   let dispatch = useDispatch();
   const history = useHistory();
 
-  const isAuthCheck = useSelector((state) => state.auth.isAuth);
-  const isLoading = useSelector((state) => state.auth.isLoading);
-
-
-  // if (isAuthCheck)
-  //   return infoAction("You successfully register and login :)","/participant-profile")
-
-  const handleSubmit = (values) => {
-    RegisterRequest(values, history)(dispatch);
-    dispatch(Loading(true));
-  };
-
+  const onSubmit = (formData) => {
+    RegisterRequest(formData, history)(dispatch);
+  }
   return (
     <div className="root-ParticipantRegister">
       <div className="participant-register__form-wrapper">
@@ -37,54 +48,15 @@ const ParticipantRegisterForm = ({ setState }) => {
           >
             Login
           </Button>
-          <Button className="participant__btn active">Register</Button>
+          <LoginReduxForm onSubmit={onSubmit}/>
         </div>
-        <Form
-          onFinish={(values) => {
-            handleSubmit(values);
-          }}
-          name="login"
-          className="login-form"
-        >
-          <Form.Item
-            validateTrigger={"onBlur"}
-            name="login"
-            rules={[
-              {
-                type: "email",
-                message: "Please enter valid email: name@post.com",
-              },
-              { required: true, message: "Field is required!" },
-            ]}
-          >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="E-mail"
-            />
-          </Form.Item>
-          <Form.Item
-            validateTrigger={"onBlur"}
-            name="password"
-            rules={[
-              { min: 6, message: "Password should contain at least 6 symbols" },
-              { required: true, message: "Field is required!" },
-            ]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              {isLoading ? <Loader /> : "Register"}
-            </Button>
-          </Form.Item>
-        </Form>
       </div>
     </div>
   );
 };
+
+
+
+
 
 export default ParticipantRegisterForm;

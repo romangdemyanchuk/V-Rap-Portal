@@ -18,11 +18,6 @@ const ResearcherStudies = () => {
 
   useEffect(() => AllCasesInfo()(dispatch), []);
 
-  const userData = useSelector((state) => state.main.userInfo);
-  const { name, school, area } = userData;
-
-  // if(!name || !area || !school) return <Redirect to='researcher-profile'/>
-
   return <>
       {isLoading ? (
           <Skeleton active className="studiesLoader" />

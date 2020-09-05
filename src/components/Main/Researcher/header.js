@@ -2,12 +2,11 @@
 import React from "react";
 import { Link, useHistory } from 'react-router-dom'
 import { Button } from "antd";
-/*eslint-disable*/
 
 const Header = ({ disableButtons, isProfileBtnActive, isStudiesBtnActive, type }) => {
   const history = useHistory();
   const logOut = () => {
-    // localStorage.clear();
+    localStorage.clear();
     history.push('/');
   };
   return (

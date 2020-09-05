@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {  caseStudiesColumns as list } from '../../../../modules/session/data'
 import "./listOfCaseStudies.css";
-import { AllCasesInfo, ResultOfCase } from '../../../../modules/session/cases-reducer'
+import { AllCasesInfo } from '../../../../modules/session/cases-reducer'
 import CaseStudiesChanges from '../ListOfCaseStudies/CaseStudiesChanges/caseStudiesChanges'
 import { Button, Table } from 'antd'
 import { Link } from 'react-router-dom'
@@ -15,10 +15,6 @@ export const status = (status) => {
   else if (status === 1) return <div>Rejected</div>;
   else if (status === 2) return <div>In Progress</div>;
   else if (status === 3) return <div>Closed</div>;
-};
-
-export const ViewResultCase = () => {
-  ResultOfCase()(dispatch)
 };
 
 const ListOfCaseStudies = () => {

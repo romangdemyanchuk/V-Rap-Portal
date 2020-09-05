@@ -17,7 +17,6 @@ const AdminCreate = ({ modalOpen, setmodalOpen }) => {
   const closeModal = () => {
     setmodalOpen(false);
   };
-
   const handleSubmit = (values) => {
     AddAdmin({values})(dispatch)
   };
@@ -30,9 +29,7 @@ const AdminCreate = ({ modalOpen, setmodalOpen }) => {
         onCancel={closeModal}
       >
         <Form
-          onFinish={(values) => {
-            handleSubmit(values);
-          }}
+          onFinish={(values) => { handleSubmit(values); }}
           name="normal_login"
           className="login-form"
         >

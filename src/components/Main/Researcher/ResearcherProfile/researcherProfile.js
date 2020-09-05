@@ -8,7 +8,6 @@ import Loader from "../../../Loader/loader";
 import "./researcherProfile.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./../header";
-import styled from "styled-components";
 
 const ResearcherProfile = () => {
   const { name, school, area }  = useSelector((state) => state.main.userInfo);

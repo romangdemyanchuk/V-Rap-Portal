@@ -6,8 +6,6 @@ const baseURL = "https://test-for-roman.herokuapp.com/";
 
 const instance = axios.create({ baseURL });
 
-let token = localStorage.getItem("userLoginToken");
-
 const instanceWithToken = () =>
   axios.create({
     baseURL,
@@ -15,7 +13,6 @@ const instanceWithToken = () =>
       Authorization: localStorage.getItem("userLoginToken"),
     },
   });
-console.log('TOKEN', token)
 
 export const RegisterApi = (regData) => {
   return instance.post(`api/auth/register`, regData);
@@ -23,7 +20,7 @@ export const RegisterApi = (regData) => {
 
 export const AddUser = (data) => {
   const {login, password} = data.values;
-  return instance.post(`/api/users/adduser`, { type: 0, login: login, password: password});
+  return instance.post(`/api/users/adduser`, { type: 0, login, password});
 };
 
 export const LoginApi = (loginData) => {
@@ -61,11 +58,11 @@ export const AddCaseFiles = (id) => {
 }
 
 export const DeleteCaseApi = (id) => {
-  return instanceWithToken().delete(`api/case/delete`, { data: { id: id } });
+  return instanceWithToken().delete(`api/case/delete`, { data: { id } });
 };
 
 export const DeleteResearcherUser = (id) => {
-  return instanceWithToken().delete(`api/users/delete`, { data: { id: id } });
+  return instanceWithToken().delete(`api/users/delete`, { data: { id } });
 };
 
 export const AllCasesApi = () => {
@@ -75,11 +72,11 @@ export const AllCasesApi = () => {
 };
 
 export const ChangePasswordApi = (password) => {
-  return instance.post(`api/users/changepassword`, { password: password });
+  return instance.post(`api/users/changepassword`, { password });
 };
 
 export const ChangingStatus = (id) => {
-  return instanceWithToken().post(`api/case/status`, { status: 3, id: id });
+  return instanceWithToken().post(`api/case/status`, { status: 3, id });
 };
 
 export const EditCaseApi = (data) => {
